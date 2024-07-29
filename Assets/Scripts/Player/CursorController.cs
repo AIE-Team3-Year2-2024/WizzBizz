@@ -19,7 +19,9 @@ public class CursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += movementDirection * speed * Time.deltaTime;
+        //Debug.Log(movementDirection.x + ", " + movementDirection.y);
+        /*((RectTransform)*/transform.position += movementDirection * speed * Time.deltaTime;
+        //Debug.Log("Transform: " + ((RectTransform)transform).position.x + ", " + ((RectTransform)transform).position.y);
     }
 
     /// <summary>

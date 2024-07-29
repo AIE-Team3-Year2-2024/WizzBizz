@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject cursorPrefab;
 
+    public GameObject canvas;
+
     // Singleton instantiation
     private void Awake()
     {
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
                     m_controllers.Add(Gamepad.all[i]);
 
                     GameObject newPlayer = PlayerInput.Instantiate(cursorPrefab, controlScheme: "Gamepad", pairWithDevice: Gamepad.all[i]).gameObject;
+                    newPlayer.transform.SetParent(canvas.transform);
                 }
             }
         }
