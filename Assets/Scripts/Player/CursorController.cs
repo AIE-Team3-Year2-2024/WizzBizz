@@ -1,3 +1,4 @@
+using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class CursorController : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    private ColliderButton lastCollidedButton;
+
     private Vector3 movementDirection;
     // Start is called before the first frame update
     void Start()
@@ -18,10 +21,9 @@ public class CursorController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        //Debug.Log(movementDirection.x + ", " + movementDirection.y);
-        /*((RectTransform)*/transform.position += movementDirection * speed * Time.deltaTime;
-        //Debug.Log("Transform: " + ((RectTransform)transform).position.x + ", " + ((RectTransform)transform).position.y);
+    { 
+        transform.position += movementDirection * speed * Time.deltaTime;
+        
     }
 
     /// <summary>
@@ -32,5 +34,19 @@ public class CursorController : MonoBehaviour
     {
         movementDirection.y = context.ReadValue<Vector2>().y;
         movementDirection.x = context.ReadValue<Vector2>().x;
+    }
+
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.GetComponent<ColliderButton>())
+        {
+            lastCollidedButton = collision.gameObject.GetComponent<ColliderButton>();
+        }
+    }
+
+    public void OnAccept()
+    {
+        lastCollidedButton.Pressed();
     }
 }
