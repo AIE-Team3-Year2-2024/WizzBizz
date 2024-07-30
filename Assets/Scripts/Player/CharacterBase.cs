@@ -7,6 +7,7 @@ using UnityEngine.ProBuilder.MeshOperations;
 public abstract class CharacterBase : MonoBehaviour
 {
     protected bool hasOrb;
+
     [Tooltip("the speed this character will move at")]
     [SerializeField]
     private float speed;
@@ -36,12 +37,6 @@ public abstract class CharacterBase : MonoBehaviour
     public enum StaitisEffects
     {
         SLOW
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
