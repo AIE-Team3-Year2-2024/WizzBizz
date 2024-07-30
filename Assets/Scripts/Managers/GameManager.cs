@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject canvas;
 
+
+
     // Singleton instantiation
     private void Awake()
     {
@@ -45,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     //input variables
     private List<Gamepad> _controllers = new List<Gamepad>(); // list of connected controllers
-    private List<PlayerController> _activePlayerControllers = new List<PlayerController>(); // currently instantiated players
+    private List<CharacterBase> _activePlayerControllers = new List<CharacterBase>(); // currently instantiated players
 
     // Start is called before the first frame update
     void Start()
@@ -107,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGameRoutine()
     {
-        SceneManager.LoadScene(_levels[Random.Range(0, _levels.Length)]);
+        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
 
         //theese are here so that the playwers get spaw2ned in the new scene and not the old one
         yield return new WaitForEndOfFrame();
@@ -120,7 +123,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _controllers.Count; i++)
         {
             GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _controllers[i]).gameObject;
-            _activePlayerControllers.Add(newPlayer.GetComponent<PlayerController>());
+            _activePlayerControllers.Add(newPlayer.GetComponent<CharacterBase>());
         }
         addingControllers = false;
     }
