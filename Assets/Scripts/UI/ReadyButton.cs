@@ -17,6 +17,10 @@ public class ReadyButton : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// player cursors call this when they  press the accept button wich will take their ability to move 
+    /// </summary>
+    /// <param name="player"></param>
     public void PlayerInteract(CursorController player)
     {
         if(_acceptedPlayers.Contains(player))
@@ -34,6 +38,9 @@ public class ReadyButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// called when the amount of ready players equl the amout of players to start the game
+    /// </summary>
     public void AllPlayersReady()
     {
         GameManager.Instance.StartGame();

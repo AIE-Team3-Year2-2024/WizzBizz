@@ -44,4 +44,15 @@ public class PlayerController : MonoBehaviour
         aimDirection.x = context.ReadValue<Vector2>().x;
         transform.LookAt(aimDirection += transform.position, transform.up);
     }
+
+
+    public void TakeDamage(float damage)
+    {
+        _health -= damage;
+
+        if(_health <= 0)
+        {
+            Debug.Log(gameObject.name + " is me and i am dead");
+        }
+    }
 }

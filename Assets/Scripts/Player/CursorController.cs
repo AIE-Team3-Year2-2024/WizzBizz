@@ -42,7 +42,10 @@ public class CursorController : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// keeps track of the current button
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.GetComponent<ReadyButton>() != null)
@@ -51,6 +54,10 @@ public class CursorController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// keeps track of the current button
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnCollisionExit(Collision collision)
     {
         if(collision.gameObject.GetComponent<ReadyButton>() == _lastCollidedButton)
@@ -59,11 +66,24 @@ public class CursorController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will press the last button
+    /// </summary>
+    /// <param name="context"></param>
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (_lastCollidedButton != null && context.started)
         {
             _lastCollidedButton.PlayerInteract(this);
         }
+    }
+
+    /// <summary>
+    /// tell the game manager this player has disconnected and destroys this object
+    /// </summary>
+    public void OnDisconnect()
+    {
+        GameManager.Instance.DissconectCursor(GetComponent<PlayerInput>());
+        Destroy(gameObject);
     }
 }

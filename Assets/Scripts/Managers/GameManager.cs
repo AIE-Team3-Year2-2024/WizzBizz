@@ -74,6 +74,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// removes the players controller from the controller list and updates the player count
+    /// </summary>
+    /// <param name="player"></param>
+    public void DissconectCursor(PlayerInput player)
+    {
+        foreach(InputDevice input in player.devices)
+        {
+            foreach(Gamepad controller in _controllers)
+            {
+                if(input == controller)
+                {
+                    _controllers.Remove(controller);
+                    _currentPlayerCount--;
+                    return;
+                }
+            }
+        }
+    }
+
     public int GetCurrntPlayerCount()
     {
         return _currentPlayerCount;
@@ -84,9 +104,12 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameRoutine());
     }
 
+
     public IEnumerator StartGameRoutine()
     {
         SceneManager.LoadScene(_levels[Random.Range(0, _levels.Length)]);
+
+        //theese are here so that the playwers get spaw2ned in the new scene and not the old one
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
@@ -99,5 +122,6 @@ public class GameManager : MonoBehaviour
             GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _controllers[i]).gameObject;
             _activePlayerControllers.Add(newPlayer.GetComponent<PlayerController>());
         }
+        addingControllers = false;
     }
 }
