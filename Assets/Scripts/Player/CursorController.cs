@@ -3,16 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CursorController : MonoBehaviour
 {
     [Tooltip("the speed this character will move at")]
     [SerializeField]
-    private float speed;
+    private float _speed;
 
-    private ColliderButton lastCollidedButton;
+    private ReadyButton _lastCollidedButton;
 
-    private Vector3 movementDirection;
+    public bool canMove = true;
+
+    private Vector3 _movementDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +25,7 @@ public class CursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        transform.position += movementDirection * speed * Time.deltaTime;
+        transform.position += _movementDirection * _speed * Time.deltaTime;
         
     }
 
@@ -32,21 +35,35 @@ public class CursorController : MonoBehaviour
     /// <param name="context"></param>
     public void OnMove(InputAction.CallbackContext context)
     {
-        movementDirection.y = context.ReadValue<Vector2>().y;
-        movementDirection.x = context.ReadValue<Vector2>().x;
+        if (canMove)
+        {
+            _movementDirection.y = context.ReadValue<Vector2>().y;
+            _movementDirection.x = context.ReadValue<Vector2>().x;
+        }
     }
 
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.GetComponent<ColliderButton>())
+        if(collision.gameObject.GetComponent<ReadyButton>() != null)
         {
-            lastCollidedButton = collision.gameObject.GetComponent<ColliderButton>();
+            _lastCollidedButton = collision.gameObject.GetComponent<ReadyButton>();
         }
     }
 
-    public void OnAccept()
+    public void OnCollisionExit(Collision collision)
     {
-        lastCollidedButton.Pressed();
+        if(collision.gameObject.GetComponent<ReadyButton>() == _lastCollidedButton)
+        {
+            _lastCollidedButton = null;
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (_lastCollidedButton != null && context.started)
+        {
+            _lastCollidedButton.PlayerInteract(this);
+        }
     }
 }

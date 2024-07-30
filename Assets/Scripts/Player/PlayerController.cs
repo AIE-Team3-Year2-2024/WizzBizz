@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    private Vector3 movementDirection;
+    private Vector3 _movementDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += movementDirection * speed * Time.deltaTime;
+        transform.position += _movementDirection * speed * Time.deltaTime;
     }
 
     /// <summary>
@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="context"></param>
     public void OnMove(InputAction.CallbackContext context)
     {
-        movementDirection.z = context.ReadValue<Vector2>().y;
-        movementDirection.x = context.ReadValue<Vector2>().x;
+        _movementDirection.z = context.ReadValue<Vector2>().y;
+        _movementDirection.x = context.ReadValue<Vector2>().x;
     }
 
 

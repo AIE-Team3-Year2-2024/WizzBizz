@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,11 +15,17 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("The list of level scenes to be picked randomly (CAPITALIZATION MATTERS)")]
     [SerializeField]
-    private string[] levels;
+    private string[] _levels;
 
     [Tooltip("the prefab players use to controll the character screen")]
     [SerializeField]
-    private GameObject cursorPrefab;
+    private GameObject _cursorPrefab;
+
+    [Tooltip("the prefab that will be used to spawn the players")]
+    [SerializeField]
+    private GameObject _playerPrefab;
+
+    private int _currentPlayerCount;
 
     public GameObject canvas;
 
@@ -33,11 +40,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     //input variables
-    private List<Gamepad> m_controllers = new List<Gamepad>(); // list of connected controllers
-    private List<PlayerController> m_activePlayerControllers; // currently instantiated players
+    private List<Gamepad> _controllers = new List<Gamepad>(); // list of connected controllers
+    private List<PlayerController> _activePlayerControllers = new List<PlayerController>(); // currently instantiated players
 
     // Start is called before the first frame update
     void Start()
@@ -53,15 +61,44 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < Gamepad.all.Count; i++)
             {
                 //check if the current gamepad has a button pressed and is not stored
-                if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic) && !m_controllers.Contains(Gamepad.all[i]))
+                if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic) && !_controllers.Contains(Gamepad.all[i]))
                 {
                     //store controller and add player to leaderboard
-                    m_controllers.Add(Gamepad.all[i]);
+                    _controllers.Add(Gamepad.all[i]);
 
-                    GameObject newPlayer = PlayerInput.Instantiate(cursorPrefab, controlScheme: "Gamepad", pairWithDevice: Gamepad.all[i]).gameObject;
+                    GameObject newPlayer = PlayerInput.Instantiate(_cursorPrefab, controlScheme: "Gamepad", pairWithDevice: Gamepad.all[i]).gameObject;
                     newPlayer.transform.SetParent(canvas.transform);
+                    _currentPlayerCount++;
                 }
             }
+        }
+    }
+
+    public int GetCurrntPlayerCount()
+    {
+        return _currentPlayerCount;
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(StartGameRoutine());
+    }
+
+    public IEnumerator StartGameRoutine()
+    {
+        SceneManager.LoadScene(_levels[Random.Range(0, _levels.Length)]);
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+
+        Debug.Log("make players");
+        for (int i = 0; i < _controllers.Count; i++)
+        {
+            Debug.Log("spawning players");
+            GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _controllers[i]).gameObject;
+            _activePlayerControllers.Add(newPlayer.GetComponent<PlayerController>());
         }
     }
 }

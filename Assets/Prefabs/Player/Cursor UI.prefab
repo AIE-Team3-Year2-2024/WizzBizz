@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5299472641670826483}
   - component: {fileID: 7085001028588040423}
   - component: {fileID: 6037114571433351020}
-  - component: {fileID: 1148082590084257114}
   - component: {fileID: 8687186599322377125}
   - component: {fileID: 3067114505025726528}
+  - component: {fileID: -214064834665802223}
+  - component: {fileID: 2712813394601600}
   m_Layer: 5
   m_Name: Cursor UI
   m_TagString: Untagged
@@ -36,10 +37,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -430, y: 224}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7085001028588040423
 CanvasRenderer:
@@ -79,19 +80,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!65 &1148082590084257114
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8008615618210288764}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8687186599322377125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a922d43f46cd04baf32f6f77d7f405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  _speed: 300
+  canMove: 1
 --- !u!114 &3067114505025726528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,15 +152,51 @@ MonoBehaviour:
     m_ActionId: a97e2dde-1d1c-4f1a-8d5a-265e0aea4499
     m_ActionName: Player/Attack[/SwitchProControllerHID1/rightTrigger,/SwitchProControllerHID/rightTrigger,/SwitchProControllerHID1/rightShoulder,/SwitchProControllerHID/rightShoulder]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8687186599322377125}
+        m_TargetAssemblyTypeName: CursorController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 74796d14-64d5-4696-b92d-bf97ad40dfb6
     m_ActionName: Player/Ability 1[/SwitchProControllerHID1/buttonNorth,/SwitchProControllerHID/buttonNorth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8687186599322377125}
+        m_TargetAssemblyTypeName: CursorController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 5cf46031-8cfc-4b1d-af0c-f3d8f0e35c4b
     m_ActionName: Player/Ability 2[/SwitchProControllerHID1/buttonEast,/SwitchProControllerHID/buttonEast]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8687186599322377125}
+        m_TargetAssemblyTypeName: CursorController, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: ae155d5c-3ca1-4e92-bfbf-826797fd444c
     m_ActionName: Player/Parry[/SwitchProControllerHID1/buttonWest,/SwitchProControllerHID/buttonWest]
   - m_PersistentCalls:
@@ -219,3 +244,32 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!65 &-214064834665802223
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008615618210288764}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 50, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2712813394601600
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008615618210288764}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
