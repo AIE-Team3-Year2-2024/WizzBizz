@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float speed;
 
+    [Tooltip("the players health")]
+    [SerializeField]
+    private float _health;
+
     private Vector3 _movementDirection;
     // Start is called before the first frame update
     void Start()

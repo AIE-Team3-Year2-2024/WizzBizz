@@ -91,12 +91,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
 
 
-        Debug.Log("make players");
         for (int i = 0; i < _controllers.Count; i++)
         {
-            Debug.Log("spawning players");
             GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _controllers[i]).gameObject;
             _activePlayerControllers.Add(newPlayer.GetComponent<PlayerController>());
         }
