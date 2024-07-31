@@ -36,6 +36,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     public enum StaitisEffects
     {
+        NONE,
         SLOW
     }
 
@@ -113,5 +114,11 @@ public abstract class CharacterBase : MonoBehaviour
     public virtual void OnAbility2(InputAction.CallbackContext context)
     {
 
+    }
+
+    public void OnDissconect()
+    {
+        GameManager.Instance.DisconnectPlayer(this);
+        Destroy(gameObject);
     }
 }
