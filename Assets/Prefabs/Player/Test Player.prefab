@@ -304,12 +304,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 4
+  _speed: 10
   _health: 100
   canMove: 1
-  _pointerAimerRange: 4
+  _pointerAimerRange: 5
+  currentAimMagnitude: 0
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
+  ballAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  normalAttack:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &3006249
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -557,7 +564,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6057059580930561455}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
