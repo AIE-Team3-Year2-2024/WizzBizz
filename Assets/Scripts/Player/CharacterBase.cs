@@ -115,6 +115,9 @@ public class CharacterBase : MonoBehaviour
             if (hasOrb)
             {
                 ballAttack.Invoke();
+                Destroy(heldOrb);
+                heldOrb = null;
+                hasOrb = false;
             }
             else
             {

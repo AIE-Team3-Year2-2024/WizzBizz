@@ -21,12 +21,12 @@ public class SpawnObjectAtTransform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<CharacterBase>();
+        player = GetComponentInParent<CharacterBase>();
     }
 
     public void SpawnObjectAtSpawn()
     {
-        GameObject newProjectile = Instantiate(projectile, _spawn.position, player.transform.rotation);
+        GameObject newProjectile = Instantiate(projectile, _spawn.position, transform.rotation);
 
         newProjectile.GetComponent<DamagePlayerOnCollision>().SetOwner(player);
 
