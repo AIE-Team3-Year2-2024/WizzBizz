@@ -7,39 +7,38 @@ using UnityEngine.ProBuilder.MeshOperations;
 
 public class CharacterBase : MonoBehaviour
 {
-    public bool hasOrb = false;
+    [HideInInspector] public bool hasOrb = false;
+    [HideInInspector] public GameObject heldOrb = null;
 
     [Tooltip("the speed this character will move at")]
     [SerializeField]
-    private float speed;
+    private float _speed;
 
     [Tooltip("the players health")]
     [SerializeField]
     private float _health;
 
     [Tooltip("whether or not on move will be skipped")]
-    [SerializeField]
     public bool canMove;
 
     [Tooltip("this value multiplies the size of the pointer aimer when aiming")]
     [SerializeField]
-    private float pointerAimerRange;
+    private float _pointerAimerRange;
+
+    public float currentAimMagnitude;
 
     [Tooltip("the image used to show where the player is aiming")]
     [SerializeField]
-    private RectTransform pointerAimer;
+    private RectTransform _pointerAimer;
 
     private Vector3 _movementDirection;
 
     [Tooltip("where to spawn projectiles on this character")]
-    public Transform projectileSpawnPosition;
+    public Transform _projectileSpawnPosition;
 
-    public float currentAimMagnitude;
-
-    [Header("trigger attacks")]
-    public UnityEvent noBallAttack;
-
+    [Header("Trigger Attacks")]
     public UnityEvent ballAttack;
+    public UnityEvent normalAttack;
 
     public enum StaitisEffects
     {
@@ -50,7 +49,7 @@ public class CharacterBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += _movementDirection * speed * Time.deltaTime;
+        transform.position += _movementDirection * _speed * Time.deltaTime;
     }
 
     /// <summary>
@@ -76,7 +75,7 @@ public class CharacterBase : MonoBehaviour
 
         currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
 
-        pointerAimer.localScale = new Vector3(pointerAimer.localScale.x, 1 + (pointerAimerRange * currentAimMagnitude), pointerAimer.localScale.z);
+        _pointerAimer.localScale = new Vector3(_pointerAimer.localScale.x, 1 + (_pointerAimerRange * currentAimMagnitude), _pointerAimer.localScale.z);
     }
 
     public void OnDash(InputAction.CallbackContext context)
@@ -119,7 +118,7 @@ public class CharacterBase : MonoBehaviour
             }
             else
             {
-                noBallAttack.Invoke();
+                normalAttack.Invoke();
             }
         }
     }

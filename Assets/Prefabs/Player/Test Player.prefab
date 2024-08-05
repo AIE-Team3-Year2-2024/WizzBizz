@@ -14,9 +14,7 @@ GameObject:
   - component: {fileID: 452431045987376309}
   - component: {fileID: 452431045987376298}
   - component: {fileID: 532612227137173808}
-  - component: {fileID: 1865637051403398714}
-  - component: {fileID: -907038504855142003}
-  - component: {fileID: 4237430602224647408}
+  - component: {fileID: 3006249}
   m_Layer: 0
   m_Name: Test Player
   m_TagString: Untagged
@@ -306,48 +304,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasOrb: 0
-  speed: 10
+  heldOrb: {fileID: 0}
+  _speed: 10
   _health: 100
   canMove: 1
-  pointerAimerRange: 5
-  pointerAimer: {fileID: 1096289958959071381}
-  projectileSpawnPosition: {fileID: 639825632643347932}
+  _pointerAimerRange: 5
   currentAimMagnitude: 0
-  noBallAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1865637051403398714}
-        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
-        m_MethodName: SpawnProjectileAtPlayer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _pointerAimer: {fileID: 1096289958959071381}
+  _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1865637051403398714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 6599871779557999481, guid: c0ff7f9cce920a647bd4e8bbec9b41bd, type: 3}
-  range: 0
-  lobAimer: {fileID: 0}
-  lifetime: 15
---- !u!54 &-907038504855142003
+  normalAttack:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!54 &3006249
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -363,22 +334,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4237430602224647408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 5546918057975252347, guid: 0443f68005650074b905614a3421c54d, type: 3}
-  range: 10
-  lobAimer: {fileID: 1309746413074950827}
-  lifetime: 0
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
