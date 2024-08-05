@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -313,7 +313,7 @@ MonoBehaviour:
   _levels:
   - CameronPlayerTesting
   _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
-  _playerPrefab: {fileID: 452431045987376296, guid: 1498f18fc0c3ca54dae6f9d931558c25, type: 3}
+  _playerPrefab: {fileID: 452431045987376296, guid: ac36afad6c5c79347a014c7972b7cd2e, type: 3}
   canvas: {fileID: 347443268}
 --- !u!4 &482636210
 Transform:
@@ -479,7 +479,6 @@ GameObject:
   - component: {fileID: 1004197929}
   - component: {fileID: 1004197939}
   - component: {fileID: 1004197938}
-  - component: {fileID: 1004197940}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -587,18 +586,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &1004197940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1004197927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175dda380d823e54bb35f7fd5f475d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1182337861
 GameObject:
   m_ObjectHideFlags: 0

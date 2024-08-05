@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject canvas;
 
+
+
     // Singleton instantiation
     private void Awake()
     {
@@ -45,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     //input variables
     private List<Gamepad> _controllers = new List<Gamepad>(); // list of connected controllers
-    private List<PlayerController> _activePlayerControllers = new List<PlayerController>(); // currently instantiated players
+    private List<CharacterBase> _activePlayers = new List<CharacterBase>(); // currently instantiated players
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +97,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DisconnectPlayer(CharacterBase player)
+    {
+        PlayerInput playerInput = player.GetComponent<PlayerInput>();
+        foreach (InputDevice input in playerInput.devices)
+        {
+            foreach (Gamepad controller in _controllers)
+            {
+                if (input == controller)
+                {
+                    _controllers.Remove(controller);
+                    _activePlayers.Remove(player);
+                    _currentPlayerCount--;
+                    return;
+                }
+            }
+        }
+    }
+
     public int GetCurrntPlayerCount()
     {
         return _currentPlayerCount;
@@ -107,7 +128,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGameRoutine()
     {
-        SceneManager.LoadScene(_levels[Random.Range(0, _levels.Length)]);
+        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
 
         //theese are here so that the playwers get spaw2ned in the new scene and not the old one
         yield return new WaitForEndOfFrame();
@@ -119,8 +140,9 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < _controllers.Count; i++)
         {
+            //here we would check a player data list at the same position to find this players character
             GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _controllers[i]).gameObject;
-            _activePlayerControllers.Add(newPlayer.GetComponent<PlayerController>());
+            _activePlayers.Add(newPlayer.GetComponent<CharacterBase>());
         }
         addingControllers = false;
     }
