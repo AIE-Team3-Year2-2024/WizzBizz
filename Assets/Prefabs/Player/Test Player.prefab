@@ -13,13 +13,8 @@ GameObject:
   - component: {fileID: 452431045987376308}
   - component: {fileID: 452431045987376309}
   - component: {fileID: 452431045987376298}
-<<<<<<< Updated upstream
   - component: {fileID: 452431045987376299}
   m_Layer: 0
-=======
-  - component: {fileID: 6435589668952087396}
-  m_Layer: 6
->>>>>>> Stashed changes
   m_Name: Test Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,11 +34,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 452431046548426736}
-<<<<<<< Updated upstream
-=======
-  - {fileID: 174067990644502866}
-  - {fileID: 1819107962826895295}
->>>>>>> Stashed changes
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -138,13 +128,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-<<<<<<< Updated upstream
       - m_Target: {fileID: 452431045987376299}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-=======
-      - m_Target: {fileID: 6435589668952087396}
-        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
->>>>>>> Stashed changes
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -159,13 +144,8 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-<<<<<<< Updated upstream
       - m_Target: {fileID: 452431045987376299}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-=======
-      - m_Target: {fileID: 6435589668952087396}
-        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
->>>>>>> Stashed changes
         m_MethodName: OnAim
         m_Mode: 0
         m_Arguments:
@@ -219,23 +199,7 @@ MonoBehaviour:
     m_ActionId: c94ddf6b-ab4d-4aba-a254-20ed8a5715ce
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
-<<<<<<< Updated upstream
       m_Calls: []
-=======
-      m_Calls:
-      - m_Target: {fileID: 6435589668952087396}
-        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
-        m_MethodName: OnDash
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
->>>>>>> Stashed changes
     m_ActionId: 969b9e6e-eba6-449f-836f-ee81eed7020f
     m_ActionName: Player/Dash
   - m_PersistentCalls:
@@ -243,7 +207,6 @@ MonoBehaviour:
     m_ActionId: 98f02f13-ac03-4a0a-a10b-7868cc9c1f59
     m_ActionName: Player/Pause
   - m_PersistentCalls:
-<<<<<<< Updated upstream
       m_Calls: []
     m_ActionId: a97e2dde-1d1c-4f1a-8d5a-265e0aea4499
     m_ActionName: Player/Attack
@@ -257,69 +220,6 @@ MonoBehaviour:
     m_ActionName: Player/Ability 2
   - m_PersistentCalls:
       m_Calls: []
-=======
-      m_Calls:
-      - m_Target: {fileID: 6435589668952087396}
-        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
-        m_MethodName: OnAttack
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a97e2dde-1d1c-4f1a-8d5a-265e0aea4499
-    m_ActionName: Player/Attack
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6435589668952087396}
-        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
-        m_MethodName: OnAbility1
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 74796d14-64d5-4696-b92d-bf97ad40dfb6
-    m_ActionName: Player/Ability 1
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6435589668952087396}
-        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
-        m_MethodName: OnAbility2
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5cf46031-8cfc-4b1d-af0c-f3d8f0e35c4b
-    m_ActionName: Player/Ability 2
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6435589668952087396}
-        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
-        m_MethodName: OnCatch
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
->>>>>>> Stashed changes
     m_ActionId: ae155d5c-3ca1-4e92-bfbf-826797fd444c
     m_ActionName: Player/Parry
   m_NeverAutoSwitchControlSchemes: 0
@@ -327,11 +227,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
-<<<<<<< Updated upstream
 --- !u!114 &452431045987376299
-=======
---- !u!114 &6435589668952087396
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -340,22 +236,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 452431045987376296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< Updated upstream
   m_Script: {fileID: 11500000, guid: cd10022c164099a4aad007dd278d75a3, type: 3}
-=======
-  m_Script: {fileID: 11500000, guid: a2dbfae1d7a2bfc4882774e0320c03e9, type: 3}
->>>>>>> Stashed changes
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
   _health: 100
-<<<<<<< Updated upstream
-=======
-  canMove: 1
-  pointerAimerRange: 15
-  pointerAimer: {fileID: 3543406935186489675}
-  projectileSpawnPosition: {fileID: 1819107962826895295}
->>>>>>> Stashed changes
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,113 +338,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
-=======
---- !u!1 &7340552541848384898
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3543406935186489675}
-  - component: {fileID: 6931978162033899080}
-  - component: {fileID: 1593467063186571848}
-  m_Layer: 6
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3543406935186489675
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7340552541848384898}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 174067990644502866}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -0.00000047683716}
-  m_SizeDelta: {x: 2, y: 2}
-  m_Pivot: {x: 0.5, y: 0}
---- !u!222 &6931978162033899080
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7340552541848384898}
-  m_CullTransparentMesh: 1
---- !u!114 &1593467063186571848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7340552541848384898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &7460188164934984358
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1819107962826895295}
-  m_Layer: 0
-  m_Name: ProjectileSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1819107962826895295
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7460188164934984358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 452431045987376310}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
