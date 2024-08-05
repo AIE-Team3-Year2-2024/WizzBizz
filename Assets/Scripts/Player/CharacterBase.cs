@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
 
 public class CharacterBase : MonoBehaviour
 {
-    protected bool hasOrb;
+    public bool hasOrb = false;
 
     [Tooltip("the speed this character will move at")]
     [SerializeField]
@@ -31,8 +32,14 @@ public class CharacterBase : MonoBehaviour
     private Vector3 _movementDirection;
 
     [Tooltip("where to spawn projectiles on this character")]
-    [SerializeField]
-    protected Transform projectileSpawnPosition;
+    public Transform projectileSpawnPosition;
+
+    public float currentAimMagnitude;
+
+    [Header("trigger attacks")]
+    public UnityEvent noBallAttack;
+
+    public UnityEvent ballAttack;
 
     public enum StaitisEffects
     {
@@ -67,7 +74,9 @@ public class CharacterBase : MonoBehaviour
         aimDirection.x = context.ReadValue<Vector2>().x;
         transform.LookAt(aimDirection += transform.position, transform.up);
 
-        pointerAimer.localScale = new Vector3(pointerAimer.localScale.x, 1 + (pointerAimerRange * context.ReadValue<Vector2>().magnitude), pointerAimer.localScale.z);
+        currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
+
+        pointerAimer.localScale = new Vector3(pointerAimer.localScale.x, 1 + (pointerAimerRange * currentAimMagnitude), pointerAimer.localScale.z);
     }
 
     public void OnDash(InputAction.CallbackContext context)
@@ -102,7 +111,17 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void OnAttack(InputAction.CallbackContext context)
     {
-
+        if (context.started)
+        {
+            if (hasOrb)
+            {
+                ballAttack.Invoke();
+            }
+            else
+            {
+                noBallAttack.Invoke();
+            }
+        }
     }
 
 
