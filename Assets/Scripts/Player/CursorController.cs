@@ -75,6 +75,7 @@ public class CursorController : MonoBehaviour
         if (_lastCollidedButton != null && context.started)
         {
             _lastCollidedButton.PlayerInteract(this);
+            _movementDirection = Vector3.zero;
         }
     }
 
