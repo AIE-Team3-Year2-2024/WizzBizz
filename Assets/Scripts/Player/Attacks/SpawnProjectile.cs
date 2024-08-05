@@ -9,7 +9,7 @@ public class SpawnProjectile : MonoBehaviour
 
     [Tooltip("the object to be created at the players SpawnProjectile object")]
     [SerializeField]
-    private GameObject projectile;
+    private GameObject[] projectiles;
 
     [Tooltip("how long before this object destroys itself (wont destroy itself if set to 0)")]
     [SerializeField]
@@ -29,13 +29,28 @@ public class SpawnProjectile : MonoBehaviour
 
     public void SpawnProjectileAtPlayer()
     {
-        GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
+        GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
         newProjectile.GetComponent<DamagePlayerOnCollision>().SetOwner(player);
 
         if (lifetime != 0)
         {
             Destroy(newProjectile, lifetime);
+        }
+    }
+
+    public void SpawnProjectileAtPlayer(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
+
+            newProjectile.GetComponent<DamagePlayerOnCollision>().SetOwner(player);
+
+            if (lifetime != 0)
+            {
+                Destroy(newProjectile, lifetime);
+            }
         }
     }
 }
