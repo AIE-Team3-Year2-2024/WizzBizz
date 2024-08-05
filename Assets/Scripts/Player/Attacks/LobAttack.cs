@@ -53,7 +53,7 @@ public class LobAttack : MonoBehaviour
     {
         if (context.started)
         {
-            GameObject newProjectile = Instantiate(projectile, player.projectileSpawnPosition.position, player.transform.rotation);
+            GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
             newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
             if (lifetime != 0)
             {

@@ -308,14 +308,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasOrb: 0
-  speed: 10
+  heldOrb: {fileID: 0}
+  _speed: 10
   _health: 100
   canMove: 1
-  pointerAimerRange: 5
-  pointerAimer: {fileID: 1096289958959071381}
-  projectileSpawnPosition: {fileID: 639825632643347932}
+  _pointerAimerRange: 5
   currentAimMagnitude: 0
-  noBallAttack:
+  _pointerAimer: {fileID: 1096289958959071381}
+  _projectileSpawnPosition: {fileID: 639825632643347932}
+  ballAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  normalAttack:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1865637051403398714}
@@ -330,9 +334,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  ballAttack:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1865637051403398714
 MonoBehaviour:
   m_ObjectHideFlags: 0

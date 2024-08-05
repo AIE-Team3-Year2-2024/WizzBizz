@@ -29,7 +29,7 @@ public class SpawnProjectile : MonoBehaviour
 
     public void SpawnProjectileAtPlayer()
     {
-        GameObject newProjectile = Instantiate(projectile, player.projectileSpawnPosition.position, player.transform.rotation);
+        GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
 
         newProjectile.GetComponent<DamagePlayerOnCollision>().SetOwner(player);
 
