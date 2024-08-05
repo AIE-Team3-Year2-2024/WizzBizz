@@ -142,7 +142,9 @@ public class GameManager : MonoBehaviour
         {
             //here we would check a player data list at the same position to find this players character
             GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _controllers[i]).gameObject;
-            _activePlayers.Add(newPlayer.GetComponent<CharacterBase>());
+            CharacterBase character = newPlayer.GetComponent<CharacterBase>();
+            character.playerGamepad = _controllers[i];
+            _activePlayers.Add(character);
         }
         addingControllers = false;
     }

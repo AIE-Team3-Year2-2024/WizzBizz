@@ -10,6 +10,8 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector] public bool hasOrb = false;
     [HideInInspector] public GameObject heldOrb = null;
 
+    [HideInInspector] public Gamepad playerGamepad = null;
+
     [Tooltip("the speed this character will move at")]
     [SerializeField]
     private float _speed;
@@ -114,6 +116,8 @@ public class CharacterBase : MonoBehaviour
         {
             if (hasOrb)
             {
+                StartCoroutine(DoBallAttackHaptics());
+
                 ballAttack.Invoke();
                 Destroy(heldOrb);
                 heldOrb = null;
@@ -141,5 +145,12 @@ public class CharacterBase : MonoBehaviour
     {
         GameManager.Instance.DisconnectPlayer(this);
         Destroy(gameObject);
+    }
+
+    public IEnumerator DoBallAttackHaptics()
+    {
+        playerGamepad.SetMotorSpeeds(1.0f, 1.0f);
+        yield return new WaitForSeconds(1000.0f);
+        playerGamepad.ResetHaptics();
     }
 }
