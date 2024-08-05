@@ -9,7 +9,7 @@ public class CharacterBase : MonoBehaviour
 {
     [HideInInspector] public bool hasOrb = false;
     [HideInInspector] public GameObject heldOrb = null;
-    
+
     [Tooltip("the speed this character will move at")]
     [SerializeField]
     private float _speed;
@@ -75,7 +75,7 @@ public class CharacterBase : MonoBehaviour
 
         currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
 
-        _pointerAimer.localScale = new Vector3(_pointerAimer.localScale.x, 1 + (_pointerAimerRange * context.ReadValue<Vector2>().magnitude), _pointerAimer.localScale.z);
+        _pointerAimer.localScale = new Vector3(_pointerAimer.localScale.x, 1 + (_pointerAimerRange * currentAimMagnitude), _pointerAimer.localScale.z);
     }
 
     public void OnDash(InputAction.CallbackContext context)
