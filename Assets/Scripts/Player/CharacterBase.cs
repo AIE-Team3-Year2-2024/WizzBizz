@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
 
 public class CharacterBase : MonoBehaviour
 {
-    protected bool hasOrb;
+    protected bool hasOrb = false;
 
     [Tooltip("the speed this character will move at")]
     [SerializeField]
@@ -31,8 +32,12 @@ public class CharacterBase : MonoBehaviour
     private Vector3 _movementDirection;
 
     [Tooltip("where to spawn projectiles on this character")]
-    [SerializeField]
-    protected Transform projectileSpawnPosition;
+    public Transform projectileSpawnPosition;
+
+    [Header("trigger attacks")]
+    public UnityEvent noBallAttack;
+
+    public UnityEvent ballAttack;
 
     public enum StaitisEffects
     {
@@ -102,7 +107,17 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void OnAttack(InputAction.CallbackContext context)
     {
-
+        if (context.started)
+        {
+            if (hasOrb)
+            {
+                ballAttack.Invoke();
+            }
+            else
+            {
+                noBallAttack.Invoke();
+            }
+        }
     }
 
 

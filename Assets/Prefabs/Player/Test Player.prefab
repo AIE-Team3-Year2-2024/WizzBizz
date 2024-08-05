@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 452431045987376309}
   - component: {fileID: 452431045987376298}
   - component: {fileID: 532612227137173808}
+  - component: {fileID: 1865637051403398714}
   m_Layer: 0
   m_Name: Test Player
   m_TagString: Untagged
@@ -307,6 +308,37 @@ MonoBehaviour:
   pointerAimerRange: 5
   pointerAimer: {fileID: 1096289958959071381}
   projectileSpawnPosition: {fileID: 639825632643347932}
+  noBallAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1865637051403398714}
+        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
+        m_MethodName: SpawnProjectileAtPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ballAttack:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1865637051403398714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 6599871779557999481, guid: c0ff7f9cce920a647bd4e8bbec9b41bd, type: 3}
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +570,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6057059580930561455}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
