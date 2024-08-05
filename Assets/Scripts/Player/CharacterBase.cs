@@ -7,7 +7,7 @@ using UnityEngine.ProBuilder.MeshOperations;
 
 public class CharacterBase : MonoBehaviour
 {
-    protected bool hasOrb = false;
+    public bool hasOrb = false;
 
     [Tooltip("the speed this character will move at")]
     [SerializeField]
@@ -33,6 +33,8 @@ public class CharacterBase : MonoBehaviour
 
     [Tooltip("where to spawn projectiles on this character")]
     public Transform projectileSpawnPosition;
+
+    public float currentAimMagnitude;
 
     [Header("trigger attacks")]
     public UnityEvent noBallAttack;
@@ -72,7 +74,9 @@ public class CharacterBase : MonoBehaviour
         aimDirection.x = context.ReadValue<Vector2>().x;
         transform.LookAt(aimDirection += transform.position, transform.up);
 
-        pointerAimer.localScale = new Vector3(pointerAimer.localScale.x, 1 + (pointerAimerRange * context.ReadValue<Vector2>().magnitude), pointerAimer.localScale.z);
+        currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
+
+        pointerAimer.localScale = new Vector3(pointerAimer.localScale.x, 1 + (pointerAimerRange * currentAimMagnitude), pointerAimer.localScale.z);
     }
 
     public void OnDash(InputAction.CallbackContext context)

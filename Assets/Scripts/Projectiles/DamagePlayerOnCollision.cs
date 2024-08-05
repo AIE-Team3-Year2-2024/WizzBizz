@@ -16,6 +16,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [SerializeField]
     private float effectTime;
 
+    [Tooltip("whether the object will destroy itself on collision")]
+    [SerializeField]
+    private bool destroyOnCollision;
+
     private CharacterBase ownerPlayer;
 
     public void OnCollisionEnter(Collision collision)
@@ -27,7 +31,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
             player.TakeDamage(damage, damageEffect, effectTime);
         }
 
-        Destroy(gameObject);
+        if (destroyOnCollision)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SetOwner(CharacterBase inputPlayer)

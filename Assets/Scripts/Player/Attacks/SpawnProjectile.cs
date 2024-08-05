@@ -11,6 +11,10 @@ public class SpawnProjectile : MonoBehaviour
     [SerializeField]
     private GameObject projectile;
 
+    [Tooltip("how long before this object destroys itself (wont destroy itself if set to 0)")]
+    [SerializeField]
+    private float lifetime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,10 +32,10 @@ public class SpawnProjectile : MonoBehaviour
         GameObject newProjectile = Instantiate(projectile, player.projectileSpawnPosition.position, player.transform.rotation);
 
         newProjectile.GetComponent<DamagePlayerOnCollision>().SetOwner(player);
-    }
 
-    public void SpawnObjectAtAim(InputAction.CallbackContext context)
-    {
-
+        if (lifetime != 0)
+        {
+            Destroy(newProjectile, lifetime);
+        }
     }
 }
