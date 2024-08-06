@@ -321,9 +321,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 10
+  _speed: 5
+  _dashTime: 3
+  _dashSpeed: 10
   _health: 100
   canMove: 1
+  canAim: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
   _pointerAimer: {fileID: 1096289958959071381}
