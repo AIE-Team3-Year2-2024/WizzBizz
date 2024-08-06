@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
                 {                    
                     GameObject newPlayer = PlayerInput.Instantiate(_cursorPrefab, controlScheme: "Gamepad", pairWithDevice: Gamepad.all[i]).gameObject;
                     newPlayer.transform.SetParent(canvas.transform);
+                    newPlayer.GetComponent<CursorController>().playerID = _connectedPlayerCount;
 
                     // Create player data, stores gamepad, character and score.
                     PlayerData newPlayerData = new PlayerData();
@@ -96,6 +97,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetSelectedCharacter(int listPosition, GameObject selection)
+    {
+        _playerData[listPosition].characterSelect = selection;
     }
 
     /// <summary>
@@ -172,7 +178,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character
-            GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _playerData[i].gamepad).gameObject;
+            GameObject newPlayer = PlayerInput.Instantiate(_playerData[i].characterSelect, controlScheme: "Gamepad", pairWithDevice: _playerData[i].gamepad).gameObject;
             newPlayer.name += (" > Player ID (" + i + ")");
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
             character.playerGamepad = _playerData[i].gamepad;
