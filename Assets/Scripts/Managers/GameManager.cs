@@ -7,6 +7,13 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 
+public class PlayerData
+{
+    public Gamepad gamepad;
+    public GameObject characterSelect;
+    public int score;
+}
+
 public class GameManager : MonoBehaviour
 {
     // Static reference
@@ -26,11 +33,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject _playerPrefab;
 
-    private int _currentPlayerCount;
+    private Dictionary<CharacterBase, PlayerData> _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
+    private int _connectedPlayerCount;
+
+    private int _currentRound = 0;
 
     public GameObject canvas;
 
-
+    private List<PlayerData> _playerData = new List<PlayerData>();
 
     // Singleton instantiation
     private void Awake()
@@ -46,10 +56,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    //input variables
-    private List<Gamepad> _controllers = new List<Gamepad>(); // list of connected controllers
-    private List<CharacterBase> _activePlayers = new List<CharacterBase>(); // currently instantiated players
-
     // Start is called before the first frame update
     void Start()
     {
@@ -63,15 +69,30 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < Gamepad.all.Count; i++)
             {
-                //check if the current gamepad has a button pressed and is not stored
-                if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic) && !_controllers.Contains(Gamepad.all[i]))
+                bool alreadyContainsGamepad = false;
+                for (int j = 0; j < _playerData.Count(); j++)
                 {
-                    //store controller and add player to leaderboard
-                    _controllers.Add(Gamepad.all[i]);
+                    if (_playerData[j].gamepad == Gamepad.all[i])
+                        alreadyContainsGamepad = true;
+                }
 
+                if (alreadyContainsGamepad == true)
+                    continue;
+
+                //check if the current gamepad has a button pressed and is not stored
+                if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic))
+                {                    
                     GameObject newPlayer = PlayerInput.Instantiate(_cursorPrefab, controlScheme: "Gamepad", pairWithDevice: Gamepad.all[i]).gameObject;
                     newPlayer.transform.SetParent(canvas.transform);
-                    _currentPlayerCount++;
+
+                    // Create player data, stores gamepad, character and score.
+                    PlayerData newPlayerData = new PlayerData();
+                    newPlayerData.gamepad = Gamepad.all[i];
+                    newPlayerData.characterSelect = null;
+                    newPlayerData.score = 0;
+                    _playerData.Add(newPlayerData);
+
+                    _connectedPlayerCount++;
                 }
             }
         }
@@ -85,12 +106,12 @@ public class GameManager : MonoBehaviour
     {
         foreach(InputDevice input in player.devices)
         {
-            foreach(Gamepad controller in _controllers)
+            foreach(PlayerData p in _playerData)
             {
-                if(input == controller)
+                if(input == p.gamepad)
                 {
-                    _controllers.Remove(controller);
-                    _currentPlayerCount--;
+                    _playerData.Remove(p);
+                    _connectedPlayerCount--;
                     return;
                 }
             }
@@ -102,29 +123,40 @@ public class GameManager : MonoBehaviour
         PlayerInput playerInput = player.GetComponent<PlayerInput>();
         foreach (InputDevice input in playerInput.devices)
         {
-            foreach (Gamepad controller in _controllers)
+            foreach (PlayerData p in _playerData)
             {
-                if (input == controller)
+                if (input == p.gamepad)
                 {
-                    _controllers.Remove(controller);
-                    _activePlayers.Remove(player);
-                    _currentPlayerCount--;
+                    _playerData.Remove(p);
+                    _connectedPlayerCount--;
                     return;
                 }
             }
         }
     }
 
-    public int GetCurrntPlayerCount()
+    public int GetConnectedPlayerCount()
     {
-        return _currentPlayerCount;
+        return _connectedPlayerCount;
+    }
+
+    public void PlayerDeath(CharacterBase player)
+    {
+        if (_alivePlayers.Count() > 1)
+        {
+            _alivePlayers.Remove(player);
+        }
+        else
+        {
+            // Handle win/lose
+            _alivePlayers[player].score++;
+        }
     }
 
     public void StartGame()
     {
         StartCoroutine(StartGameRoutine());
     }
-
 
     public IEnumerator StartGameRoutine()
     {
@@ -137,15 +169,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
-
-        for (int i = 0; i < _controllers.Count; i++)
+        for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character
-            GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _controllers[i]).gameObject;
+            GameObject newPlayer = PlayerInput.Instantiate(_playerPrefab, controlScheme: "Gamepad", pairWithDevice: _playerData[i].gamepad).gameObject;
+            newPlayer.name += (" > Player ID (" + i + ")");
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
-            character.playerGamepad = _controllers[i];
-            _activePlayers.Add(character);
+            character.playerGamepad = _playerData[i].gamepad;
+            _alivePlayers.Add(character, _playerData[i]);
         }
+
         addingControllers = false;
     }
 }
