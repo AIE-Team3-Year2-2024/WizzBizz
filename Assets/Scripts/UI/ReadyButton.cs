@@ -31,7 +31,7 @@ public class ReadyButton : MonoBehaviour
         {
             _acceptedPlayers.Add(player);
             player.canMove = false;
-            if(_acceptedPlayers.Count == GameManager.Instance.GetCurrntPlayerCount())
+            if(_acceptedPlayers.Count == GameManager.Instance.GetConnectedPlayerCount())
             {
                 AllPlayersReady();
             }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,7 +97,7 @@ public class CharacterBase : MonoBehaviour
 
         if (_health <= 0)
         {
-            Debug.Log(gameObject.name + " is me and i am dead");
+            Death();
         }
     }
 
@@ -106,8 +107,16 @@ public class CharacterBase : MonoBehaviour
 
         if (_health <= 0)
         {
-            Debug.Log(gameObject.name + " is me and i am dead");
+            Death();
         }
+    }
+
+    public void Death()
+    {
+        Debug.Log("Player has died: " + gameObject.name);
+
+        canMove = false;
+        GameManager.Instance.PlayerDeath(this);
     }
 
     public virtual void OnAttack(InputAction.CallbackContext context)
@@ -130,7 +139,6 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-
     public virtual void OnAbility1(InputAction.CallbackContext context)
     {
 
@@ -139,6 +147,14 @@ public class CharacterBase : MonoBehaviour
     public virtual void OnAbility2(InputAction.CallbackContext context)
     {
 
+    }
+
+    public virtual void OnDebug(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            TakeDamage(50.0f);
+        }
     }
 
     public void OnDissconect()
