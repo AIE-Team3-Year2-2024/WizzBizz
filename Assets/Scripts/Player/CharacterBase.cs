@@ -16,13 +16,19 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _speed;
 
+    private float _origanalSpeed;
+
     [Tooltip("how long this character will dash for")]
     [SerializeField]
     private float _dashTime;
 
-    [Tooltip("the speed this charcater will dash for")]
+    [Tooltip("the speed this charcater will dash at")]
     [SerializeField]
     private float _dashSpeed;
+
+    [Tooltip("the speed the player will move at if chgarging ann attack")]
+    [SerializeField]
+    private float _chargeSpeed;
 
     [Tooltip("the players health")]
     [SerializeField]
@@ -37,7 +43,14 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _pointerAimerRange;
 
+    [HideInInspector]
     public float currentAimMagnitude;
+
+    [Tooltip("the amount of time needed to charge the basic attack")]
+    [SerializeField]
+    private float _basicAttackTime;
+
+    private float _basicAttackTimer = 0;
 
     [Tooltip("the image used to show where the player is aiming")]
     [SerializeField]
@@ -58,10 +71,16 @@ public class CharacterBase : MonoBehaviour
         SLOW
     }
 
+    private void Start()
+    {
+        _origanalSpeed = _speed;
+    }
+
     // Update is called once per frame
     void Update()
     {
         transform.position += _movementDirection * _speed * Time.deltaTime;
+        _basicAttackTimer += Time.deltaTime;
     }
 
     /// <summary>
@@ -152,6 +171,7 @@ public class CharacterBase : MonoBehaviour
     {
         if (context.started)
         {
+            _basicAttackTimer = 0;
             if (hasOrb)
             {
                 StartCoroutine(DoBallAttackHaptics());
@@ -162,6 +182,14 @@ public class CharacterBase : MonoBehaviour
                 hasOrb = false;
             }
             else
+            {
+                _speed = _chargeSpeed;
+            }
+        }
+        else if (context.canceled)
+        {
+            _speed = _origanalSpeed;
+            if (_basicAttackTimer >= _basicAttackTime)
             {
                 normalAttack.Invoke();
             }
