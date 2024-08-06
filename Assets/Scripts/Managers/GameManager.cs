@@ -202,6 +202,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
+        _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
+
         for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character

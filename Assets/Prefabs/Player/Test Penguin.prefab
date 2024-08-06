@@ -340,10 +340,14 @@ MonoBehaviour:
   hasOrb: 0
   heldOrb: {fileID: 0}
   _speed: 10
+  _dashTime: 0
+  _dashSpeed: 0
+  _chargeSpeed: 0
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
+  _basicAttackTime: 0
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
@@ -446,7 +450,7 @@ MonoBehaviour:
   projectile: {fileID: 5546918057975252347, guid: 0443f68005650074b905614a3421c54d, type: 3}
   range: 10
   lobAimer: {fileID: 1309746413074950827}
-  lifetime: 0
+  lifetime: 15
 --- !u!114 &8328546656257713296
 MonoBehaviour:
   m_ObjectHideFlags: 0
