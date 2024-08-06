@@ -149,8 +149,11 @@ public class CharacterBase : MonoBehaviour
 
     public IEnumerator DoBallAttackHaptics()
     {
-        playerGamepad.SetMotorSpeeds(1.0f, 1.0f);
-        yield return new WaitForSeconds(1000.0f);
-        playerGamepad.ResetHaptics();
+        if (playerGamepad != null)
+        {
+            playerGamepad.SetMotorSpeeds(1.0f, 1.0f);
+            yield return new WaitForSeconds(1000.0f);
+            playerGamepad.ResetHaptics();
+        }
     }
 }
