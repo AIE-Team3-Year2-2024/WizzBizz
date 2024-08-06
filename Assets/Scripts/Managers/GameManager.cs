@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string[] _levels;
 
+    [Tooltip("The scene to load when the game is over")]
+    [SerializeField]
+    private string _endLevel;
+
     [Tooltip("the prefab players use to controll the character screen")]
     [SerializeField]
     private GameObject _cursorPrefab;
@@ -37,6 +41,10 @@ public class GameManager : MonoBehaviour
     private int _connectedPlayerCount;
 
     private int _currentRound = 0;
+
+    [Tooltip("the amount of rounds needed to end the game")]
+    [SerializeField]
+    private int _scoreToWin;
 
     public GameObject canvas;
 
@@ -152,10 +160,29 @@ public class GameManager : MonoBehaviour
         {
             _alivePlayers.Remove(player);
         }
-        else
+        
+        if (_alivePlayers.Count() <= 1)
         {
-            // Handle win/lose
-            _alivePlayers[player].score++;
+            // Handle win
+            PlayerWin();
+        }
+    }
+
+    public void PlayerWin()
+    {
+        foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
+        {
+            p.Value.score++;
+            _currentRound++;
+
+            //if round over
+            if (p.Value.score < _scoreToWin)
+                StartGame();
+            else // if game over
+            {
+                SceneManager.LoadScene(_endLevel);
+                Destroy(gameObject);
+            }
         }
     }
 

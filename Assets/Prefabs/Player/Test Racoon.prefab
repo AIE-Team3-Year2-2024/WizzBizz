@@ -302,6 +302,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ae155d5c-3ca1-4e92-bfbf-826797fd444c
     m_ActionName: Player/Parry
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd70c30c-0deb-47e9-a01d-86ed9ad860d9
+    m_ActionName: Player/Debug[/SwitchProControllerHID/rightStickPress,/SwitchProControllerHID1/rightStickPress,/DualSenseGamepadHID/rightStickPress]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -329,7 +333,7 @@ MonoBehaviour:
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 5
+  _basicAttackTime: 0.3
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:

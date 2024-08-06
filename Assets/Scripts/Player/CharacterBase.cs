@@ -173,6 +173,7 @@ public class CharacterBase : MonoBehaviour
         Debug.Log("Player has died: " + gameObject.name);
 
         canMove = false;
+        _movementDirection = Vector3.zero;
         GameManager.Instance.PlayerDeath(this);
     }
 
