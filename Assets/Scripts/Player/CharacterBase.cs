@@ -77,7 +77,10 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// this function should be called by all charcters and will change the direction that this player faces
+    /// </summary>
+    /// <param name="context"></param>
     public void OnAim(InputAction.CallbackContext context)
     {
         Vector3 aimDirection = new Vector3();
@@ -92,6 +95,10 @@ public class CharacterBase : MonoBehaviour
         _pointerAimer.localScale = new Vector3(_pointerAimer.localScale.x, 1 + (_pointerAimerRange * currentAimMagnitude), _pointerAimer.localScale.z);
     }
 
+    /// <summary>
+    /// should be called by all charcaters and calls DashRoutine()
+    /// </summary>
+    /// <param name="context"></param>
     public void OnDash(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -100,6 +107,10 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// takes the players ability to move and changes there speed and sets it back after _dashTime
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator DashRoutine()
     {
         canMove = false;
