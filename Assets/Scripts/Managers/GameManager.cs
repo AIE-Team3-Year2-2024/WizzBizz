@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
 
-        //theese are here so that the playwers get spaw2ned in the new scene and not the old one
+        //theese are here so that the players get spawned in the new scene and not the old one
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
