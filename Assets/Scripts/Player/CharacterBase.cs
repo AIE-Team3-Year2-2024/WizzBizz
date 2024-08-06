@@ -16,12 +16,22 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _speed;
 
+    [Tooltip("how long this character will dash for")]
+    [SerializeField]
+    private float _dashTime;
+
+    [Tooltip("the speed this charcater will dash for")]
+    [SerializeField]
+    private float _dashSpeed;
+
     [Tooltip("the players health")]
     [SerializeField]
     private float _health;
 
     [Tooltip("whether or not on move will be skipped")]
-    public bool canMove;
+    [HideInInspector]
+    public bool canMove = true;
+
 
     [Tooltip("this value multiplies the size of the pointer aimer when aiming")]
     [SerializeField]
@@ -73,7 +83,9 @@ public class CharacterBase : MonoBehaviour
         Vector3 aimDirection = new Vector3();
         aimDirection.z = context.ReadValue<Vector2>().y;
         aimDirection.x = context.ReadValue<Vector2>().x;
+                
         transform.LookAt(aimDirection += transform.position, transform.up);
+        
 
         currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
 
@@ -82,7 +94,22 @@ public class CharacterBase : MonoBehaviour
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        if (context.started)
+        {
+            StartCoroutine(DashRoutine());
+        }
+    }
 
+    public IEnumerator DashRoutine()
+    {
+        canMove = false;
+        float oldSpeed = _speed;
+        _speed = _dashSpeed;
+        _movementDirection = transform.forward;
+        yield return new WaitForSeconds(_dashTime);
+        canMove = true;
+        _speed = oldSpeed;
+        _movementDirection = Vector3.zero;
     }
 
     public void OnCatch(InputAction.CallbackContext context)
