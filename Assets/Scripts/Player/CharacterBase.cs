@@ -62,8 +62,8 @@ public class CharacterBase : MonoBehaviour
     {
         if (canMove)
         {
-            _movementDirection.z = context.ReadValue<Vector2>().y;
-            _movementDirection.x = context.ReadValue<Vector2>().x;
+            _movementDirection.z = context.ReadValue<Vector2>().y * _speed * Time.deltaTime;
+            _movementDirection.x = context.ReadValue<Vector2>().x * _speed * Time.deltaTime;
         }
     }
 
