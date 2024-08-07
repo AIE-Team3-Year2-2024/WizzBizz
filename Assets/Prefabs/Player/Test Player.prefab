@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 452431045987376298}
   - component: {fileID: 532612227137173808}
   - component: {fileID: 3006249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Test Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,10 +318,14 @@ MonoBehaviour:
   hasOrb: 0
   heldOrb: {fileID: 0}
   _speed: 10
+  _dashTime: 0
+  _dashSpeed: 0
+  _chargeSpeed: 0
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
+  _basicAttackTime: 0
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
@@ -358,7 +362,7 @@ GameObject:
   - component: {fileID: 452431046548426749}
   - component: {fileID: 452431046548426738}
   - component: {fileID: 452431046548426739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -454,7 +458,7 @@ GameObject:
   - component: {fileID: 1465012572978774652}
   - component: {fileID: 2885920242837571443}
   - component: {fileID: 2179331503762377133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LobAimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 639825632643347932}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ProjectileSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +572,7 @@ GameObject:
   - component: {fileID: 1096289958959071381}
   - component: {fileID: 6291924151899607562}
   - component: {fileID: 2471778120679614510}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -645,7 +649,7 @@ GameObject:
   - component: {fileID: 1341162402894293128}
   - component: {fileID: 5989101143034528657}
   - component: {fileID: 9132511462560435837}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
