@@ -13,11 +13,16 @@ public class CharacterBase : MonoBehaviour
 
     [HideInInspector] public Gamepad playerGamepad = null;
 
+    private PlayerInput input;
+
     [Tooltip("the speed this character will move at")]
     [SerializeField]
     private float _speed;
 
     private float _origanalSpeed;
+
+    [Tooltip("this is the trigger collider used for catching")]
+    public Collider catchTrigger;
 
     [Tooltip("how long this character will dash for")]
     [SerializeField]
@@ -30,6 +35,14 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("the speed the player will move at if chgarging ann attack")]
     [SerializeField]
     private float _chargeSpeed;
+
+    [Tooltip("how long the catch trigger will be active")]
+    [SerializeField]
+    private float catchParryTime;
+
+    [Tooltip("how long after the catch trigger activates where the player cant move and is vulnrable")]
+    [SerializeField]
+    private float catchWaitTime;
 
     [Tooltip("the players health")]
     [SerializeField]
@@ -75,6 +88,9 @@ public class CharacterBase : MonoBehaviour
     private void Start()
     {
         _origanalSpeed = _speed;
+        input = GetComponent<PlayerInput>();
+        catchTrigger.isTrigger = true;
+        catchTrigger.enabled = false;
     }
 
     // Update is called once per frame
@@ -145,7 +161,17 @@ public class CharacterBase : MonoBehaviour
 
     public void OnCatch(InputAction.CallbackContext context)
     {
+        StartCoroutine(CatchRoutine());
+    }
 
+    public IEnumerator CatchRoutine()
+    {
+        input.DeactivateInput();
+        catchTrigger.enabled = true;
+        yield return new WaitForSeconds(catchParryTime);
+        catchTrigger.enabled = false;
+        yield return new WaitForSeconds(catchWaitTime);
+        input.ActivateInput();
     }
 
     public void TakeDamage(float damage)

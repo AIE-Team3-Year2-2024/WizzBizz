@@ -19,9 +19,10 @@ GameObject:
   - component: {fileID: 3833022284611438099}
   - component: {fileID: 4946476987851103924}
   - component: {fileID: 1710617483415450620}
+  - component: {fileID: -3436212031268177746}
   m_Layer: 6
   m_Name: Test Racoon
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,9 +327,12 @@ MonoBehaviour:
   hasOrb: 0
   heldOrb: {fileID: 0}
   _speed: 5
+  catchTrigger: {fileID: -3436212031268177746}
   _dashTime: 3
   _dashSpeed: 10
   _chargeSpeed: 1
+  catchParryTime: 0
+  catchWaitTime: 0
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
@@ -448,6 +452,19 @@ MonoBehaviour:
   projectiles:
   - {fileID: 2783992932023041390, guid: 22b4ba189e212dd41809f20795628793, type: 3}
   lifetime: 0
+--- !u!65 &-3436212031268177746
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6985164, y: 2, z: 1.2522864}
+  m_Center: {x: 0.012624264, y: 0, z: 0.54081094}
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0

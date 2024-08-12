@@ -18,9 +18,10 @@ GameObject:
   - component: {fileID: -907038504855142003}
   - component: {fileID: 7826727589078929842}
   - component: {fileID: 8328546656257713296}
+  - component: {fileID: 3000781201183644107}
   m_Layer: 6
   m_Name: Test Penguin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,9 +341,12 @@ MonoBehaviour:
   hasOrb: 0
   heldOrb: {fileID: 0}
   _speed: 10
+  catchTrigger: {fileID: 3000781201183644107}
   _dashTime: 0
   _dashSpeed: 0
   _chargeSpeed: 0
+  catchParryTime: 0
+  catchWaitTime: 0
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
@@ -467,6 +471,19 @@ MonoBehaviour:
   range: 5
   lobAimer: {fileID: 7203248672751915788}
   lifetime: 0
+--- !u!65 &3000781201183644107
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6985164, y: 2, z: 1.2522864}
+  m_Center: {x: 0.012624264, y: 0, z: 0.54081094}
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3209cfea980b7f4db30cd321a67c820, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 6599871779557999481, guid: c0ff7f9cce920a647bd4e8bbec9b41bd, type: 3}
+  projectile: {fileID: 6599871779557999481, guid: f00d385795e894e47b178dcaf1fd55a4, type: 3}
   lifetime: 15
   _spawn: {fileID: 639825632643347932}
 --- !u!1 &3081807396904528472
