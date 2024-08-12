@@ -124,14 +124,18 @@ public class CharacterBase : MonoBehaviour
     void FixedUpdate()
     {
         if (_movementDirection.magnitude > 0.0f)
-            _velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
+            rb.AddForce(_movementDirection * _acceleration, ForceMode.Impulse);
+        //_velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
 
-        if (_velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
-            _velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
+        if (rb.velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
+            rb.velocity *= (1.0f - _deceleration);
+        //_velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
 
-        _velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, _speed);
+
+        //_velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
         //rb.position += _velocity * Time.fixedDeltaTime; // Apply the velocity to the character position.
-        rb.velocity = _velocity;
+        //rb.velocity = _velocity;
     }
 
     void LateUpdate()
