@@ -37,6 +37,7 @@ public class MoveInArc : MonoBehaviour
         } 
         else
         {
+            transform.position = endPos;
             Destroy(gameObject);
         }
     }
