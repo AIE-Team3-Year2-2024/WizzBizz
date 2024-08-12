@@ -326,13 +326,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 5
+  _speed: 10
+  _acceleration: 1
+  _deceleration: 0.1
   catchTrigger: {fileID: -3436212031268177746}
   _dashTime: 3
   _dashSpeed: 10
   _chargeSpeed: 1
-  catchParryTime: 0
-  catchWaitTime: 0
+  catchParryTime: 2
+  catchWaitTime: 1
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
