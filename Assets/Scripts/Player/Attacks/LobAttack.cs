@@ -45,7 +45,7 @@ public class LobAttack : MonoBehaviour
     {
         if (lobAimer && range != 0)
         {
-            lobAimer.transform.localPosition = Vector3.forward * range * player.currentAimMagnitude;
+            lobAimer.transform.localPosition = (Vector3.forward * range * player.currentAimMagnitude) - Vector3.up;
         }
     }
 

@@ -11,11 +11,18 @@ public class CursorController : MonoBehaviour
     [SerializeField]
     private float _speed;
 
-    private ReadyButton _lastCollidedButton;
+    private ReadyButton _lastCollidedReadyButton;
+
+    private CharacterButton _lastCollidedCharacterButton;
 
     public bool canMove = true;
 
+    private bool playerSelected = false;
+
     private Vector3 _movementDirection;
+
+    public int playerID;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +57,11 @@ public class CursorController : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<ReadyButton>() != null)
         {
-            _lastCollidedButton = collision.gameObject.GetComponent<ReadyButton>();
+            _lastCollidedReadyButton = collision.gameObject.GetComponent<ReadyButton>();
+        } 
+        else if(collision.gameObject.GetComponent<CharacterButton>() != null)
+        {
+            _lastCollidedCharacterButton = collision.gameObject.GetComponent<CharacterButton>();
         }
     }
 
@@ -60,9 +71,13 @@ public class CursorController : MonoBehaviour
     /// <param name="collision"></param>
     public void OnCollisionExit(Collision collision)
     {
-        if(collision.gameObject.GetComponent<ReadyButton>() == _lastCollidedButton)
+        if(collision.gameObject.GetComponent<ReadyButton>() == _lastCollidedReadyButton)
         {
-            _lastCollidedButton = null;
+            _lastCollidedReadyButton = null;
+        } 
+        else if (collision.gameObject.GetComponent<CharacterButton>() == _lastCollidedCharacterButton)
+        {
+            _lastCollidedCharacterButton = null;
         }
     }
 
@@ -72,10 +87,15 @@ public class CursorController : MonoBehaviour
     /// <param name="context"></param>
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (_lastCollidedButton != null && context.started)
+        if (_lastCollidedReadyButton != null && context.started && playerSelected)
         {
-            _lastCollidedButton.PlayerInteract(this);
+            _lastCollidedReadyButton.PlayerInteract(this);
             _movementDirection = Vector3.zero;
+        }
+        if(_lastCollidedCharacterButton != null && context.started)
+        {
+            GameManager.Instance.SetSelectedCharacter(playerID, _lastCollidedCharacterButton.character);
+            playerSelected = true;
         }
     }
 
