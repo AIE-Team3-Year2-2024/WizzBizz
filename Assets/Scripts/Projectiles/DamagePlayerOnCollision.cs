@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+[RequireComponent(typeof(Rigidbody))]
 public class DamagePlayerOnCollision : MonoBehaviour
 {
     [Tooltip("the amount of damge this object will deal to a player or object")]
@@ -20,12 +22,14 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [SerializeField]
     private bool destroyOnCollision;
 
+    [Tooltip("event invoked in OnDestroy")]
+    public UnityEvent DoOnDestroy;
+
     private CharacterBase ownerPlayer;
 
     public void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.gameObject.GetComponent<CharacterBase>() != ownerPlayer)
+        if (collision.gameObject.GetComponent<CharacterBase>() != ownerPlayer && collision.gameObject.GetComponent<CharacterBase>())
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
             player.TakeDamage(damage, damageEffect, effectTime);
@@ -40,5 +44,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
     public void SetOwner(CharacterBase inputPlayer)
     {
         ownerPlayer = inputPlayer;
+    }
+
+    private void OnDestroy()
+    {
+        DoOnDestroy.Invoke();
     }
 }

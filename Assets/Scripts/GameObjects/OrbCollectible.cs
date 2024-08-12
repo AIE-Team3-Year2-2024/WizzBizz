@@ -57,7 +57,7 @@ public class OrbCollectible : MonoBehaviour
                 if (character.heldOrb != null) 
                 {
                     character.hasOrb = true;
-                    spawner.Collect();
+                    spawner.Collect(character);
                     Destroy(gameObject);
                 }
             }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MoveInArc : MonoBehaviour
 {
@@ -14,6 +15,10 @@ public class MoveInArc : MonoBehaviour
 
     public float heightMultiplyer;
 
+    [Tooltip("event to be invoked when this object is destroyed")]
+    [SerializeField]
+    private UnityEvent doOnDestroy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,13 +31,24 @@ public class MoveInArc : MonoBehaviour
         arcCompletion += Time.deltaTime * speed;
         if (arcCompletion < 1)
         {
-            transform.position = Vector3.Slerp(startPos, endPos, arcCompletion);
-            transform.position = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(arcCompletion * Mathf.PI) * heightMultiplyer, transform.position.z);
+            float t = 1.0f - Mathf.Cos((arcCompletion * Mathf.PI) / 2.0f); // https://easings.net/#easeInSine
+            transform.position = Vector3.Slerp(startPos, endPos, t);
+            transform.position = new Vector3(transform.position.x, transform.position.y + Mathf.Sin(t * Mathf.PI) * heightMultiplyer, transform.position.z);
+        } 
+        else
+        {
+            transform.position = endPos;
+            Destroy(gameObject);
         }
     }
 
     public void SetEndPos(Vector3 inputTransform)
     {
         endPos = inputTransform;
+    }
+
+    private void OnDestroy()
+    {
+        doOnDestroy.Invoke();
     }
 }

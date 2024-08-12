@@ -10,7 +10,9 @@ public class OrbSpawner : MonoBehaviour
 
     private GameObject _spawnedCollectible = null;
     private float _timer = 0.0f;
+    private CharacterBase _playerWhoCollected = null;
     private bool _collected = false;
+    private bool _justCollected = true;
 
     void Start()
     {
@@ -19,6 +21,9 @@ public class OrbSpawner : MonoBehaviour
 
     void Update()
     {
+        if (_justCollected == true)
+            return;
+
         if (_collected == true)
         {
             _timer -= Time.deltaTime;
@@ -43,9 +48,20 @@ public class OrbSpawner : MonoBehaviour
         _collected = false;
     }
 
-    public void Collect()
+    public void Collect(CharacterBase playerRef)
     {
         _collected = true;
+        _justCollected = true;
         _spawnedCollectible = null;
+        _playerWhoCollected = playerRef;
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other?.GetComponent<CharacterBase>() == _playerWhoCollected)
+        {
+            _justCollected = false;
+            _playerWhoCollected = null;
+        }
     }
 }
