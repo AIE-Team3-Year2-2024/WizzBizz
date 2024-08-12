@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 452431045987376298}
   - component: {fileID: 532612227137173808}
   - component: {fileID: 3006249}
+  - component: {fileID: 1143968817450751776}
   m_Layer: 6
   m_Name: Test Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,6 +299,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ae155d5c-3ca1-4e92-bfbf-826797fd444c
     m_ActionName: Player/Parry
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: bd70c30c-0deb-47e9-a01d-86ed9ad860d9
+    m_ActionName: Player/Debug
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -318,9 +323,12 @@ MonoBehaviour:
   hasOrb: 0
   heldOrb: {fileID: 0}
   _speed: 10
+  catchTrigger: {fileID: 1143968817450751776}
   _dashTime: 0
   _dashSpeed: 0
   _chargeSpeed: 0
+  catchParryTime: 0
+  catchWaitTime: 0
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
@@ -350,6 +358,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1143968817450751776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6985164, y: 2, z: 1.2522864}
+  m_Center: {x: 0.012624264, y: 0, z: 0.54081094}
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
