@@ -46,6 +46,16 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int _scoreToWin;
 
+    [Tooltip("how long before the players take damage over time")]
+    [SerializeField]
+    private float _roundTime;
+
+    [Tooltip("the multiplyer for damage taken for the round being over")]
+    [SerializeField]
+    private float endGameDamageMult;
+
+    private float _roundTimer;
+
     public GameObject canvas;
 
     private List<PlayerData> _playerData = new List<PlayerData>();
@@ -102,6 +112,16 @@ public class GameManager : MonoBehaviour
                     _playerData.Add(newPlayerData);
 
                     _connectedPlayerCount++;
+                }
+            }
+        } else
+        {
+            _roundTimer -= Time.deltaTime;
+            if(_roundTimer <= 0)
+            {
+                foreach(KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
+                {
+                    p.Key.TakeDamage(Time.deltaTime * endGameDamageMult);
                 }
             }
         }
@@ -163,6 +183,7 @@ public class GameManager : MonoBehaviour
         
         if (_alivePlayers.Count() <= 1)
         {
+            _roundTimer = _roundTime;
             // Handle win
             PlayerWin();
         }
@@ -215,5 +236,7 @@ public class GameManager : MonoBehaviour
         }
 
         addingControllers = false;
+
+        _roundTimer = _roundTime;
     }
 }

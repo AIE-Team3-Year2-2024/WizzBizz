@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -318,6 +318,8 @@ MonoBehaviour:
   _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
   _playerPrefab: {fileID: 452431045987376296, guid: 148a73ed0ea7d284fbf6ad3d6ecb2bf0, type: 3}
   _scoreToWin: 17
+  _roundTime: 10
+  endGameDamageMult: 12.73
   canvas: {fileID: 347443268}
 --- !u!4 &482636210
 Transform:
