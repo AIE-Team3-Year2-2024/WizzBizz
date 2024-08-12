@@ -197,12 +197,11 @@ public class CharacterBase : MonoBehaviour
     public IEnumerator DashRoutine()
     {
         canMove = false;
-        float oldSpeed = _speed;
         _speed = _dashSpeed;
         _movementDirection = transform.forward;
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
-        _speed = oldSpeed;
+        _speed = _originalSpeed;
         _movementDirection = Vector3.zero;
     }
 
