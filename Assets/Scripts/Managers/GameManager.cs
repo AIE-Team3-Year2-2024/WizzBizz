@@ -225,10 +225,13 @@ public class GameManager : MonoBehaviour
 
         _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
 
+        Spawn spawnInScene = FindAnyObjectByType<Spawn>();
+
         for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character
             GameObject newPlayer = PlayerInput.Instantiate(_playerData[i].characterSelect, controlScheme: "Gamepad", pairWithDevice: _playerData[i].gamepad).gameObject;
+            newPlayer.transform.position = spawnInScene.spawns[i].position;
             newPlayer.name += (" > Player ID (" + i + ")");
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
             character.playerGamepad = _playerData[i].gamepad;
@@ -238,5 +241,7 @@ public class GameManager : MonoBehaviour
         addingControllers = false;
 
         _roundTimer = _roundTime;
+
+        Destroy(spawnInScene.gameObject);
     }
 }
