@@ -94,6 +94,8 @@ public class CharacterBase : MonoBehaviour
     public UnityEvent ballAttack;
     public UnityEvent normalAttack;
 
+    private Rigidbody rb;
+
     public enum StaitisEffects
     {
         NONE,
@@ -109,10 +111,17 @@ public class CharacterBase : MonoBehaviour
         _originalSpeed = _speed;
         _originalAccel = _acceleration;
         _originalDecel = _deceleration;
+
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        _basicAttackTimer += Time.deltaTime;   
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_movementDirection.magnitude > 0.0f)
             _velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
@@ -121,9 +130,8 @@ public class CharacterBase : MonoBehaviour
             _velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
 
         _velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
-        transform.position += _velocity * Time.deltaTime; // Apply the velocity to the character position.
-
-        _basicAttackTimer += Time.deltaTime;
+        //rb.position += _velocity * Time.fixedDeltaTime; // Apply the velocity to the character position.
+        rb.velocity = _velocity;
     }
 
     void LateUpdate()
