@@ -239,6 +239,10 @@ public class CharacterBase : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if(_health <=0)
+        {
+            return;
+        }
         _health -= damage;
 
         if (_health <= 0)
@@ -249,6 +253,10 @@ public class CharacterBase : MonoBehaviour
 
     public void TakeDamage(float damage, StaitisEffects effect, float time)
     {
+        if (_health <= 0)
+        {
+            return;
+        }
         _health -= damage;
 
         if (_health <= 0)
