@@ -15,11 +15,26 @@ public class CharacterBase : MonoBehaviour
 
     private PlayerInput input;
 
-    [Tooltip("the speed this character will move at")]
+    [Tooltip("The maximum speed this character will move at.")]
     [SerializeField]
     private float _speed;
 
-    private float _origanalSpeed;
+    private float _originalSpeed;
+
+    [SerializeField]
+    [Tooltip("The rate at which the character will accelerate towards the max speed.")]
+    private float _acceleration;
+    [Tooltip("The amount the character will decelerate when it is not moving. This is a percentage (0-1).")]
+    [Range(0.0f, 1.0f)]
+    [SerializeField]
+    private float _deceleration;
+
+    private float _originalAccel;
+    private float _originalDecel;
+
+    private Vector3 _velocity;
+
+    private bool _shouldStopSliding = false;
 
     [Tooltip("this is the trigger collider used for catching")]
     public Collider catchTrigger;
@@ -87,17 +102,41 @@ public class CharacterBase : MonoBehaviour
 
     private void Start()
     {
-        _origanalSpeed = _speed;
         input = GetComponent<PlayerInput>();
         catchTrigger.isTrigger = true;
         catchTrigger.enabled = false;
+
+        _originalSpeed = _speed;
+        _originalAccel = _acceleration;
+        _originalDecel = _deceleration;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += _movementDirection * _speed * Time.deltaTime;
+        if (_movementDirection.magnitude > 0.0f)
+            _velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
+
+        if (_velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
+            _velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
+
+        _velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
+        transform.position += _velocity * Time.deltaTime; // Apply the velocity to the character position.
+
         _basicAttackTimer += Time.deltaTime;
+    }
+
+    void LateUpdate()
+    {
+        if (_velocity.magnitude <= 0.0f || _movementDirection.magnitude > 0.0f) // If the character has stopped moving, or if there is input.
+        {
+            if (_shouldStopSliding) // The player should stop sliding now.
+            {
+                _acceleration = _originalAccel; // Reset.
+                _deceleration = _originalDecel;
+                _shouldStopSliding = false;
+            }
+        }
     }
 
     /// <summary>
@@ -174,6 +213,19 @@ public class CharacterBase : MonoBehaviour
         input.ActivateInput();
     }
 
+    public void StartSliding(float slipperyness, float accelFactor)
+    {
+        _shouldStopSliding = false;
+        float inv = (1.0f - slipperyness);
+        _acceleration = _originalAccel * (slipperyness * accelFactor);
+        _deceleration = inv;
+    }
+
+    public void StopSliding()
+    {
+        _shouldStopSliding = true;
+    }
+
     public void TakeDamage(float damage)
     {
         _health -= damage;
@@ -224,7 +276,7 @@ public class CharacterBase : MonoBehaviour
         }
         else if (context.canceled)
         {
-            _speed = _origanalSpeed;
+            _speed = _originalSpeed;
             if (_basicAttackTimer >= _basicAttackTime)
             {
                 normalAttack.Invoke();
