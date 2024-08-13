@@ -105,7 +105,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452431045987376296}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09fb78cf3b48eb946844182c4fb053e0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -344,16 +344,16 @@ MonoBehaviour:
   _acceleration: 1
   _deceleration: 0.1
   catchTrigger: {fileID: 3000781201183644107}
-  _dashTime: 0
-  _dashSpeed: 0
+  _dashTime: 0.5
+  _dashSpeed: 30
   _chargeSpeed: 1
-  catchParryTime: 0
-  catchWaitTime: 0
+  catchParryTime: 2
+  catchWaitTime: 1
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 0
+  _basicAttackTime: 0.3
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
