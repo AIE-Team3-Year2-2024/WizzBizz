@@ -162,6 +162,7 @@ public class GameManager : MonoBehaviour
                 if (input == p.gamepad)
                 {
                     _playerData.Remove(p);
+                    _alivePlayers.Remove(player);
                     _connectedPlayerCount--;
                     return;
                 }
