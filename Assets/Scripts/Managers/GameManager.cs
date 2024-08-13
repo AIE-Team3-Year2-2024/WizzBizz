@@ -231,7 +231,9 @@ public class GameManager : MonoBehaviour
         {
             //here we would check a player data list at the same position to find this players character
             GameObject newPlayer = PlayerInput.Instantiate(_playerData[i].characterSelect, controlScheme: "Gamepad", pairWithDevice: _playerData[i].gamepad).gameObject;
-            newPlayer.transform.position = spawnInScene.spawns[i].position;
+            int random = UnityEngine.Random.Range(0, spawnInScene.spawns.Count);
+            newPlayer.transform.position = spawnInScene.spawns[random].position;
+            spawnInScene.spawns.Remove(spawnInScene.spawns[random]);
             newPlayer.name += (" > Player ID (" + i + ")");
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
             character.playerGamepad = _playerData[i].gamepad;
