@@ -18,6 +18,10 @@ GameObject:
   - component: {fileID: 1143968817450751776}
   - component: {fileID: 3314487795171020480}
   - component: {fileID: 2189079599295184151}
+  - component: {fileID: 4897880449972657288}
+  - component: {fileID: 6273077283286855474}
+  - component: {fileID: 6824721345329797457}
+  - component: {fileID: 1714746252522696318}
   m_Layer: 6
   m_Name: Test Lizard
   m_TagString: Player
@@ -271,9 +275,45 @@ MonoBehaviour:
     m_ActionName: Player/Ability 1
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
-        m_MethodName: SpawnObjectAtAim
+      - m_Target: {fileID: 4897880449972657288}
+        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
+        m_MethodName: MakeObjectAsChild
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6273077283286855474}
+        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
+        m_MethodName: MakeObjectAsChild
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6824721345329797457}
+        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
+        m_MethodName: MakeObjectAsChild
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1714746252522696318}
+        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
+        m_MethodName: MakeObjectAsChild
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -429,6 +469,62 @@ MonoBehaviour:
   projectiles:
   - {fileID: 3363175542702627947, guid: 29f1144a58d8e3a4c92bd8d2b62cd283, type: 3}
   lifetime: 0
+--- !u!114 &4897880449972657288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3763851691602367980, guid: d084eecfe7a30344691c61ff27bd4bc1, type: 3}
+  _spawn: {fileID: 452431045987376296}
+--- !u!114 &6273077283286855474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3763851691602367980, guid: 6fc658a5b45bc614da75a09f0cc15553, type: 3}
+  _spawn: {fileID: 452431045987376296}
+--- !u!114 &6824721345329797457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3763851691602367980, guid: ef689e983576c524b974d3e2201f543c, type: 3}
+  _spawn: {fileID: 452431045987376296}
+--- !u!114 &1714746252522696318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3763851691602367980, guid: 7ece4252c1edeaf428a37bac5af1fe76, type: 3}
+  _spawn: {fileID: 452431045987376296}
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
