@@ -8,6 +8,8 @@ public class OrbitAroundParent : MonoBehaviour
     [SerializeField] private float _orbitSpeed = 1.0f;
     [SerializeField] private float _followSpeed = 1.0f;
 
+    [SerializeField] private float _heightOffset;
+
     [SerializeField] [Range(0.0f, 1.0f)] private float _offset = 0.0f;
 
     private float _orbitAmount = 0.0f;
@@ -23,6 +25,7 @@ public class OrbitAroundParent : MonoBehaviour
         target = transform.parent;
 
         _targetPosition.x = target.position.x;
+        _targetPosition.y = target.position.y;
         _targetPosition.z = target.position.z;
     }
 
@@ -33,12 +36,12 @@ public class OrbitAroundParent : MonoBehaviour
         if (_orbitAmount >= 1.0f)
             _orbitAmount = 0.0f;
 
-        Vector3 targetPos = new Vector3(target.position.x, 0.0f, target.position.z);
+        Vector3 targetPos = new Vector3(target.position.x, target.position.y, target.position.z);
         _targetPosition = Vector3.Slerp(_targetPosition, targetPos, Time.deltaTime * _followSpeed);
 
         Vector3 orbitVector = Vector3.zero;
         orbitVector.x = _targetPosition.x + Mathf.Sin(_offset * TAU + _orbitAmount * TAU) * _distance;
         orbitVector.z = _targetPosition.z + Mathf.Cos(_offset * TAU + _orbitAmount * TAU) * _distance;
-        transform.position = orbitVector;
+        transform.position = orbitVector + Vector3.up * _heightOffset;
     }
 }

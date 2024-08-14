@@ -99,7 +99,8 @@ public class CharacterBase : MonoBehaviour
     public enum StaitisEffects
     {
         NONE,
-        SLOW
+        SLOW, 
+        CONFUSION
     }
 
     private void Start()
