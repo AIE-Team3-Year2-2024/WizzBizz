@@ -33,10 +33,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject _cursorPrefab;
 
-    [Tooltip("the prefab that will be used to spawn the players")]
-    [SerializeField]
-    private GameObject _playerPrefab;
-
     private Dictionary<CharacterBase, PlayerData> _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
     private int _connectedPlayerCount;
 
