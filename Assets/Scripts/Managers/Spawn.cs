@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     [Tooltip("the places where the players can be spawned")]
-    public Transform[] spawns;
+    public List<Transform> spawns;
     // Start is called before the first frame update
     void Start()
     {
