@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -314,8 +314,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addingControllers: 1
   _levels:
-  - LVL1Prototype
-  _endLevel: Character
+  - CameronLVL1Prototype
+  _endLevel: CameronCharacterScreen
   _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
   _playerPrefab: {fileID: 452431045987376296, guid: 148a73ed0ea7d284fbf6ad3d6ecb2bf0, type: 3}
   _scoreToWin: 17
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Test Lizard
+  m_text: Real Lizard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1407,7 +1407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a2951e4b696b44d9ed88b91d3bf486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 452431045987376296, guid: f38a9d0a6e1086b4f8b4f3a660d183fb, type: 3}
+  character: {fileID: 452431045987376296, guid: 453d4fd5b397f7642b8bda97c466a66b, type: 3}
 --- !u!65 &1995576254
 BoxCollider:
   m_ObjectHideFlags: 0

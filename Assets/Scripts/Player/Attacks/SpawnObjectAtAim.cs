@@ -54,6 +54,12 @@ public class SpawnObjectAtAim : MonoBehaviour
         if (context.started)
         {
             GameObject newProjectile = Instantiate(projectile, lobAimer.transform.position, player.transform.rotation);
+
+            if (newProjectile.GetComponent<Minion>())
+            {
+                newProjectile.GetComponent<Minion>().RemoveTargetPlayer(transform);
+            }
+
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);
