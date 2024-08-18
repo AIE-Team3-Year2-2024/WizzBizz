@@ -15,13 +15,16 @@ GameObject:
   - component: {fileID: 452431045987376298}
   - component: {fileID: 532612227137173808}
   - component: {fileID: 3006249}
-  - component: {fileID: 5063866448997029449}
-  - component: {fileID: 3833022284611438099}
-  - component: {fileID: 4946476987851103924}
-  - component: {fileID: 1710617483415450620}
-  - component: {fileID: -3436212031268177746}
+  - component: {fileID: 1143968817450751776}
+  - component: {fileID: 3314487795171020480}
+  - component: {fileID: 2189079599295184151}
+  - component: {fileID: 4897880449972657288}
+  - component: {fileID: 6273077283286855474}
+  - component: {fileID: 6824721345329797457}
+  - component: {fileID: 1714746252522696318}
+  - component: {fileID: 3429027457535621894}
   m_Layer: 6
-  m_Name: Racoon
+  m_Name: Lizard
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +260,7 @@ MonoBehaviour:
     m_ActionName: Player/Attack
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3833022284611438099}
+      - m_Target: {fileID: 3429027457535621894}
         m_TargetAssemblyTypeName: SpawnObjectAtAim, Assembly-CSharp
         m_MethodName: SpawnObjectAtAimFunction
         m_Mode: 0
@@ -273,9 +276,45 @@ MonoBehaviour:
     m_ActionName: Player/Ability 1
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4946476987851103924}
-        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
-        m_MethodName: SpawnProjectileAtPlayer
+      - m_Target: {fileID: 4897880449972657288}
+        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
+        m_MethodName: MakeObjectAsChild
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6273077283286855474}
+        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
+        m_MethodName: MakeObjectAsChild
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6824721345329797457}
+        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
+        m_MethodName: MakeObjectAsChild
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1714746252522696318}
+        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
+        m_MethodName: MakeObjectAsChild
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -306,7 +345,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: bd70c30c-0deb-47e9-a01d-86ed9ad860d9
-    m_ActionName: Player/Debug[/SwitchProControllerHID/rightStickPress,/SwitchProControllerHID1/rightStickPress,/DualSenseGamepadHID/rightStickPress]
+    m_ActionName: Player/Debug
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: Player
@@ -327,25 +366,25 @@ MonoBehaviour:
   hasOrb: 0
   heldOrb: {fileID: 0}
   _speed: 10
-  _acceleration: 1
+  _acceleration: 10.04
   _deceleration: 0.1
-  catchTrigger: {fileID: -3436212031268177746}
-  _dashTime: 3
-  _dashSpeed: 10
-  _chargeSpeed: 1
-  catchParryTime: 2
-  catchWaitTime: 1
+  catchTrigger: {fileID: 1143968817450751776}
+  _dashTime: 0
+  _dashSpeed: 0
+  _chargeSpeed: 0
+  catchParryTime: 0
+  catchWaitTime: 0
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 0.3
+  _basicAttackTime: 0
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1710617483415450620}
+      - m_Target: {fileID: 3314487795171020480}
         m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
         m_MethodName: SpawnProjectileAtPlayer
         m_Mode: 1
@@ -360,7 +399,7 @@ MonoBehaviour:
   normalAttack:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5063866448997029449}
+      - m_Target: {fileID: 2189079599295184151}
         m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
         m_MethodName: SpawnProjectileAtPlayer
         m_Mode: 1
@@ -384,77 +423,11 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &5063866448997029449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles:
-  - {fileID: 3363175542702627947, guid: be0fbd7d8c008a649856ec3a1edc698e, type: 3}
-  - {fileID: 3363175542702627947, guid: d502021d43b0f6b45a28a1d75d552d3c, type: 3}
-  - {fileID: 3363175542702627947, guid: 121ec97c36d9b9e40ac56cacbf00f4b7, type: 3}
-  - {fileID: 3363175542702627947, guid: c407b90c4828d0140b5253cfdcd45aeb, type: 3}
-  - {fileID: 3363175542702627947, guid: bdcdf6f0aa965d3439b85973a01533c2, type: 3}
-  - {fileID: 3363175542702627947, guid: ecd4ec73662ebce44b65a09fe27d72db, type: 3}
-  lifetime: 20
---- !u!114 &3833022284611438099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37a98c60a0bbbc04f86b8da631a3625e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 1021126783160119911, guid: ccf6720bd874c8b468178d7ad4778ae9, type: 3}
-  range: 10
-  lobAimer: {fileID: 1309746413074950827}
-  lifetime: 0
---- !u!114 &4946476987851103924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles:
-  - {fileID: 5777404286988346730, guid: 4d549e2601617b24da0ca09748788214, type: 3}
-  lifetime: 40
---- !u!114 &1710617483415450620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles:
-  - {fileID: 2783992932023041390, guid: 22b4ba189e212dd41809f20795628793, type: 3}
-  lifetime: 0
---- !u!65 &-3436212031268177746
+--- !u!65 &1143968817450751776
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -467,6 +440,108 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6985164, y: 2, z: 1.2522864}
   m_Center: {x: 0.012624264, y: 0, z: 0.54081094}
+--- !u!114 &3314487795171020480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectiles:
+  - {fileID: 3363175542702627947, guid: aaec805ed6194ae49bb8e030505b9dda, type: 3}
+  lifetime: 40
+--- !u!114 &2189079599295184151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectiles:
+  - {fileID: 3363175542702627947, guid: 29f1144a58d8e3a4c92bd8d2b62cd283, type: 3}
+  lifetime: 0
+--- !u!114 &4897880449972657288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3763851691602367980, guid: d084eecfe7a30344691c61ff27bd4bc1, type: 3}
+  _spawn: {fileID: 452431045987376296}
+--- !u!114 &6273077283286855474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3763851691602367980, guid: 6fc658a5b45bc614da75a09f0cc15553, type: 3}
+  _spawn: {fileID: 452431045987376296}
+--- !u!114 &6824721345329797457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3763851691602367980, guid: ef689e983576c524b974d3e2201f543c, type: 3}
+  _spawn: {fileID: 452431045987376296}
+--- !u!114 &1714746252522696318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 3763851691602367980, guid: 7ece4252c1edeaf428a37bac5af1fe76, type: 3}
+  _spawn: {fileID: 452431045987376296}
+--- !u!114 &3429027457535621894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37a98c60a0bbbc04f86b8da631a3625e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 2655046034569396977, guid: f21fdade79723394c9e7b1cd4ed54458, type: 3}
+  range: 10
+  lobAimer: {fileID: 1309746413074950827}
+  lifetime: 20
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0

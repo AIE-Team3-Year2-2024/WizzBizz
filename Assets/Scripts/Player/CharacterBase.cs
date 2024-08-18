@@ -94,10 +94,13 @@ public class CharacterBase : MonoBehaviour
     public UnityEvent ballAttack;
     public UnityEvent normalAttack;
 
+    private Rigidbody rb;
+
     public enum StaitisEffects
     {
         NONE,
-        SLOW
+        SLOW, 
+        CONFUSION
     }
 
     private void Start()
@@ -109,21 +112,31 @@ public class CharacterBase : MonoBehaviour
         _originalSpeed = _speed;
         _originalAccel = _acceleration;
         _originalDecel = _deceleration;
+
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        _basicAttackTimer += Time.deltaTime;   
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_movementDirection.magnitude > 0.0f)
-            _velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
+            rb.AddForce(_movementDirection * _acceleration, ForceMode.Impulse);
+        //_velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
 
-        if (_velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
-            _velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
+        if (rb.velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
+            rb.velocity *= (1.0f - _deceleration);
+        //_velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
 
-        _velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
-        transform.position += _velocity * Time.deltaTime; // Apply the velocity to the character position.
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, _speed);
 
-        _basicAttackTimer += Time.deltaTime;
+        //_velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
+        //rb.position += _velocity * Time.fixedDeltaTime; // Apply the velocity to the character position.
+        //rb.velocity = _velocity;
     }
 
     void LateUpdate()
@@ -189,12 +202,11 @@ public class CharacterBase : MonoBehaviour
     public IEnumerator DashRoutine()
     {
         canMove = false;
-        float oldSpeed = _speed;
         _speed = _dashSpeed;
         _movementDirection = transform.forward;
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
-        _speed = oldSpeed;
+        _speed = _originalSpeed;
         _movementDirection = Vector3.zero;
     }
 
@@ -228,6 +240,10 @@ public class CharacterBase : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if(_health <=0)
+        {
+            return;
+        }
         _health -= damage;
 
         if (_health <= 0)
@@ -238,6 +254,10 @@ public class CharacterBase : MonoBehaviour
 
     public void TakeDamage(float damage, StaitisEffects effect, float time)
     {
+        if (_health <= 0)
+        {
+            return;
+        }
         _health -= damage;
 
         if (_health <= 0)

@@ -33,10 +33,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject _cursorPrefab;
 
-    [Tooltip("the prefab that will be used to spawn the players")]
-    [SerializeField]
-    private GameObject _playerPrefab;
-
     private Dictionary<CharacterBase, PlayerData> _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
     private int _connectedPlayerCount;
 
@@ -162,6 +158,7 @@ public class GameManager : MonoBehaviour
                 if (input == p.gamepad)
                 {
                     _playerData.Remove(p);
+                    _alivePlayers.Remove(player);
                     _connectedPlayerCount--;
                     return;
                 }
@@ -225,10 +222,15 @@ public class GameManager : MonoBehaviour
 
         _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
 
+        Spawn spawnInScene = FindAnyObjectByType<Spawn>();
+
         for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character
             GameObject newPlayer = PlayerInput.Instantiate(_playerData[i].characterSelect, controlScheme: "Gamepad", pairWithDevice: _playerData[i].gamepad).gameObject;
+            int random = UnityEngine.Random.Range(0, spawnInScene.spawns.Count);
+            newPlayer.transform.position = spawnInScene.spawns[random].position;
+            spawnInScene.spawns.Remove(spawnInScene.spawns[random]);
             newPlayer.name += (" > Player ID (" + i + ")");
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
             character.playerGamepad = _playerData[i].gamepad;
@@ -238,5 +240,7 @@ public class GameManager : MonoBehaviour
         addingControllers = false;
 
         _roundTimer = _roundTime;
+
+        Destroy(spawnInScene.gameObject);
     }
 }
