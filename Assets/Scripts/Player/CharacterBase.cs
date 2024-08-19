@@ -63,6 +63,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _health;
 
+    [Tooltip("how long the player will have the orb before it dissapears")]
+    [SerializeField]
+    private float _ballLifetime;
+
     [Tooltip("whether or not on move will be skipped")]
     [HideInInspector]
     public bool canMove = true;
@@ -118,7 +122,7 @@ public class CharacterBase : MonoBehaviour
 
     void Update()
     {
-        _basicAttackTimer += Time.deltaTime;   
+        _basicAttackTimer += Time.deltaTime;
     }
 
     // Update is called once per frame
@@ -283,7 +287,7 @@ public class CharacterBase : MonoBehaviour
             if (hasOrb)
             {
                 StartCoroutine(DoBallAttackHaptics());
-
+                StopCoroutine(KillBall(null));
                 ballAttack.Invoke();
                 Destroy(heldOrb);
                 heldOrb = null;
@@ -302,6 +306,22 @@ public class CharacterBase : MonoBehaviour
                 normalAttack.Invoke();
             }
         }
+    }
+
+    public IEnumerator KillBall(GameObject currentOrb)
+    {
+        yield return new WaitForSeconds(_ballLifetime);
+        if (heldOrb == currentOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
+    }
+
+    public void StartKillBall(GameObject currentOrb)
+    {
+        StartCoroutine(KillBall(currentOrb));
     }
 
     public virtual void OnAbility1(InputAction.CallbackContext context)
