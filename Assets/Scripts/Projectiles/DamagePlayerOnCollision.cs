@@ -25,6 +25,9 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [Tooltip("event invoked in OnDestroy")]
     public UnityEvent DoOnDestroy;
 
+    [Tooltip("event invoked when a player is hit")]
+    public UnityEvent DoOnHit;
+
     private CharacterBase ownerPlayer;
 
     public void OnCollisionEnter(Collision collision)
@@ -33,6 +36,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
             player.TakeDamage(damage, damageEffect, effectTime);
+            DoOnHit.Invoke();
         }
 
         if (destroyOnCollision)
