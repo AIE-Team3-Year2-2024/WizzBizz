@@ -203,7 +203,7 @@ public class CharacterBase : MonoBehaviour
     {
         canMove = false;
         _speed = _dashSpeed;
-        _movementDirection = transform.forward;
+        _movementDirection = _movementDirection.normalized;
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
         _speed = _originalSpeed;
