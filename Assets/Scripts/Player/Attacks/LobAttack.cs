@@ -55,6 +55,12 @@ public class LobAttack : MonoBehaviour
         {
             GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
             newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
+
+            if(newProjectile.GetComponent<DamagePlayerOnCollision>())
+            {
+                newProjectile.GetComponent<DamagePlayerOnCollision>().damage *= player.damageMult;
+            }
+
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);

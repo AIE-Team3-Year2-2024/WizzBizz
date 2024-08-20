@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 7826727589078929842}
   - component: {fileID: 8328546656257713296}
   - component: {fileID: 3000781201183644107}
+  - component: {fileID: 1408706803080725723}
+  - component: {fileID: 8143481247709075467}
   m_Layer: 6
   m_Name: Test Penguin
   m_TagString: Player
@@ -343,19 +345,24 @@ MonoBehaviour:
   _speed: 10
   _acceleration: 1
   _deceleration: 0.1
-  catchTrigger: {fileID: 3000781201183644107}
-  _dashTime: 0
-  _dashSpeed: 0
-  _chargeSpeed: 0
-  catchParryTime: 0
-  catchWaitTime: 0
+  catchTrigger: {fileID: 3000781201183644107, guid: 44705663733005b45b529f3508a6ed03, type: 3}
+  _dashTime: 0.5
+  _dashSpeed: 30
+  _chargeSpeed: 1
+  catchParryTime: 2
+  catchWaitTime: 1
   _health: 100
+  _ballLifetime: 0
   canMove: 1
+  canDash: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 0
+  _basicAttackTime: 0.3
+  damageMult: 0
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
+  _weakness: {fileID: 1408706803080725723}
+  _crippled: {fileID: 8143481247709075467}
   ballAttack:
     m_PersistentCalls:
       m_Calls:
@@ -437,10 +444,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 116
+  m_CollisionDetection: 1
 --- !u!114 &7826727589078929842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,6 +493,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6985164, y: 2, z: 1.2522864}
   m_Center: {x: 0.012624264, y: 0, z: 0.54081094}
+--- !u!114 &1408706803080725723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059977774b35520438dc9c392c7f435b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8143481247709075467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdfbda978e9c3bb46a3425b259d59d4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 0
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0

@@ -71,6 +71,10 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    [Tooltip("whether or not on dash will be skipped")]
+    [HideInInspector]
+    public bool canDash = true;
+
 
     [Tooltip("this value multiplies the size of the pointer aimer when aiming")]
     [SerializeField]
@@ -83,6 +87,9 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _basicAttackTime;
 
+    [HideInInspector]
+    public float damageMult;
+
     private float _basicAttackTimer = 0;
 
     [Tooltip("the image used to show where the player is aiming")]
@@ -94,6 +101,16 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("where to spawn projectiles on this character")]
     public Transform _projectileSpawnPosition;
 
+    [Header("Effects")]
+
+    [Tooltip("weakness")]
+    [SerializeField]
+    private Weakness _weakness;
+
+    [Tooltip("Crippled")]
+    [SerializeField]
+    private Crippled _crippled;
+
     [Header("Trigger Attacks")]
     public UnityEvent ballAttack;
     public UnityEvent normalAttack;
@@ -102,9 +119,20 @@ public class CharacterBase : MonoBehaviour
 
     public enum StatusEffects
     {
-        NONE,
-        SLOW, 
-        CONFUSION
+        NONE, 
+        CONFUSION,
+        DISABLED,
+        SILENCE,
+        CRIPPLED,
+        STUN,
+        WEAKNESS,
+        VITALITY,
+        SLOW,
+        HASTE,
+        BURNING,
+        POISON,
+        CURE,
+        DEMENTIA
     }
 
     private void Start()
@@ -193,7 +221,7 @@ public class CharacterBase : MonoBehaviour
     /// <param name="context"></param>
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && canDash)
         {
             StartCoroutine(DashRoutine());
         }
@@ -267,6 +295,83 @@ public class CharacterBase : MonoBehaviour
         if (_health <= 0)
         {
             Death();
+        }
+
+        switch(effect)
+        {
+            case(StatusEffects.NONE):
+                {
+                    break;
+                }
+
+            case (StatusEffects.CONFUSION):
+                {
+                    break;
+                }
+
+            case (StatusEffects.DISABLED):
+                {
+                    break;
+                }
+
+            case (StatusEffects.SILENCE):
+                {
+                    break;
+                }
+
+            case (StatusEffects.CRIPPLED):
+                {
+                    _crippled.enabled = true;
+                    _crippled.lifeTime = time; 
+                    break;
+                }
+
+            case (StatusEffects.STUN):
+                {
+                    break;
+                }
+
+            case (StatusEffects.WEAKNESS):
+                {
+                    //_weakness;
+                    break;
+                }
+
+            case (StatusEffects.VITALITY):
+                {
+                    break;
+                }
+
+            case (StatusEffects.SLOW):
+                {
+                    break;
+                }
+
+            case (StatusEffects.HASTE):
+                {
+                    break;
+                }
+
+            case (StatusEffects.BURNING):
+                {
+                    break;
+                }
+
+            case (StatusEffects.POISON):
+                {
+                    break;
+                }
+
+            case (StatusEffects.CURE):
+                {
+                    break;
+                }
+
+            case (StatusEffects.DEMENTIA):
+                {
+                    break;
+                }
+
         }
     }
 

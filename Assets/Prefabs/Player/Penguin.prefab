@@ -350,12 +350,17 @@ MonoBehaviour:
   catchParryTime: 2
   catchWaitTime: 1
   _health: 100
+  _ballLifetime: 0
   canMove: 1
+  canDash: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
   _basicAttackTime: 0.3
+  damageMult: 0
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
+  _weakness: {fileID: 0}
+  _crippled: {fileID: 0}
   ballAttack:
     m_PersistentCalls:
       m_Calls:
@@ -482,7 +487,7 @@ BoxCollider:
   m_GameObject: {fileID: 452431045987376296}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.6985164, y: 2, z: 1.2522864}
   m_Center: {x: 0.012624264, y: 0, z: 0.54081094}
