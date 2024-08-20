@@ -58,6 +58,7 @@ public class OrbCollectible : MonoBehaviour
                 {
                     character.hasOrb = true;
                     spawner.Collect(character);
+                    character.StartKillBall(character.heldOrb);
                     Destroy(gameObject);
                 }
             }
