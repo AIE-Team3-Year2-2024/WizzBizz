@@ -365,20 +365,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 10
+  _speed: 6
   _acceleration: 10.04
   _deceleration: 0.1
   catchTrigger: {fileID: 1143968817450751776}
-  _dashTime: 0
-  _dashSpeed: 0
-  _chargeSpeed: 0
-  catchParryTime: 0
-  catchWaitTime: 0
+  _dashTime: 0.5
+  _dashSpeed: 10
+  _chargeSpeed: 1.5
+  catchParryTime: 0.4
+  catchWaitTime: 1.5
   _health: 100
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 0
+  _basicAttackTime: 2
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
@@ -469,7 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 3363175542702627947, guid: 29f1144a58d8e3a4c92bd8d2b62cd283, type: 3}
-  lifetime: 2.5
+  lifetime: 2
 --- !u!114 &4897880449972657288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,7 +541,7 @@ MonoBehaviour:
   projectile: {fileID: 2655046034569396977, guid: f21fdade79723394c9e7b1cd4ed54458, type: 3}
   range: 10
   lobAimer: {fileID: 1309746413074950827}
-  lifetime: 20
+  lifetime: 15
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
