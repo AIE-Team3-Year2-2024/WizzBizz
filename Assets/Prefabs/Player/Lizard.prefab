@@ -369,16 +369,17 @@ MonoBehaviour:
   _acceleration: 10.04
   _deceleration: 0.1
   catchTrigger: {fileID: 1143968817450751776}
-  _dashTime: 0.5
-  _dashSpeed: 10
+  _dashTime: 0.3
+  _dashSpeed: 24
   _chargeSpeed: 1.5
   catchParryTime: 0.4
   catchWaitTime: 1.5
   _health: 100
+  _ballLifetime: 8
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 2
+  _basicAttackTime: 0.7
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
