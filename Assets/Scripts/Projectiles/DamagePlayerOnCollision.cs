@@ -12,7 +12,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
 
     [Tooltip("the damage type of this attack")]
     [SerializeField]
-    private CharacterBase.StaitisEffects damageEffect;
+    private CharacterBase.StatusEffects damageEffect;
 
     [Tooltip("how long this attacks effect lasts for")]
     [SerializeField]
@@ -25,14 +25,23 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [Tooltip("event invoked in OnDestroy")]
     public UnityEvent DoOnDestroy;
 
+    [Tooltip("event invoked when a player is hit")]
+    public UnityEvent DoOnHit;
+
     private CharacterBase ownerPlayer;
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<CharacterBase>() != ownerPlayer && collision.gameObject.GetComponent<CharacterBase>())
+        if(collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
+        {
+            return;
+        }
+
+        if (collision.gameObject.GetComponent<CharacterBase>())
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
             player.TakeDamage(damage, damageEffect, effectTime);
+            DoOnHit.Invoke();
         }
 
         if (destroyOnCollision)
