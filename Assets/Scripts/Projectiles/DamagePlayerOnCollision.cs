@@ -32,7 +32,12 @@ public class DamagePlayerOnCollision : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<CharacterBase>() != ownerPlayer && collision.gameObject.GetComponent<CharacterBase>())
+        if(collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
+        {
+            return;
+        }
+
+        if (collision.gameObject.GetComponent<CharacterBase>())
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
             player.TakeDamage(damage, damageEffect, effectTime);
