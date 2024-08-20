@@ -12,7 +12,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
 
     [Tooltip("the damage type of this attack")]
     [SerializeField]
-    private CharacterBase.StaitisEffects damageEffect;
+    private CharacterBase.StatusEffects damageEffect;
 
     [Tooltip("how long this attacks effect lasts for")]
     [SerializeField]

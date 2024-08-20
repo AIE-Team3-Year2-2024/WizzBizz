@@ -100,7 +100,7 @@ public class CharacterBase : MonoBehaviour
 
     private Rigidbody rb;
 
-    public enum StaitisEffects
+    public enum StatusEffects
     {
         NONE,
         SLOW, 
@@ -256,7 +256,7 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage, StaitisEffects effect, float time)
+    public void TakeDamage(float damage, StatusEffects effect, float time)
     {
         if (_health <= 0)
         {
