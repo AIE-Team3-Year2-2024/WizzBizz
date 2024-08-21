@@ -27,6 +27,10 @@ public class Crippled : MonoBehaviour
 
     private void OnEnable()
     {
+        if(player == null)
+        {
+            player = GetComponent<CharacterBase>();
+        }
         player.canDash = false;
     }
 
