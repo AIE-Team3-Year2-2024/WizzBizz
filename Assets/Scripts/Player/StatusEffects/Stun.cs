@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class Weakness : MonoBehaviour
+public class Stun : MonoBehaviour
 {
     [HideInInspector]
-    public float lifeTime = 0;
+    public float lifeTime;
 
-    [Tooltip("how much will be taken off of the players damage multiplyer (players base damage multiplyer is 1)")]
-    [SerializeField]
-    private float _damgeMinus;
+    private PlayerInput input;
+    private CharacterBase player;
 
-    private CharacterBase _player;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,15 +29,18 @@ public class Weakness : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_player == null)
+        if(input == null)
         {
-            _player = GetComponent<CharacterBase>();
+            input = GetComponent<PlayerInput>();
+            player = GetComponent<CharacterBase>();
         }
-        _player.damageMult -= _damgeMinus;
+
+        input.DeactivateInput();
+        player.CancelPlayerMovement();
     }
 
     private void OnDisable()
     {
-        _player.damageMult += _damgeMinus;
+        input.ActivateInput();
     }
 }

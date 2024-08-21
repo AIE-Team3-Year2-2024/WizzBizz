@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weakness : MonoBehaviour
+public class Dementia : MonoBehaviour
 {
     [HideInInspector]
     public float lifeTime = 0;
 
-    [Tooltip("how much will be taken off of the players damage multiplyer (players base damage multiplyer is 1)")]
+    [Tooltip("the object wich contains all of the players UI")]
     [SerializeField]
-    private float _damgeMinus;
-
-    private CharacterBase _player;
+    private GameObject _UIParent;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +20,7 @@ public class Weakness : MonoBehaviour
     void Update()
     {
         lifeTime -= Time.deltaTime;
-        if (lifeTime < 0 )
+        if (lifeTime < 0)
         {
             enabled = false;
         }
@@ -30,15 +28,11 @@ public class Weakness : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_player == null)
-        {
-            _player = GetComponent<CharacterBase>();
-        }
-        _player.damageMult -= _damgeMinus;
+        _UIParent.SetActive(false);
     }
 
     private void OnDisable()
     {
-        _player.damageMult += _damgeMinus;
+        _UIParent.SetActive(true);
     }
 }

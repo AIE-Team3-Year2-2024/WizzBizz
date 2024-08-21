@@ -2,14 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weakness : MonoBehaviour
+public class Burn : MonoBehaviour
 {
     [HideInInspector]
     public float lifeTime = 0;
 
-    [Tooltip("how much will be taken off of the players damage multiplyer (players base damage multiplyer is 1)")]
+    [Tooltip("how often to apply damage to this player")]
     [SerializeField]
-    private float _damgeMinus;
+    private float _damageInterval;
+
+    [Tooltip("how much damage the player player wil take after the interval")]
+    [SerializeField]
+    private float damage;
+
+    private float currentIntervalAmount = 0;
 
     private CharacterBase _player;
     // Start is called before the first frame update
@@ -22,7 +28,15 @@ public class Weakness : MonoBehaviour
     void Update()
     {
         lifeTime -= Time.deltaTime;
-        if (lifeTime < 0 )
+        currentIntervalAmount += Time.deltaTime;
+
+        if (currentIntervalAmount > _damageInterval)
+        {
+            _player.TakeDamage(damage);
+            currentIntervalAmount = 0;
+        }
+
+        if (lifeTime < 0)
         {
             enabled = false;
         }
@@ -30,15 +44,14 @@ public class Weakness : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_player == null)
+        if (_player == null)
         {
             _player = GetComponent<CharacterBase>();
         }
-        _player.damageMult -= _damgeMinus;
     }
 
     private void OnDisable()
     {
-        _player.damageMult += _damgeMinus;
+        currentIntervalAmount = 0;
     }
 }

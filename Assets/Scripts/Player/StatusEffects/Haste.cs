@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weakness : MonoBehaviour
+public class Haste : MonoBehaviour
 {
     [HideInInspector]
     public float lifeTime = 0;
 
-    [Tooltip("how much will be taken off of the players damage multiplyer (players base damage multiplyer is 1)")]
+    [Tooltip("how much will added to the players speed")]
     [SerializeField]
-    private float _damgeMinus;
+    private float _speedAdd;
 
     private CharacterBase _player;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         lifeTime -= Time.deltaTime;
-        if (lifeTime < 0 )
+        if (lifeTime < 0)
         {
             enabled = false;
         }
@@ -30,15 +30,15 @@ public class Weakness : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_player == null)
+        if (_player == null)
         {
             _player = GetComponent<CharacterBase>();
         }
-        _player.damageMult -= _damgeMinus;
+        _player.AddSpeed(_speedAdd);
     }
 
     private void OnDisable()
     {
-        _player.damageMult += _damgeMinus;
+        _player.AddSpeed(-_speedAdd);
     }
 }
