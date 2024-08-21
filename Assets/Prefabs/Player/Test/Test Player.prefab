@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 532612227137173808}
   - component: {fileID: 3006249}
   - component: {fileID: 1143968817450751776}
+  - component: {fileID: -792908230003790660}
   m_Layer: 6
   m_Name: Test Player
   m_TagString: Player
@@ -332,10 +333,12 @@ MonoBehaviour:
   catchParryTime: 0
   catchWaitTime: 0
   _health: 100
+  _ballLifetime: 0
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
   _basicAttackTime: 0
+  damageMult: 0
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
@@ -373,6 +376,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6985164, y: 2, z: 1.2522864}
   m_Center: {x: 0.012624264, y: 0, z: 0.54081094}
+--- !u!114 &-792908230003790660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059977774b35520438dc9c392c7f435b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0

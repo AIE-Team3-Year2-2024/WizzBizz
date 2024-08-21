@@ -28,7 +28,9 @@ public class SpawnObjectAtTransform : MonoBehaviour
     {
         GameObject newProjectile = Instantiate(projectile, _spawn.position, transform.rotation);
 
-        newProjectile.GetComponent<DamagePlayerOnCollision>().SetOwner(player);
+        DamagePlayerOnCollision collision = newProjectile.GetComponent<DamagePlayerOnCollision>();
+        collision.SetOwner(player);
+        collision.damage *= player.damageMult;
 
         if (lifetime != 0)
         {
