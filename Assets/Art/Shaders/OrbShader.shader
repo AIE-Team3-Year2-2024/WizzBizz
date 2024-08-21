@@ -98,8 +98,8 @@ Shader "Custom/OrbShader"
         float3 pom(float3 st, float3 viewDir)
         {
             const float scale = _HeightScale;
-            const int minLayers = 16;
-            const int maxLayers = 64;
+            const int minLayers = 8;
+            const int maxLayers = 32;
             float numLayers = lerp(maxLayers, minLayers, abs(dot(float3(0, 0, 1), viewDir)));
             float layerDepth = 1.0 / numLayers;
             float currentLayerDepth = 0.0;
