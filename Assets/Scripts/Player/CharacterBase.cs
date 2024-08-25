@@ -6,6 +6,20 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
 
+
+[RequireComponent(typeof(Weakness))]
+[RequireComponent(typeof(Crippled))]
+[RequireComponent(typeof(Stun))]
+[RequireComponent(typeof(Confusion))]
+[RequireComponent(typeof(Disabled))]
+[RequireComponent(typeof(Silence))]
+[RequireComponent(typeof(Vitality))]
+[RequireComponent(typeof(Slow))]
+[RequireComponent(typeof(Haste))]
+[RequireComponent(typeof(Burn))]
+[RequireComponent(typeof(Poison))]
+[RequireComponent(typeof(Cure))]
+[RequireComponent(typeof(Dementia))]
 public class CharacterBase : MonoBehaviour
 {
     [HideInInspector] public bool hasOrb = false;
