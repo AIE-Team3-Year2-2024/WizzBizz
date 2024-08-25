@@ -125,10 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 7
+  damage: 9
   damageEffect: 0
   effectTime: 0
   destroyOnCollision: 1
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
+  DoOnHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &6153397547465170400
 Rigidbody:
   m_ObjectHideFlags: 0
