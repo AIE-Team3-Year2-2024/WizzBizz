@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 6824721345329797457}
   - component: {fileID: 1714746252522696318}
   - component: {fileID: 3429027457535621894}
+  - component: {fileID: -6314327883616765908}
   m_Layer: 6
   m_Name: Test Lizard
   m_TagString: Player
@@ -375,10 +376,12 @@ MonoBehaviour:
   catchParryTime: 0
   catchWaitTime: 0
   _health: 100
+  _ballLifetime: 0
   canMove: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
   _basicAttackTime: 0
+  damageMult: 0
   _pointerAimer: {fileID: 1096289958959071381}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   ballAttack:
@@ -542,6 +545,18 @@ MonoBehaviour:
   range: 10
   lobAimer: {fileID: 1309746413074950827}
   lifetime: 20
+--- !u!114 &-6314327883616765908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 059977774b35520438dc9c392c7f435b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0

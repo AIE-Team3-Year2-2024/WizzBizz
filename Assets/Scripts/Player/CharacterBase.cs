@@ -6,6 +6,20 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
 
+
+[RequireComponent(typeof(Weakness))]
+[RequireComponent(typeof(Crippled))]
+[RequireComponent(typeof(Stun))]
+[RequireComponent(typeof(Confusion))]
+[RequireComponent(typeof(Disabled))]
+[RequireComponent(typeof(Silence))]
+[RequireComponent(typeof(Vitality))]
+[RequireComponent(typeof(Slow))]
+[RequireComponent(typeof(Haste))]
+[RequireComponent(typeof(Burn))]
+[RequireComponent(typeof(Poison))]
+[RequireComponent(typeof(Cure))]
+[RequireComponent(typeof(Dementia))]
 public class CharacterBase : MonoBehaviour
 {
     [HideInInspector] public bool hasOrb = false;
@@ -71,6 +85,10 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+    [Tooltip("whether or not on dash will be skipped")]
+    [HideInInspector]
+    public bool canDash = true;
+
 
     [Tooltip("this value multiplies the size of the pointer aimer when aiming")]
     [SerializeField]
@@ -83,6 +101,9 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _basicAttackTime;
 
+    //[HideInInspector]
+    public float damageMult = 1;
+
     private float _basicAttackTimer = 0;
 
     [Tooltip("the image used to show where the player is aiming")]
@@ -94,6 +115,63 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("where to spawn projectiles on this character")]
     public Transform _projectileSpawnPosition;
 
+    [Header("Effects")]
+
+    [Tooltip("weakness")]
+    [SerializeField]
+    private Weakness _weakness;
+
+    [Tooltip("Crippled")]
+    [SerializeField]
+    private Crippled _crippled;
+
+    [Tooltip("Stun")]
+    [SerializeField]
+    private Stun _stun;
+
+    [Tooltip("Confusion")]
+    [SerializeField]
+    private Confusion _confusion;
+
+    [HideInInspector]
+    public bool confused;
+
+    [Tooltip("Disabled")]
+    [SerializeField]
+    private Disabled _disabled;
+
+    [Tooltip("Silence")]
+    [SerializeField]
+    private Silence _silence;
+
+    [Tooltip("Vitality")]
+    [SerializeField]
+    private Vitality _vitality;
+
+    [Tooltip("Slow")]
+    [SerializeField]
+    private Slow _slow;
+
+    [Tooltip("Haste")]
+    [SerializeField]
+    private Haste _haste;
+
+    [Tooltip("Burn")]
+    [SerializeField]
+    private Burn _burn;
+
+    [Tooltip("Poison")]
+    [SerializeField]
+    private Poison _poison;
+
+    [Tooltip("Cure")]
+    [SerializeField]
+    private Cure _cure;
+
+    [Tooltip("Dementia")]
+    [SerializeField]
+    private Dementia _dementia;
+
     [Header("Trigger Attacks")]
     public UnityEvent ballAttack;
     public UnityEvent normalAttack;
@@ -102,9 +180,20 @@ public class CharacterBase : MonoBehaviour
 
     public enum StatusEffects
     {
-        NONE,
-        SLOW, 
-        CONFUSION
+        NONE, 
+        CONFUSION,
+        DISABLED,
+        SILENCE,
+        CRIPPLED,
+        STUN,
+        WEAKNESS,
+        VITALITY,
+        SLOW,
+        HASTE,
+        BURNING,
+        POISON,
+        CURE,
+        DEMENTIA
     }
 
     private void Start()
@@ -118,6 +207,8 @@ public class CharacterBase : MonoBehaviour
         _originalDecel = _deceleration;
 
         rb = GetComponent<Rigidbody>();
+
+        damageMult = 1;
     }
 
     void Update()
@@ -167,6 +258,21 @@ public class CharacterBase : MonoBehaviour
             _movementDirection.z = context.ReadValue<Vector2>().y;
             _movementDirection.x = context.ReadValue<Vector2>().x;
         }
+        if (confused)
+        {
+            _movementDirection = -_movementDirection;
+        }
+    }
+
+    public void CancelPlayerMovement()
+    {
+        _movementDirection = Vector3.zero;
+    }
+
+    public void AddSpeed(float addition)
+    {
+        _speed += addition;
+        _originalSpeed += addition;
     }
 
     /// <summary>
@@ -178,6 +284,11 @@ public class CharacterBase : MonoBehaviour
         Vector3 aimDirection = new Vector3();
         aimDirection.z = context.ReadValue<Vector2>().y;
         aimDirection.x = context.ReadValue<Vector2>().x;
+
+        if(confused)
+        {
+            aimDirection = -aimDirection;
+        }
                 
         transform.LookAt(aimDirection += transform.position, transform.up);
         
@@ -193,7 +304,7 @@ public class CharacterBase : MonoBehaviour
     /// <param name="context"></param>
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.started && canDash)
         {
             StartCoroutine(DashRoutine());
         }
@@ -267,6 +378,153 @@ public class CharacterBase : MonoBehaviour
         if (_health <= 0)
         {
             Death();
+        }
+
+        switch(effect)
+        {
+            case(StatusEffects.NONE):
+                {
+                    break;
+                }
+
+            case (StatusEffects.CONFUSION):
+                {
+                    if(_confusion.enabled == false)
+                    {
+                        _confusion.enabled = true;
+                        _confusion.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.DISABLED):
+                {
+                    if(_silence.enabled)
+                    {
+                        _silence.enabled = false;
+                    }
+                    if(_disabled.enabled == false)
+                    {
+                        _disabled.enabled = true;
+                        _disabled.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.SILENCE):
+                {
+                    if(_disabled.enabled)
+                    {
+                        _disabled.enabled = false;
+                    }
+                    if(_silence.enabled == false)
+                    {
+                        _silence.enabled = true;
+                        _silence.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.CRIPPLED):
+                {
+                    if(_crippled.enabled == false)
+                    {
+                        _crippled.enabled = true;
+                        _crippled.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.STUN):
+                {
+                    if(_stun.enabled == false)
+                    {
+                        _stun.enabled = true;
+                        _stun.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.WEAKNESS):
+                {
+                    if (_weakness.enabled == false)
+                    {
+                        _weakness.enabled = true;
+                        _weakness.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.VITALITY):
+                {
+                    if(_vitality.enabled == false)
+                    {
+                        _vitality.enabled = true;
+                        _vitality.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.SLOW):
+                {
+                    if(_slow.enabled == false)
+                    {
+                        _slow.enabled = true;
+                        _slow.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.HASTE):
+                {
+                    if (_haste.enabled == false)
+                    {
+                        _haste.enabled = true;
+                        _haste.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.BURNING):
+                {
+                    if(_burn.enabled == false)
+                    {
+                        _burn.enabled = true;
+                        _burn.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.POISON):
+                {
+                    if (_poison.enabled == false)
+                    {
+                        _poison.enabled = true;
+                        _poison.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.CURE):
+                {
+                    if(_cure.enabled == false)
+                    {
+                        _cure.enabled = true;
+                        _cure.lifeTime = time;
+                    }
+                    break;
+                }
+
+            case (StatusEffects.DEMENTIA):
+                {
+                    if(_dementia.enabled == false)
+                    {
+                        _dementia.enabled = true;
+                        _dementia.lifeTime = time;
+                    }
+                    break;
+                }
+
         }
     }
 

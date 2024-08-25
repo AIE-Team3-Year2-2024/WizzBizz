@@ -31,7 +31,9 @@ public class SpawnProjectile : MonoBehaviour
     {
         GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
-        newProjectile.GetComponent<DamagePlayerOnCollision>().SetOwner(player);
+        DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>(); 
+        damage.SetOwner(player);
+        damage.damage *= player.damageMult;
 
         if (lifetime != 0)
         {
@@ -45,7 +47,9 @@ public class SpawnProjectile : MonoBehaviour
         {
             GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
-            newProjectile.GetComponent<DamagePlayerOnCollision>().SetOwner(player);
+            DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>();
+            damage.SetOwner(player);
+            damage.damage *= player.damageMult;
 
             if (lifetime != 0)
             {

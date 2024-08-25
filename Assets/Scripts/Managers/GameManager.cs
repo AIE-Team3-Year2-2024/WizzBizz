@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,6 +52,13 @@ public class GameManager : MonoBehaviour
     private float endGameDamageMult;
 
     private float _roundTimer;
+
+    [HideInInspector]
+    public List<OrbSpawner> orbSpawners = new List<OrbSpawner>();
+
+    public float orbSpawnerCooldown = 3.0f;
+    private float _orbSpawnerTimer = 0.0f;
+    private bool _orbCollected = true;
 
     public GameObject canvas;
 
@@ -118,6 +126,35 @@ public class GameManager : MonoBehaviour
                 foreach(KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
                 {
                     p.Key.TakeDamage(Time.deltaTime * endGameDamageMult);
+                }
+            }
+
+            if (orbSpawners.Count > 0)
+            {
+                if (_orbSpawnerTimer <= 0.0f && _orbCollected == true)
+                {
+                    Debug.Log("Orb should spawn!");
+
+                    Dictionary<float, OrbSpawner> spawnersByDistance = new Dictionary<float, OrbSpawner>();
+                    foreach (OrbSpawner o in orbSpawners)
+                    {
+                        List<float> playerDistances = new List<float>();
+                        foreach (CharacterBase c in _alivePlayers.Keys)
+                        {
+                            playerDistances.Add(Vector3.Distance(o.transform.position, c.transform.position));
+                        }
+                        spawnersByDistance.Add(playerDistances.Average(), o);
+                    }
+                    float furthestSpawnerDistance = spawnersByDistance.Keys.Max();
+                    Debug.Log("Furthest distance: " + furthestSpawnerDistance);
+
+                    spawnersByDistance[furthestSpawnerDistance].Reset();
+                    _orbCollected = false;
+                    _orbSpawnerTimer = orbSpawnerCooldown;
+                }
+                else
+                {
+                    _orbSpawnerTimer -= Time.deltaTime;
                 }
             }
         }
@@ -204,6 +241,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OrbSpawnerCollected()
+    {
+        _orbSpawnerTimer = orbSpawnerCooldown; // Reset timer.
+        _orbCollected = true;
+        Debug.Log("Orb has been collected!");
+    }
+
     public void StartGame()
     {
         StartCoroutine(StartGameRoutine());
@@ -211,6 +255,9 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGameRoutine()
     {
+        orbSpawners.Clear(); // Should be cleared everytime a new arena is loaded.
+        _orbSpawnerTimer = orbSpawnerCooldown;
+
         SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
 
         //theese are here so that the players get spawned in the new scene and not the old one
