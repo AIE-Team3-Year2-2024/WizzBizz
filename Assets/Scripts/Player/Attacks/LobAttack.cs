@@ -67,4 +67,30 @@ public class LobAttack : MonoBehaviour
             }
         }
     }
+
+    public void FrogSpawnLobObject(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
+            newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
+
+            DamagePlayerOnCollision damageComponent;
+            if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()) != null)
+            {
+                newProjectile.GetComponent<DamagePlayerOnCollision>().damage *= player.damageMult;
+            }
+
+            FrogID frogid = null;
+            if((frogid = newProjectile.GetComponent<FrogID>()) != null)
+            {
+                frogid.ID = player.GetComponent<FrogID>().ID;
+            }
+
+            if (lifetime != 0)
+            {
+                Destroy(newProjectile, lifetime);
+            }
+        }
+    }
 }

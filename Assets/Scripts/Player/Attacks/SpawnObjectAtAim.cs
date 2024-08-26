@@ -71,4 +71,35 @@ public class SpawnObjectAtAim : MonoBehaviour
             }
         }
     }
+
+    public void FrogSpawnObjectAtAimFunction(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameObject newProjectile = Instantiate(projectile, lobAimer.transform.position, player.transform.rotation);
+
+            DamagePlayerOnCollision damageComponent;
+            if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()) != null)
+            {
+                newProjectile.GetComponent<DamagePlayerOnCollision>().damage *= player.damageMult;
+            }
+
+            Minion minion;
+            if ((minion = newProjectile.GetComponent<Minion>()) != null)
+            {
+                newProjectile.GetComponent<Minion>().RemoveTargetPlayer(transform);
+            }
+
+            FrogID frogid = null;
+            if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
+            {
+                frogid.ID = player.GetComponent<FrogID>().ID;
+            }
+
+            if (lifetime != 0)
+            {
+                Destroy(newProjectile, lifetime);
+            }
+        }
+    }
 }
