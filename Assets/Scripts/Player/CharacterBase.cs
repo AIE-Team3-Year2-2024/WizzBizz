@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(Weakness))]
@@ -45,6 +46,7 @@ public class CharacterBase : MonoBehaviour
 
     private float _originalAccel;
     private float _originalDecel;
+    private float _origanalHealth;
 
     private Vector3 _velocity;
 
@@ -109,6 +111,10 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("the image used to show where the player is aiming")]
     [SerializeField]
     private RectTransform _pointerAimer;
+
+    [Tooltip("the slider component of this players health bar")]
+    [SerializeField]
+    private Slider healthBar;
 
     private Vector3 _movementDirection;
 
@@ -205,6 +211,10 @@ public class CharacterBase : MonoBehaviour
         _originalSpeed = _speed;
         _originalAccel = _acceleration;
         _originalDecel = _deceleration;
+        _origanalHealth = _health;
+
+        healthBar.minValue = 0;
+        healthBar.maxValue = _origanalHealth;
 
         rb = GetComponent<Rigidbody>();
 
@@ -361,6 +371,8 @@ public class CharacterBase : MonoBehaviour
         }
         _health -= damage;
 
+        healthBar.value = _health;
+
         if (_health <= 0)
         {
             Death();
@@ -374,6 +386,8 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+
+        healthBar.value = _health;
 
         if (_health <= 0)
         {
@@ -612,6 +626,16 @@ public class CharacterBase : MonoBehaviour
         {
             playerGamepad.SetMotorSpeeds(1.0f, 1.0f);
             yield return new WaitForSeconds(1000.0f);
+            playerGamepad.ResetHaptics();
+        }
+    }
+
+    public IEnumerator AdjustableHaptics(float lowInput, float highInput, float time)
+    {
+        if (playerGamepad != null)
+        {
+            playerGamepad.SetMotorSpeeds(lowInput, highInput);
+            yield return new WaitForSeconds(time);
             playerGamepad.ResetHaptics();
         }
     }
