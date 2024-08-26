@@ -283,9 +283,9 @@ MonoBehaviour:
     m_ActionName: Player/Ability 1
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
-        m_MethodName: SpawnObjectAtAim
+      - m_Target: {fileID: 3629782962501561363}
+        m_TargetAssemblyTypeName: PortalAttack, Assembly-CSharp
+        m_MethodName: SpawnObjectAtAimFunction
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -600,6 +600,7 @@ MonoBehaviour:
   _range: 10
   _lobAimer: {fileID: 1309746413074950827}
   _portalPrefab: {fileID: 6539852389524594942, guid: d71e1466c2f03624791dfbbb70b1ad5f, type: 3}
+  frogID: 0
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0

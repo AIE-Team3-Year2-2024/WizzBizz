@@ -20,9 +20,9 @@ public class Portal : MonoBehaviour
     {
         if(other.GetComponent<FrogID>().ID == frogID)
         {
-
+            other.transform.position = endPoint.position;
+            madeAttack.OnPortalUsed();
         }
-        other.transform.position = endPoint.position;
-        madeAttack.OnPortalUsed();
+        
     }
 }
