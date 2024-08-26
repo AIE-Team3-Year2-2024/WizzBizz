@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class CharacterAbilities : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class CharacterAbilities : MonoBehaviour
     [SerializeField] private float ability1Cooldown = 3.0f;
     [Tooltip("How long the cooldown is for ability 2.")]
     [SerializeField] private float ability2Cooldown = 3.0f;
+
+    [Tooltip("The UI slider for ability 1.")]
+    [SerializeField] private Slider uiSlider1;
+    [Tooltip("The UI slider for ability 2.")]
+    [SerializeField] private Slider uiSlider2;
 
     [Header("Ability Callbacks")]
     [Tooltip("The callback which is invoked when ability 1 is pressed.")]
@@ -26,6 +32,19 @@ public class CharacterAbilities : MonoBehaviour
             _ability1Timer -= Time.deltaTime;
         if (_ability2Timer > 0.0f)
             _ability2Timer -= Time.deltaTime;
+
+        if (uiSlider1 != null)
+        {
+            uiSlider1.minValue = 0.0f;
+            uiSlider1.maxValue = ability1Cooldown;
+            uiSlider1.value = ability1Cooldown - _ability1Timer;
+        }
+        if (uiSlider2 != null)
+        {
+            uiSlider2.minValue = 0.0f;
+            uiSlider2.maxValue = ability2Cooldown;
+            uiSlider2.value = ability2Cooldown - _ability2Timer;
+        }
     }
 
     public void DoAbility1(InputAction.CallbackContext context)
