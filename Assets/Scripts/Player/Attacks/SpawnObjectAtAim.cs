@@ -19,6 +19,8 @@ public class SpawnObjectAtAim : MonoBehaviour
     [SerializeField]
     private GameObject lobAimer;
 
+    private AimChecker _checker;
+
     [Tooltip("how long before this object destroys itself (wont destroy itself if set to 0)")]
     [SerializeField]
     private float lifetime;
@@ -37,6 +39,7 @@ public class SpawnObjectAtAim : MonoBehaviour
             {
                 lobAimer.SetActive(false);
             }
+            _checker = lobAimer.GetComponent<AimChecker>();
         }
     }
 
@@ -51,7 +54,7 @@ public class SpawnObjectAtAim : MonoBehaviour
 
     public void SpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (_checker.currentCollisions < 1)
         {
             GameObject newProjectile = Instantiate(projectile, lobAimer.transform.position, player.transform.rotation);
 
@@ -74,7 +77,7 @@ public class SpawnObjectAtAim : MonoBehaviour
 
     public void FrogSpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (_checker.currentCollisions < 1)
         {
             GameObject newProjectile = Instantiate(projectile, lobAimer.transform.position, player.transform.rotation);
 
