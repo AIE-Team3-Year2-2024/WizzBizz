@@ -615,4 +615,14 @@ public class CharacterBase : MonoBehaviour
             playerGamepad.ResetHaptics();
         }
     }
+
+    public IEnumerator AdjustableHaptics(float lowInput, float highInput, float time)
+    {
+        if (playerGamepad != null)
+        {
+            playerGamepad.SetMotorSpeeds(lowInput, highInput);
+            yield return new WaitForSeconds(time);
+            playerGamepad.ResetHaptics();
+        }
+    }
 }
