@@ -49,7 +49,7 @@ public class SpawnObjectAtTransform : MonoBehaviour
         FrogID frogid = null;
         if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
         {
-            frogid.ID = player.GetInstanceID();
+            frogid.ID = player.GetComponent<FrogID>().ID;
         }
 
         if (lifetime != 0)

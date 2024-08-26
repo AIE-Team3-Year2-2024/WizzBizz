@@ -4,6 +4,7 @@ using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(FrogID))]
 public class PortalAttack : MonoBehaviour
 {
     private CharacterBase _player;
@@ -43,7 +44,9 @@ public class PortalAttack : MonoBehaviour
             }
         }
 
-        frogID = gameObject.GetInstanceID();
+        frogID = _player.GetInstanceID();
+
+        gameObject.GetComponent<FrogID>().ID = frogID;
     }
 
     // Update is called once per frame
@@ -59,18 +62,19 @@ public class PortalAttack : MonoBehaviour
     {
         if (context.started)
         {
-            GameObject newPortal = Instantiate(_portalPrefab, _lobAimer.transform.position, _player.transform.rotation);
 
             if(_firstPortal == null)
             {
+                GameObject newPortal = Instantiate(_portalPrefab, _lobAimer.transform.position, _player.transform.rotation);
                 _firstPortal = newPortal.GetComponent<Portal>();
                 _firstPortal.trigger.enabled = false;
                 _firstPortal.madeAttack = this;
 
                 _firstPortal.frogID = frogID;
             } 
-            else
+            else if (_secondPortal == null)
             {
+                GameObject newPortal = Instantiate(_portalPrefab, _lobAimer.transform.position, _player.transform.rotation);
                 _secondPortal = newPortal.GetComponent<Portal>();
                 _secondPortal.madeAttack = this;
                 _secondPortal.frogID = frogID;

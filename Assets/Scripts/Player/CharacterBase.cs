@@ -213,8 +213,11 @@ public class CharacterBase : MonoBehaviour
         _originalDecel = _deceleration;
         _origanalHealth = _health;
 
-        healthBar.minValue = 0;
-        healthBar.maxValue = _origanalHealth;
+        if (healthBar)
+        {
+            healthBar.minValue = 0;
+            healthBar.maxValue = _origanalHealth;
+        }
 
         rb = GetComponent<Rigidbody>();
 
@@ -365,13 +368,16 @@ public class CharacterBase : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if(_health <=0)
+        if(_health <= 0)
         {
             return;
         }
         _health -= damage;
 
-        healthBar.value = _health;
+        if (healthBar)
+        {
+            healthBar.value = _health;
+        }
 
         if (_health <= 0)
         {
@@ -387,7 +393,10 @@ public class CharacterBase : MonoBehaviour
         }
         _health -= damage;
 
-        healthBar.value = _health;
+        if (healthBar)
+        {
+            healthBar.value = _health;
+        }
 
         if (_health <= 0)
         {
