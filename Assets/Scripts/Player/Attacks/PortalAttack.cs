@@ -16,6 +16,8 @@ public class PortalAttack : MonoBehaviour
     [SerializeField]
     private GameObject _lobAimer;
 
+    private AimChecker _checker;
+
     [Tooltip("the prefab for the portals (make sure they have the portal component)")]
     [SerializeField]
     private GameObject _portalPrefab;
@@ -41,6 +43,8 @@ public class PortalAttack : MonoBehaviour
             {
                 _lobAimer.SetActive(false);
             }
+            _checker = _lobAimer.GetComponent<AimChecker>();
+            
         }
 
         frogID = _player.GetInstanceID();
@@ -59,7 +63,7 @@ public class PortalAttack : MonoBehaviour
 
     public void SpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (_checker.currentCollisions < 1)
         {
 
             if(_firstPortal == null)
