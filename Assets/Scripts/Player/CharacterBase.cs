@@ -34,7 +34,8 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _speed;
 
-    private float _originalSpeed;
+    [HideInInspector]
+    public float originalSpeed;
 
     [SerializeField]
     [Tooltip("The rate at which the character will accelerate towards the max speed.")]
@@ -208,7 +209,7 @@ public class CharacterBase : MonoBehaviour
         catchTrigger.isTrigger = true;
         catchTrigger.enabled = false;
 
-        _originalSpeed = _speed;
+        originalSpeed = _speed;
         _originalAccel = _acceleration;
         _originalDecel = _deceleration;
         _origanalHealth = _health;
@@ -285,7 +286,12 @@ public class CharacterBase : MonoBehaviour
     public void AddSpeed(float addition)
     {
         _speed += addition;
-        _originalSpeed += addition;
+        originalSpeed += addition;
+    }
+
+    public void ChangeCurrentSpeed(float newSpeed)
+    {
+        _speed = newSpeed;
     }
 
     /// <summary>
@@ -334,7 +340,7 @@ public class CharacterBase : MonoBehaviour
         _movementDirection = _movementDirection.normalized;
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
-        _speed = _originalSpeed;
+        _speed = originalSpeed;
         _movementDirection = Vector3.zero;
     }
 
@@ -581,7 +587,7 @@ public class CharacterBase : MonoBehaviour
         }
         else if (context.canceled)
         {
-            _speed = _originalSpeed;
+            _speed = originalSpeed;
             if (_basicAttackTimer >= _basicAttackTime)
             {
                 normalAttack.Invoke();
