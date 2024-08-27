@@ -7,8 +7,7 @@ using UnityEngine.Events;
 public class DamagePlayerOnCollision : MonoBehaviour
 {
     [Tooltip("the amount of damge this object will deal to a player or object")]
-    [SerializeField]
-    private float damage;
+    public float damage;
 
     [Tooltip("the damage type of this attack")]
     [SerializeField]
