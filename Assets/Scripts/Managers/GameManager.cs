@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -50,6 +51,14 @@ public class GameManager : MonoBehaviour
     [Tooltip("the multiplyer for damage taken for the round being over")]
     [SerializeField]
     private float endGameDamageMult;
+
+    [Tooltip("A reference to the Arena UI canvas.")]
+    [SerializeField]
+    private Canvas arenaUICanvas;
+
+    [Tooltip("A reference to the UI text object for the round timer.")]
+    [SerializeField]
+    private TMP_Text roundTimerText;
 
     private float _roundTimer;
 
@@ -126,6 +135,15 @@ public class GameManager : MonoBehaviour
                 foreach(KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
                 {
                     p.Key.TakeDamage(Time.deltaTime * endGameDamageMult);
+                }
+            }
+
+            if (roundTimerText != null)
+            {
+                if (_roundTimer >= 0.0f)
+                {
+                    TimeSpan formattedTime = TimeSpan.FromSeconds(_roundTimer);
+                    roundTimerText.text = formattedTime.ToString("mm':'ss");
                 }
             }
 
@@ -235,6 +253,7 @@ public class GameManager : MonoBehaviour
                 StartGame();
             else // if game over
             {
+                arenaUICanvas.gameObject.SetActive(false);
                 SceneManager.LoadScene(_endLevel);
                 Destroy(gameObject);
             }
@@ -287,6 +306,9 @@ public class GameManager : MonoBehaviour
         addingControllers = false;
 
         _roundTimer = _roundTime;
+
+        if (arenaUICanvas != null)
+            arenaUICanvas.gameObject.SetActive(true);
 
         Destroy(spawnInScene.gameObject);
     }
