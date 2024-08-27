@@ -991,7 +991,9 @@ GameObject:
   - component: {fileID: 1465012572978774652}
   - component: {fileID: 2885920242837571443}
   - component: {fileID: 2179331503762377133}
-  m_Layer: 6
+  - component: {fileID: 366581143912885588}
+  - component: {fileID: 4753383984372716316}
+  m_Layer: 12
   m_Name: LobAimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1063,6 +1065,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &366581143912885588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309746413074950827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e812e7e586f2d8544ad1db29accca782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCollisions: 0
+--- !u!135 &4753383984372716316
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309746413074950827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1424408229124318600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 794634357223231939}
   - component: {fileID: 1630594034792197854}
+  - component: {fileID: 537985919708587265}
   m_Layer: 6
   m_Name: Ability2Cooldown
   m_TagString: Untagged
@@ -1333,7 +1362,35 @@ MonoBehaviour:
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 537985919708587265}
+        m_TargetAssemblyTypeName: ImageFading, Assembly-CSharp
+        m_MethodName: SetAlphasToOne
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &537985919708587265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755946045724203883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7feb4ff1d008442abe31c04c5aff41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  images:
+  - {fileID: 1032937703559940010}
+  - {fileID: 1182273431486849437}
+  speed: 1
 --- !u!1 &3900782138796478595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd5dfa0182d83043af879b427611c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSize: {x: 2, y: 2}
   target: {fileID: 452431045987376310}
   offset: {x: 0, y: 1.25, z: 0.75}
 --- !u!1 &3939091605264350532
@@ -1475,6 +1531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4724804136358114685}
   - component: {fileID: 8734395181219429099}
+  - component: {fileID: 5687027129882253415}
   m_Layer: 6
   m_Name: Ability1Cooldown
   m_TagString: Untagged
@@ -1554,7 +1611,35 @@ MonoBehaviour:
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5687027129882253415}
+        m_TargetAssemblyTypeName: ImageFading, Assembly-CSharp
+        m_MethodName: SetAlphasToOne
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5687027129882253415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4035047071980323781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7feb4ff1d008442abe31c04c5aff41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  images:
+  - {fileID: 4163011381683257989}
+  - {fileID: 6609740235799755679}
+  speed: 1
 --- !u!1 &4487258701002610513
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,10 +1783,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 4008a1a0e16e9dc43bba99e8777d834e, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -1717,6 +1802,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6859042691513430485}
   - component: {fileID: 2851635355805277473}
+  - component: {fileID: 4513401983454371436}
   m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
@@ -1796,7 +1882,35 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4513401983454371436}
+        m_TargetAssemblyTypeName: ImageFading, Assembly-CSharp
+        m_MethodName: SetAlphasToOne
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4513401983454371436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5798424091946887926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7feb4ff1d008442abe31c04c5aff41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  images:
+  - {fileID: 2578038882588646022}
+  - {fileID: 6541067074074871512}
+  speed: 1
 --- !u!1 &6057059580930561455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +2072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
