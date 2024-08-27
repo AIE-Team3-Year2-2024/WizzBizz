@@ -37,4 +37,24 @@ public class SpawnObjectAtTransform : MonoBehaviour
             Destroy(newProjectile, lifetime);
         }
     }
+
+    public void FrogSpawnObjectAtSpawn()
+    {
+        GameObject newProjectile = Instantiate(projectile, _spawn.position, transform.rotation);
+
+        DamagePlayerOnCollision collision = newProjectile.GetComponent<DamagePlayerOnCollision>();
+        collision.SetOwner(player);
+        collision.damage *= player.damageMult;
+
+        FrogID frogid = null;
+        if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
+        {
+            frogid.ID = player.GetComponent<FrogID>().ID;
+        }
+
+        if (lifetime != 0)
+        {
+            Destroy(newProjectile, lifetime);
+        }
+    }
 }
