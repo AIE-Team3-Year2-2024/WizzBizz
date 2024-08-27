@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(Weakness))]
@@ -33,7 +34,8 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _speed;
 
-    private float _originalSpeed;
+    [HideInInspector]
+    public float originalSpeed;
 
     [SerializeField]
     [Tooltip("The rate at which the character will accelerate towards the max speed.")]
@@ -45,6 +47,7 @@ public class CharacterBase : MonoBehaviour
 
     private float _originalAccel;
     private float _originalDecel;
+    private float _origanalHealth;
 
     private Vector3 _velocity;
 
@@ -109,6 +112,10 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("the image used to show where the player is aiming")]
     [SerializeField]
     private RectTransform _pointerAimer;
+
+    [Tooltip("the slider component of this players health bar")]
+    [SerializeField]
+    private Slider healthBar;
 
     private Vector3 _movementDirection;
 
@@ -202,9 +209,16 @@ public class CharacterBase : MonoBehaviour
         catchTrigger.isTrigger = true;
         catchTrigger.enabled = false;
 
-        _originalSpeed = _speed;
+        originalSpeed = _speed;
         _originalAccel = _acceleration;
         _originalDecel = _deceleration;
+        _origanalHealth = _health;
+
+        if (healthBar)
+        {
+            healthBar.minValue = 0;
+            healthBar.maxValue = _origanalHealth;
+        }
 
         rb = GetComponent<Rigidbody>();
 
@@ -272,7 +286,12 @@ public class CharacterBase : MonoBehaviour
     public void AddSpeed(float addition)
     {
         _speed += addition;
-        _originalSpeed += addition;
+        originalSpeed += addition;
+    }
+
+    public void ChangeCurrentSpeed(float newSpeed)
+    {
+        _speed = newSpeed;
     }
 
     /// <summary>
@@ -321,7 +340,7 @@ public class CharacterBase : MonoBehaviour
         _movementDirection = _movementDirection.normalized;
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
-        _speed = _originalSpeed;
+        _speed = originalSpeed;
         _movementDirection = Vector3.zero;
     }
 
@@ -355,11 +374,16 @@ public class CharacterBase : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if(_health <=0)
+        if(_health <= 0)
         {
             return;
         }
         _health -= damage;
+
+        if (healthBar)
+        {
+            healthBar.value = _health;
+        }
 
         if (_health <= 0)
         {
@@ -374,6 +398,11 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+
+        if (healthBar)
+        {
+            healthBar.value = _health;
+        }
 
         if (_health <= 0)
         {
@@ -558,7 +587,7 @@ public class CharacterBase : MonoBehaviour
         }
         else if (context.canceled)
         {
-            _speed = _originalSpeed;
+            _speed = originalSpeed;
             if (_basicAttackTimer >= _basicAttackTime)
             {
                 normalAttack.Invoke();

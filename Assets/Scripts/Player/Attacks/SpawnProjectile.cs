@@ -41,6 +41,26 @@ public class SpawnProjectile : MonoBehaviour
         }
     }
 
+    public void FrogSpawnProjectileAtPlayer()
+    {
+        GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
+
+        DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>();
+        damage.SetOwner(player);
+        damage.damage *= player.damageMult;
+
+        FrogID frogid = null;
+        if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
+        {
+            frogid.ID = player.GetInstanceID();
+        }
+
+        if (lifetime != 0)
+        {
+            Destroy(newProjectile, lifetime);
+        }
+    }
+
     public void SpawnProjectileAtPlayer(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -50,6 +70,29 @@ public class SpawnProjectile : MonoBehaviour
             DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>();
             damage.SetOwner(player);
             damage.damage *= player.damageMult;
+
+            if (lifetime != 0)
+            {
+                Destroy(newProjectile, lifetime);
+            }
+        }
+    }
+
+    public void FrogSpawnProjectileAtPlayer(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
+
+            DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>();
+            damage.SetOwner(player);
+            damage.damage *= player.damageMult;
+
+            FrogID frogid = null;
+            if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
+            {
+                frogid.ID = player.GetComponent<FrogID>().ID;
+            }
 
             if (lifetime != 0)
             {
