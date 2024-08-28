@@ -28,4 +28,10 @@ public class AimChecker : MonoBehaviour
             renderer.material.color = Color.green;
         }
     }
+
+    public void Reset()
+    {
+        currentCollisions = 0;
+        renderer.material.color = Color.green;  
+    }
 }
