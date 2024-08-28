@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 7470833458025451815}
   - component: {fileID: 3879300080267412195}
   - component: {fileID: 2175305282102580035}
+  - component: {fileID: 6803933975168186518}
+  - component: {fileID: 1141189815897970696}
   m_Layer: 9
   m_Name: Note .75
   m_TagString: Untagged
@@ -112,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fabec0dafec434c429e389691b646222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 5
+  _distance: 4
   _orbitSpeed: 0.6
   _followSpeed: 16.9
   _heightOffset: 1.5
@@ -138,7 +140,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 471b6fa9387a7ea47a3592b8ebb8a836, type: 2}
+  - {fileID: 2100000, guid: dd6a3c4397eb8834c8ccb2f8d8f5dc56, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,40 +169,31 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.16869026
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        time: 0.032517016
+        value: 0.8673477
+        inSlope: -1.027118
+        outSlope: -1.027118
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.74607277
       - serializedVersion: 3
-        time: 0.31530783
-        value: 0.8942304
-        inSlope: -1.1228969
-        outSlope: -1.1228969
+        time: 0.28552127
+        value: 0.424845
+        inSlope: -3.5678644
+        outSlope: -3.5678644
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.64809555
+        inWeight: 0.6514366
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.45381165
-        value: 0.35577393
-        inSlope: -6.4165363
-        outSlope: -6.4165363
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 1
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.5043909
+        time: 0.54269046
         value: 0
-        inSlope: -4.513649
-        outSlope: -4.513649
+        inSlope: -0.5923246
+        outSlope: -0.5923246
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.776927
+        inWeight: 0.6322408
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -256,3 +249,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 8
+--- !u!54 &6803933975168186518
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3763851691602367980}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1141189815897970696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3763851691602367980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  damageEffect: 1
+  effectTime: 5
+  destroyOnCollision: 1
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
+  DoOnHit:
+    m_PersistentCalls:
+      m_Calls: []
