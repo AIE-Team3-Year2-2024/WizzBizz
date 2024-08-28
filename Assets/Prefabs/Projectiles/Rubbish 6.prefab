@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 15
 --- !u!114 &1587318600284152238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,10 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 7
+  damage: 12
   damageEffect: 0
   effectTime: 0
   destroyOnCollision: 1
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
+  DoOnHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &8759748588996902776
 Rigidbody:
   m_ObjectHideFlags: 0

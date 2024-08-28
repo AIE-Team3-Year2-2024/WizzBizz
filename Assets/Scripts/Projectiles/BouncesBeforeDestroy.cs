@@ -24,13 +24,13 @@ public class BouncesBeforeDestroy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(_bounces < _deathBounceAmount)
+        if(_bounces < _deathBounceAmount || _deathBounceAmount == 0)
         {
             _bounces++;
             Vector3 refection = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
             transform.forward = new Vector3(refection.x, 0, refection.z);
         }
-        else
+        else if(_deathBounceAmount != 0)
         {
             Destroy(gameObject);
         }
