@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1587318600284152238}
   - component: {fileID: 8759748588996902776}
   - component: {fileID: 6332736741048967311}
+  - component: {fileID: -99800131824615849}
   m_Layer: 10
   m_Name: Lizard ball
   m_TagString: Untagged
@@ -133,6 +134,9 @@ MonoBehaviour:
   DoOnDestroy:
     m_PersistentCalls:
       m_Calls: []
+  DoOnHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &8759748588996902776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,3 +166,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathBounceAmount: 3
+--- !u!114 &-99800131824615849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363175542702627947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356116622282bf042af259bc156f6fab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distanceMult: 0.08
+  _speed: 5

@@ -318,11 +318,13 @@ MonoBehaviour:
   - IssacLVL1Prototype
   _endLevel: IssacCharacterScreen
   _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
-  _scoreToWin: 17
-  _roundTime: 60
-  endGameDamageMult: 1
+  _scoreToWin: 10
+  _roundTime: 120
+  endGameDamageMult: 2
+  arenaUICanvas: {fileID: 0}
+  roundTimerText: {fileID: 0}
   orbSpawners: []
-  orbSpawnerCooldown: 3
+  orbSpawnerCooldown: 8
   canvas: {fileID: 347443268}
 --- !u!4 &482636210
 Transform:
