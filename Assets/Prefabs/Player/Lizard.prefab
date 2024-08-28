@@ -350,8 +350,8 @@ MonoBehaviour:
   _deceleration: 0.1
   catchTrigger: {fileID: 1143968817450751776}
   _dashTime: 0.3
-  _dashSpeed: 24
-  _chargeSpeed: 1.5
+  _dashSpeed: 25
+  _chargeSpeed: 3
   catchParryTime: 0.4
   catchWaitTime: 1.5
   _health: 100
@@ -567,7 +567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 3363175542702627947, guid: 29f1144a58d8e3a4c92bd8d2b62cd283, type: 3}
-  lifetime: 2
+  lifetime: 4
 --- !u!114 &4897880449972657288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgeMinus: 0
+  _damgeMinus: 5
 --- !u!114 &2187619237441558528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgePlus: 0
+  _damgePlus: 5
 --- !u!114 &2025562164637247473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 0
+  _speedMinus: 3
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 5
+  _speedAdd: 3
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -774,8 +774,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damageInterval: 0
-  damage: 0
+  _damageInterval: 2
+  damage: 4
 --- !u!114 &7124786109629838651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _UIParent: {fileID: 0}
+  _UIParent: {fileID: 6057059580930561455}
 --- !u!114 &-5068809524858732858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lowFreq: 0.139
   highFreq: 0.287
-  time: 2.5
+  time: 0
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0

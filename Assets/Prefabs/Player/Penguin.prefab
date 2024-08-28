@@ -506,12 +506,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 10
+  _speed: 5
   originalSpeed: 0
-  _acceleration: 1
+  _acceleration: 10
   _deceleration: 0.1
   catchTrigger: {fileID: 3000781201183644107}
-  _dashTime: 0.5
+  _dashTime: 0.25
   _dashSpeed: 30
   _chargeSpeed: 1
   catchParryTime: 2
@@ -522,25 +522,25 @@ MonoBehaviour:
   canDash: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 0.3
+  _basicAttackTime: 1
   damageMult: 1
   _pointerAimer: {fileID: 1096289958959071381}
   healthBar: {fileID: 7005577783245112486}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   _weakness: {fileID: 3722349283893674540}
-  _crippled: {fileID: 0}
-  _stun: {fileID: 0}
-  _confusion: {fileID: 0}
+  _crippled: {fileID: 2187619237441558528}
+  _stun: {fileID: 8237443836018001246}
+  _confusion: {fileID: 4899803853188748000}
   confused: 0
-  _disabled: {fileID: 0}
-  _silence: {fileID: 0}
-  _vitality: {fileID: 0}
-  _slow: {fileID: 0}
-  _haste: {fileID: 0}
-  _burn: {fileID: 0}
-  _poison: {fileID: 0}
-  _cure: {fileID: 0}
-  _dementia: {fileID: 0}
+  _disabled: {fileID: 1507066548477584075}
+  _silence: {fileID: 3299529405822620948}
+  _vitality: {fileID: 4572482287238223607}
+  _slow: {fileID: 2025562164637247473}
+  _haste: {fileID: 2022015719311518545}
+  _burn: {fileID: 7904240128527876260}
+  _poison: {fileID: 7124786109629838651}
+  _cure: {fileID: 6925921418720077777}
+  _dementia: {fileID: 8364465316122460612}
   ballAttack:
     m_PersistentCalls:
       m_Calls:
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 6599871779557999481, guid: c0ff7f9cce920a647bd4e8bbec9b41bd, type: 3}
-  lifetime: 15
+  lifetime: 4
 --- !u!114 &-949787460204921858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +693,7 @@ MonoBehaviour:
   projectile: {fileID: 5546918057975252347, guid: 0443f68005650074b905614a3421c54d, type: 3}
   range: 10
   lobAimer: {fileID: 1309746413074950827}
-  lifetime: 15
+  lifetime: 10
 --- !u!114 &8328546656257713296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3192898056125740344, guid: 4b01739367ddbf9468e45a8d893a9313, type: 3}
-  range: 5
+  range: 15
   lobAimer: {fileID: 7203248672751915788}
   lifetime: 0
 --- !u!65 &3000781201183644107
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgeMinus: 0
+  _damgeMinus: 5
 --- !u!114 &2187619237441558528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgePlus: 0
+  _damgePlus: 5
 --- !u!114 &2025562164637247473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 0
+  _speedMinus: 3
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 0
+  _speedAdd: 3
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -857,8 +857,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damageInterval: 0
-  damage: 0
+  _damageInterval: 2
+  damage: 4
 --- !u!114 &7124786109629838651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,8 +887,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _healthInterval: 0
-  health: 0
+  _healthInterval: 2
+  health: 4
 --- !u!114 &8364465316122460612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _UIParent: {fileID: 0}
+  _UIParent: {fileID: 6057059580930561455}
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
