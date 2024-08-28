@@ -418,12 +418,12 @@ MonoBehaviour:
   heldOrb: {fileID: 0}
   _speed: 6
   originalSpeed: 0
-  _acceleration: 1
+  _acceleration: 10
   _deceleration: 0.1
   catchTrigger: {fileID: -3436212031268177746}
-  _dashTime: 0.5
+  _dashTime: 0.3
   _dashSpeed: 25
-  _chargeSpeed: 3
+  _chargeSpeed: 3.5
   catchParryTime: 2
   catchWaitTime: 1
   _health: 100
@@ -568,7 +568,7 @@ MonoBehaviour:
   - {fileID: 3363175542702627947, guid: c407b90c4828d0140b5253cfdcd45aeb, type: 3}
   - {fileID: 3363175542702627947, guid: bdcdf6f0aa965d3439b85973a01533c2, type: 3}
   - {fileID: 3363175542702627947, guid: ecd4ec73662ebce44b65a09fe27d72db, type: 3}
-  lifetime: 20
+  lifetime: 5
 --- !u!114 &3833022284611438099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 5777404286988346730, guid: 4d549e2601617b24da0ca09748788214, type: 3}
-  lifetime: 40
+  lifetime: 20
 --- !u!114 &1710617483415450620
 MonoBehaviour:
   m_ObjectHideFlags: 0
