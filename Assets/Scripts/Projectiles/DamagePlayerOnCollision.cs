@@ -77,7 +77,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
 
         foreach (DamagePlayerOnCollision child in children)
         {
-            child.SetOwner(inputPlayer);
+            if (child != this)
+            {
+                child.SetOwner(inputPlayer);
+            }
         }
     }
 
