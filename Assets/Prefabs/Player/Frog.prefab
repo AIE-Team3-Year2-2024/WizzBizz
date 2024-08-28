@@ -467,7 +467,7 @@ MonoBehaviour:
   _deceleration: 0.1
   catchTrigger: {fileID: 1143968817450751776}
   _dashTime: 0.3
-  _dashSpeed: 20
+  _dashSpeed: 25
   _chargeSpeed: 2.5
   catchParryTime: 0.4
   catchWaitTime: 1.5
@@ -477,7 +477,7 @@ MonoBehaviour:
   canDash: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 1.2
+  _basicAttackTime: 1
   damageMult: 1
   _pointerAimer: {fileID: 1096289958959071381}
   healthBar: {fileID: 2438572597152420097}
@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 5
+  _speedMinus: 3
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,7 +675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 5
+  _speedAdd: 3
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,7 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 6599871779557999481, guid: 83cc7d76203ea9a42afd2fa37386d50a, type: 3}
-  lifetime: 2.5
+  lifetime: 1.5
 --- !u!114 &-8277679434416479755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 6599871779557999481, guid: 495aa339df5df014093ac1cf529b476a, type: 3}
-  lifetime: 8
+  lifetime: 12
 --- !u!114 &5619487726306417995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +861,7 @@ MonoBehaviour:
   projectile: {fileID: 4245985465227740682, guid: c7140e668c6d6bf47936c17b2d1a3d0e, type: 3}
   range: 15
   lobAimer: {fileID: 1100810549408191807}
-  lifetime: 6
+  lifetime: 7
 --- !u!1 &452431046548426737
 GameObject:
   m_ObjectHideFlags: 0
