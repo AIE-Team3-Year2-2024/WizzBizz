@@ -145,10 +145,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 7
-  damageEffect: 1
+  damageEffect: 8
   effectTime: 20
   destroyOnCollision: 0
   DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
+  DoOnHit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &8733080108697574047
