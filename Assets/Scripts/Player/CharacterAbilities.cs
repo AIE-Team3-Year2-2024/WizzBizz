@@ -77,7 +77,7 @@ public class CharacterAbilities : MonoBehaviour
 
         if (ability1Chargeup == false)
         {
-            if (context.started)
+            if (context.performed)
             {
                 if (_ability1Timer <= 0.0f)
                 {
@@ -90,7 +90,7 @@ public class CharacterAbilities : MonoBehaviour
         }
         else
         {
-            if (context.started)
+            if (context.performed)
             {
                 _ability1Timer = ability1Cooldown;
                 _characterBase.ChangeCurrentSpeed(ability1ChargeSpeed);
@@ -114,7 +114,7 @@ public class CharacterAbilities : MonoBehaviour
 
         if (ability2Chargeup == false)
         {
-            if (context.started)
+            if (context.performed)
             {
                 if (_ability2Timer <= 0.0f)
                 {
@@ -127,7 +127,7 @@ public class CharacterAbilities : MonoBehaviour
         }
         else
         {
-            if (context.started)
+            if (context.performed)
             {
                 _ability2Timer = ability2Cooldown;
                 _characterBase.ChangeCurrentSpeed(ability2ChargeSpeed);
