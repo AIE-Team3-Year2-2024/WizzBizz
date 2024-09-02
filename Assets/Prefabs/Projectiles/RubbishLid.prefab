@@ -45,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5777404286988346730}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 7172154778425679417, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
 --- !u!23 &4586058822843116924
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -131,6 +131,9 @@ MonoBehaviour:
   effectTime: 0
   destroyOnCollision: 0
   DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
+  DoOnHit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!54 &529405592993949442
