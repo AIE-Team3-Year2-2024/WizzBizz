@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class DamagePlayerOnCollision : MonoBehaviour
@@ -27,6 +28,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
 
     [Tooltip("event invoked when a player is hit")]
     public UnityEvent DoOnHit;
+
+    [Tooltip("the component that allows this projectiloe direction to be controlled by the player")]
+    [SerializeField]
+    private ControlProjectileDirection controlComponent;
 
     private CharacterBase ownerPlayer;
 
@@ -82,10 +87,22 @@ public class DamagePlayerOnCollision : MonoBehaviour
                 child.SetOwner(inputPlayer);
             }
         }
+
+
+        if (controlComponent)
+        {
+            ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").performed += controlComponent.OnAim;
+            ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").canceled += controlComponent.OnAim;
+        }
     }
 
     private void OnDestroy()
     {
+        if (controlComponent)
+        {
+            ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").performed -= controlComponent.OnAim;
+            ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").canceled -= controlComponent.OnAim;
+        }
         DoOnDestroy.Invoke();
     }
 }
