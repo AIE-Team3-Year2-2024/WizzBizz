@@ -33,6 +33,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [SerializeField]
     private ControlProjectileDirection controlComponent;
 
+    [Tooltip("any damage player components in this array will have their player set to the player set to tthis component (the player set to this component is the one this cannot damage)")]
+    [SerializeField]
+    private DamagePlayerOnCollision[] damageChildren;
+
     private CharacterBase ownerPlayer;
 
     private AttackKnockback _knockbackComponent;
@@ -91,14 +95,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
     public void SetOwner(CharacterBase inputPlayer)
     {
         ownerPlayer = inputPlayer;
-        DamagePlayerOnCollision[] children = transform.GetComponentsInChildren<DamagePlayerOnCollision>();
 
-        foreach (DamagePlayerOnCollision child in children)
+        foreach (DamagePlayerOnCollision child in damageChildren)
         {
-            if (child != this)
-            {
-                child.SetOwner(inputPlayer);
-            }
+            child.ownerPlayer = inputPlayer;
         }
 
 

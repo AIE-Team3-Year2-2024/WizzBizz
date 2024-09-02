@@ -155,6 +155,8 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
+  controlComponent: {fileID: 0}
+  damageChildren: []
 --- !u!1 &5777404286988346730
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +173,6 @@ GameObject:
   - component: {fileID: 394035490441348042}
   - component: {fileID: 529405592993949442}
   - component: {fileID: 6054873528089637230}
-  - component: {fileID: -986958070039792210}
   m_Layer: 7
   m_Name: RubbishLid
   m_TagString: Untagged
@@ -188,7 +189,7 @@ Transform:
   m_GameObject: {fileID: 5777404286988346730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 0.2, z: 1.5}
+  m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4962633669838473358}
@@ -294,6 +295,10 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
+  controlComponent: {fileID: 0}
+  damageChildren:
+  - {fileID: 928868167861452443}
+  - {fileID: 2023721584593529375}
 --- !u!54 &529405592993949442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -323,28 +328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathBounceAmount: 4
---- !u!114 &-986958070039792210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5777404286988346730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  damageEffect: 4
-  effectTime: 2
-  destroyOnCollision: 1
-  DoOnDestroy:
-    m_PersistentCalls:
-      m_Calls: []
-  DoOnHit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &8668670383875836222
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,3 +483,5 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
+  controlComponent: {fileID: 0}
+  damageChildren: []
