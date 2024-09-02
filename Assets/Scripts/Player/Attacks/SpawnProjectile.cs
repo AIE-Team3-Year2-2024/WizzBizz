@@ -63,7 +63,7 @@ public class SpawnProjectile : MonoBehaviour
 
     public void SpawnProjectileAtPlayer(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
@@ -80,7 +80,7 @@ public class SpawnProjectile : MonoBehaviour
 
     public void FrogSpawnProjectileAtPlayer(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 

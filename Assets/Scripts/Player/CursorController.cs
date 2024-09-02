@@ -87,12 +87,12 @@ public class CursorController : MonoBehaviour
     /// <param name="context"></param>
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (_lastCollidedReadyButton != null && context.started && playerSelected)
+        if (_lastCollidedReadyButton != null && context.performed && playerSelected)
         {
             _lastCollidedReadyButton.PlayerInteract(this);
             _movementDirection = Vector3.zero;
         }
-        if(_lastCollidedCharacterButton != null && context.started)
+        if(_lastCollidedCharacterButton != null && context.performed)
         {
             GameManager.Instance.SetSelectedCharacter(playerID, _lastCollidedCharacterButton.character);
             playerSelected = true;
