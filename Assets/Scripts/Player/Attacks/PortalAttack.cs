@@ -92,11 +92,15 @@ public class PortalAttack : MonoBehaviour
         }
     }
 
-    public void OnPortalUsed()
+    public void OnPortalUsed(GameObject teleportee)
     {
         Destroy(_firstPortal.gameObject);
         _firstPortal = null;
         Destroy(_secondPortal.gameObject);
         _secondPortal = null;
+        if (teleportee == gameObject)
+        {
+            _checker.Reset();
+        }
     }
 }

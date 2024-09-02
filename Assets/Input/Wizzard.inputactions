@@ -10,7 +10,7 @@
                     "type": "Value",
                     "id": "f909c500-af19-4090-a011-98ac54203ad9",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -19,7 +19,7 @@
                     "type": "Value",
                     "id": "563ce93f-a690-407a-959a-23f41f19e8de",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -266,17 +266,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4c5d6c9d-14e5-4976-b22d-8cb3d2ed87e1",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3a760df0-e728-46c7-bbb4-c0a5c172f050",
                     "path": "<Gamepad>/start",
                     "interactions": "",
@@ -310,19 +299,8 @@
                 },
                 {
                     "name": "",
-                    "id": "c2112072-59f2-48fb-b36b-75c8e43e9f2d",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d3abcb3f-251e-4ffb-848d-a71fed9d4ce3",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -333,7 +311,7 @@
                 {
                     "name": "",
                     "id": "4c82d0b5-71d6-4db5-a731-8f0e8a6462d4",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
