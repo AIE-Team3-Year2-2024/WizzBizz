@@ -173,7 +173,6 @@ GameObject:
   - component: {fileID: 394035490441348042}
   - component: {fileID: 529405592993949442}
   - component: {fileID: 6054873528089637230}
-  - component: {fileID: -986958070039792210}
   m_Layer: 7
   m_Name: RubbishLid
   m_TagString: Untagged
@@ -329,30 +328,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deathBounceAmount: 4
---- !u!114 &-986958070039792210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5777404286988346730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 5
-  damageEffect: 4
-  effectTime: 2
-  destroyOnCollision: 1
-  DoOnDestroy:
-    m_PersistentCalls:
-      m_Calls: []
-  DoOnHit:
-    m_PersistentCalls:
-      m_Calls: []
-  controlComponent: {fileID: 0}
-  damageChildren: []
 --- !u!1 &8668670383875836222
 GameObject:
   m_ObjectHideFlags: 0
