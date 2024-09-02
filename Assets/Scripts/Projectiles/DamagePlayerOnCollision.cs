@@ -35,6 +35,13 @@ public class DamagePlayerOnCollision : MonoBehaviour
 
     private CharacterBase ownerPlayer;
 
+    private AttackKnockback _knockbackComponent;
+
+    private void Awake()
+    {
+        _knockbackComponent = GetComponent<AttackKnockback>();
+    }
+
     public void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
@@ -47,6 +54,12 @@ public class DamagePlayerOnCollision : MonoBehaviour
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
             player.TakeDamage(damage, damageEffect, effectTime);
             DoOnHit.Invoke();
+
+            if (_knockbackComponent)
+            {
+                _knockbackComponent.DoKnockback(collision, player);
+            }
+
         }
 
         if (destroyOnCollision)
