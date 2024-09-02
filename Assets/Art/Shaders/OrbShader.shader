@@ -16,6 +16,7 @@ Shader "Custom/OrbShader"
         Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
         Blend SrcAlpha OneMinusSrcAlpha
         Cull Back
+        ZWrite On
         LOD 200
 
         CGPROGRAM
@@ -123,8 +124,8 @@ Shader "Custom/OrbShader"
 
         void surf (Input IN, inout SurfaceOutputStandardSpecular o)
         {  
-            float t = _Time.x * _AnimationSpeed;
-            float3 offset = float3(t,t,t/20.0);
+            float animTime = _Time.x * _AnimationSpeed;
+            float3 offset = float3(animTime,animTime,animTime/20.0);
             float3 texCoords = pom(IN.worldNormal + offset, IN.viewDir);
 
             float n = orbNoise(texCoords);
