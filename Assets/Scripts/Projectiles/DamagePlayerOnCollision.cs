@@ -81,7 +81,6 @@ public class DamagePlayerOnCollision : MonoBehaviour
 
     public void SetOwner(CharacterBase inputPlayer)
     {
-        Debug.Log("owner SEt");
         ownerPlayer = inputPlayer;
 
         foreach (DamagePlayerOnCollision child in damageChildren)
