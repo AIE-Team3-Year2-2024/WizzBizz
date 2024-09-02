@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 4260592004534349395}
   - component: {fileID: 4260592004534349392}
   - component: {fileID: 4260592004534349394}
+  - component: {fileID: -1174458140791273388}
   m_Layer: 7
   m_Name: IcePatch
   m_TagString: Untagged
@@ -110,6 +111,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slipperyness: 1
   accelerationFactor: 0.15
+--- !u!114 &-1174458140791273388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260592004534349393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780969401da3a2243a46eb3f65e2bcde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _time: 14
 --- !u!1 &4260592004535204199
 GameObject:
   m_ObjectHideFlags: 0
