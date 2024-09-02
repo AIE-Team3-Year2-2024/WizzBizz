@@ -117,6 +117,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private Slider healthBar;
 
+    [Tooltip("The slider component of the attack charge up bar.")]
+    [SerializeField]
+    private Slider attackChargeBar;
+
     private Vector3 _movementDirection;
 
     [Tooltip("where to spawn projectiles on this character")]
@@ -228,6 +232,12 @@ public class CharacterBase : MonoBehaviour
     void Update()
     {
         _basicAttackTimer += Time.deltaTime;
+
+        if (attackChargeBar != null)
+        {
+            attackChargeBar.maxValue = _basicAttackTime;
+            attackChargeBar.value = _basicAttackTimer;
+        }
     }
 
     // Update is called once per frame
@@ -323,7 +333,7 @@ public class CharacterBase : MonoBehaviour
     /// <param name="context"></param>
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.started && canDash)
+        if (context.performed && canDash)
         {
             StartCoroutine(DashRoutine());
         }
@@ -568,7 +578,7 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             _basicAttackTimer = 0;
             if (hasOrb)
@@ -582,15 +592,29 @@ public class CharacterBase : MonoBehaviour
             }
             else
             {
+                if (attackChargeBar != null)
+                {
+                    attackChargeBar.gameObject.SetActive(true);
+                }
+
+                Debug.Log("Start Attack Timer: " + _basicAttackTimer);
+
                 _speed = _chargeSpeed;
             }
         }
         else if (context.canceled)
         {
             _speed = originalSpeed;
+            Debug.Log("Release Attack Timer: " + _basicAttackTimer);
             if (_basicAttackTimer >= _basicAttackTime)
             {
+                Debug.Log("Basic attack reached");
                 normalAttack.Invoke();
+            }
+
+            if (attackChargeBar != null)
+            {
+                attackChargeBar.gameObject.SetActive(false);
             }
         }
     }
@@ -623,7 +647,7 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void OnDebug(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             TakeDamage(50.0f);
         }
