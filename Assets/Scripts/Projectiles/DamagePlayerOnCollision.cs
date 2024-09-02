@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -49,9 +50,38 @@ public class DamagePlayerOnCollision : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
+        {
+            return;
+        }
+
+        if (collision.gameObject.GetComponent<CharacterBase>())
+        {
+            CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
+            player.TakeDamage(damage, damageEffect, effectTime);
+            DoOnHit.Invoke();
+        }
+
+        if (destroyOnCollision)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void SetOwner(CharacterBase inputPlayer)
     {
         ownerPlayer = inputPlayer;
+        DamagePlayerOnCollision[] children = transform.GetComponentsInChildren<DamagePlayerOnCollision>();
+
+        foreach (DamagePlayerOnCollision child in children)
+        {
+            if (child != this)
+            {
+                child.SetOwner(inputPlayer);
+            }
+        }
     }
 
     private void OnDestroy()
