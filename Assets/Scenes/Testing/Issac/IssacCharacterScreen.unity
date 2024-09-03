@@ -284,63 +284,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2335.922, y: 310.68417, z: 1}
   m_Center: {x: -183.15717, y: 515.50446, z: 0}
---- !u!1 &482636208
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 482636210}
-  - component: {fileID: 482636209}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &482636209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 482636208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd6d3c7c4d5ae14e830edec2ab613a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  addingControllers: 1
-  _levels:
-  - IssacLVL1Prototype
-  _endLevel: IssacCharacterScreen
-  _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
-  _scoreToWin: 10
-  _roundTime: 120
-  endGameDamageMult: 2
-  arenaUICanvas: {fileID: 0}
-  roundTimerText: {fileID: 0}
-  orbSpawners: []
-  orbSpawnerCooldown: 8
-  canvas: {fileID: 347443268}
---- !u!4 &482636210
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 482636208}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &928075470
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,6 +908,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 6547c17825dc82e48b48d1d64ba78fca, type: 3}
+  hoverColour: {r: 0.45882353, g: 1, b: 0.7490196, a: 0.39215687}
+  selectedColour: {r: 0.45882353, g: 1, b: 0.7490196, a: 1}
 --- !u!65 &1390984316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1167,6 +1112,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480919454}
   m_CullTransparentMesh: 1
+--- !u!1001 &1531193731
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4376679972535037484, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037485, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 347443268}
+    - target: {fileID: 4376679972535037485, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: _levels.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037485, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: _levels.Array.data[0]
+      value: IssacLVL1Prototype
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037486, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
 --- !u!1 &1582955703
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,6 +1371,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 44705663733005b45b529f3508a6ed03, type: 3}
+  hoverColour: {r: 0.56078434, g: 0.80784315, b: 1, a: 0.39215687}
+  selectedColour: {r: 0.56078434, g: 0.80784315, b: 1, a: 1}
 --- !u!65 &1752793675
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1547,6 +1563,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 148a73ed0ea7d284fbf6ad3d6ecb2bf0, type: 3}
+  hoverColour: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 0.39215687}
+  selectedColour: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
 --- !u!65 &1926990846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1669,6 +1687,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 453d4fd5b397f7642b8bda97c466a66b, type: 3}
+  hoverColour: {r: 1, g: 0.8117647, b: 0.3647059, a: 0.39215687}
+  selectedColour: {r: 1, g: 0.8117647, b: 0.3647059, a: 1}
 --- !u!65 &1995576254
 BoxCollider:
   m_ObjectHideFlags: 0
