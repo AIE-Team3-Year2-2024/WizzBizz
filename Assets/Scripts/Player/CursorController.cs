@@ -23,6 +23,12 @@ public class CursorController : MonoBehaviour
 
     public int playerID;
 
+    [SerializeField]
+    private Image _bodyImage;
+
+    [SerializeField]
+    private Image _tailImage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +68,7 @@ public class CursorController : MonoBehaviour
         else if(collision.gameObject.GetComponent<CharacterButton>() != null)
         {
             _lastCollidedCharacterButton = collision.gameObject.GetComponent<CharacterButton>();
+            _tailImage.color = _lastCollidedCharacterButton.hoverColour;
         }
     }
 
@@ -78,6 +85,7 @@ public class CursorController : MonoBehaviour
         else if (collision.gameObject.GetComponent<CharacterButton>() == _lastCollidedCharacterButton)
         {
             _lastCollidedCharacterButton = null;
+            _tailImage.color = Color.white;
         }
     }
 
@@ -91,11 +99,20 @@ public class CursorController : MonoBehaviour
         {
             _lastCollidedReadyButton.PlayerInteract(this);
             _movementDirection = Vector3.zero;
+            if(canMove)
+            {
+                _tailImage.color = Color.white;
+            } 
+            else
+            {
+                _tailImage.color = Color.red;
+            }
         }
         if(_lastCollidedCharacterButton != null && context.performed)
         {
             GameManager.Instance.SetSelectedCharacter(playerID, _lastCollidedCharacterButton.character);
             playerSelected = true;
+            _bodyImage.color = _lastCollidedCharacterButton.selectedColour;
         }
     }
 
