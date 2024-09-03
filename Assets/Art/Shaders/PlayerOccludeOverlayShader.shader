@@ -7,7 +7,7 @@ Shader "Custom/PlayerOccludeOverlay"
     }
     SubShader
     {
-        Tags { "RenderType"="Transparent" "Queue"="Overlay" "PerformanceChecks"="False" }
+        Tags { "RenderType"="Transparent" "Queue"="Transparent" "PerformanceChecks"="False" }
         LOD 100
      
         Stencil

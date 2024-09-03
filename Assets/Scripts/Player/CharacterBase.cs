@@ -251,6 +251,8 @@ public class CharacterBase : MonoBehaviour
             rb.velocity *= (1.0f - _deceleration);
         //_velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
 
+        //rb.velocity *= _speed / (_speed + _acceleration);
+
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, _speed);
 
         //_velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
@@ -564,6 +566,14 @@ public class CharacterBase : MonoBehaviour
                     break;
                 }
 
+        }
+    }
+
+    public void TakeKnockback(float amount, Vector3 dir)
+    {
+        if (dir != Vector3.zero && amount > 0.0f)
+        {
+            rb.AddForce(-dir * amount, ForceMode.Impulse);
         }
     }
 
