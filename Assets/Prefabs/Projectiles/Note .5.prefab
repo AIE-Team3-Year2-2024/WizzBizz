@@ -278,8 +278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  damageEffect: 1
-  effectTime: 5
+  damageEffect: 3
+  effectTime: 4
   destroyOnCollision: 1
   DoOnDestroy:
     m_PersistentCalls:
@@ -287,3 +287,5 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
+  controlComponent: {fileID: 0}
+  damageChildren: []
