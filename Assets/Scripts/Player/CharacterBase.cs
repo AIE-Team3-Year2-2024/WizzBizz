@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -118,6 +119,9 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("The slider component of the attack charge up bar.")]
     [SerializeField]
     private Slider attackChargeBar;
+
+    [Tooltip("the Text on the player showing what number they are")]
+    public TMP_Text playerNumber;
 
     private Vector3 _movementDirection;
 
