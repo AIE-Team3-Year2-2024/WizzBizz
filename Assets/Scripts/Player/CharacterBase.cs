@@ -63,6 +63,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _dashSpeed;
 
+    [Tooltip("how long the player must wait to dash agian AFTER the dash has completed")]
+    [SerializeField]
+    private float _dashWaitTime;
+
     [Tooltip("the speed the player will move at if chgarging ann attack")]
     [SerializeField]
     private float _chargeSpeed;
@@ -357,6 +361,13 @@ public class CharacterBase : MonoBehaviour
         canMove = true;
         _speed = originalSpeed;
         _movementDirection = oldMoveDir;
+        StartCoroutine(WaitToDash());
+    }
+
+    public IEnumerator WaitToDash()
+    {
+        yield return new WaitForSeconds(_dashWaitTime);
+        canDash = true;
     }
 
     public void OnCatch(InputAction.CallbackContext context)
