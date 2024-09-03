@@ -319,6 +319,7 @@ public class GameManager : MonoBehaviour
             newPlayer.name += (" > Player ID (" + i + ")");
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
             character.playerGamepad = _playerData[i].gamepad;
+            character.playerNumber.text = "P" + (i + 1);
             _alivePlayers.Add(character, _playerData[i]);
 
 

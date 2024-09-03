@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1239,6 +1239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 6547c17825dc82e48b48d1d64ba78fca, type: 3}
+  hoverColour: {r: 0.4392157, g: 1, b: 0, a: 0.57254905}
+  selectedColour: {r: 0.4392157, g: 1, b: 0, a: 1}
 --- !u!65 &1660026134
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1361,6 +1363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 44705663733005b45b529f3508a6ed03, type: 3}
+  hoverColour: {r: 0.05271244, g: 0, b: 1, a: 0.5372549}
+  selectedColour: {r: 0.050980393, g: 0, b: 1, a: 1}
 --- !u!65 &1752793675
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1551,6 +1555,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 148a73ed0ea7d284fbf6ad3d6ecb2bf0, type: 3}
+  hoverColour: {r: 0.4056604, g: 0.4056604, b: 0.4056604, a: 0.6156863}
+  selectedColour: {r: 0.40392157, g: 0.40392157, b: 0.40392157, a: 1}
 --- !u!65 &1926990846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1673,6 +1679,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 453d4fd5b397f7642b8bda97c466a66b, type: 3}
+  hoverColour: {r: 1, g: 0.61149544, b: 0, a: 0.57254905}
+  selectedColour: {r: 1, g: 0.6117647, b: 0, a: 1}
 --- !u!65 &1995576254
 BoxCollider:
   m_ObjectHideFlags: 0
