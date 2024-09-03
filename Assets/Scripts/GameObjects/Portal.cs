@@ -18,10 +18,10 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponent<FrogID>().ID == frogID)
+        if(other.GetComponent<FrogID>()?.ID == frogID)
         {
             other.transform.position = endPoint.position;
-            madeAttack.OnPortalUsed();
+            madeAttack.OnPortalUsed(other.gameObject);
         }
         
     }

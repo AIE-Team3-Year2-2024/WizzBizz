@@ -276,6 +276,7 @@ public class GameManager : MonoBehaviour
     {
         orbSpawners.Clear(); // Should be cleared everytime a new arena is loaded.
         _orbSpawnerTimer = orbSpawnerCooldown;
+        _orbCollected = true;
 
         SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
 

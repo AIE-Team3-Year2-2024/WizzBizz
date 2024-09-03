@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4149634641176543668}
   - component: {fileID: 8447300318475051547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 7876939310001432661}
   - component: {fileID: 7876939310001432666}
   - component: {fileID: 7876939310001432667}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spawn Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 7876939310819747781}
   - component: {fileID: 7876939310819747780}
   - component: {fileID: 9217054955663936868}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Orb Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _orbCollectiblePrefab: {fileID: 6733809361145689069, guid: d06e2b2478e174648b3ecf6a199d2e4d, type: 3}
-  _coolDown: 3
 --- !u!54 &9217054955663936868
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class MakeObjectAtObject : MonoBehaviour
 
     public void MakeObject(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             if (_spawn != null)
             {
@@ -47,7 +47,7 @@ public class MakeObjectAtObject : MonoBehaviour
 
     public void MakeObjectAsChild(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (context.performed)
         {
             Instantiate(_prefab, transform);
         }
