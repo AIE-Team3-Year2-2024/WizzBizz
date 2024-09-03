@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class IcePatch : MonoBehaviour
 {
@@ -10,7 +11,9 @@ public class IcePatch : MonoBehaviour
 
     [Tooltip("The factor of how much to slow the character's acceleration by.")]
     [Range(0.0f, 1.0f)]
-    public float accelerationFactor = 0.5f;
+    [HideInInspector] public float accelerationFactor = 0.5f; // Unused.
+
+    private List<CharacterBase> _charactersInside = new List<CharacterBase>();
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,6 +21,7 @@ public class IcePatch : MonoBehaviour
         if ((character = other?.GetComponent<CharacterBase>()) != null)
         {
             character.StartSliding(slipperyness, accelerationFactor);
+            _charactersInside.Add(character);
         }
     }
 
@@ -27,6 +31,18 @@ public class IcePatch : MonoBehaviour
         if ((character = other?.GetComponent<CharacterBase>()) != null)
         {
             character.StopSliding();
+            _charactersInside.Remove(character);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_charactersInside.Count > 0)
+        {
+            foreach (CharacterBase c in _charactersInside)
+            {
+                c.StopSliding();
+            }
         }
     }
 }

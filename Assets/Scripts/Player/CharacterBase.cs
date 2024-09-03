@@ -37,8 +37,8 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public float originalSpeed;
 
-    [SerializeField]
-    [Tooltip("The rate at which the character will accelerate towards the max speed.")]
+    //[SerializeField]
+    //[Tooltip("The rate at which the character will accelerate towards the max speed.")]
     private float _acceleration;
     [Tooltip("The amount the character will decelerate when it is not moving. This is a percentage (0-1).")]
     [Range(0.0f, 1.0f)]
@@ -48,8 +48,6 @@ public class CharacterBase : MonoBehaviour
     private float _originalAccel;
     private float _originalDecel;
     private float _origanalHealth;
-
-    private Vector3 _velocity;
 
     private bool _shouldStopSliding = false;
 
@@ -243,15 +241,17 @@ public class CharacterBase : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        _acceleration = _speed * _deceleration;
         if (_movementDirection.magnitude > 0.0f)
-            rb.AddForce(_movementDirection * _acceleration, ForceMode.Impulse);
+            rb.AddForce(_movementDirection * _acceleration, ForceMode.VelocityChange);
         //_velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
 
-        if (rb.velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
+        //if (rb.velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
             rb.velocity *= (1.0f - _deceleration);
         //_velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
 
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, _speed);
+        //rb.velocity *= (_speed / (_speed + _acceleration)) * _deceleration;
+        //rb.velocity = Vector3.ClampMagnitude(rb.velocity, _speed);
 
         //_velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
         //rb.position += _velocity * Time.fixedDeltaTime; // Apply the velocity to the character position.
@@ -260,11 +260,11 @@ public class CharacterBase : MonoBehaviour
 
     void LateUpdate()
     {
-        if (_velocity.magnitude <= 0.0f || _movementDirection.magnitude > 0.0f) // If the character has stopped moving, or if there is input.
+        if (rb.velocity.magnitude <= 0.0f || _movementDirection.magnitude > 0.0f) // If the character has stopped moving, or if there is input.
         {
             if (_shouldStopSliding) // The player should stop sliding now.
             {
-                _acceleration = _originalAccel; // Reset.
+                //_acceleration = _originalAccel; // Reset.
                 _deceleration = _originalDecel;
                 _shouldStopSliding = false;
             }
@@ -345,13 +345,14 @@ public class CharacterBase : MonoBehaviour
     /// <returns></returns>
     public IEnumerator DashRoutine()
     {
+        Vector3 oldMoveDir = _movementDirection;
         canMove = false;
         _speed = _dashSpeed;
         _movementDirection = _movementDirection.normalized;
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
         _speed = originalSpeed;
-        _movementDirection = Vector3.zero;
+        _movementDirection = oldMoveDir;
     }
 
     public void OnCatch(InputAction.CallbackContext context)
@@ -373,7 +374,7 @@ public class CharacterBase : MonoBehaviour
     {
         _shouldStopSliding = false;
         float inv = (1.0f - slipperyness);
-        _acceleration = _originalAccel * (slipperyness * accelFactor);
+        //_acceleration = _originalAccel * (slipperyness * accelFactor);
         _deceleration = inv;
     }
 
@@ -564,6 +565,14 @@ public class CharacterBase : MonoBehaviour
                     break;
                 }
 
+        }
+    }
+
+    public void TakeKnockback(float amount, Vector3 dir)
+    {
+        if (dir != Vector3.zero && amount > 0.0f)
+        {
+            rb.AddForce(-dir * amount, ForceMode.Impulse);
         }
     }
 

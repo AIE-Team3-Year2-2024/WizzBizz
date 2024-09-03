@@ -506,18 +506,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 4
+  _speed: 14
   originalSpeed: 0
-  _acceleration: 10
-  _deceleration: 0.1
+  _deceleration: 0.25
   catchTrigger: {fileID: 3000781201183644107}
   _dashTime: 0.25
-  _dashSpeed: 30
+  _dashSpeed: 40
   _chargeSpeed: 0.8
   catchParryTime: 2
   catchWaitTime: 1
   _health: 100
-  _ballLifetime: 0
+  _ballLifetime: 5
   canMove: 1
   canDash: 1
   _pointerAimerRange: 5
