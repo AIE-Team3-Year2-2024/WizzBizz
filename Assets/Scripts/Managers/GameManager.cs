@@ -1,3 +1,4 @@
+using Cinemachine;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -8,6 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class PlayerData
 {
@@ -61,6 +63,14 @@ public class GameManager : MonoBehaviour
     private TMP_Text roundTimerText;
 
     private float _roundTimer;
+
+    [Tooltip("the wieght this players target in the target group will be set to")]
+    [SerializeField]
+    private float _playerCameraWeight;
+
+    [Tooltip("the radius this players target in the target group will be set to")]
+    [SerializeField]
+    private float _playerCameraRadius;
 
     [HideInInspector]
     public List<OrbSpawner> orbSpawners = new List<OrbSpawner>();
@@ -291,6 +301,14 @@ public class GameManager : MonoBehaviour
 
         Spawn spawnInScene = FindAnyObjectByType<Spawn>();
 
+        CinemachineTargetGroup targetGroup = FindAnyObjectByType<CinemachineTargetGroup>();
+
+        targetGroup.m_PositionMode = 0;
+        targetGroup.m_RotationMode = 0;
+        targetGroup.m_UpdateMethod = 0;
+
+        CinemachineTargetGroup.Target[] targs = new CinemachineTargetGroup.Target[_playerData.Count];
+
         for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character
@@ -302,7 +320,15 @@ public class GameManager : MonoBehaviour
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
             character.playerGamepad = _playerData[i].gamepad;
             _alivePlayers.Add(character, _playerData[i]);
+
+
+            targs[i].target = newPlayer.transform;
+            targs[i].radius = _playerCameraRadius;
+            targs[i].weight = _playerCameraWeight;
+
         }
+
+        targetGroup.m_Targets = targs;
 
         addingControllers = false;
 
