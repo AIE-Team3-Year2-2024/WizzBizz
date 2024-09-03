@@ -416,12 +416,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 15
+  _speed: 12
   originalSpeed: 0
   _deceleration: 0.25
   catchTrigger: {fileID: -3436212031268177746}
   _dashTime: 0.3
-  _dashSpeed: 40
+  _dashSpeed: 35
   _chargeSpeed: 1
   catchParryTime: 2
   catchWaitTime: 1
@@ -431,7 +431,7 @@ MonoBehaviour:
   canDash: 1
   _pointerAimerRange: 7
   currentAimMagnitude: 0
-  _basicAttackTime: 0.4
+  _basicAttackTime: 0.6
   damageMult: 1
   _pointerAimer: {fileID: 1096289958959071381}
   healthBar: {fileID: 9115697439534105825}
@@ -584,7 +584,7 @@ MonoBehaviour:
   projectile: {fileID: 1021126783160119911, guid: ccf6720bd874c8b468178d7ad4778ae9, type: 3}
   range: 10
   lobAimer: {fileID: 1309746413074950827}
-  lifetime: 15
+  lifetime: 3
 --- !u!114 &4946476987851103924
 MonoBehaviour:
   m_ObjectHideFlags: 0
