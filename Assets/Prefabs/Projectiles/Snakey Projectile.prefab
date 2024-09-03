@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8759748588996902776}
   - component: {fileID: 5303709986921139075}
   - component: {fileID: -2435879551113560375}
+  - component: {fileID: 6651534048465323158}
   m_Layer: 7
   m_Name: Snakey Projectile
   m_TagString: Untagged
@@ -137,6 +138,8 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
+  controlComponent: {fileID: 6651534048465323158}
+  damageChildren: []
 --- !u!54 &8759748588996902776
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -284,3 +287,15 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &6651534048465323158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363175542702627947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a137b190fc878f48b87a66f2cd67bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

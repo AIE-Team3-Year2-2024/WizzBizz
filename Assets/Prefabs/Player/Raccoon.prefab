@@ -422,6 +422,7 @@ MonoBehaviour:
   catchTrigger: {fileID: -3436212031268177746}
   _dashTime: 0.3
   _dashSpeed: 35
+  _dashWaitTime: 0
   _chargeSpeed: 1
   catchParryTime: 2
   catchWaitTime: 1
@@ -569,7 +570,7 @@ MonoBehaviour:
   - {fileID: 3363175542702627947, guid: c407b90c4828d0140b5253cfdcd45aeb, type: 3}
   - {fileID: 3363175542702627947, guid: bdcdf6f0aa965d3439b85973a01533c2, type: 3}
   - {fileID: 3363175542702627947, guid: ecd4ec73662ebce44b65a09fe27d72db, type: 3}
-  lifetime: 5
+  lifetime: 3
 --- !u!114 &3833022284611438099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,7 +586,7 @@ MonoBehaviour:
   projectile: {fileID: 1021126783160119911, guid: ccf6720bd874c8b468178d7ad4778ae9, type: 3}
   range: 10
   lobAimer: {fileID: 1309746413074950827}
-  lifetime: 3
+  lifetime: 8
 --- !u!114 &4946476987851103924
 MonoBehaviour:
   m_ObjectHideFlags: 0
