@@ -303,9 +303,9 @@ public class GameManager : MonoBehaviour
 
         CinemachineTargetGroup targetGroup = FindAnyObjectByType<CinemachineTargetGroup>();
 
-        targetGroup.m_PositionMode = 0;
-        targetGroup.m_RotationMode = 0;
-        targetGroup.m_UpdateMethod = 0;
+        //targetGroup.m_PositionMode = 0;
+        //targetGroup.m_RotationMode = 0;
+        targetGroup.m_UpdateMethod = CinemachineTargetGroup.UpdateMethod.LateUpdate;
 
         CinemachineTargetGroup.Target[] targs = new CinemachineTargetGroup.Target[_playerData.Count];
 
