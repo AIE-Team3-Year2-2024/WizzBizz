@@ -1,6 +1,7 @@
 using Pixelplacement;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -108,8 +109,22 @@ public class CursorController : MonoBehaviour
                 _tailImage.color = Color.red;
             }
         }
-        if(_lastCollidedCharacterButton != null && context.performed)
+        if (_lastCollidedCharacterButton != null && _lastCollidedCharacterButton.isLocked == false && context.performed)
         {
+            foreach (CharacterButton c in FindObjectsOfType<CharacterButton>())
+            {
+                if (c.isLocked == false)
+                    continue;
+                if (c.whosLockedIn != playerID)
+                    continue;
+                c.whosLockedIn = -1;
+                c.isLocked = false;
+                c.GetComponent<Image>().color = c.selectedColour;
+            }
+
+            _lastCollidedCharacterButton.isLocked = true;
+            _lastCollidedCharacterButton.whosLockedIn = playerID;
+            _lastCollidedCharacterButton.GetComponent<Image>().color = _lastCollidedCharacterButton.lockedColour;
             GameManager.Instance.SetSelectedCharacter(playerID, _lastCollidedCharacterButton.character);
             playerSelected = true;
             _bodyImage.color = _lastCollidedCharacterButton.selectedColour;

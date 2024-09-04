@@ -10,4 +10,9 @@ public class CharacterButton : MonoBehaviour
 
     public Color selectedColour;
 
+    public Color lockedColour = Color.gray;
+
+    [HideInInspector] public int whosLockedIn = -1;
+    [HideInInspector] public bool isLocked = false;
+
 }
