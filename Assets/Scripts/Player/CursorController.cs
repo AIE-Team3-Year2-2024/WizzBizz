@@ -59,13 +59,13 @@ public class CursorController : MonoBehaviour
     /// keeps track of the current button
     /// </summary>
     /// <param name="collision"></param>
-    public void OnCollisionEnter(Collision collision)
+    public void OnCollisionStay(Collision collision)
     {
         if(collision.gameObject.GetComponent<ReadyButton>() != null)
         {
             _lastCollidedReadyButton = collision.gameObject.GetComponent<ReadyButton>();
         } 
-        else if(collision.gameObject.GetComponent<CharacterButton>() != null)
+        if(collision.gameObject.GetComponent<CharacterButton>() != null)
         {
             _lastCollidedCharacterButton = collision.gameObject.GetComponent<CharacterButton>();
             _tailImage.color = _lastCollidedCharacterButton.hoverColour;
@@ -82,7 +82,7 @@ public class CursorController : MonoBehaviour
         {
             _lastCollidedReadyButton = null;
         } 
-        else if (collision.gameObject.GetComponent<CharacterButton>() == _lastCollidedCharacterButton)
+        if (collision.gameObject.GetComponent<CharacterButton>() == _lastCollidedCharacterButton)
         {
             _lastCollidedCharacterButton = null;
             _tailImage.color = Color.white;
