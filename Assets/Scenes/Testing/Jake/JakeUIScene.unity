@@ -316,10 +316,15 @@ MonoBehaviour:
   - LVL1Prototype
   _endLevel: JakeUIScene
   _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
-  _playerPrefab: {fileID: 452431045987376296, guid: 148a73ed0ea7d284fbf6ad3d6ecb2bf0, type: 3}
   _scoreToWin: 17
   _roundTime: 60
   endGameDamageMult: 1
+  arenaUICanvas: {fileID: 0}
+  roundTimerText: {fileID: 0}
+  _playerCameraWeight: 0
+  _playerCameraRadius: 0
+  orbSpawners: []
+  orbSpawnerCooldown: 3
   canvas: {fileID: 347443268}
 --- !u!4 &482636210
 Transform:
@@ -960,6 +965,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 44705663733005b45b529f3508a6ed03, type: 3}
+  hoverColour: {r: 0, g: 0, b: 0, a: 0}
+  selectedColour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1752793675
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1150,6 +1157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 452431045987376296, guid: 148a73ed0ea7d284fbf6ad3d6ecb2bf0, type: 3}
+  hoverColour: {r: 0, g: 0, b: 0, a: 0}
+  selectedColour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!65 &1926990846
 BoxCollider:
   m_ObjectHideFlags: 0
