@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class AimChecker : MonoBehaviour
 {
+
     [HideInInspector]
-    public int currentCollisions;
+    public bool _colliding;
 
     private MeshRenderer renderer;
 
@@ -14,24 +15,17 @@ public class AimChecker : MonoBehaviour
         renderer = GetComponent<MeshRenderer>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        currentCollisions++;
+        _colliding = true;
         renderer.material.color = Color.red;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void FixedUpdate()
     {
-        currentCollisions--;
-        if(currentCollisions < 1)
-        {
-            renderer.material.color = Color.green;
-        }
+        _colliding = false;
+        renderer.material.color = Color.green;
     }
 
-    public void Reset()
-    {
-        currentCollisions = 0;
-        renderer.material.color = Color.green;  
-    }
+
 }
