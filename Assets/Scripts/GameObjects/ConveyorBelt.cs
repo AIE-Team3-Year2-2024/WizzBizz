@@ -16,6 +16,6 @@ public class ConveyorBelt : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        other.transform.position += direction;
+        other.transform.position += direction * Time.deltaTime;
     }
 }
