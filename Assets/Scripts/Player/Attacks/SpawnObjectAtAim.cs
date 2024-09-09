@@ -58,12 +58,15 @@ public class SpawnObjectAtAim : MonoBehaviour
         {
             GameObject newProjectile = Instantiate(projectile, lobAimer.transform.position, player.transform.rotation);
 
-            if (newProjectile.GetComponent<DamagePlayerOnCollision>())
+            DamagePlayerOnCollision damageComponent;
+            if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
             {
-                newProjectile.GetComponent<DamagePlayerOnCollision>().damage *= player.damageMult;
+                damageComponent.damage *= player.damageMult;
+                damageComponent.SetOwner(player);
             }
 
-            if (newProjectile.GetComponent<Minion>())
+            Minion minion;
+            if ((minion = newProjectile.GetComponent<Minion>()) != null)
             {
                 newProjectile.GetComponent<Minion>().RemoveTargetPlayer(transform);
             }
@@ -84,7 +87,8 @@ public class SpawnObjectAtAim : MonoBehaviour
             DamagePlayerOnCollision damageComponent;
             if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()) != null)
             {
-                newProjectile.GetComponent<DamagePlayerOnCollision>().damage *= player.damageMult;
+                damageComponent.damage *= player.damageMult;
+                damageComponent.SetOwner(player);
             }
 
             Minion minion;
