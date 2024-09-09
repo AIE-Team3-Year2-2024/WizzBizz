@@ -444,11 +444,10 @@ public class CharacterBase : MonoBehaviour
 
             case (StatusEffects.CONFUSION):
                 {
-                    if(_confusion.enabled == false)
-                    {
-                        _confusion.enabled = true;
-                        _confusion.lifeTime = time;
-                    }
+
+                    _confusion.enabled = true;
+                    _confusion.lifeTime = time;
+                    
                     break;
                 }
 
@@ -458,11 +457,8 @@ public class CharacterBase : MonoBehaviour
                     {
                         _silence.enabled = false;
                     }
-                    if(_disabled.enabled == false)
-                    {
-                        _disabled.enabled = true;
-                        _disabled.lifeTime = time;
-                    }
+                    _disabled.enabled = true;
+                    _disabled.lifeTime = time;
                     break;
                 }
 
@@ -472,111 +468,88 @@ public class CharacterBase : MonoBehaviour
                     {
                         _disabled.enabled = false;
                     }
-                    if(_silence.enabled == false)
-                    {
-                        _silence.enabled = true;
-                        _silence.lifeTime = time;
-                    }
+                    _silence.enabled = true;
+                    _silence.lifeTime = time;
+                    
                     break;
                 }
 
             case (StatusEffects.CRIPPLED):
                 {
-                    if(_crippled.enabled == false)
-                    {
-                        _crippled.enabled = true;
-                        _crippled.lifeTime = time;
-                    }
+
+                    _crippled.enabled = true;
+                    _crippled.lifeTime = time;
+                    
                     break;
                 }
 
             case (StatusEffects.STUN):
                 {
-                    if(_stun.enabled == false)
-                    {
-                        _stun.enabled = true;
-                        _stun.lifeTime = time;
-                    }
+
+                    _stun.enabled = true;
+                    _stun.lifeTime = time;
+                    
                     break;
                 }
 
             case (StatusEffects.WEAKNESS):
                 {
-                    if (_weakness.enabled == false)
-                    {
-                        _weakness.enabled = true;
-                        _weakness.lifeTime = time;
-                    }
+                    _weakness.enabled = true;
+                    _weakness.lifeTime = time;
                     break;
                 }
 
             case (StatusEffects.VITALITY):
                 {
-                    if(_vitality.enabled == false)
-                    {
-                        _vitality.enabled = true;
-                        _vitality.lifeTime = time;
-                    }
+                    _vitality.enabled = true;
+                    _vitality.lifeTime = time;
+                    
                     break;
                 }
 
             case (StatusEffects.SLOW):
                 {
-                    if(_slow.enabled == false)
-                    {
-                        _slow.enabled = true;
-                        _slow.lifeTime = time;
-                    }
+                    _slow.enabled = true;
+                    _slow.lifeTime = time;
+                    
                     break;
                 }
 
             case (StatusEffects.HASTE):
                 {
-                    if (_haste.enabled == false)
-                    {
-                        _haste.enabled = true;
-                        _haste.lifeTime = time;
-                    }
+
+                    _haste.enabled = true;
+                    _haste.lifeTime = time;
                     break;
                 }
 
             case (StatusEffects.BURNING):
                 {
-                    if(_burn.enabled == false)
-                    {
-                        _burn.enabled = true;
-                        _burn.lifeTime = time;
-                    }
+                    _burn.enabled = true;
+                    _burn.lifeTime = time;
+                    
                     break;
                 }
 
             case (StatusEffects.POISON):
                 {
-                    if (_poison.enabled == false)
-                    {
-                        _poison.enabled = true;
-                        _poison.lifeTime = time;
-                    }
+                    _poison.enabled = true;
+                    _poison.lifeTime = time;
+                    
                     break;
                 }
 
             case (StatusEffects.CURE):
                 {
-                    if(_cure.enabled == false)
-                    {
-                        _cure.enabled = true;
-                        _cure.lifeTime = time;
-                    }
+                    _cure.enabled = true;
+                    _cure.lifeTime = time;
                     break;
                 }
 
             case (StatusEffects.DEMENTIA):
                 {
-                    if(_dementia.enabled == false)
-                    {
-                        _dementia.enabled = true;
-                        _dementia.lifeTime = time;
-                    }
+                    _dementia.enabled = true;
+                    _dementia.lifeTime = time;
                     break;
                 }
 
