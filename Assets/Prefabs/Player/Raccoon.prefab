@@ -422,7 +422,7 @@ MonoBehaviour:
   catchTrigger: {fileID: -3436212031268177746}
   _dashTime: 0.3
   _dashSpeed: 35
-  _dashWaitTime: 3
+  _dashWaitTime: 5
   _chargeSpeed: 1
   catchParryTime: 2
   catchWaitTime: 1
@@ -957,7 +957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812e7e586f2d8544ad1db29accca782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCollisions: 0
+  _colliding: 0
 --- !u!1 &1317489424991297090
 GameObject:
   m_ObjectHideFlags: 0

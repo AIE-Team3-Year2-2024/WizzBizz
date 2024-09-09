@@ -349,7 +349,7 @@ MonoBehaviour:
   catchTrigger: {fileID: 1143968817450751776}
   _dashTime: 0.3
   _dashSpeed: 25
-  _dashWaitTime: 0
+  _dashWaitTime: 5
   _chargeSpeed: 4
   catchParryTime: 0.4
   catchWaitTime: 1.5
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812e7e586f2d8544ad1db29accca782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCollisions: 0
+  _colliding: 0
 --- !u!135 &8188832512142504660
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1995,7 +1995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.89411765, b: 0, a: 0}
+  m_Color: {r: 1, g: 0.89411765, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

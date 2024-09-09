@@ -512,8 +512,8 @@ MonoBehaviour:
   catchTrigger: {fileID: 3000781201183644107}
   _dashTime: 0.25
   _dashSpeed: 35
-  _dashWaitTime: 0
-  _chargeSpeed: 1
+  _dashWaitTime: 5
+  _chargeSpeed: 4
   catchParryTime: 2
   catchWaitTime: 1
   _health: 100
@@ -522,7 +522,7 @@ MonoBehaviour:
   canDash: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 1
+  _basicAttackTime: 0.9
   damageMult: 1
   _pointerAimer: {fileID: 1096289958959071381}
   healthBar: {fileID: 7005577783245112486}
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812e7e586f2d8544ad1db29accca782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCollisions: 0
+  _colliding: 0
 --- !u!135 &5062103463730484529
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2574,7 +2574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812e7e586f2d8544ad1db29accca782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCollisions: 0
+  _colliding: 0
 --- !u!1 &7639383265612539795
 GameObject:
   m_ObjectHideFlags: 0
