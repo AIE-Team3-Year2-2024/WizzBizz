@@ -49,13 +49,15 @@ MonoBehaviour:
   _levels:
   - CameronLVL1Prototype
   - FactoryLevel1
-  _endLevel: CameronCharacterScreen
+  _endLevel: Character
   _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
   _scoreToWin: 3
   _roundTime: 120
   endGameDamageMult: 2
   arenaUICanvas: {fileID: 4376679973628366032}
   roundTimerText: {fileID: 4376679973178694759}
+  _playerCameraWeight: 1
+  _playerCameraRadius: 4
   orbSpawners: []
   orbSpawnerCooldown: 8
   canvas: {fileID: 0}

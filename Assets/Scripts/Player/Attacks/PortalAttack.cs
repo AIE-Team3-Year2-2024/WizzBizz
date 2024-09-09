@@ -63,7 +63,7 @@ public class PortalAttack : MonoBehaviour
 
     public void SpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
-        if (_checker.currentCollisions < 1)
+        if (!_checker._colliding)
         {
 
             if(_firstPortal == null)
@@ -98,9 +98,5 @@ public class PortalAttack : MonoBehaviour
         _firstPortal = null;
         Destroy(_secondPortal.gameObject);
         _secondPortal = null;
-        if (teleportee == gameObject)
-        {
-            _checker.Reset();
-        }
     }
 }

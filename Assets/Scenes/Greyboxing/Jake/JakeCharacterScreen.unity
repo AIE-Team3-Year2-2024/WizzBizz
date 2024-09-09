@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addingControllers: 1
   _levels:
-  - CameraTesting
+  - LVL1Prototype
   _endLevel: JakeCharacterScreen
   _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
   _scoreToWin: 10
@@ -323,6 +323,8 @@ MonoBehaviour:
   endGameDamageMult: 2
   arenaUICanvas: {fileID: 0}
   roundTimerText: {fileID: 0}
+  _playerCameraWeight: 0
+  _playerCameraRadius: 0
   orbSpawners: []
   orbSpawnerCooldown: 8
   canvas: {fileID: 347443268}

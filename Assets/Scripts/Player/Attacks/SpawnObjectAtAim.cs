@@ -54,7 +54,7 @@ public class SpawnObjectAtAim : MonoBehaviour
 
     public void SpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
-        if (_checker.currentCollisions < 1)
+        if (!_checker._colliding)
         {
             GameObject newProjectile = Instantiate(projectile, lobAimer.transform.position, player.transform.rotation);
 
@@ -77,7 +77,7 @@ public class SpawnObjectAtAim : MonoBehaviour
 
     public void FrogSpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
-        if (_checker.currentCollisions < 1)
+        if (!_checker._colliding)
         {
             GameObject newProjectile = Instantiate(projectile, lobAimer.transform.position, player.transform.rotation);
 

@@ -54,7 +54,7 @@ public class LobAttack : MonoBehaviour
 
     public void SpawnLobObject(InputAction.CallbackContext context)
     {
-        if (_checker.currentCollisions < 1)
+        if (!_checker._colliding)
         {
             GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
             newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
@@ -73,7 +73,7 @@ public class LobAttack : MonoBehaviour
 
     public void FrogSpawnLobObject(InputAction.CallbackContext context)
     {
-        if (_checker.currentCollisions < 1)
+        if (!_checker._colliding)
         {
 
             GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
