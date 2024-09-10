@@ -82,6 +82,28 @@ public class DamagePlayerOnCollision : MonoBehaviour
         if (collision.gameObject.GetComponent<CharacterBase>())
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
+            Debug.Log("hit player with trigger");
+            player.TakeDamage(damage, damageEffect, effectTime);
+            DoOnHit.Invoke();
+        }
+
+        if (destroyOnCollision)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    
+    private void OnTriggerStay(Collider collision)
+    {
+        if (collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
+        {
+            return;
+        }
+
+        if (collision.gameObject.GetComponent<CharacterBase>())
+        {
+            CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
             player.TakeDamage(damage, damageEffect, effectTime);
             DoOnHit.Invoke();
         }
