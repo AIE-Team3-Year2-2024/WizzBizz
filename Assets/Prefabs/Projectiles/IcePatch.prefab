@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 4260592004534349392}
   - component: {fileID: 4260592004534349394}
   - component: {fileID: -1174458140791273388}
+  - component: {fileID: 4723237043907308750}
   m_Layer: 7
   m_Name: IcePatch
   m_TagString: Untagged
@@ -124,6 +125,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 14
+--- !u!114 &4723237043907308750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260592004534349393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  damageEffect: 8
+  effectTime: 0.3
+  destroyOnCollision: 0
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
+  DoOnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  controlComponent: {fileID: 0}
+  damageChildren: []
 --- !u!1 &4260592004535204199
 GameObject:
   m_ObjectHideFlags: 0
