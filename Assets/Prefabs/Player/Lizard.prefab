@@ -436,8 +436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability1Toggle: 1
   ability2Toggle: 1
-  ability1Cooldown: 12
-  ability2Cooldown: 10
+  ability1Cooldown: 14
+  ability2Cooldown: 12
   uiSlider1: {fileID: 7438209131174251057}
   uiSlider2: {fileID: 4817701622186641233}
   ability1Chargeup: 0
@@ -568,7 +568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 3363175542702627947, guid: 29f1144a58d8e3a4c92bd8d2b62cd283, type: 3}
-  lifetime: 4
+  lifetime: 3
 --- !u!114 &4897880449972657288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 2
+  _speedMinus: 5
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,7 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 2
+  _speedAdd: 5
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0

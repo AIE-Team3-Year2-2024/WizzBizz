@@ -421,7 +421,7 @@ MonoBehaviour:
   _deceleration: 0.25
   catchTrigger: {fileID: -3436212031268177746}
   _dashTime: 0.3
-  _dashSpeed: 35
+  _dashSpeed: 30
   _dashWaitTime: 5
   _chargeSpeed: 1
   catchParryTime: 2
@@ -497,8 +497,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability1Toggle: 1
   ability2Toggle: 1
-  ability1Cooldown: 8
-  ability2Cooldown: 4
+  ability1Cooldown: 10
+  ability2Cooldown: 6
   uiSlider1: {fileID: 6888771523431322142}
   uiSlider2: {fileID: 7532435500120589136}
   ability1Chargeup: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
   - {fileID: 3363175542702627947, guid: c407b90c4828d0140b5253cfdcd45aeb, type: 3}
   - {fileID: 3363175542702627947, guid: bdcdf6f0aa965d3439b85973a01533c2, type: 3}
   - {fileID: 3363175542702627947, guid: ecd4ec73662ebce44b65a09fe27d72db, type: 3}
-  lifetime: 3
+  lifetime: 1.5
 --- !u!114 &3833022284611438099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 5777404286988346730, guid: 4d549e2601617b24da0ca09748788214, type: 3}
-  lifetime: 20
+  lifetime: 14
 --- !u!114 &1710617483415450620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,7 +616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 2783992932023041390, guid: 22b4ba189e212dd41809f20795628793, type: 3}
-  lifetime: 0
+  lifetime: 6
 --- !u!65 &-3436212031268177746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 3
+  _speedMinus: 5
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 3
+  _speedAdd: 5
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0
