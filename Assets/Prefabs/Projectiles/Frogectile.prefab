@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 17
 --- !u!114 &4297597167232359517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 8
+  damage: 10
   damageEffect: 0
   effectTime: 0
   destroyOnCollision: 0
@@ -186,6 +186,8 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
+  controlComponent: {fileID: 0}
+  damageChildren: []
 --- !u!114 &413267540910040873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a4e08a6c38610438b2d5aab8cd4c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathBounceAmount: 3
+  _deathBounceAmount: 4
 --- !u!135 &380556358162270826
 SphereCollider:
   m_ObjectHideFlags: 0
