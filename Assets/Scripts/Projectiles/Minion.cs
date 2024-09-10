@@ -25,14 +25,16 @@ public class Minion : MonoBehaviour
             targets.Add(p.transform);
         }
 
-        agent = GetComponent<NavMeshAgent>();
+            agent = GetComponent<NavMeshAgent>();
         StartCoroutine(UpdateTarget());
         
     }
 
     public IEnumerator UpdateTarget()
     {
-        float minDist = 99999999999f;
+        yield return new WaitForEndOfFrame();
+
+        float minDist = float.PositiveInfinity;
 
         Transform closestTarget = null;
         foreach (Transform t in targets)
@@ -45,7 +47,14 @@ public class Minion : MonoBehaviour
             }
         }
 
-        agent.destination = closestTarget.position;
+        if (closestTarget == null)
+        {
+            agent.destination = Vector3.zero;
+        }
+        else
+        {
+            agent.destination = closestTarget.position;
+        }
 
         yield return new WaitForSeconds(updateTime);
         RestartTarget();
