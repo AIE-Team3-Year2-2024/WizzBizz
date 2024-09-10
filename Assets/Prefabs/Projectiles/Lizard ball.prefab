@@ -35,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 3363175542702627947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 24
+  speed: 45
 --- !u!114 &1587318600284152238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +132,7 @@ MonoBehaviour:
   damage: 22
   damageEffect: 10
   effectTime: 6
-  destroyOnCollision: 1
+  destroyOnCollision: 0
   DoOnDestroy:
     m_PersistentCalls:
       m_Calls: []
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a4e08a6c38610438b2d5aab8cd4c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathBounceAmount: 6
+  _deathBounceAmount: 12
 --- !u!114 &-99800131824615849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3363175542702627947}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 356116622282bf042af259bc156f6fab, type: 3}
   m_Name: 
