@@ -45,15 +45,10 @@ Shader "Custom/OrbShader"
             #pragma fragment frag
 
             #define _SPECULAR_COLOR
-            #pragma shader_feature_local _RECEIVE_SHADOWS_OFF
-            //#pragma shader_feature_local_fragment _ _SPECGLOSSMAP _SPECULAR_COLOR
-            //#pragma shader_feature_local_fragment _GLOSSINESS_FROM_BASE_ALPHA
             #pragma shader_feature_local_fragment _SPECULAR_SETUP
             #pragma shader_feature_local_fragment _EMISSION
-            #pragma shader_feature_local_fragment _ALPHATEST_ON
-            #pragma shader_feature_local_fragment _ALPHAPREMULTIPLY_ON
 
-            #pragma multi_compile_fwdbasealpha
+            //#pragma multi_compile_fwdbasealpha
             #pragma multi_compile_fog
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
@@ -66,7 +61,6 @@ Shader "Custom/OrbShader"
                 float4 vertex : POSITION;
                 float4 normal : NORMAL;
                 float2 uv : TEXCOORD0;
-                float4 lightmapUV : TEXCOORD1;
                 //UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
@@ -76,15 +70,6 @@ Shader "Custom/OrbShader"
                 float3 worldPos : TEXCOORD2;
                 half3 worldNormal : TEXCOORD3;
                 half3 viewDir : TEXCOORD4;
-                #ifdef _ADDITIONAL_LIGHTS_VERTEX
-                    half4 fogFactorAndVertexLight : TEXCOORD5;
-                #else
-                    half fogFactor : TEXCOORD5;
-                #endif
-                #if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
-                    float4 shadowCoord : TEXCOORD6;
-                #endif
-                DECLARE_LIGHTMAP_OR_SH(lightmapUV, vertexSH, 1);
                 //UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
@@ -146,12 +131,20 @@ Shader "Custom/OrbShader"
                 float3 deltaTexCoords = P / numLayers;
                 float3 currentTexCoords = st;
                 float currentDepthValue = orbNoise(currentTexCoords);
+
+                #if 1
+                int i = 0;
                 while (currentLayerDepth < currentDepthValue)
                 {
+                    if (i > maxLayers)
+                        break;
                     currentTexCoords -= deltaTexCoords;
                     currentDepthValue = orbNoise(currentTexCoords);
                     currentLayerDepth += layerDepth;
+                    i++;
                 }
+                #endif
+
                 float3 prevTexCoords = currentTexCoords + deltaTexCoords;
                 float afterDepth = currentDepthValue - currentLayerDepth;
                 float beforeDepth = orbNoise(prevTexCoords) - currentLayerDepth + layerDepth;
@@ -174,24 +167,6 @@ Shader "Custom/OrbShader"
                 OUT.worldPos = positionInputs.positionWS;
                 OUT.worldNormal = NormalizeNormalPerVertex(normalInputs.normalWS);
                 OUT.viewDir = GetWorldSpaceNormalizeViewDir(positionInputs.positionWS);
-
-                #if 0
-                half3 vertexLight = VertexLighting(positionInputs.positionWS, normalInputs.normalWS);
-                half fogFactor = ComputeFogFactor(positionInputs.positionCS.z);
-
-                OUTPUT_LIGHTMAP_UV(IN.lightmapUV, unity_LightmapST, OUT.lightmapUV);
-                OUTPUT_SH(OUT.worldNormal.xyz, OUT.vertexSH);
-
-                #ifdef _ADDITIONAL_LIGHTS_VERTEX
-                    OUT.fogFactorAndVertexLight = half4(fogFactor, vertexLight);
-                #else
-                    OUT.fogFactor = fogFactor;
-                #endif
-
-                #if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
-                    OUT.shadowCoord = GetShadowCoord(positionInputs);
-                #endif
-                #endif
 
                 return OUT;
             }
@@ -216,7 +191,7 @@ Shader "Custom/OrbShader"
                 half4 e = half4(0.0,0.0,0.0,1.0);
                 e.rgb += lerp(float3(0.0, 0.0, 0.0), _InnerGlow.rgb, pow(n, 16));
 
-                #if 0
+                #if 1
                 SurfaceData surfaceData = (SurfaceData)0;
                 surfaceData.occlusion = 1.0;
                 surfaceData.albedo = c.rgb;
@@ -230,32 +205,16 @@ Shader "Custom/OrbShader"
                 inputData.normalWS = NormalizeNormalPerPixel(IN.worldNormal);
                 inputData.viewDirectionWS = SafeNormalize(IN.viewDir);
 
-                #if defined(REQUIRES_VERTEX_SHADOW_COORD_INTERPOLATOR)
-                    inputData.shadowCoord = IN.shadowCoord;
-                #elif defined(MAIN_LIGHT_CALCULATE_SHADOWS)
-                    inputData.shadowCoord = TransformWorldToShadowCoord(IN.worldPos);
-                #else
-                    inputData.shadowCoord = float4(0,0,0,0);
-                #endif
-
-                #ifdef _ADDITIONAL_LIGHTS_VERTEX
-                    inputData.fogCoord = IN.fogFactorAndVertexLight.x;
-                    inputData.vertexLighting = IN.fogFactorAndVertexLight.yzw;
-                #else
-                    inputData.fogCoord = IN.fogFactor;
-                    inputData.vertexLighting = half3(0,0,0);
-                #endif
-
-                inputData.bakedGI = SAMPLE_GI(IN.lightmapUV, IN.vertexSH, inputData.normalWS);
+                //inputData.bakedGI = SAMPLE_GI(IN.lightmapUV, IN.vertexSH, inputData.normalWS);
                 inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(IN.vertex);
-                inputData.shadowMask = SAMPLE_SHADOWMASK(IN.lightmapUV);
+               // inputData.shadowMask = SAMPLE_SHADOWMASK(IN.lightmapUV);
 
                 half4 result = UniversalFragmentPBR(inputData, surfaceData);
-                result.rgb = MixFog(result.rgb, inputData.fogCoord);
+                //result.rgb = MixFog(result.rgb, inputData.fogCoord);
                 #endif
 
-                //return result;
-                return c;
+                //half4 result = half4(c.rgb, 1.0);
+                return result;
             }
             ENDHLSL
         }
