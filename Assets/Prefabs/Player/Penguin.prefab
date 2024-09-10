@@ -512,8 +512,8 @@ MonoBehaviour:
   catchTrigger: {fileID: 3000781201183644107}
   _dashTime: 0.25
   _dashSpeed: 35
-  _dashWaitTime: 0
-  _chargeSpeed: 1
+  _dashWaitTime: 5
+  _chargeSpeed: 4
   catchParryTime: 2
   catchWaitTime: 1
   _health: 100
@@ -522,7 +522,7 @@ MonoBehaviour:
   canDash: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
-  _basicAttackTime: 1
+  _basicAttackTime: 0.9
   damageMult: 1
   _pointerAimer: {fileID: 1096289958959071381}
   healthBar: {fileID: 7005577783245112486}
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 6599871779557999481, guid: c0ff7f9cce920a647bd4e8bbec9b41bd, type: 3}
-  lifetime: 4
+  lifetime: 2
 --- !u!114 &-949787460204921858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,8 +626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ability1Toggle: 1
   ability2Toggle: 1
-  ability1Cooldown: 7
-  ability2Cooldown: 9
+  ability1Cooldown: 9
+  ability2Cooldown: 11
   uiSlider1: {fileID: 3692803809901229239}
   uiSlider2: {fileID: 8289619844333391295}
   ability1Chargeup: 0
@@ -711,7 +711,7 @@ MonoBehaviour:
   projectile: {fileID: 3192898056125740344, guid: 4b01739367ddbf9468e45a8d893a9313, type: 3}
   range: 15
   lobAimer: {fileID: 7203248672751915788}
-  lifetime: 0
+  lifetime: 4
 --- !u!65 &3000781201183644107
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 3
+  _speedMinus: 5
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -845,7 +845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 3
+  _speedAdd: 5
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812e7e586f2d8544ad1db29accca782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCollisions: 0
+  _colliding: 0
 --- !u!135 &5062103463730484529
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2574,7 +2574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e812e7e586f2d8544ad1db29accca782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentCollisions: 0
+  _colliding: 0
 --- !u!1 &7639383265612539795
 GameObject:
   m_ObjectHideFlags: 0
