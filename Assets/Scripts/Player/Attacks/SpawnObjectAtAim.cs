@@ -65,10 +65,14 @@ public class SpawnObjectAtAim : MonoBehaviour
                 damageComponent.SetOwner(player);
             }
 
-            Minion minion;
-            if ((minion = newProjectile.GetComponent<Minion>()) != null)
+            Minion[] minion;
+
+            if ((minion = newProjectile.GetComponentsInChildren<Minion>()) != null)
             {
-                newProjectile.GetComponent<Minion>().RemoveTargetPlayer(transform);
+                foreach(Minion minio in minion)
+                {
+                    minio.RemoveTargetPlayer(player.transform);
+                }
             }
 
             if (lifetime != 0)
@@ -91,10 +95,14 @@ public class SpawnObjectAtAim : MonoBehaviour
                 damageComponent.SetOwner(player);
             }
 
-            Minion minion;
-            if ((minion = newProjectile.GetComponent<Minion>()) != null)
+            Minion[] minion;
+
+            if ((minion = newProjectile.GetComponentsInChildren<Minion>()) != null)
             {
-                newProjectile.GetComponent<Minion>().RemoveTargetPlayer(transform);
+                foreach (Minion minio in minion)
+                {
+                    minio.RemoveTargetPlayer(player.transform);
+                }
             }
 
             FrogID frogid = null;

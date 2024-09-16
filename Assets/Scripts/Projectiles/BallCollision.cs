@@ -34,6 +34,10 @@ public class BallCollision : MonoBehaviour
                     character.StopCoroutine(character.CatchRoutine());
                     character.GetComponent<PlayerInput>().ActivateInput();
                     character.catchTrigger.enabled = false;
+
+                    CharacterBase[] player = new CharacterBase[] { character };
+
+                    GameManager.Instance.StartSlowDown(player);
                     Destroy(gameObject);
                 }
             }

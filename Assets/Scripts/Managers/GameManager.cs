@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     // Static reference
     public static GameManager Instance { get; private set; }
 
+    [HideInInspector]
     public bool addingControllers;
 
     [Tooltip("The list of level scenes to be picked randomly (CAPITALIZATION MATTERS)")]
@@ -71,6 +72,27 @@ public class GameManager : MonoBehaviour
     [Tooltip("the radius this players target in the target group will be set to")]
     [SerializeField]
     private float _playerCameraRadius;
+
+    [Header("Slowdown effect")]
+
+    [Tooltip("the radius this players target in the target group will be set to in slowdown")]
+    [SerializeField]
+    private float _slowPlayerCameraRadius;
+
+    [Tooltip("the wieght this players target in the target group will be set to in slowdown")]
+    [SerializeField]
+    private float _slowPlayerCameraWeight;
+
+    [Tooltip("the speed of time during slowdown")]
+    [SerializeField]
+    [Range(0, 1)]
+    private float _slowTimeScale;
+
+    [Tooltip("how long slowdown will last for in seconds")]
+    [SerializeField]
+    private float _slowdownLength;
+
+    private CinemachineTargetGroup currentTargetGroup;
 
     [HideInInspector]
     public List<OrbSpawner> orbSpawners = new List<OrbSpawner>();
@@ -240,6 +262,8 @@ public class GameManager : MonoBehaviour
     {
         if (_alivePlayers.Count() > 1)
         {
+            CharacterBase[] deadPlayer = new CharacterBase[]{ player };
+            StartSlowDown(deadPlayer);
             _alivePlayers.Remove(player);
         }
         
@@ -282,6 +306,47 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameRoutine());
     }
 
+    public void StartSlowDown(CharacterBase[] players)
+    {
+        StartCoroutine(SlowDownEffect(players));
+    }
+
+    public IEnumerator SlowDownEffect(CharacterBase[] players)
+    {
+        CinemachineTargetGroup.Target[] oldTargets = currentTargetGroup.m_Targets;
+        CinemachineTargetGroup.Target[] slowTargs = new CinemachineTargetGroup.Target[players.Length];
+        for (int i = 0; i < players.Length; i++)
+        {
+            slowTargs[i].target = players[i].transform;
+            slowTargs[i].radius = _slowPlayerCameraRadius;
+            slowTargs[i].weight = _slowPlayerCameraWeight;
+        }
+
+        currentTargetGroup.m_Targets = slowTargs;
+
+        Time.timeScale = _slowTimeScale;
+
+        yield return new WaitForSeconds(_slowdownLength * _slowTimeScale);
+
+        currentTargetGroup.m_Targets = oldTargets;
+
+        CinemachineTargetGroup.Target[] aliveTargets = new CinemachineTargetGroup.Target[_alivePlayers.Count];
+
+        int pos = 0;
+
+        foreach (CharacterBase c in _alivePlayers.Keys)
+        {
+            aliveTargets[pos].target = c.transform;
+            aliveTargets[pos].weight = _playerCameraWeight;
+            aliveTargets[pos].radius = _playerCameraRadius;
+            pos++;
+        }
+
+        currentTargetGroup.m_Targets = aliveTargets;
+
+        Time.timeScale = 1;
+    }
+
     public IEnumerator StartGameRoutine()
     {
         orbSpawners.Clear(); // Should be cleared everytime a new arena is loaded.
@@ -301,11 +366,11 @@ public class GameManager : MonoBehaviour
 
         Spawn spawnInScene = FindAnyObjectByType<Spawn>();
 
-        CinemachineTargetGroup targetGroup = FindAnyObjectByType<CinemachineTargetGroup>();
+        currentTargetGroup = FindAnyObjectByType<CinemachineTargetGroup>();
 
         //targetGroup.m_PositionMode = 0;
         //targetGroup.m_RotationMode = 0;
-        targetGroup.m_UpdateMethod = CinemachineTargetGroup.UpdateMethod.LateUpdate;
+        currentTargetGroup.m_UpdateMethod = CinemachineTargetGroup.UpdateMethod.LateUpdate;
 
         CinemachineTargetGroup.Target[] targs = new CinemachineTargetGroup.Target[_playerData.Count];
 
@@ -329,7 +394,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        targetGroup.m_Targets = targs;
+        currentTargetGroup.m_Targets = targs;
 
         addingControllers = false;
 
