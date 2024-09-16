@@ -110,7 +110,7 @@ public class CharacterBase : MonoBehaviour
     //[HideInInspector]
     public float damageMult = 1;
 
-    private float _basicAttackTimer = 0;
+    private float _ballAttackTimer = 0;
 
     [Tooltip("the image used to show where the player is aiming")]
     [SerializeField]
@@ -238,12 +238,12 @@ public class CharacterBase : MonoBehaviour
 
     void Update()
     {
-        _basicAttackTimer += Time.deltaTime;
+        _ballAttackTimer += Time.deltaTime;
 
         if (attackChargeBar != null)
         {
             attackChargeBar.maxValue = _basicAttackTime;
-            attackChargeBar.value = _basicAttackTimer;
+            attackChargeBar.value = _ballAttackTimer;
         }
     }
 
@@ -578,15 +578,10 @@ public class CharacterBase : MonoBehaviour
     {
         if (context.performed)
         {
-            _basicAttackTimer = 0;
-            if (hasOrb)
+            _ballAttackTimer = 0;
+            if (!hasOrb)
             {
-                StartCoroutine(DoBallAttackHaptics());
-                StopCoroutine(KillBall(null));
-                ballAttack.Invoke();
-                Destroy(heldOrb);
-                heldOrb = null;
-                hasOrb = false;
+                normalAttack.Invoke();
             }
             else
             {
@@ -595,7 +590,7 @@ public class CharacterBase : MonoBehaviour
                     attackChargeBar.gameObject.SetActive(true);
                 }
 
-                Debug.Log("Start Attack Timer: " + _basicAttackTimer);
+                Debug.Log("Start Attack Timer: " + _ballAttackTimer);
 
                 _speed = _chargeSpeed;
             }
@@ -603,11 +598,14 @@ public class CharacterBase : MonoBehaviour
         else if (context.canceled)
         {
             _speed = originalSpeed;
-            Debug.Log("Release Attack Timer: " + _basicAttackTimer);
-            if (_basicAttackTimer >= _basicAttackTime)
+            if (_ballAttackTimer >= _basicAttackTime)
             {
-                Debug.Log("Basic attack reached");
-                normalAttack.Invoke();
+                StartCoroutine(DoBallAttackHaptics());
+                StopCoroutine(KillBall(null));
+                ballAttack.Invoke();
+                Destroy(heldOrb);
+                heldOrb = null;
+                hasOrb = false;
             }
 
             if (attackChargeBar != null)
