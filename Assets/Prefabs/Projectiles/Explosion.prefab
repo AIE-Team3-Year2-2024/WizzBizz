@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 12
   damageEffect: 4
   effectTime: 2
   destroyOnCollision: 1
@@ -138,6 +138,8 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
+  controlComponent: {fileID: 0}
+  damageChildren: []
 --- !u!114 &34398456946547949
 MonoBehaviour:
   m_ObjectHideFlags: 0

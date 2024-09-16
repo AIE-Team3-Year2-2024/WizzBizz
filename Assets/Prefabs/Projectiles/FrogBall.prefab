@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 1013483540105568657}
   - component: {fileID: 380556358162270826}
   - component: {fileID: 8252697303617144653}
+  - component: {fileID: 5609397189411050986}
   m_Layer: 7
   m_Name: FrogBall
   m_TagString: Untagged
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 40
 --- !u!114 &4297597167232359517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +174,8 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
+  controlComponent: {fileID: 0}
+  damageChildren: []
 --- !u!114 &413267540910040873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a4e08a6c38610438b2d5aab8cd4c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathBounceAmount: 15
+  _deathBounceAmount: 16
 --- !u!135 &380556358162270826
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -329,3 +332,17 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &5609397189411050986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599871779557999481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ed61b81abb68c47a678156308b5495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackAmount: 40
+  abTest: 0

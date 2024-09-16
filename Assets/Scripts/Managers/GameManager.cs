@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     // Static reference
     public static GameManager Instance { get; private set; }
 
+    [HideInInspector]
     public bool addingControllers;
 
     [Tooltip("The list of level scenes to be picked randomly (CAPITALIZATION MATTERS)")]
