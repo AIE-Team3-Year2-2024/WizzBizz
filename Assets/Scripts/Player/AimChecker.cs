@@ -8,23 +8,23 @@ public class AimChecker : MonoBehaviour
     [HideInInspector]
     public bool _colliding;
 
-    private MeshRenderer renderer;
+    private MeshRenderer _renderer;
 
     private void Start()
     {
-        renderer = GetComponent<MeshRenderer>();
+        _renderer = GetComponent<MeshRenderer>();
     }
 
     private void OnTriggerStay(Collider other)
     {
         _colliding = true;
-        renderer.material.color = Color.red;
+        _renderer.material.color = Color.red;
     }
 
     private void FixedUpdate()
     {
         _colliding = false;
-        renderer.material.color = Color.green;
+        _renderer.material.color = Color.green;
     }
 
 

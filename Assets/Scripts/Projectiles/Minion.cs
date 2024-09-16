@@ -13,6 +13,8 @@ public class Minion : MonoBehaviour
     [SerializeField]
     private float updateTime;
 
+    private Transform ownerTransform;
+
     private NavMeshAgent agent;
 
     // Start is called before the first frame update
@@ -22,7 +24,10 @@ public class Minion : MonoBehaviour
 
         foreach (CharacterBase p in players)
         {
-            targets.Add(p.transform);
+            if (p.transform != ownerTransform)
+            {
+                targets.Add(p.transform);
+            }
         }
 
             agent = GetComponent<NavMeshAgent>();
@@ -68,5 +73,6 @@ public class Minion : MonoBehaviour
     public void RemoveTargetPlayer(Transform player)
     {
         targets.Remove(player);
+        ownerTransform = player;
     }
 }
