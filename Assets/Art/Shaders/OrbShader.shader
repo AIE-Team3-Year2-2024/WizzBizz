@@ -13,135 +13,210 @@ Shader "Custom/OrbShader"
     }
     SubShader
     {
-        Tags { "Queue"="Transparent" "RenderType"="Transparent" "IgnoreProjector"="True" }
-        Blend SrcAlpha OneMinusSrcAlpha
-        Cull Back
-        ZWrite On
-        LOD 200
+        Tags { "RenderPipeline"="UniversalPipeline" "Queue"="Transparent" }
+        LOD 100
 
-        CGPROGRAM
-        // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf StandardSpecular fullforwardshadows alpha
+        HLSLINCLUDE
+        #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
-        // Use shader model 3.0 target, to get nicer looking lighting
-        #pragma target 3.0
+        CBUFFER_START(UnityPerMaterial)
+            half3 _InnerColor;
+            half3 _OuterColor;
+            half3 _InnerGlow;
+            half _Glossiness;
+            half _AnimationSpeed;
+            half _HeightScale;
+            half _Noise1Scale;
+            half _Noise2Scale;
+        CBUFFER_END
 
-        #include "Includes/Noise.cginc"
+        ENDHLSL
 
-        struct Input
+        Pass
         {
-            float3 viewDir;
-            float3 worldPos;
-            float3 worldNormal; 
-        };
-        half3 _InnerColor;
-        half3 _OuterColor;
-        half3 _InnerGlow;
-        half _Glossiness;
-        half _AnimationSpeed;
-        half _HeightScale;
-        half _Noise1Scale;
-        half _Noise2Scale;
+            Name "ForwardLit"
+            Tags { "LightMode"="UniversalForward" }
+            //Blend SrcAlpha OneMinusSrcAlpha
+            Cull Back
+            ZWrite On
 
-        // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
-        // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
-        // #pragma instancing_options assumeuniformscaling
-        UNITY_INSTANCING_BUFFER_START(Props)
-            // put more per-instance properties here
-        UNITY_INSTANCING_BUFFER_END(Props)
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
 
-        inline float3 colorburn_blend(in float3 a, in float3 b, in float mix = 1.0)
-        {
-            float f = 1.0 - mix;
-            float3 result = a;
+            #define _SPECULAR_COLOR
+            #pragma shader_feature_local_fragment _SPECULAR_SETUP
+            #pragma shader_feature_local_fragment _EMISSION
 
-            float tmp = f + mix * b.r;
-            if (tmp <= 0.0) 
-                result.r = 0.0;
-            else if ((tmp = (1.0 - (1.0 - (a.r)) / tmp)) < 0.0)
-                result.r = 0.0;
-            else if (tmp > 1.0)
-                result.r = 1.0;
-            else
-                result.r = tmp;
+            //#pragma multi_compile_fwdbasealpha
+            #pragma multi_compile_fog
 
-            tmp = f + mix * b.g;
-            if (tmp <= 0.0) 
-                result.g = 0.0;
-            else if ((tmp = (1.0 - (1.0 - (a.g)) / tmp)) < 0.0)
-                result.g = 0.0;
-            else if (tmp > 1.0)
-                result.g = 1.0;
-            else
-                result.g = tmp;
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/SurfaceInput.hlsl"
 
-            tmp = f + mix * b.b;
-            if (tmp <= 0.0) 
-                result.b = 0.0;
-            else if ((tmp = (1.0 - (1.0 - (a.b)) / tmp)) < 0.0)
-                result.b = 0.0;
-            else if (tmp > 1.0)
-                result.b = 1.0;
-            else
-                result.b = tmp;
+            #include "Includes/Noise.cginc"
 
-            return result;
-        }
-
-        float orbNoise(float3 st)
-        {
-            float noise = fbm(st * _Noise1Scale, 2, 2.0, 0.5);
-            float noise2 = fbm(st * _Noise2Scale, 2, 4.0, 1.0);
-            float finalNoise = colorburn_blend(noise, noise2, 0.333333);
-            return finalNoise;
-        }
-
-        float3 pom(float3 st, float3 viewDir)
-        {
-            const float scale = _HeightScale;
-            const int minLayers = 8;
-            const int maxLayers = 32;
-            float numLayers = lerp(maxLayers, minLayers, abs(dot(float3(0, 0, 1), viewDir)));
-            float layerDepth = 1.0 / numLayers;
-            float currentLayerDepth = 0.0;
-            float3 P = viewDir * scale;
-            float3 deltaTexCoords = P / numLayers;
-            float3 currentTexCoords = st;
-            float currentDepthValue = orbNoise(currentTexCoords);
-            while (currentLayerDepth < currentDepthValue)
+            struct Attributes
             {
-                currentTexCoords -= deltaTexCoords;
-                currentDepthValue = orbNoise(currentTexCoords);
-                currentLayerDepth += layerDepth;
+                float4 vertex : POSITION;
+                float4 normal : NORMAL;
+                float2 uv : TEXCOORD0;
+                //UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+            struct Varyings
+            {
+                float4 vertex : SV_POSITION;
+                float3 worldPos : TEXCOORD2;
+                half3 worldNormal : TEXCOORD3;
+                half3 viewDir : TEXCOORD4;
+                //UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+            inline float3 colorburn_blend(in float3 a, in float3 b, in float mix = 1.0)
+            {
+                float f = 1.0 - mix;
+                float3 result = a;
+
+                float tmp = f + mix * b.r;
+                if (tmp <= 0.0) 
+                    result.r = 0.0;
+                else if ((tmp = (1.0 - (1.0 - (a.r)) / tmp)) < 0.0)
+                    result.r = 0.0;
+                else if (tmp > 1.0)
+                    result.r = 1.0;
+                else
+                    result.r = tmp;
+
+                tmp = f + mix * b.g;
+                if (tmp <= 0.0) 
+                    result.g = 0.0;
+                else if ((tmp = (1.0 - (1.0 - (a.g)) / tmp)) < 0.0)
+                    result.g = 0.0;
+                else if (tmp > 1.0)
+                    result.g = 1.0;
+                else
+                    result.g = tmp;
+
+                tmp = f + mix * b.b;
+                if (tmp <= 0.0) 
+                    result.b = 0.0;
+                else if ((tmp = (1.0 - (1.0 - (a.b)) / tmp)) < 0.0)
+                    result.b = 0.0;
+                else if (tmp > 1.0)
+                    result.b = 1.0;
+                else
+                    result.b = tmp;
+
+                return result;
             }
-            float3 prevTexCoords = currentTexCoords + deltaTexCoords;
-            float afterDepth = currentDepthValue - currentLayerDepth;
-            float beforeDepth = orbNoise(prevTexCoords) - currentLayerDepth + layerDepth;
-            float weight = afterDepth / (afterDepth - beforeDepth);
-            float3 finalTexCoords = prevTexCoords * weight + currentTexCoords * (1.0 - weight);
-            return finalTexCoords;
+
+            float orbNoise(float3 st)
+            {
+                float noise = fbm(st * _Noise1Scale, 2, 2.0, 0.5);
+                float noise2 = fbm(st * _Noise2Scale, 2, 4.0, 1.0);
+                float finalNoise = colorburn_blend(noise, noise2, 0.333333);
+                return finalNoise;
+            }
+
+            float3 pom(float3 st, float3 viewDir)
+            {
+                const float scale = _HeightScale;
+                const int minLayers = 8;
+                const int maxLayers = 32;
+                float numLayers = lerp(maxLayers, minLayers, abs(dot(float3(0, 0, 1), viewDir)));
+                float layerDepth = 1.0 / numLayers;
+                float currentLayerDepth = 0.0;
+                float3 P = viewDir * scale;
+                float3 deltaTexCoords = P / numLayers;
+                float3 currentTexCoords = st;
+                float currentDepthValue = orbNoise(currentTexCoords);
+
+                #if 1
+                int i = 0;
+                while (currentLayerDepth < currentDepthValue)
+                {
+                    if (i > maxLayers)
+                        break;
+                    currentTexCoords -= deltaTexCoords;
+                    currentDepthValue = orbNoise(currentTexCoords);
+                    currentLayerDepth += layerDepth;
+                    i++;
+                }
+                #endif
+
+                float3 prevTexCoords = currentTexCoords + deltaTexCoords;
+                float afterDepth = currentDepthValue - currentLayerDepth;
+                float beforeDepth = orbNoise(prevTexCoords) - currentLayerDepth + layerDepth;
+                float weight = afterDepth / (afterDepth - beforeDepth);
+                float3 finalTexCoords = prevTexCoords * weight + currentTexCoords * (1.0 - weight);
+                return finalTexCoords;
+            }
+
+            Varyings vert(Attributes IN)
+            {
+                Varyings OUT;
+
+                //UNITY_SETUP_INSTANCE_ID(IN);
+                //UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
+
+                VertexPositionInputs positionInputs = GetVertexPositionInputs(IN.vertex.xyz);
+                VertexNormalInputs normalInputs = GetVertexNormalInputs(IN.normal.xyz);
+
+                OUT.vertex = positionInputs.positionCS;
+                OUT.worldPos = positionInputs.positionWS;
+                OUT.worldNormal = NormalizeNormalPerVertex(normalInputs.normalWS);
+                OUT.viewDir = GetWorldSpaceNormalizeViewDir(positionInputs.positionWS);
+
+                return OUT;
+            }
+
+            half4 frag(Varyings IN) : SV_Target
+            {  
+                //UNITY_SETUP_INSTANCE_ID(IN);
+
+                // pom & animation
+                float animTime = _Time.x * _AnimationSpeed;
+                float3 offset = float3(animTime,animTime,animTime/20.0);
+                float3 texCoords = pom(IN.worldNormal + offset, IN.viewDir);
+
+                // noise
+                float n = orbNoise(texCoords);
+
+                // color
+                half4 c = half4(0.0,0.0,0.0,1.0);
+                c.rgb += lerp(_InnerColor.rgb, _OuterColor.rgb, pow(n, 6));
+
+                // emission
+                half4 e = half4(0.0,0.0,0.0,1.0);
+                e.rgb += lerp(float3(0.0, 0.0, 0.0), _InnerGlow.rgb, pow(n, 16));
+
+                #if 1
+                SurfaceData surfaceData = (SurfaceData)0;
+                surfaceData.occlusion = 1.0;
+                surfaceData.albedo = c.rgb;
+                surfaceData.emission = e.rgb;
+                surfaceData.specular = 0.5;
+                surfaceData.smoothness = _Glossiness;
+                surfaceData.alpha = c.a;
+
+                InputData inputData = (InputData)0;
+                inputData.positionWS = IN.worldPos;
+                inputData.normalWS = NormalizeNormalPerPixel(IN.worldNormal);
+                inputData.viewDirectionWS = SafeNormalize(IN.viewDir);
+
+                //inputData.bakedGI = SAMPLE_GI(IN.lightmapUV, IN.vertexSH, inputData.normalWS);
+                inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(IN.vertex);
+               // inputData.shadowMask = SAMPLE_SHADOWMASK(IN.lightmapUV);
+
+                half4 result = UniversalFragmentPBR(inputData, surfaceData);
+                //result.rgb = MixFog(result.rgb, inputData.fogCoord);
+                #endif
+
+                //half4 result = half4(c.rgb, 1.0);
+                return result;
+            }
+            ENDHLSL
         }
-
-        void surf (Input IN, inout SurfaceOutputStandardSpecular o)
-        {  
-            float animTime = _Time.x * _AnimationSpeed;
-            float3 offset = float3(animTime,animTime,animTime/20.0);
-            float3 texCoords = pom(IN.worldNormal + offset, IN.viewDir);
-
-            float n = orbNoise(texCoords);
-
-            float4 c = float4(0.0,0.0,0.0,1.0);
-            c.rgb += lerp(_InnerColor.rgb, _OuterColor.rgb, pow(n, 6));
-
-            float4 e = float4(0.0,0.0,0.0,1.0);
-            e.rgb += lerp(float3(0.0, 0.0, 0.0), _InnerGlow.rgb, pow(n, 16));
-
-            o.Albedo = c.rgb;
-            o.Emission = e.rgb;
-            o.Smoothness = _Glossiness;
-            o.Alpha = c.a;
-        }
-        ENDCG
     }
-    FallBack "Diffuse"
 }
