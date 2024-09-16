@@ -57,7 +57,11 @@ MonoBehaviour:
   arenaUICanvas: {fileID: 4376679973628366032}
   roundTimerText: {fileID: 4376679973178694759}
   _playerCameraWeight: 1
-  _playerCameraRadius: 3
+  _playerCameraRadius: 5
+  _slowPlayerCameraRadius: 3.5
+  _slowPlayerCameraWeight: 20
+  _slowTimeScale: 0.4
+  _slowdownLength: 5
   orbSpawners: []
   orbSpawnerCooldown: 8
   canvas: {fileID: 0}
