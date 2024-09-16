@@ -228,6 +228,7 @@ public class CharacterBase : MonoBehaviour
         {
             healthBar.minValue = 0;
             healthBar.maxValue = _origanalHealth;
+            healthBar.value = _health;
         }
 
         rb = GetComponent<Rigidbody>();
