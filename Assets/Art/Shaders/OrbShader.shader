@@ -13,7 +13,7 @@ Shader "Custom/OrbShader"
     }
     SubShader
     {
-        Tags { "RenderPipeline"="UniversalPipeline" }
+        Tags { "RenderPipeline"="UniversalPipeline" "Queue"="Transparent" }
         LOD 100
 
         HLSLINCLUDE
