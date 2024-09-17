@@ -130,18 +130,6 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private Slider ballAttackChargeBar;
 
-    [Tooltip("The slider component of the basic attack charge up bar.")]
-    [SerializeField]
-    private Slider basicAttackChargeBar;
-
-    [Tooltip("Whether or not the basic attack will be a charge up")]
-    [SerializeField]
-    private bool basicAttackChargeUp;
-
-    [Tooltip("Whether or not the basic attack will be a charge up")]
-    [SerializeField]
-    private bool ballAttackChargeUp;
-
     [Tooltip("the Text on the player showing what number they are")]
     public TMP_Text playerNumber;
 
@@ -263,12 +251,6 @@ public class CharacterBase : MonoBehaviour
         {
             ballAttackChargeBar.maxValue = _ballAttackTime;
             ballAttackChargeBar.value = _ballAttackTimer;
-        }
-
-        if(basicAttackChargeBar != null)
-        {
-            basicAttackChargeBar.maxValue = _basicAttackTime;
-            basicAttackChargeBar.value = _basicAttackTimer;
         }
     }
 
@@ -604,41 +586,26 @@ public class CharacterBase : MonoBehaviour
         if (context.performed)
         {
             _ballAttackTimer = 0;
-            _basicAttackTimer = 0;
-            _speed = _chargeSpeed;
+            
             if (!hasOrb)
             {
-                if(!basicAttackChargeUp)
-                {
-                    normalAttack.Invoke();
-                }
-                else if (basicAttackChargeBar != null)
-                {
-                    basicAttackChargeBar.gameObject.SetActive(true);
-                }
+                normalAttack.Invoke();
+                
             }
             else
             {
-                if(!ballAttackChargeUp)
-                {
-                    StartCoroutine(DoBallAttackHaptics());
-                    StopCoroutine(KillBall(null));
-                    ballAttack.Invoke();
-                    Destroy(heldOrb);
-                    heldOrb = null;
-                    hasOrb = false;
-                }
-                else if (ballAttackChargeBar != null)
+                if (ballAttackChargeBar != null)
                 {
                     ballAttackChargeBar.gameObject.SetActive(true); 
                 }
+                _speed = _chargeSpeed;
             }
             
         }
         else if (context.canceled)
         {
             _speed = originalSpeed;
-            if (hasOrb && ballAttackChargeUp)
+            if (hasOrb)
             {
                 if (_ballAttackTimer >= _ballAttackTime)
                 {
@@ -650,22 +617,10 @@ public class CharacterBase : MonoBehaviour
                     hasOrb = false;
                 }
             }
-            else if(basicAttackChargeUp)
-            {
-                if(_basicAttackTimer >= _basicAttackTime)
-                {
-                    normalAttack.Invoke();
-                }
-            }
 
             if (ballAttackChargeBar != null)
             {
                 ballAttackChargeBar.gameObject.SetActive(false);
-            }
-
-            if(basicAttackChargeBar != null)
-            {
-                basicAttackChargeBar.gameObject.SetActive(false);
             }
         }
     }
