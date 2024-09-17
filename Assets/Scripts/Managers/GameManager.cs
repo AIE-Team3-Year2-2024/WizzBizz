@@ -349,6 +349,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartGameRoutine()
     {
+        Time.timeScale = 1;
         orbSpawners.Clear(); // Should be cleared everytime a new arena is loaded.
         _orbSpawnerTimer = orbSpawnerCooldown;
         _orbCollected = true;
