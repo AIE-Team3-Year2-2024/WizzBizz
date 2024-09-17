@@ -116,7 +116,11 @@ public class CharacterBase : MonoBehaviour
 
     private float _ballAttackTimer = 0;
 
-    private float _basicAttackTimer = 0;
+    [Tooltip("how long it takes for the basic attack to cool down")]
+    [SerializeField]
+    private float _basicAttackCooldownGoal;
+
+    private float _basicAttackCooldown = 0;
 
     [Tooltip("the image used to show where the player is aiming")]
     [SerializeField]
@@ -129,6 +133,10 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("The slider component of the ball attack charge up bar.")]
     [SerializeField]
     private Slider ballAttackChargeBar;
+
+    [Tooltip("The slider component of the basic attack cool down bar.")]
+    [SerializeField]
+    private Slider basicAttackChargeBar;
 
     [Tooltip("the Text on the player showing what number they are")]
     public TMP_Text playerNumber;
@@ -245,12 +253,18 @@ public class CharacterBase : MonoBehaviour
     void Update()
     {
         _ballAttackTimer += Time.deltaTime;
-        _basicAttackTimer += Time.deltaTime;
+        _basicAttackCooldown += Time.deltaTime;
 
         if (ballAttackChargeBar != null)
         {
             ballAttackChargeBar.maxValue = _ballAttackTime;
             ballAttackChargeBar.value = _ballAttackTimer;
+        }
+
+        if(basicAttackChargeBar != null)
+        {
+            basicAttackChargeBar.maxValue = _basicAttackCooldownGoal;
+            basicAttackChargeBar.value = _basicAttackCooldown;
         }
     }
 
@@ -587,10 +601,10 @@ public class CharacterBase : MonoBehaviour
         {
             _ballAttackTimer = 0;
             
-            if (!hasOrb)
+            if (!hasOrb && _basicAttackCooldown >= _basicAttackCooldownGoal)
             {
                 normalAttack.Invoke();
-                
+                _basicAttackCooldown = 0;
             }
             else
             {
