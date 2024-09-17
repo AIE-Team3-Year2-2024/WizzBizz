@@ -103,6 +103,10 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public float currentAimMagnitude;
 
+    [Tooltip("the amount of time needed to charge the ball attack")]
+    [SerializeField]
+    private float _ballAttackTime;
+
     [Tooltip("the amount of time needed to charge the basic attack")]
     [SerializeField]
     private float _basicAttackTime;
@@ -112,6 +116,8 @@ public class CharacterBase : MonoBehaviour
 
     private float _ballAttackTimer = 0;
 
+    private float _basicAttackTimer = 0;
+
     [Tooltip("the image used to show where the player is aiming")]
     [SerializeField]
     private RectTransform _pointerAimer;
@@ -120,9 +126,13 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private Slider healthBar;
 
-    [Tooltip("The slider component of the attack charge up bar.")]
+    [Tooltip("The slider component of the ball attack charge up bar.")]
     [SerializeField]
-    private Slider attackChargeBar;
+    private Slider ballAttackChargeBar;
+
+    [Tooltip("The slider component of the basic attack charge up bar.")]
+    [SerializeField]
+    private Slider basicAttackChargeBar;
 
     [Tooltip("the Text on the player showing what number they are")]
     public TMP_Text playerNumber;
@@ -239,11 +249,18 @@ public class CharacterBase : MonoBehaviour
     void Update()
     {
         _ballAttackTimer += Time.deltaTime;
+        _basicAttackTimer += Time.deltaTime;
 
-        if (attackChargeBar != null)
+        if (ballAttackChargeBar != null)
         {
-            attackChargeBar.maxValue = _basicAttackTime;
-            attackChargeBar.value = _ballAttackTimer;
+            ballAttackChargeBar.maxValue = _ballAttackTime;
+            ballAttackChargeBar.value = _ballAttackTimer;
+        }
+
+        if(basicAttackChargeBar != null)
+        {
+            basicAttackChargeBar.maxValue = _basicAttackTime;
+            basicAttackChargeBar.value = _basicAttackTimer;
         }
     }
 
@@ -579,38 +596,56 @@ public class CharacterBase : MonoBehaviour
         if (context.performed)
         {
             _ballAttackTimer = 0;
+            _basicAttackTimer = 0;
+            _speed = _chargeSpeed;
             if (!hasOrb)
             {
-                normalAttack.Invoke();
+                
+                if (basicAttackChargeBar != null)
+                {
+                    basicAttackChargeBar.gameObject.SetActive(true);
+                }
             }
             else
             {
-                if (attackChargeBar != null)
+                if (ballAttackChargeBar != null)
                 {
-                    attackChargeBar.gameObject.SetActive(true);
+                    ballAttackChargeBar.gameObject.SetActive(true); 
                 }
-
-                Debug.Log("Start Attack Timer: " + _ballAttackTimer);
-
-                _speed = _chargeSpeed;
             }
+            
         }
         else if (context.canceled)
         {
             _speed = originalSpeed;
-            if (_ballAttackTimer >= _basicAttackTime)
+            if (hasOrb)
             {
-                StartCoroutine(DoBallAttackHaptics());
-                StopCoroutine(KillBall(null));
-                ballAttack.Invoke();
-                Destroy(heldOrb);
-                heldOrb = null;
-                hasOrb = false;
+                if (_ballAttackTimer >= _ballAttackTime)
+                {
+                    StartCoroutine(DoBallAttackHaptics());
+                    StopCoroutine(KillBall(null));
+                    ballAttack.Invoke();
+                    Destroy(heldOrb);
+                    heldOrb = null;
+                    hasOrb = false;
+                }
+            }
+            else
+            {
+                if(_basicAttackTimer >= _basicAttackTime)
+                {
+                    normalAttack.Invoke();
+                }
             }
 
-            if (attackChargeBar != null)
+            if (ballAttackChargeBar != null)
             {
-                attackChargeBar.gameObject.SetActive(false);
+                ballAttackChargeBar.gameObject.SetActive(false);
+            }
+
+            if(basicAttackChargeBar != null)
+            {
+                basicAttackChargeBar.gameObject.SetActive(false);
             }
         }
     }
