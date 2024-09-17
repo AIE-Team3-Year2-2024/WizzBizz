@@ -134,6 +134,14 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private Slider basicAttackChargeBar;
 
+    [Tooltip("Whether or not the basic attack will be a charge up")]
+    [SerializeField]
+    private bool basicAttackChargeUp;
+
+    [Tooltip("Whether or not the basic attack will be a charge up")]
+    [SerializeField]
+    private bool ballAttackChargeUp;
+
     [Tooltip("the Text on the player showing what number they are")]
     public TMP_Text playerNumber;
 
@@ -600,15 +608,27 @@ public class CharacterBase : MonoBehaviour
             _speed = _chargeSpeed;
             if (!hasOrb)
             {
-                
-                if (basicAttackChargeBar != null)
+                if(!basicAttackChargeUp)
+                {
+                    normalAttack.Invoke();
+                }
+                else if (basicAttackChargeBar != null)
                 {
                     basicAttackChargeBar.gameObject.SetActive(true);
                 }
             }
             else
             {
-                if (ballAttackChargeBar != null)
+                if(!ballAttackChargeUp)
+                {
+                    StartCoroutine(DoBallAttackHaptics());
+                    StopCoroutine(KillBall(null));
+                    ballAttack.Invoke();
+                    Destroy(heldOrb);
+                    heldOrb = null;
+                    hasOrb = false;
+                }
+                else if (ballAttackChargeBar != null)
                 {
                     ballAttackChargeBar.gameObject.SetActive(true); 
                 }
@@ -618,7 +638,7 @@ public class CharacterBase : MonoBehaviour
         else if (context.canceled)
         {
             _speed = originalSpeed;
-            if (hasOrb)
+            if (hasOrb && ballAttackChargeUp)
             {
                 if (_ballAttackTimer >= _ballAttackTime)
                 {
@@ -630,7 +650,7 @@ public class CharacterBase : MonoBehaviour
                     hasOrb = false;
                 }
             }
-            else
+            else if(basicAttackChargeUp)
             {
                 if(_basicAttackTimer >= _basicAttackTime)
                 {
