@@ -39,6 +39,13 @@ public class CharacterAbilities : MonoBehaviour
     [Tooltip("The callback which is invoked when ability 2 is pressed.")]
     [SerializeField] private UnityEvent<InputAction.CallbackContext> ability2Callback;
 
+    [Tooltip("the aimer for the first ability(IF THE ABILITY DOESNT USE IT LEAVE THIS EMPTY)")]
+    [SerializeField]
+    private AimChecker ability1Aimer;
+    [Tooltip("the aimer for the SECOND ability(IF THE ABILITY DOESNT USE IT LEAVE THIS EMPTY)")]
+    [SerializeField]
+    private AimChecker ability2Aimer;
+
     private float _ability1Timer = 0.0f;
     private float _ability2Timer = 0.0f;
 
@@ -82,7 +89,16 @@ public class CharacterAbilities : MonoBehaviour
                 if (_ability1Timer <= 0.0f)
                 {
                     if (ability1Callback != null)
+                    {
+                        if(ability1Aimer)
+                        {
+                            if(ability1Aimer._colliding)
+                            {
+                                return;
+                            }
+                        }
                         ability1Callback.Invoke(context);
+                    }
 
                     _ability1Timer = ability1Cooldown;
                 }
@@ -100,7 +116,16 @@ public class CharacterAbilities : MonoBehaviour
                 if (_ability1Timer <= 0.0f)
                 {
                     if (ability1Callback != null)
-                        ability1Callback.Invoke(context);
+                    {
+                        if(ability1Aimer)
+                        {
+                            if(ability1Aimer._colliding)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    ability1Callback.Invoke(context);
                 }
                 _characterBase.ChangeCurrentSpeed(_characterBase.originalSpeed);
             }
@@ -119,7 +144,16 @@ public class CharacterAbilities : MonoBehaviour
                 if (_ability2Timer <= 0.0f)
                 {
                     if (ability2Callback != null)
-                        ability2Callback.Invoke(context);
+                    {
+                        if (ability2Aimer)
+                        {
+                            if (ability2Aimer._colliding)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    ability2Callback.Invoke(context);
 
                     _ability2Timer = ability2Cooldown;
                 }
@@ -137,7 +171,16 @@ public class CharacterAbilities : MonoBehaviour
                 if (_ability2Timer <= 0.0f)
                 {
                     if (ability2Callback != null)
-                        ability2Callback.Invoke(context);
+                    {
+                        if (ability2Aimer)
+                        {
+                            if (ability2Aimer._colliding)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                    ability2Callback.Invoke(context);
                 }
                 _characterBase.ChangeCurrentSpeed(_characterBase.originalSpeed);
             }

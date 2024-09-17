@@ -6,9 +6,38 @@ public class Teleporter : MonoBehaviour
 {
     [Tooltip("where the teleportee will end up")]
     [SerializeField]
-    private Transform[] endPoints;
+    private Teleporter[] endPoints;
+
+    private Collider teleCollider;
+
+    [Tooltip("how long this will stay off for after it is enterd or exited")]
+    [SerializeField]
+    private float _offTime;
+
+    private void Start()
+    {
+        teleCollider = GetComponent<Collider>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        other.transform.position = endPoints[Random.Range(0, endPoints.Length)].position;
+        Teleporter otherTele = endPoints[Random.Range(0, endPoints.Length)];
+        other.transform.position = otherTele.transform.position;
+        otherTele.StartOffRoutine();
+        StartOffRoutine();
+    }
+
+    public void StartOffRoutine()
+    {
+        StartCoroutine(OffRoutine());
+    }
+
+    public IEnumerator OffRoutine()
+    {
+        teleCollider.enabled = false;
+
+        yield return new WaitForSeconds(_offTime);
+
+        teleCollider.enabled = true;
     }
 }

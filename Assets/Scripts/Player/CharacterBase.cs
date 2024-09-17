@@ -228,6 +228,7 @@ public class CharacterBase : MonoBehaviour
         {
             healthBar.minValue = 0;
             healthBar.maxValue = _origanalHealth;
+            healthBar.value = _health;
         }
 
         rb = GetComponent<Rigidbody>();
@@ -360,7 +361,7 @@ public class CharacterBase : MonoBehaviour
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
         _speed = originalSpeed;
-        _movementDirection = oldMoveDir;
+        _movementDirection = Vector3.zero;
         StartCoroutine(WaitToDash());
     }
 
