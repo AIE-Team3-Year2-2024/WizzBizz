@@ -601,10 +601,13 @@ public class CharacterBase : MonoBehaviour
         {
             _ballAttackTimer = 0;
             
-            if (!hasOrb && _basicAttackCooldown >= _basicAttackCooldownGoal)
+            if (!hasOrb)
             {
-                normalAttack.Invoke();
-                _basicAttackCooldown = 0;
+                if (_basicAttackCooldown >= _basicAttackCooldownGoal)
+                {
+                    normalAttack.Invoke();
+                    _basicAttackCooldown = 0;
+                }
             }
             else
             {
