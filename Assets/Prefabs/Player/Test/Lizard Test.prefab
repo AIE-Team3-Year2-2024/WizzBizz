@@ -435,11 +435,14 @@ MonoBehaviour:
   canDash: 1
   _pointerAimerRange: 5
   currentAimMagnitude: 0
+  _ballAttackTime: 3
   _basicAttackTime: 0.7
   damageMult: 1
+  _basicAttackCooldownGoal: 3
   _pointerAimer: {fileID: 1096289958959071381}
   healthBar: {fileID: 6928445385099329077}
-  attackChargeBar: {fileID: 9002232914235022701}
+  ballAttackChargeBar: {fileID: 9002232914235022701}
+  basicAttackChargeBar: {fileID: 0}
   playerNumber: {fileID: 610724348451032187}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   _weakness: {fileID: 3722349283893674540}
@@ -586,6 +589,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ability1Aimer: {fileID: 2728097623437260813}
+  ability2Aimer: {fileID: 0}
 --- !u!54 &3006249
 Rigidbody:
   m_ObjectHideFlags: 0
