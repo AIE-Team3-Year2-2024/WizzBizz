@@ -10623,6 +10623,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1943326631}
+  - {fileID: 594203588}
   - {fileID: 1981200082}
   - {fileID: 1892343480}
   m_Father: {fileID: 0}
@@ -14355,16 +14356,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594203587}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -172.06145, y: 25.010653, z: -70.16396}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -163.08868, y: 29.683321, z: -136.27441}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 97247495}
   - {fileID: 513983020}
   - {fileID: 2091556279}
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_Father: {fileID: 458192165}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &601435033
 Mesh:
@@ -22283,6 +22284,7 @@ GameObject:
   - component: {fileID: 988170213}
   - component: {fileID: 988170212}
   - component: {fileID: 988170215}
+  - component: {fileID: 988170216}
   m_Layer: 11
   m_Name: LevelCube (156)
   m_TagString: Untagged
@@ -22389,6 +22391,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &988170216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988170210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370e69cf673508a4c8cedb8a63f33f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerName: ColourChange
+  time: 0
 --- !u!1 &989810674
 GameObject:
   m_ObjectHideFlags: 0
@@ -33924,6 +33940,7 @@ GameObject:
   - component: {fileID: 1604546684}
   - component: {fileID: 1604546683}
   - component: {fileID: 1604546682}
+  - component: {fileID: 1604546686}
   m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
@@ -34030,6 +34047,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604546680}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1604546686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604546680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370e69cf673508a4c8cedb8a63f33f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerName: ColourChange
+  time: 0
 --- !u!1 &1634591467
 GameObject:
   m_ObjectHideFlags: 0
@@ -36526,6 +36557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803571973}
   - component: {fileID: 1803571974}
+  - component: {fileID: 1803571975}
   m_Layer: 11
   m_Name: Parent
   m_TagString: Untagged
@@ -36573,6 +36605,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1803571975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803571972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370e69cf673508a4c8cedb8a63f33f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerName: RumbleTrigger
+  time: 5
 --- !u!1 &1838064923
 GameObject:
   m_ObjectHideFlags: 0
@@ -37457,7 +37503,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 458192165}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1892343481
 BoxCollider:
@@ -38777,7 +38823,7 @@ Transform:
   - {fileID: 1352571025}
   - {fileID: 1487252022}
   m_Father: {fileID: 458192165}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987933776
 GameObject:
@@ -39441,6 +39487,7 @@ GameObject:
   - component: {fileID: 2016013980}
   - component: {fileID: 2016013979}
   - component: {fileID: 2016013978}
+  - component: {fileID: 2016013982}
   m_Layer: 11
   m_Name: LevelCube (208)
   m_TagString: Untagged
@@ -39547,6 +39594,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016013976}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2016013982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016013976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370e69cf673508a4c8cedb8a63f33f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerName: ColourChange
+  time: 0
 --- !u!1 &2038166369
 GameObject:
   m_ObjectHideFlags: 0
@@ -40239,6 +40300,7 @@ GameObject:
   - component: {fileID: 2102826679}
   - component: {fileID: 2102826678}
   - component: {fileID: 2102826681}
+  - component: {fileID: 2102826682}
   m_Layer: 11
   m_Name: LevelCube (182)
   m_TagString: Untagged
@@ -40345,6 +40407,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2102826682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102826676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370e69cf673508a4c8cedb8a63f33f9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerName: ColourChange
+  time: 0
 --- !u!1 &2103538394
 GameObject:
   m_ObjectHideFlags: 0
