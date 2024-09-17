@@ -136,7 +136,7 @@ public class CharacterBase : MonoBehaviour
 
     [Tooltip("The slider component of the basic attack cool down bar.")]
     [SerializeField]
-    private Slider basicAttackChargeBar;
+    private Slider basicAttackCoolDownBar;
 
     [Tooltip("the Text on the player showing what number they are")]
     public TMP_Text playerNumber;
@@ -261,10 +261,10 @@ public class CharacterBase : MonoBehaviour
             ballAttackChargeBar.value = _ballAttackTimer;
         }
 
-        if(basicAttackChargeBar != null)
+        if(basicAttackCoolDownBar != null)
         {
-            basicAttackChargeBar.maxValue = _basicAttackCooldownGoal;
-            basicAttackChargeBar.value = _basicAttackCooldown;
+            basicAttackCoolDownBar.maxValue = _basicAttackCooldownGoal;
+            basicAttackCoolDownBar.value = _basicAttackCooldown;
         }
     }
 
@@ -601,10 +601,13 @@ public class CharacterBase : MonoBehaviour
         {
             _ballAttackTimer = 0;
             
-            if (!hasOrb && _basicAttackCooldown >= _basicAttackCooldownGoal)
+            if (!hasOrb)
             {
-                normalAttack.Invoke();
-                _basicAttackCooldown = 0;
+                if (_basicAttackCooldown >= _basicAttackCooldownGoal)
+                {
+                    normalAttack.Invoke();
+                    _basicAttackCooldown = 0;
+                }
             }
             else
             {
