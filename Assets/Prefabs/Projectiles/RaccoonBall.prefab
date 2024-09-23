@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: 7123593361693911382}
   - component: {fileID: 2487584900510465726}
   - component: {fileID: 7695426062487486879}
+  - component: {fileID: 8825359376855909104}
   m_Layer: 0
-  m_Name: RubbishBall
+  m_Name: RaccoonBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,6 +248,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &8825359376855909104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783992932023041390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad3f9afd469b4742ba949e1f2a83d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbProjectilePrefab: {fileID: 7298617281746096956, guid: f1595ca3a161cae48af787d8bf7fc2c1, type: 3}
 --- !u!1001 &1182509072472734924
 PrefabInstance:
   m_ObjectHideFlags: 0
