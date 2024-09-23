@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2301433297655800175}
   - component: {fileID: 5630871066546095690}
   - component: {fileID: 6649406981384941141}
+  - component: {fileID: 6973420576612790020}
   m_Layer: 0
   m_Name: GreenDumpster_IY
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2602498665112676946}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 16.51655, y: 0.3000002, z: 99.3646}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6973420576612790020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2602498665112676946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 299.99997, y: 206.25308, z: 213.9237}
+  m_Center: {x: 149.99998, y: 103.12654, z: 99.999985}

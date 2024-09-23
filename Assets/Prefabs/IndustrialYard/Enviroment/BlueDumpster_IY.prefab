@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 266228898804974976}
   - component: {fileID: 3755454878587669029}
   - component: {fileID: 1439736918583099119}
+  - component: {fileID: 8156583677610484610}
   m_Layer: 0
   m_Name: BlueDumpster_IY
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646835446160465722}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.26655, y: 0.3000002, z: 99.3646}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8156583677610484610
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646835446160465722}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 300.00015, y: 206.25308, z: 213.92384}
+  m_Center: {x: 150.00008, y: 103.12654, z: 100.000046}
