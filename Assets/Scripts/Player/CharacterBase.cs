@@ -146,6 +146,9 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("where to spawn projectiles on this character")]
     public Transform _projectileSpawnPosition;
 
+    [SerializeField, Tooltip("the pause screen object to create on pause")]
+    private GameObject _pauseScreen;
+
     [Header("Effects")]
 
     [Tooltip("weakness")]
@@ -640,6 +643,31 @@ public class CharacterBase : MonoBehaviour
                 ballAttackChargeBar.gameObject.SetActive(false);
             }
         }
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            GameManager.Instance.Pause(this);
+            input.SwitchCurrentActionMap("UI");
+            Instantiate(_pauseScreen);
+        }
+    }
+
+    public void OnUnPause(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            GameManager.Instance.UnPause(this);
+            input.SwitchCurrentActionMap("Player");
+        }
+    }
+
+    public void UnPause()
+    {
+        GameManager.Instance.UnPause(this);
+        input.SwitchCurrentActionMap("Player");
     }
 
     public IEnumerator KillBall(GameObject currentOrb)
