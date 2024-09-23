@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 380556358162270826}
   - component: {fileID: 8252697303617144653}
   - component: {fileID: 5609397189411050986}
+  - component: {fileID: 2327555214322669241}
   m_Layer: 7
   m_Name: FrogBall
   m_TagString: Untagged
@@ -346,3 +347,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackAmount: 40
   abTest: 0
+--- !u!114 &2327555214322669241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599871779557999481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad3f9afd469b4742ba949e1f2a83d3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbProjectilePrefab: {fileID: 7298617281746096956, guid: f1595ca3a161cae48af787d8bf7fc2c1, type: 3}
