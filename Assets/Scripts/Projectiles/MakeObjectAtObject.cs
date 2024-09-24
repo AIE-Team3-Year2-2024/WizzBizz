@@ -13,6 +13,10 @@ public class MakeObjectAtObject : MonoBehaviour
     [SerializeField]
     private GameObject _spawn;
 
+    /// <summary>
+    /// will spawn the prefab at spawns position if spawn exists otherwise it will spawn it at this objects position
+    /// </summary>
+    /// <param name="context"></param>
     public void MakeObject(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -28,6 +32,9 @@ public class MakeObjectAtObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will spawn the prefab at spawns position if spawn exists otherwise it will spawn it at this objects position
+    /// </summary>
     public void MakeObject()
     {
         if (_spawn != null)
@@ -40,11 +47,18 @@ public class MakeObjectAtObject : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will spawn the prefab as a child of this object 
+    /// </summary>
     public void MakeObjectAsChild()
     {
         Instantiate(_prefab, transform);
     }
 
+    /// <summary>
+    /// will spawn the prefab as a child of this object 
+    /// </summary>
+    /// <param name="context"></param>
     public void MakeObjectAsChild(InputAction.CallbackContext context)
     {
         if (context.performed)

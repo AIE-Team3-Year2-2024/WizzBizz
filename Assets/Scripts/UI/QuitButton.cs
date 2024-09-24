@@ -7,6 +7,10 @@ public class QuitButton : MonoBehaviour
 {
     [SerializeField, Tooltip("the name of the level to load")]
     private string _level;
+
+    /// <summary>
+    /// will load the inputted scene
+    /// </summary>
     public void LoadScene()
     {
         SceneManager.LoadScene(_level);

@@ -10,13 +10,10 @@ public class Dementia : MonoBehaviour
     [Tooltip("the object wich contains all of the players UI")]
     [SerializeField]
     private GameObject _UIParent;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    /// <summary>
+    /// manage lifetime and whther it is enabled
+    /// </summary>
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -26,11 +23,17 @@ public class Dementia : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// apply effect to player
+    /// </summary>
     private void OnEnable()
     {
         _UIParent.SetActive(false);
     }
 
+    /// <summary>
+    /// set the player back to normal
+    /// </summary>
     private void OnDisable()
     {
         _UIParent.SetActive(true);

@@ -11,6 +11,11 @@ public class AttackKnockback : MonoBehaviour
     [SerializeField]
     private bool abTest = false;
 
+    /// <summary>
+    /// will find a direction to knockback the colliding player and then pass that direction and amount to the player
+    /// </summary>
+    /// <param name="coll"></param>
+    /// <param name="player"></param>
     public void DoKnockback(Collision coll, CharacterBase player)
     {
         if (coll.contactCount > 0)

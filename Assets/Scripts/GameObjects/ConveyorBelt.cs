@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class ConveyorBelt : MonoBehaviour
 {
-    [Tooltip("the direction any object being hit by this will move")]
+    [Tooltip("the direction any object being hit by this will move(to controll speed just make this bigger or smaller)")]
     [SerializeField]
     private Vector3 direction;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    /// <summary>
+    /// this will move any object it comes accross by the inputted vector
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
         other.transform.position += direction * Time.deltaTime;

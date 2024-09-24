@@ -18,7 +18,9 @@ public class SpikeTile : MonoBehaviour
     [Tooltip("event invoked when damging the player")]
     public UnityEvent doWhenDamaging;
 
-    // Update is called once per frame
+    /// <summary>
+    /// will decrease _playerCollideTimer down to zero
+    /// </summary>
     void Update()
     {
         _playerCollideTimer -= Time.deltaTime;
@@ -28,6 +30,10 @@ public class SpikeTile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will increase _playerCollidide timer of colliding qwith a playre and if it reaches hit time will find the player and damage it
+    /// </summary>
+    /// <param name="other"></param>
     public void OnTriggerStay(Collider other)
     {
         CharacterBase character;

@@ -56,6 +56,9 @@ public class CharacterAbilities : MonoBehaviour
         _characterBase = GetComponent<CharacterBase>();
     }
 
+    /// <summary>
+    /// update timers and ui components
+    /// </summary>
     void Update()
     {
         if (_ability1Timer > 0.0f)
@@ -77,6 +80,10 @@ public class CharacterAbilities : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will do a seris of checks to see whther this ability should be invoked and will manage the charge up timer if this ability uses it
+    /// </summary>
+    /// <param name="context"></param>
     public void DoAbility1(InputAction.CallbackContext context)
     {
         if (ability1Toggle == false)
@@ -132,6 +139,10 @@ public class CharacterAbilities : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will do a seris of checks to see whther this ability should be invoked and will manage the charge up timer if this ability uses it
+    /// </summary>
+    /// <param name="context"></param>
     public void DoAbility2(InputAction.CallbackContext context)
     {
         if (ability2Toggle == false)

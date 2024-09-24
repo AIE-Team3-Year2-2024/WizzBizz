@@ -14,7 +14,9 @@ public class SnakeProjectileMovement : MonoBehaviour
 
     private float _progress = 0.25f;
 
-    // Update is called once per frame
+    /// <summary>
+    /// movesw this object on its right direction using a sin wave
+    /// </summary>
     void Update()
     {
         float wiggle = Mathf.Sin(_progress * (2 * Mathf.PI));

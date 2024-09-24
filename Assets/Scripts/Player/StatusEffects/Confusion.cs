@@ -8,13 +8,10 @@ public class Confusion : MonoBehaviour
     public float lifeTime;
 
     private CharacterBase _player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    /// <summary>
+    /// manage lifetime and whther it is enabled
+    /// </summary>
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -24,6 +21,9 @@ public class Confusion : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// apply effect to player
+    /// </summary>
     private void OnEnable()
     {
         if(_player == null)
@@ -33,6 +33,9 @@ public class Confusion : MonoBehaviour
         _player.confused = true;
     }
 
+    /// <summary>
+    /// set the player back to normal
+    /// </summary>
     private void OnDisable()
     {
         _player.confused = false;

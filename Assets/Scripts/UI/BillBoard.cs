@@ -14,6 +14,9 @@ public class BillBoard : MonoBehaviour
     private RectTransform _canvasTransform;
     private Vector3 _tmpLocalScale = new Vector3();
 
+    /// <summary>
+    /// uses the distance from the camera to find the size modifier
+    /// </summary>
     void Start()
     {
         _canvasTransform = GetComponent<RectTransform>();
@@ -31,7 +34,9 @@ public class BillBoard : MonoBehaviour
         _sizeModifier = _cameraDistance / _canvasTransform.localScale.x;
     }
 
-    
+    /// <summary>
+    /// changes this rotation and scale by the camera rotation distance and the size modifier
+    /// </summary>
     void Update()
     {
         // Adjusts UI rotation and position by world position.

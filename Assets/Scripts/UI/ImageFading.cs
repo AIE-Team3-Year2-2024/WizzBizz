@@ -5,18 +5,15 @@ using UnityEngine.UI;
 
 public class ImageFading : MonoBehaviour
 {
+    [Tooltip("the images that will fasde over time")]
     public Image[] images;
 
-    [SerializeField]
+    [SerializeField, Tooltip("how fast the images will fade")]
     private float speed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    /// <summary>
+    /// will minus the alpha of each image
+    /// </summary>
     void Update()
     {
         foreach(Image current in images)
@@ -25,6 +22,9 @@ public class ImageFading : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// sets the alpha of each image to one
+    /// </summary>
     public void SetAlphasToOne()
     {
         foreach(Image current in images)
