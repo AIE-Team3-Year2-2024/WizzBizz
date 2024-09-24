@@ -19,9 +19,13 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [SerializeField]
     private float effectTime;
 
-    [Tooltip("whether the object will destroy itself on collision")]
+    [Tooltip("whether the object will destroy itself on any collision")]
     [SerializeField]
     private bool destroyOnCollision;
+
+    [Tooltip("whether the object will destroy itself when it hits a player")]
+    [SerializeField]
+    private bool destroyOnPlayerCollision;
 
     [Tooltip("event invoked in OnDestroy")]
     public UnityEvent DoOnDestroy;
@@ -67,6 +71,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
             {
                 _knockbackComponent.DoKnockback(collision, player);
             }
+            if(destroyOnPlayerCollision)
+            {
+                Destroy(gameObject);
+            }
 
         }
 
@@ -93,6 +101,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
             Debug.Log("hit player with trigger");
             player.TakeDamage(damage, damageEffect, effectTime);
             DoOnHit.Invoke();
+            if (destroyOnPlayerCollision)
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (destroyOnCollision)
@@ -117,6 +129,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
             player.TakeDamage(damage, damageEffect, effectTime);
             DoOnHit.Invoke();
+            if (destroyOnPlayerCollision)
+            {
+                Destroy(gameObject);
+            }
         }
 
         if (destroyOnCollision)
