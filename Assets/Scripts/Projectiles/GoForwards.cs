@@ -9,7 +9,9 @@ public class GoForwards : MonoBehaviour
     [SerializeField]
     private float speed;
 
-    // Update is called once per frame
+    /// <summary>
+    /// moves this obejct in its forwards direction by its speed and delta time
+    /// </summary>
     void Update()
     {
         transform.position += transform.forward * Time.deltaTime * speed;

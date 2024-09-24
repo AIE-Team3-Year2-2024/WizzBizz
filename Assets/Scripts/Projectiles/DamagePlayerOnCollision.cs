@@ -46,6 +46,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
         _knockbackComponent = GetComponent<AttackKnockback>();
     }
 
+    /// <summary>
+    /// if this hits a player this isnt the owner do damage to them
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
@@ -72,6 +76,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// if this hits a player this isnt the owner do damage to them
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
@@ -93,7 +101,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// if this hits a player this isnt the owner do damage to them
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
@@ -114,6 +125,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// get the player who made this object so this connot damage them
+    /// </summary>
+    /// <param name="inputPlayer"></param>
     public void SetOwner(CharacterBase inputPlayer)
     {
         ownerPlayer = inputPlayer;
@@ -130,6 +145,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
             ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").canceled += controlComponent.OnAim;
         }
     }
+
 
     private void OnDestroy()
     {

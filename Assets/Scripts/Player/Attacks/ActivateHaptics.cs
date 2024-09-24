@@ -19,12 +19,18 @@ public class ActivateHaptics : MonoBehaviour
     [Tooltip("how long this vibration will last")]
     [SerializeField]
     private float time;
-    // Start is called before the first frame update
+    
+    /// <summary>
+    /// find player
+    /// </summary>
     void Start()
     {
         player = GetComponent<CharacterBase>();
     }
 
+    /// <summary>
+    /// tells the player to vibrate thier controller
+    /// </summary>
     public void Vibrate()
     {
         StartCoroutine(player.AdjustableHaptics(lowFreq, highFreq, time));

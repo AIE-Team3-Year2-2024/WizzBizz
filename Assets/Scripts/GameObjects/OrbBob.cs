@@ -11,6 +11,9 @@ public class OrbBob : MonoBehaviour
 
     private float _floatTimer = 0.0f;
 
+    /// <summary>
+    /// uses a timer to move this object up and down on a sin wave
+    /// </summary>
     void Update()
     {
         if (!shouldBob)

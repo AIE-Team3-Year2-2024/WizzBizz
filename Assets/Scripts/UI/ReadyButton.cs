@@ -5,17 +5,6 @@ using UnityEngine;
 public class ReadyButton : MonoBehaviour
 {
     private List<CursorController> _acceptedPlayers = new List<CursorController>();
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /// <summary>
     /// player cursors call this when they  press the accept button wich will take their ability to move 

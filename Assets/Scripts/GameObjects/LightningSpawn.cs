@@ -26,6 +26,10 @@ public class LightningSpawn : MonoBehaviour
         StartCoroutine(SpawnLightning());
     }
 
+    /// <summary>
+    /// waits for random time and then spawns a prefab at one of the spawns randomly
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator SpawnLightning()
     {
         yield return new WaitForSeconds(Random.Range(_minTimer, _maxTimer));

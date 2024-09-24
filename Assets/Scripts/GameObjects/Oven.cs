@@ -46,6 +46,10 @@ public class Oven : MonoBehaviour
         StartCoroutine(OvenRoutine());
     }
 
+    /// <summary>
+    /// will wait for a random time then spawn a new object and rotate it on a loop 
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator OvenRoutine()
     {
         yield return new WaitForSeconds(Random.Range(_minimumOvenTime, _maximumOvenTime));
