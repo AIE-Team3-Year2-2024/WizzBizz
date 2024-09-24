@@ -91,6 +91,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _slowdownLength;
 
+    private float _currentTimeScale = 1;
+
+    private CharacterBase _pausingPlayer;
+
     private CinemachineTargetGroup currentTargetGroup;
 
     [HideInInspector]
@@ -257,6 +261,37 @@ public class GameManager : MonoBehaviour
         return _connectedPlayerCount;
     }
 
+    public void Pause(CharacterBase pauser)
+    {
+        Time.timeScale = 0;
+        _pausingPlayer = pauser;
+        foreach (CharacterBase c in _alivePlayers.Keys)
+        {
+            if(c != pauser)
+            {
+                c.GetComponent<PlayerInput>().DeactivateInput();
+            }
+        }
+    }
+
+    public void UnPause(CharacterBase pauser)
+    {
+        Time.timeScale = _currentTimeScale;
+        _pausingPlayer = null;
+        foreach (CharacterBase c in _alivePlayers.Keys)
+        {
+            if (c != pauser)
+            {
+                c.GetComponent<PlayerInput>().ActivateInput();
+            }
+        }
+    }
+
+    public void UnPause()
+    {
+        _pausingPlayer.UnPause();
+    }
+
     public void PlayerDeath(CharacterBase player)
     {
         if (_alivePlayers.Count() > 1)
@@ -327,6 +362,8 @@ public class GameManager : MonoBehaviour
 
         Time.timeScale = _slowTimeScale;
 
+        _currentTimeScale = _slowTimeScale;
+
         yield return new WaitForSeconds(_slowdownLength * _slowTimeScale);
 
         currentTargetGroup.m_Targets = oldTargets;
@@ -346,6 +383,8 @@ public class GameManager : MonoBehaviour
         currentTargetGroup.m_Targets = aliveTargets;
 
         Time.timeScale = 1;
+
+        _currentTimeScale = 1;
     }
 
     public IEnumerator StartGameRoutine()
