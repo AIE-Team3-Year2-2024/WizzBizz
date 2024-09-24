@@ -24,13 +24,19 @@ public class SpawnObjectAtTransform : MonoBehaviour
         player = GetComponentInParent<CharacterBase>();
     }
 
+    /// <summary>
+    /// will spawn the projectile at _spawns position (also handles life time and damage player component settings)
+    /// </summary>
     public void SpawnObjectAtSpawn()
     {
         GameObject newProjectile = Instantiate(projectile, _spawn.position, transform.rotation);
 
-        DamagePlayerOnCollision collision = newProjectile.GetComponent<DamagePlayerOnCollision>();
-        collision.SetOwner(player);
-        collision.damage *= player.damageMult;
+        DamagePlayerOnCollision damageComponent;
+        if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+        {
+            damageComponent.damage *= player.damageMult;
+            damageComponent.SetOwner(player);
+        }
 
         if (lifetime != 0)
         {
@@ -38,13 +44,19 @@ public class SpawnObjectAtTransform : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will spawn the projectile at _spawns position (also handles life time and damage player component settings) specifcly for projectiles with a frog id component
+    /// </summary>
     public void FrogSpawnObjectAtSpawn()
     {
         GameObject newProjectile = Instantiate(projectile, _spawn.position, transform.rotation);
 
-        DamagePlayerOnCollision collision = newProjectile.GetComponent<DamagePlayerOnCollision>();
-        collision.SetOwner(player);
-        collision.damage *= player.damageMult;
+        DamagePlayerOnCollision damageComponent;
+        if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+        {
+            damageComponent.damage *= player.damageMult;
+            damageComponent.SetOwner(player);
+        }
 
         FrogID frogid = null;
         if ((frogid = newProjectile.GetComponent<FrogID>()) != null)

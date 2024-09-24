@@ -9,23 +9,26 @@ public class MoveInArc : MonoBehaviour
 
     private Vector3 endPos;
 
+    [Tooltip("how fast this object will move along the arc")]
     public float speed;
 
     private float arcCompletion = 0;
 
+    [Tooltip("decides how high the arc will be")]
     public float heightMultiplyer;
 
     [Tooltip("event to be invoked when this object is destroyed")]
     [SerializeField]
     private UnityEvent doOnDestroy;
 
-    // Start is called before the first frame update
     void Start()
     {
         startPos = transform.position;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// moves this object by a timer along a curve made by the height multiplyer and destroys it at the end of the curve
+    /// </summary>
     void Update()
     {
         arcCompletion += Time.deltaTime * speed;

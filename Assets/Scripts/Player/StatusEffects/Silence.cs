@@ -10,7 +10,9 @@ public class Silence : MonoBehaviour
 
     private PlayerInput _input;
 
-    // Update is called once per frame
+    /// <summary>
+    /// manage lifetime and whther it is enabled
+    /// </summary>
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -20,6 +22,9 @@ public class Silence : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// apply effect to player
+    /// </summary>
     private void OnEnable()
     {
         if (_input == null)
@@ -31,6 +36,9 @@ public class Silence : MonoBehaviour
         _input.actions.FindAction("Ability 2").Disable();
     }
 
+    /// <summary>
+    /// set the player back to normal
+    /// </summary>
     private void OnDisable()
     {
         _input.actions.FindAction("Ability 1").Enable();

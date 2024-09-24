@@ -12,7 +12,9 @@ public class Disabled : MonoBehaviour
 
     private int _currentAbility;
 
-    // Update is called once per frame
+    /// <summary>
+    /// manage lifetime and whther it is enabled
+    /// </summary>
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -22,6 +24,9 @@ public class Disabled : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// apply effect to player
+    /// </summary>
     private void OnEnable()
     {
         if (_input == null)
@@ -34,6 +39,9 @@ public class Disabled : MonoBehaviour
         _input.actions.FindAction("Ability " + _currentAbility).Disable();
     }
 
+    /// <summary>
+    /// set the player back to normal
+    /// </summary>
     private void OnDisable()
     {
         _input.actions.FindAction("Ability " + _currentAbility).Enable();
