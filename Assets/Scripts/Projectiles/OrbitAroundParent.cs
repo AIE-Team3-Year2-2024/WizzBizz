@@ -19,7 +19,9 @@ public class OrbitAroundParent : MonoBehaviour
 
     private Transform target;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// sets the target position from this objects parents position
+    /// </summary>
     void Start()
     {
         target = transform.parent;
@@ -29,16 +31,22 @@ public class OrbitAroundParent : MonoBehaviour
         _targetPosition.z = target.position.z;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// update the position of this object based on the parents position and time
+    /// </summary>
     void Update()
     {
+        //increase orbit amount by time and speed
         _orbitAmount += Time.deltaTime * _orbitSpeed;
+        //limit the orbit amount to be under one
         if (_orbitAmount >= 1.0f)
             _orbitAmount = 0.0f;
 
+        //apply smoothing
         Vector3 targetPos = new Vector3(target.position.x, target.position.y, target.position.z);
         _targetPosition = Vector3.Slerp(_targetPosition, targetPos, Time.deltaTime * _followSpeed);
 
+        //update the x and z position by sin and cos
         Vector3 orbitVector = Vector3.zero;
         orbitVector.x = _targetPosition.x + Mathf.Sin(_offset * TAU + _orbitAmount * TAU) * _distance;
         orbitVector.z = _targetPosition.z + Mathf.Cos(_offset * TAU + _orbitAmount * TAU) * _distance;

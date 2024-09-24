@@ -24,18 +24,15 @@ public class SpawnInRange : MonoBehaviour
     [SerializeField]
     private GameObject _object;
 
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnLoop());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// will spawn object on a loop with its position randomly being within range of this objects position
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator SpawnLoop()
     {
         for(int i = 0; i < _objectAmount; i++)

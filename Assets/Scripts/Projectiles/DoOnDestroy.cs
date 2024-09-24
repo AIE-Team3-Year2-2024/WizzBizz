@@ -5,23 +5,14 @@ using UnityEngine.Events;
 
 public class DoOnDestroy : MonoBehaviour
 {
+    [Tooltip("any function in this event will be called when this object is destroyed")]
     public UnityEvent onDestroy;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// invokes the event when this object is destroyed
+    /// </summary>
     public void OnDestroy()
     {
-        Debug.Log("on destroy");
         onDestroy.Invoke();
-
     }
 }

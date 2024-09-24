@@ -5,7 +5,10 @@ using UnityEngine.InputSystem;
 
 public class ControlProjectileDirection : MonoBehaviour
 {
-
+    /// <summary>
+    /// will rotate this object based on the vector in context
+    /// </summary>
+    /// <param name="context"></param>
     public void OnAim(InputAction.CallbackContext context)
     {
         Vector3 aimDirection = new Vector3();

@@ -43,7 +43,9 @@ public class SpawnObjectAtAim : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// changes the lob aimers position
+    /// </summary>
     void Update()
     {
         if (lobAimer && range != 0)
@@ -52,6 +54,10 @@ public class SpawnObjectAtAim : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// used to make the object at the lob aimers position (alos handles life time damage player component seetings and minion owning)
+    /// </summary>
+    /// <param name="context"></param>
     public void SpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
         if (!_checker._colliding)
@@ -82,6 +88,10 @@ public class SpawnObjectAtAim : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// used to make an object with a frog id at the lobaimers position (alos handles life time damage player component seetings and minion owning)
+    /// </summary>
+    /// <param name="context"></param>
     public void FrogSpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
         if (!_checker._colliding)

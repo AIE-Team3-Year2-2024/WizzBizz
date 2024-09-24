@@ -16,6 +16,10 @@ public class DamageDamagable : MonoBehaviour
     [Tooltip("event invoked in OnDestroy")]
     public UnityEvent DoOnDestroy;
 
+    /// <summary>
+    /// will damage any found damagable script
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Damagable>())
@@ -30,6 +34,9 @@ public class DamageDamagable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// invokes the OnDestroy event
+    /// </summary>
     private void OnDestroy()
     {
         DoOnDestroy.Invoke();

@@ -10,18 +10,10 @@ public class BouncesBeforeDestroy : MonoBehaviour
 
     private int _bounces = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// will reflect the forwards vector of this if it has bounced less than _deathBounceAmount
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if(_bounces < _deathBounceAmount || _deathBounceAmount == 0)
