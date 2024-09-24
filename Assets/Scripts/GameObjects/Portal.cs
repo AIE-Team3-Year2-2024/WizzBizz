@@ -16,6 +16,10 @@ public class Portal : MonoBehaviour
 
     public int frogID;
 
+    /// <summary>
+    /// will move anything with the correct frog id to the end point
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponent<FrogID>()?.ID == frogID)

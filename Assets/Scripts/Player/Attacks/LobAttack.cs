@@ -24,7 +24,8 @@ public class LobAttack : MonoBehaviour
     [Tooltip("how long before this object destroys itself (wont destroy itself if set to 0)")]
     [SerializeField]
     private float lifetime;
-    // Start is called before the first frame update
+    
+
     void Start()
     {
         player = GetComponent<CharacterBase>();
@@ -43,7 +44,9 @@ public class LobAttack : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// changes the lob aimers position
+    /// </summary>
     void Update()
     {
         if (lobAimer && range != 0)
@@ -52,6 +55,10 @@ public class LobAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// used to make the lobbed object (also handles lifetime)
+    /// </summary>
+    /// <param name="context"></param>
     public void SpawnLobObject(InputAction.CallbackContext context)
     {
         if (!_checker._colliding)
@@ -59,9 +66,11 @@ public class LobAttack : MonoBehaviour
             GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
             newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
 
-            if(newProjectile.GetComponent<DamagePlayerOnCollision>())
+            DamagePlayerOnCollision damageComponent;
+            if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
             {
-                newProjectile.GetComponent<DamagePlayerOnCollision>().damage *= player.damageMult;
+                damageComponent.damage *= player.damageMult;
+                damageComponent.SetOwner(player);
             }
 
             if (lifetime != 0)
@@ -71,6 +80,10 @@ public class LobAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// used to make lobbed object that has a frog id on it (also handles lifetime)
+    /// </summary>
+    /// <param name="context"></param>
     public void FrogSpawnLobObject(InputAction.CallbackContext context)
     {
         if (!_checker._colliding)

@@ -92,6 +92,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _slowdownLength;
 
+    private float _currentTimeScale = 1;
+
+    private CharacterBase _pausingPlayer;
+
     private CinemachineTargetGroup currentTargetGroup;
 
     [HideInInspector]
@@ -119,13 +123,9 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    /// <summary>
+    /// before the game starts this is in charge of adding controllers and during the game its in charge of the round timer and spawning orbs
+    /// </summary>
     void Update()
     {
         if(addingControllers)
@@ -210,6 +210,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// is used by the cursour when they pick a character
+    /// </summary>
+    /// <param name="listPosition"></param>
+    /// <param name="selection"></param>
     public void SetSelectedCharacter(int listPosition, GameObject selection)
     {
         _playerData[listPosition].characterSelect = selection;
@@ -235,6 +240,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// removes the player from alive players and player data
+    /// </summary>
+    /// <param name="player"></param>
     public void DisconnectPlayer(CharacterBase player)
     {
         PlayerInput playerInput = player.GetComponent<PlayerInput>();
@@ -253,11 +262,58 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public int GetConnectedPlayerCount()
     {
         return _connectedPlayerCount;
     }
 
+    /// <summary>
+    /// pauses time and deactivates input on all players other than the pauser
+    /// </summary>
+    /// <param name="pauser"></param>
+    public void Pause(CharacterBase pauser)
+    {
+        Time.timeScale = 0;
+        _pausingPlayer = pauser;
+        foreach (CharacterBase c in _alivePlayers.Keys)
+        {
+            if(c != pauser)
+            {
+                c.GetComponent<PlayerInput>().DeactivateInput();
+            }
+        }
+    }
+
+    /// <summary>
+    /// puts time back to normal and re activates all players
+    /// </summary>
+    /// <param name="pauser"></param>
+    public void UnPause(CharacterBase pauser)
+    {
+        Time.timeScale = _currentTimeScale;
+        _pausingPlayer = null;
+        foreach (CharacterBase c in _alivePlayers.Keys)
+        {
+            if (c != pauser)
+            {
+                c.GetComponent<PlayerInput>().ActivateInput();
+            }
+        }
+    }
+
+    /// <summary>
+    /// used to unpause the game from the game manager e.g. with a button
+    /// </summary>
+    public void UnPause()
+    {
+        _pausingPlayer.UnPause();
+    }
+
+    /// <summary>
+    /// removes and destroys dead player and does a win check
+    /// </summary>
+    /// <param name="player"></param>
     public void PlayerDeath(CharacterBase player)
     {
         if (_alivePlayers.Count() > 1)
@@ -265,6 +321,7 @@ public class GameManager : MonoBehaviour
             CharacterBase[] deadPlayer = new CharacterBase[]{ player };
             StartSlowDown(deadPlayer);
             _alivePlayers.Remove(player);
+            Destroy(player.gameObject);
         }
         
         if (_alivePlayers.Count() <= 1)
@@ -275,6 +332,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// adds score to the first alive player and either loads the next round or the end level
+    /// </summary>
     public void PlayerWin()
     {
         foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
@@ -294,11 +354,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// resets orb timer
+    /// </summary>
     public void OrbSpawnerCollected()
     {
         _orbSpawnerTimer = orbSpawnerCooldown; // Reset timer.
         _orbCollected = true;
-        Debug.Log("Orb has been collected!");
     }
 
     public void StartGame()
@@ -311,6 +373,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SlowDownEffect(players));
     }
 
+    /// <summary>
+    /// slows down time and then changes the transform group whan waits and reverts the time and transform group back to normal
+    /// </summary>
+    /// <param name="players"></param>
+    /// <returns></returns>
     public IEnumerator SlowDownEffect(CharacterBase[] players)
     {
         CinemachineTargetGroup.Target[] oldTargets = currentTargetGroup.m_Targets;
@@ -325,6 +392,8 @@ public class GameManager : MonoBehaviour
         currentTargetGroup.m_Targets = slowTargs;
 
         Time.timeScale = _slowTimeScale;
+
+        _currentTimeScale = _slowTimeScale;
 
         yield return new WaitForSeconds(_slowdownLength * _slowTimeScale);
 
@@ -345,8 +414,14 @@ public class GameManager : MonoBehaviour
         currentTargetGroup.m_Targets = aliveTargets;
 
         Time.timeScale = 1;
+
+        _currentTimeScale = 1;
     }
 
+    /// <summary>
+    /// sets the game manager back to normal then loads a scene waits for the scene to load and then sets up the scene
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator StartGameRoutine()
     {
         Time.timeScale = 1;

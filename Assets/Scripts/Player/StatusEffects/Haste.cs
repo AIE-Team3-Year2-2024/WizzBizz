@@ -12,13 +12,10 @@ public class Haste : MonoBehaviour
     private float _speedAdd;
 
     private CharacterBase _player;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
+    /// <summary>
+    /// manage lifetime and whther it is enabled
+    /// </summary>
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -28,6 +25,9 @@ public class Haste : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// apply effect to player
+    /// </summary>
     private void OnEnable()
     {
         if (_player == null)
@@ -37,6 +37,9 @@ public class Haste : MonoBehaviour
         _player.AddSpeed(_speedAdd);
     }
 
+    /// <summary>
+    /// set the player back to normal
+    /// </summary>
     private void OnDisable()
     {
         _player.AddSpeed(-_speedAdd);

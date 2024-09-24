@@ -16,13 +16,17 @@ public class SnowmanSpin : MonoBehaviour
 
     private float _triggerRadius;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// get th radius of the collider
+    /// </summary>
     void Start()
     {
         _triggerRadius = _trigger.radius;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// rotate this object by a multiplyer found form the distances of all colliding player objects
+    /// </summary>
     void Update()
     {
         float currentMult = 0;
@@ -35,6 +39,10 @@ public class SnowmanSpin : MonoBehaviour
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + (currentMult * _speed), transform.rotation.eulerAngles.z);
     }
 
+    /// <summary>
+    /// store any colliding players
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -43,6 +51,10 @@ public class SnowmanSpin : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// remove any player exiting this objects collider
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
