@@ -8,7 +8,7 @@ public class Minion : MonoBehaviour
 {
     [Tooltip("the transforms of the other players to target")]
     private List<Transform> targets = new List<Transform>();
-
+    
     [Tooltip("how often to update this agents target")]
     [SerializeField]
     private float updateTime;
