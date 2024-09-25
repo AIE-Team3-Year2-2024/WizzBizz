@@ -99,7 +99,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
             Debug.Log("hit player with trigger");
-            player.TakeDamage(damage, damageEffect, effectTime);
+            if (!collision.isTrigger)
+            {
+                player.TakeDamage(damage, damageEffect, effectTime);
+            }
             DoOnHit.Invoke();
             if (destroyOnPlayerCollision)
             {

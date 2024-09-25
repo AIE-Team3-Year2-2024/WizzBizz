@@ -26,6 +26,7 @@ public class BallCollision : MonoBehaviour
                     character.StopCoroutine(character.CatchRoutine());
                     character.GetComponent<PlayerInput>().ActivateInput();
                     character.catchTrigger.enabled = false;
+                    character.InvincibilityForFrames(5);
 
                     CharacterBase[] player = new CharacterBase[] { character };
 
