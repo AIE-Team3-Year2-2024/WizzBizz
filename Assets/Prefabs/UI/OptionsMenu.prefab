@@ -381,6 +381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3142759684601209951}
   - component: {fileID: 8006647225263908447}
+  - component: {fileID: 1894695841904473777}
   m_Layer: 0
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -421,6 +422,22 @@ MonoBehaviour:
   menuButtons:
   - {fileID: 2649899433792567485}
   firstSelected: {fileID: 2649899433792567485}
+  _lastSelected: {fileID: 0}
+  _canvasReferenceResolution: {x: 0, y: 0}
+  _canvasGroup: {fileID: 0}
+  _menuManager: {fileID: 0}
+--- !u!225 &1894695841904473777
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3142759684601209948}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3142759684886250012
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +615,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.88235295, g: 0.88235295, b: 0.88235295, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -617,4 +634,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4102228132860965576}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8006647225263908447}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: GoBackScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

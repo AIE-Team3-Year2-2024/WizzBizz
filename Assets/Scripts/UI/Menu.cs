@@ -19,7 +19,7 @@ public class Menu : MonoBehaviour
 
     [HideInInspector] public Vector2 _canvasReferenceResolution = Vector2.zero;
     [HideInInspector] public CanvasGroup _canvasGroup = null;
-    [HideInInspector] public MenuManager _menuManager = null;
+    [HideInInspector] public MenuManager _menuManager = null; // MenuManager is a singleton but this is probably safer idk.
 
     public enum MenuTransitionDirection
     {
@@ -36,6 +36,27 @@ public class Menu : MonoBehaviour
             _canvasReferenceResolution = cs.referenceResolution;
 
         _lastSelected = firstSelected;
+    }
+
+    // Wrapper functions so we don't have to rely on a MenuManager being in the scene.
+    public void GoBackScene()
+    {
+        if (_menuManager == null)
+        {
+            Debug.LogError("Menu Manager is null on Menu: " + gameObject.name);
+            return;
+        }
+        _menuManager.GoBackScene();
+    }
+
+    public void GoBackMenu()
+    {
+        if (_menuManager == null)
+        {
+            Debug.LogError("Menu Manager is null on Menu: " + gameObject.name);
+            return;
+        }
+        _menuManager.GoBackMenu();
     }
 
 }

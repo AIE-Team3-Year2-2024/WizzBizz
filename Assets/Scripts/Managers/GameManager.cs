@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
     {
         if(addingControllers)
         {
-            for (int i = 0; i < Gamepad.all.Count; i++)
+            /*for (int i = 0; i < Gamepad.all.Count; i++)
             {
                 bool alreadyContainsGamepad = false;
                 for (int j = 0; j < _playerData.Count(); j++)
@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
 
                     _connectedPlayerCount++;
                 }
-            }
+            }*/
         } else
         {
             _roundTimer -= Time.deltaTime;

@@ -5,9 +5,12 @@ using Pixelplacement;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class MenuManager : MonoBehaviour
 {
+    static public MenuManager Instance { get; private set; }
+
     [Tooltip("The curve that dictates the smoothing of the transition.")]
     public AnimationCurve transitionCurve;
     [Tooltip("How long it will take for the menus to fully transition.")]
@@ -22,15 +25,28 @@ public class MenuManager : MonoBehaviour
     private Menu _targetMenu = null;
     private Menu _lastActiveMenu = null;
 
+    private string _lastActiveScene = string.Empty;
+
     private List<Menu> menus = new List<Menu>();
+
+    private List<PlayerInput> controllers = new List<PlayerInput>();
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
+        PlayerInput primaryInput = null;
+        if (primaryInput = GetComponentInChildren<PlayerInput>())
+            controllers.Add(primaryInput);
+
         InitializeManager();
 
         if (fadeCanvas != null)
@@ -44,12 +60,6 @@ public class MenuManager : MonoBehaviour
         PopulateMenus();
 
         Menu firstMenu = null;
-        SceneInfo info = FindObjectOfType<SceneInfo>();
-        if (info != null)
-        {
-            firstMenu = info.firstMenu;
-        }
-
         foreach (Menu m in menus)
         {
             if (m.gameObject.activeInHierarchy == false)
@@ -63,6 +73,12 @@ public class MenuManager : MonoBehaviour
             m._canvasGroup.blocksRaycasts = true;
 
             m.gameObject.SetActive(false);
+        }
+
+        SceneInfo info = FindObjectOfType<SceneInfo>();
+        if (info != null)
+        {
+            firstMenu = info.firstMenu;
         }
 
         if (firstMenu != null && menus.Contains(firstMenu))
@@ -99,9 +115,18 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void GoBack()
+    public void GoBackMenu()
     {
+        if (_lastActiveMenu == null) 
+            return;
         SetTargetMenu(_lastActiveMenu);
+    }
+
+    public void GoBackScene()
+    {
+        if (_lastActiveScene == string.Empty)
+            return;
+        FadeToScene(_lastActiveScene);
     }
 
     public void FadeToScene(string sceneName)
@@ -120,6 +145,8 @@ public class MenuManager : MonoBehaviour
                 _activeMenu = null;
                 _lastActiveMenu = null;
                 _targetMenu = null;
+
+                _lastActiveScene = SceneManager.GetActiveScene().name;
 
                 StartCoroutine(LoadSpecifiedScene(sceneName));
             }, // Complete callback. 
@@ -171,7 +198,7 @@ public class MenuManager : MonoBehaviour
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
-        while (!asyncLoad.isDone)
+        while (!asyncLoad.isDone) // Wait until loaded.
         {
             yield return null;
         }
