@@ -83,6 +83,8 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _health;
 
+    private bool _invincible = false;
+
     [Tooltip("how long the player will have the orb before it dissapears")]
     [SerializeField]
     private float _ballLifetime;
@@ -461,7 +463,7 @@ public class CharacterBase : MonoBehaviour
     /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
-        if(_health <= 0)
+        if(_health <= 0 || _invincible)
         {
             return;
         }
@@ -486,7 +488,7 @@ public class CharacterBase : MonoBehaviour
     /// <param name="time"></param>
     public void TakeDamage(float damage, StatusEffects effect, float time)
     {
-        if (_health <= 0)
+        if (_health <= 0 || _invincible)
         {
             return;
         }
@@ -621,6 +623,33 @@ public class CharacterBase : MonoBehaviour
                 }
 
         }
+    }
+
+    /// <summary>
+    /// makes the player unable to take damage for time
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public IEnumerator InvincibiltyForTime(float time)
+    {
+        _invincible = true;
+        yield return new WaitForSeconds(time);
+        _invincible = false;
+    }
+
+    /// <summary>
+    /// makes the player unable to take damge for as many frames as frames is equal to
+    /// </summary>
+    /// <param name="frames"></param>
+    /// <returns></returns>
+    public IEnumerator InvincibilityForFrames(int frames)
+    {
+        _invincible = true;
+        for(int i = 0; i > frames; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        _invincible = false;
     }
 
     /// <summary>
