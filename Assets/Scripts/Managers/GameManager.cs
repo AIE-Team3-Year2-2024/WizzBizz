@@ -57,8 +57,7 @@ public class GameManager : MonoBehaviour
     private float endGameDamageMult;
 
     [Tooltip("A reference to the Arena UI canvas.")]
-    [SerializeField]
-    private Canvas arenaUICanvas;
+    public Canvas arenaUICanvas;
 
     [Tooltip("A reference to the UI text object for the round timer.")]
     [SerializeField]
