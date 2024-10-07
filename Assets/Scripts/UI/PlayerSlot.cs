@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 public class PlayerSlot : MonoBehaviour
@@ -11,7 +12,14 @@ public class PlayerSlot : MonoBehaviour
     public CanvasGroup selectArrows;
     public CanvasGroup options;
 
+    [HideInInspector] public int _playerID = -1;
     [HideInInspector] public bool _playerJoined = false;
+    [HideInInspector] public bool _playerReady = false;
+
+    [HideInInspector] public int _selectedCharacterIndex = -1;
+
+    [HideInInspector]
+    public MultiplayerEventSystem _controllerEventSystem = null;
 
     public void OnEnable()
     {
@@ -20,7 +28,7 @@ public class PlayerSlot : MonoBehaviour
 
     public void Start()
     {
-        if (joinText == null || playerSelect == null || selectArrows == null || options == null)
+        if (!joinText || !playerSelect || !selectArrows || !options)
         {
             Debug.LogError("Player slot has not been setup! (" + gameObject.name + ")");
             return;
@@ -38,12 +46,13 @@ public class PlayerSlot : MonoBehaviour
         playerSelect.GetComponentInChildren<PortraitsAnchor>()._playerSelect = playerSelect;
     }
 
-    public void JoinPlayer()
+    public void JoinPlayer(MultiplayerEventSystem mm)
     {
         if (_playerJoined == true)
             return;
-
+        
         Debug.Log("ANOTHER JOINED TEST");
+        _controllerEventSystem = mm;
 
         joinText.alpha = 0.0f;
         joinText.interactable = false;
@@ -53,7 +62,7 @@ public class PlayerSlot : MonoBehaviour
         selectArrows.interactable = true;
         options.gameObject.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(playerSelect.gameObject);
+        mm.SetSelectedGameObject(playerSelect.gameObject);
 
         _playerJoined = true;
     }

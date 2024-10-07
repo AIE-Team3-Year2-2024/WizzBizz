@@ -6,11 +6,14 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 
 public class MenuManager : MonoBehaviour
 {
     static public MenuManager Instance { get; private set; }
 
+    public PlayerInput primaryController = null;
+    
     [Tooltip("The curve that dictates the smoothing of the transition.")]
     public AnimationCurve transitionCurve;
     [Tooltip("How long it will take for the menus to fully transition.")]
@@ -27,9 +30,14 @@ public class MenuManager : MonoBehaviour
 
     private string _lastActiveScene = string.Empty;
 
-    private List<Menu> menus = new List<Menu>();
+    private List<Menu> _menus = new List<Menu>();
 
-    private List<PlayerInput> controllers = new List<PlayerInput>();
+    private List<PlayerInput> _controllers = new List<PlayerInput>();
+
+    private MultiplayerEventSystem _primaryEventSystem = null;
+    
+    // TODO: Back on controller button press.
+    // TODO: Handle controller disconnect/reconnect.
 
     void Awake()
     {
@@ -43,10 +51,12 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        PlayerInput primaryInput = null;
-        if (primaryInput = GetComponentInChildren<PlayerInput>())
-            controllers.Add(primaryInput);
-
+        if (primaryController != null)
+        {
+            _controllers.Add(primaryController);
+            _primaryEventSystem = primaryController.GetComponentInChildren<MultiplayerEventSystem>();
+        }
+        
         InitializeManager();
 
         if (fadeCanvas != null)
@@ -60,7 +70,7 @@ public class MenuManager : MonoBehaviour
         PopulateMenus();
 
         Menu firstMenu = null;
-        foreach (Menu m in menus)
+        foreach (Menu m in _menus)
         {
             if (m.gameObject.activeInHierarchy == false)
             {
@@ -76,20 +86,28 @@ public class MenuManager : MonoBehaviour
         }
 
         SceneInfo info = FindObjectOfType<SceneInfo>();
-        if (info != null)
+        if (info)
         {
             firstMenu = info.firstMenu;
         }
 
-        if (firstMenu != null && menus.Contains(firstMenu))
+        if (firstMenu && _menus.Contains(firstMenu))
         {
             _activeMenu = firstMenu;
             _activeMenu._canvasGroup.interactable = true;
             _activeMenu._canvasGroup.blocksRaycasts = false;
             _activeMenu.gameObject.SetActive(true);
 
-            if (_activeMenu.firstSelected != null)
-                EventSystem.current.SetSelectedGameObject(_activeMenu.firstSelected.gameObject);
+            if (_activeMenu.firstSelected)
+                _primaryEventSystem.SetSelectedGameObject(_activeMenu.firstSelected.gameObject);
+        }
+    }
+
+    public void AddController(PlayerInput controller)
+    {
+        if (controller != null && _controllers.Contains(controller) == false)
+        {
+            _controllers.Add(controller);
         }
     }
 
@@ -101,7 +119,7 @@ public class MenuManager : MonoBehaviour
         _targetMenu = menuObj;
         _lastActiveMenu = _activeMenu;
 
-        _activeMenu._lastSelected = EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>();
+        _activeMenu._lastSelected = _primaryEventSystem.currentSelectedGameObject.GetComponent<Selectable>();
 
         switch (_activeMenu.transitionDirection)
         {
@@ -180,7 +198,7 @@ public class MenuManager : MonoBehaviour
                         nextMenu._canvasGroup.blocksRaycasts = false;
 
                         Selectable selectedObject = nextMenu._lastSelected == null ? nextMenu.firstSelected : nextMenu._lastSelected;
-                        EventSystem.current.SetSelectedGameObject(selectedObject.gameObject);
+                        _primaryEventSystem.SetSelectedGameObject(selectedObject.gameObject);
                     }, // Complete callback. 
                     false);
             }, // Complete callback.
@@ -189,9 +207,9 @@ public class MenuManager : MonoBehaviour
 
     private void PopulateMenus()
     {
-        menus.Clear();
-        Menu[] arr = FindObjectsByType<Menu>(FindObjectsSortMode.None);
-        menus.AddRange(arr);
+        _menus.Clear();
+        Menu[] arr = FindObjectsByType<Menu>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        _menus.AddRange(arr);
     }
 
     IEnumerator LoadSpecifiedScene(string sceneName)

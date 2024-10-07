@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class PortraitsAnchor : MonoBehaviour
 {
+    public PlayerSlot parentSlot = null;
+    
     public List<RectTransform> portraits = new List<RectTransform>();
     public RectTransform defaultPortrait = null;
 
@@ -47,6 +49,9 @@ public class PortraitsAnchor : MonoBehaviour
             Vector3 newPosition = _theActualTransform.anchoredPosition;
             newPosition.x = -defaultPortrait.anchoredPosition.x;
             _theActualTransform.anchoredPosition = newPosition;
+
+            if (parentSlot != null)
+                parentSlot._selectedCharacterIndex = _activePortrait;
         }
     }
 
@@ -72,7 +77,8 @@ public class PortraitsAnchor : MonoBehaviour
             () => { _inTransition = true; },
             () => { 
                 _inTransition = false;
-                EventSystem.current.SetSelectedGameObject(_playerSelect.gameObject);
+                parentSlot._selectedCharacterIndex = _activePortrait;
+                parentSlot._controllerEventSystem.SetSelectedGameObject(_playerSelect.gameObject);
             },
             false);
     }

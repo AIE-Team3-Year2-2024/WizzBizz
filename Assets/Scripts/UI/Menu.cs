@@ -32,7 +32,7 @@ public class Menu : MonoBehaviour
         _canvasGroup = GetComponent<CanvasGroup>();
 
         CanvasScaler cs = GetComponentInChildren<CanvasScaler>();
-        if (cs != null)
+        if (cs)
             _canvasReferenceResolution = cs.referenceResolution;
 
         _lastSelected = firstSelected;

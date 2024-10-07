@@ -210,6 +210,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddController(Gamepad gamepad)
+    {
+        PlayerData newPlayerData = new PlayerData();
+        newPlayerData.gamepad = gamepad;
+        newPlayerData.characterSelect = null;
+        newPlayerData.score = 0;
+        _playerData.Add(newPlayerData);
+        
+        _connectedPlayerCount++;
+    }
+
     /// <summary>
     /// is used by the cursour when they pick a character
     /// </summary>

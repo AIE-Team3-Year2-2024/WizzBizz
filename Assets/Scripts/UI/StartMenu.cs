@@ -13,7 +13,7 @@ public class StartMenu : Menu
 
     public void StartGameButton()
     {
-        if (_menuManager != null)
+        if (_menuManager)
             _menuManager.FadeToScene(startGameScene);
         else
             Debug.LogError("Menu couldn't find the Menu Manager. Is it in the scene?");
