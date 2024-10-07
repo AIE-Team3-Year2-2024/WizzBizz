@@ -46,9 +46,6 @@ public class MenuManager : MonoBehaviour
     private List<PlayerInput> _controllers = new List<PlayerInput>();
 
     private MultiplayerEventSystem _primaryEventSystem = null;
-    
-    // TODO: Back on controller button press.
-    // TODO: Handle controller disconnect/reconnect.
 
     void Awake()
     {
@@ -78,10 +75,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    void InitializeManager()
+    public void InitializeManager()
     {
         _controllerDisconnectCallback = null;
         _controllerReconnectCallback = null;
+        _primaryEventSystem.playerRoot = null;
         
         PopulateMenus();
 

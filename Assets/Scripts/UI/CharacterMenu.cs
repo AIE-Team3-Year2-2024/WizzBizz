@@ -21,6 +21,7 @@ public class CharacterMenu : Menu
     private List<int> _addedGamepadIDs = new List<int>();
 
     // TODO: Player leave lobby on controller button.
+    // TODO: Handle going back to character select after everything has already been selected.
     
     public override void Start()
     {
