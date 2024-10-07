@@ -20,6 +20,15 @@ public class CharacterMenu : Menu
     private bool _addingControllers = true;
     private List<int> _addedGamepadIDs = new List<int>();
 
+    // TODO: Player leave lobby on controller button.
+    
+    public override void Start()
+    {
+        base.Start();
+        _menuManager._controllerDisconnectCallback += ControllerDisconnect;
+        _menuManager._controllerReconnectCallback += ControllerReconnect;
+    }
+    
     public void Update()
     {
         if (_addingControllers == false)
@@ -50,27 +59,29 @@ public class CharacterMenu : Menu
         {
             Gamepad gamepad = null;
             MultiplayerEventSystem mm = null;
-            if (gamepadID <= 0)
+            if (gamepadID <= 0 && _menuManager.primaryController != null)
             {
                 PlayerInput p = _menuManager.primaryController.GetComponent<PlayerInput>();
                 gamepad = (Gamepad)p.devices[0];
                 mm = _menuManager.primaryController.GetComponentInChildren<MultiplayerEventSystem>();
                 mm.playerRoot = slot.gameObject;
             }
-            
-            if (controllerPrefab != null && gamepadID > 0)
+            else if (controllerPrefab != null)
             {
-                gamepad = Gamepad.all[gamepadID];
+                gamepad = Gamepad.all[gamepadID]; // TODO: Not sure if this is reliable.
                 if (gamepad == null)
                 {
                     Debug.Log("No suitable gamepad found. " + gameObject.name);
                     return;
                 }
 
-                GameObject controller =
-                    PlayerInput.Instantiate(controllerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad).gameObject;
+                PlayerInput controller =
+                    PlayerInput.Instantiate(controllerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad);
                 controller.transform.SetParent(_menuManager.transform);
-                _menuManager.AddController(controller.GetComponent<PlayerInput>());
+                controller.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
+                controller.onDeviceLost += _menuManager.ControllerDisconnect;
+                controller.onDeviceRegained += _menuManager.ControllerReconnect;
+                _menuManager.AddController(controller);
                 mm = controller.GetComponentInChildren<MultiplayerEventSystem>();
                 mm.playerRoot = slot.gameObject;
             }
@@ -102,13 +113,14 @@ public class CharacterMenu : Menu
         
         if (slot._playerJoined == true && slot._playerReady == false)
         {
-            slot._playerReady = true;
+            slot.ReadyPlayer();
             _readyPlayers++;
 
             if (characterPrefabs != null && characterPrefabs.Count > 0 && 
                 slot._selectedCharacterIndex > -1 && slot._selectedCharacterIndex < characterPrefabs.Count)
             {
                 GameObject selectedCharacter = characterPrefabs[slot._selectedCharacterIndex];
+                Debug.Log(selectedCharacter.name + ", " + slot._selectedCharacterIndex);
                 GameManager.Instance.SetSelectedCharacter(slot._playerID, selectedCharacter);
             }
             else
@@ -123,6 +135,73 @@ public class CharacterMenu : Menu
                 _addingControllers = false;
                 GameManager.Instance.StartGame();
             }
+        }
+    }
+
+    public void UnreadyPlayer(PlayerSlot slot)
+    {
+        if (slot == null)
+            return;
+        if (playerSlots.Contains(slot) == false)
+        {
+            Debug.LogError("Slot " + slot.gameObject.name + " is not in the PlayerSlots list!");
+            return;
+        }
+
+        if (slot._playerJoined == true && slot._playerReady == true)
+        {
+            slot.ReadyPlayer(false);
+            _readyPlayers--;
+            
+            // TODO: Cancel countdown.
+        }
+    }
+
+    public void ControllerDisconnect(PlayerInput controller)
+    {
+        PlayerSlot associatedSlot = null;
+        for (int i = 0; i < playerSlots.Count; i++)
+        {
+            if (playerSlots[i]._controllerEventSystem == controller.GetComponentInChildren<MultiplayerEventSystem>())
+            {
+                associatedSlot = playerSlots[i];
+                break;
+            }
+        }
+
+        if (associatedSlot != null)
+        {
+            GameManager.Instance.RemoveController(controller);
+            UnreadyPlayer(associatedSlot);
+            associatedSlot.LeavePlayer();
+            _joinedPlayers--;
+        }
+    }
+    
+    public void ControllerReconnect(PlayerInput controller)
+    {
+        PlayerSlot slot = getNextAvailableSlot(playerSlots);
+        if (slot != null)
+        {
+            Gamepad gamepad = Gamepad.all.Last(); // Really wish the event gave the device directly.
+            MultiplayerEventSystem mm = controller.GetComponentInChildren<MultiplayerEventSystem>();
+
+            if (mm != null && gamepad != null)
+            {
+                slot._playerID = _joinedPlayers;
+                _joinedPlayers++;
+
+                GameManager.Instance.AddController(gamepad);
+                slot.JoinPlayer(mm);
+            }
+            else
+            {
+                Debug.LogError("Either gamepad or eventsystem returned null!");
+            }
+        }
+        else
+        {
+            Debug.LogError("Slot returned null!");
         }
     }
 

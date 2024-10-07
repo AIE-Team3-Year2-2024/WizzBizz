@@ -9,6 +9,7 @@ public class PlayerSlot : MonoBehaviour
 {
     public CanvasGroup joinText;
     public CanvasGroup playerSelect;
+    public CanvasGroup readyOverlay;
     public CanvasGroup selectArrows;
     public CanvasGroup options;
 
@@ -39,6 +40,8 @@ public class PlayerSlot : MonoBehaviour
         joinText.interactable = true;
         playerSelect.alpha = 0.0f;
         playerSelect.interactable = false;
+        readyOverlay.alpha = 0.0f;
+        readyOverlay.interactable = false;
         selectArrows.alpha = 0.0f;
         selectArrows.interactable = false;
         options.gameObject.SetActive(false);
@@ -51,7 +54,7 @@ public class PlayerSlot : MonoBehaviour
         if (_playerJoined == true)
             return;
         
-        Debug.Log("ANOTHER JOINED TEST");
+        //Debug.Log("ANOTHER JOINED TEST");
         _controllerEventSystem = mm;
 
         joinText.alpha = 0.0f;
@@ -65,6 +68,46 @@ public class PlayerSlot : MonoBehaviour
         mm.SetSelectedGameObject(playerSelect.gameObject);
 
         _playerJoined = true;
+    }
+
+    public void LeavePlayer()
+    {
+        _playerJoined = false;
+        _playerReady = false;
+        _controllerEventSystem = null;
+        _playerID = -1;
+        
+        joinText.alpha = 1.0f;
+        joinText.interactable = true;
+        playerSelect.alpha = 0.0f;
+        playerSelect.interactable = false;
+        selectArrows.alpha = 0.0f;
+        selectArrows.interactable = false;
+        options.gameObject.SetActive(false);
+    }
+
+    public void ReadyPlayer(bool isReady = true)
+    {
+        if (isReady == true)
+        {
+            _playerReady = true;
+            readyOverlay.alpha = 1.0f;
+            readyOverlay.interactable = true;
+            playerSelect.interactable = false;
+            selectArrows.interactable = false;
+            
+            _controllerEventSystem.SetSelectedGameObject(readyOverlay.GetComponentInChildren<Button>().gameObject); // TODO: Fix this. Make it a parameter or something.
+        }
+        else
+        {
+            _playerReady = false;
+            readyOverlay.alpha = 0.0f;
+            readyOverlay.interactable = false;
+            playerSelect.interactable = true;
+            selectArrows.interactable = true;
+            
+            _controllerEventSystem.SetSelectedGameObject(playerSelect.gameObject);
+        }
     }
 
 }

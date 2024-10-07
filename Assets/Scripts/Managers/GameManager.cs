@@ -11,6 +11,7 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
+[Serializable]
 public class PlayerData
 {
     public Gamepad gamepad;
@@ -219,6 +220,22 @@ public class GameManager : MonoBehaviour
         _playerData.Add(newPlayerData);
         
         _connectedPlayerCount++;
+    }
+
+    public void RemoveController(PlayerInput controller)
+    {
+        foreach(InputDevice input in controller.devices)
+        {
+            foreach(PlayerData p in _playerData)
+            {
+                if(input == p.gamepad)
+                {
+                    _playerData.Remove(p);
+                    _connectedPlayerCount--;
+                    return;
+                }
+            }
+        }
     }
 
     /// <summary>

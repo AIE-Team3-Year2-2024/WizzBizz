@@ -27,7 +27,7 @@ public class Menu : MonoBehaviour
         MENU_MOVE_RIGHT
     }
 
-    public void Awake()
+    public virtual void Awake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
 
@@ -38,7 +38,22 @@ public class Menu : MonoBehaviour
         _lastSelected = firstSelected;
     }
 
+    public virtual void Start()
+    {
+        /* Implemented in inherited classes. */
+    }
+
     // Wrapper functions so we don't have to rely on a MenuManager being in the scene.
+    public void GoToMenu(Menu menuObj)
+    {
+        if (_menuManager == null)
+        {
+            Debug.LogError("Menu Manager is null on Menu: " + gameObject.name);
+            return;
+        }
+        _menuManager.SetTargetMenu(menuObj);
+    }
+    
     public void GoBackScene()
     {
         if (_menuManager == null)

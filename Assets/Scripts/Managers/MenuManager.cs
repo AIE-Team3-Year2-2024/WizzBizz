@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pixelplacement;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -13,6 +15,8 @@ public class MenuManager : MonoBehaviour
     static public MenuManager Instance { get; private set; }
 
     public PlayerInput primaryController = null;
+
+    public string rootSceneName = "";
     
     [Tooltip("The curve that dictates the smoothing of the transition.")]
     public AnimationCurve transitionCurve;
@@ -24,11 +28,18 @@ public class MenuManager : MonoBehaviour
     [Tooltip("How long it will take to fade.")]
     public float fadeDuration = 3.0f;
 
+    [HideInInspector]
+    public event Action<PlayerInput> _controllerDisconnectCallback = null;
+    [HideInInspector]
+    public event Action<PlayerInput> _controllerReconnectCallback = null;
+
+    private bool _goingBack = false;
+    
     private Menu _activeMenu = null;
     private Menu _targetMenu = null;
     private Menu _lastActiveMenu = null;
 
-    private string _lastActiveScene = string.Empty;
+    private string _lastActiveScene = string.Empty; // TODO: Make this a tree so that menus can be nested properly.
 
     private List<Menu> _menus = new List<Menu>();
 
@@ -51,6 +62,8 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+        rootSceneName = SceneManager.GetActiveScene().name;
+        
         if (primaryController != null)
         {
             _controllers.Add(primaryController);
@@ -67,6 +80,9 @@ public class MenuManager : MonoBehaviour
 
     void InitializeManager()
     {
+        _controllerDisconnectCallback = null;
+        _controllerReconnectCallback = null;
+        
         PopulateMenus();
 
         Menu firstMenu = null;
@@ -82,6 +98,7 @@ public class MenuManager : MonoBehaviour
             m._canvasGroup.interactable = false;
             m._canvasGroup.blocksRaycasts = true;
 
+            m.Start();
             m.gameObject.SetActive(false);
         }
 
@@ -111,6 +128,38 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void ControllerDisconnect(PlayerInput controller)
+    {
+        if (_controllers.Contains(controller) == false)
+            return;
+        
+        _controllers.Remove(controller);
+        if (controller == primaryController)
+        {
+            primaryController = null;
+            _primaryEventSystem = null;
+        }
+
+        if (_controllerDisconnectCallback != null)
+            _controllerDisconnectCallback.Invoke(controller);
+    }
+
+    public void ControllerReconnect(PlayerInput controller)
+    {
+        if (_controllers.Contains(controller) == true)
+            return;
+        
+        if (primaryController == null)
+        {
+            primaryController = controller;
+            _primaryEventSystem = primaryController.GetComponentInChildren<MultiplayerEventSystem>();
+        }
+        AddController(controller);
+
+        if (_controllerReconnectCallback != null)
+            _controllerReconnectCallback.Invoke(controller);
+    }
+
     public void SetTargetMenu(Menu menuObj)
     {
         if (menuObj == null || menuObj == _activeMenu)
@@ -135,15 +184,17 @@ public class MenuManager : MonoBehaviour
 
     public void GoBackMenu()
     {
-        if (_lastActiveMenu == null) 
+        if (_lastActiveMenu == null || _goingBack == true) 
             return;
+        _goingBack = true;
         SetTargetMenu(_lastActiveMenu);
     }
 
     public void GoBackScene()
     {
-        if (_lastActiveScene == string.Empty)
+        if (_lastActiveScene == string.Empty || SceneManager.GetActiveScene().name == rootSceneName || _goingBack == true)
             return;
+        _goingBack = true;
         FadeToScene(_lastActiveScene);
     }
 
@@ -165,6 +216,8 @@ public class MenuManager : MonoBehaviour
                 _targetMenu = null;
 
                 _lastActiveScene = SceneManager.GetActiveScene().name;
+                
+                _goingBack = false;
 
                 StartCoroutine(LoadSpecifiedScene(sceneName));
             }, // Complete callback. 
@@ -199,6 +252,8 @@ public class MenuManager : MonoBehaviour
 
                         Selectable selectedObject = nextMenu._lastSelected == null ? nextMenu.firstSelected : nextMenu._lastSelected;
                         _primaryEventSystem.SetSelectedGameObject(selectedObject.gameObject);
+
+                        _goingBack = false;
                     }, // Complete callback. 
                     false);
             }, // Complete callback.
