@@ -18,13 +18,10 @@ public class Cure : MonoBehaviour
     private float currentIntervalAmount = 0;
 
     private CharacterBase _player;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    
+    /// <summary>
+    /// keep track of life time and healing the player on an interval
+    /// </summary>
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -42,6 +39,9 @@ public class Cure : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// find player
+    /// </summary>
     private void OnEnable()
     {
         if (_player == null)
@@ -50,6 +50,9 @@ public class Cure : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// set the player back to normal
+    /// </summary>
     private void OnDisable()
     {
         currentIntervalAmount = 0;

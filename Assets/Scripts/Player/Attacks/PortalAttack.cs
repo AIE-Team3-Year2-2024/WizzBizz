@@ -52,7 +52,9 @@ public class PortalAttack : MonoBehaviour
         gameObject.GetComponent<FrogID>().ID = frogID;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// changes the lob aimers position
+    /// </summary>
     void Update()
     {
         if (_lobAimer && _range != 0)
@@ -61,6 +63,10 @@ public class PortalAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will make either the first or second portal depending on the existence of the first portal
+    /// </summary>
+    /// <param name="context"></param>
     public void SpawnObjectAtAimFunction(InputAction.CallbackContext context)
     {
         if (!_checker._colliding)
@@ -92,6 +98,10 @@ public class PortalAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// destroys the active portals resetting this attck so it can be used agian
+    /// </summary>
+    /// <param name="teleportee"></param>
     public void OnPortalUsed(GameObject teleportee)
     {
         Destroy(_firstPortal.gameObject);

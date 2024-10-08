@@ -83,6 +83,8 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _health;
 
+    private bool _invincible = false;
+
     [Tooltip("how long the player will have the orb before it dissapears")]
     [SerializeField]
     private float _ballLifetime;
@@ -111,7 +113,7 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _basicAttackTime;
 
-    //[HideInInspector]
+    [HideInInspector]
     public float damageMult = 1;
 
     private float _ballAttackTimer = 0;
@@ -230,6 +232,9 @@ public class CharacterBase : MonoBehaviour
         DEMENTIA
     }
 
+    /// <summary>
+    /// initalization
+    /// </summary>
     private void Start()
     {
         input = GetComponent<PlayerInput>();
@@ -253,6 +258,9 @@ public class CharacterBase : MonoBehaviour
         damageMult = 1;
     }
 
+    /// <summary>
+    /// handles timers and ui for the basic and ball attacks
+    /// </summary>
     void Update()
     {
         _ballAttackTimer += Time.deltaTime;
@@ -271,7 +279,9 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// handles the players movement
+    /// </summary>
     void FixedUpdate()
     {
         _acceleration = _speed * _deceleration;
@@ -290,6 +300,7 @@ public class CharacterBase : MonoBehaviour
         //rb.position += _velocity * Time.fixedDeltaTime; // Apply the velocity to the character position.
         //rb.velocity = _velocity;
     }
+
 
     void LateUpdate()
     {
@@ -317,21 +328,32 @@ public class CharacterBase : MonoBehaviour
         }
         if (confused)
         {
-            _movementDirection = -_movementDirection;
+            _movementDirection = -_movementDirection;//reverses the movement direction
         }
     }
 
+    /// <summary>
+    /// sets _movementDirection to 0
+    /// </summary>
     public void CancelPlayerMovement()
     {
         _movementDirection = Vector3.zero;
     }
 
+    /// <summary>
+    /// adds addition to both speed and origanal speed
+    /// </summary>
+    /// <param name="addition"></param>
     public void AddSpeed(float addition)
     {
         _speed += addition;
         originalSpeed += addition;
     }
 
+    /// <summary>
+    /// changes speed to newSpeed
+    /// </summary>
+    /// <param name="newSpeed"></param>
     public void ChangeCurrentSpeed(float newSpeed)
     {
         _speed = newSpeed;
@@ -349,7 +371,7 @@ public class CharacterBase : MonoBehaviour
 
         if(confused)
         {
-            aimDirection = -aimDirection;
+            aimDirection = -aimDirection;//reverses aim direction
         }
                 
         transform.LookAt(aimDirection += transform.position, transform.up);
@@ -361,7 +383,7 @@ public class CharacterBase : MonoBehaviour
     }
 
     /// <summary>
-    /// should be called by all charcaters and calls DashRoutine()
+    /// this function is callked by the player input system when the dash button is pressed
     /// </summary>
     /// <param name="context"></param>
     public void OnDash(InputAction.CallbackContext context)
@@ -389,17 +411,29 @@ public class CharacterBase : MonoBehaviour
         StartCoroutine(WaitToDash());
     }
 
+    /// <summary>
+    /// re enables dashing after _dashWaitTime
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator WaitToDash()
     {
         yield return new WaitForSeconds(_dashWaitTime);
         canDash = true;
     }
 
+    /// <summary>
+    /// called by the player input system when a player attempts to catch
+    /// </summary>
+    /// <param name="context"></param>
     public void OnCatch(InputAction.CallbackContext context)
     {
         StartCoroutine(CatchRoutine());
     }
 
+    /// <summary>
+    /// takes away movement but activates the catching trigger and then reverses that
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator CatchRoutine()
     {
         input.DeactivateInput();
@@ -423,9 +457,13 @@ public class CharacterBase : MonoBehaviour
         _shouldStopSliding = true;
     }
 
+    /// <summary>
+    /// takes damge from helth and updates the helath bar and calls death if helath is under 0
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
-        if(_health <= 0)
+        if(_health <= 0 || _invincible)
         {
             return;
         }
@@ -442,9 +480,15 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// handles taking damage and call death and turns on status affect components 
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="effect"></param>
+    /// <param name="time"></param>
     public void TakeDamage(float damage, StatusEffects effect, float time)
     {
-        if (_health <= 0)
+        if (_health <= 0 || _invincible)
         {
             return;
         }
@@ -581,6 +625,38 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// makes the player unable to take damage for time
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public IEnumerator InvincibiltyForTime(float time)
+    {
+        _invincible = true;
+        yield return new WaitForSeconds(time);
+        _invincible = false;
+    }
+
+    /// <summary>
+    /// makes the player unable to take damge for as many frames as frames is equal to
+    /// </summary>
+    /// <param name="frames"></param>
+    /// <returns></returns>
+    public IEnumerator InvincibilityForFrames(int frames)
+    {
+        _invincible = true;
+        for(int i = 0; i > frames; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        _invincible = false;
+    }
+
+    /// <summary>
+    /// adds force to the rigidbody in the opposite of dir by amount
+    /// </summary>
+    /// <param name="amount"></param>
+    /// <param name="dir"></param>
     public void TakeKnockback(float amount, Vector3 dir)
     {
         if (dir != Vector3.zero && amount > 0.0f)
@@ -589,15 +665,20 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// stop movement and update the game manger on the players death
+    /// </summary>
     public void Death()
     {
-        Debug.Log("Player has died: " + gameObject.name);
-
-        canMove = false;
+        input.DeactivateInput();
         _movementDirection = Vector3.zero;
         GameManager.Instance.PlayerDeath(this);
     }
 
+    /// <summary>
+    /// this is called by the player input system and checks whther the ball or basic attck should be invoked
+    /// </summary>
+    /// <param name="context"></param>
     public virtual void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -645,6 +726,10 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// called by the player input system to pause the game and take controll of the menu
+    /// </summary>
+    /// <param name="context"></param>
     public void OnPause(InputAction.CallbackContext context)
     {
         if(context.performed)
@@ -655,6 +740,10 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// called by the player input system to unpause the game and bring this player back to normal controlls
+    /// </summary>
+    /// <param name="context"></param>
     public void OnUnPause(InputAction.CallbackContext context)
     {
         if(context.performed)
@@ -664,12 +753,20 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// called to unpause the game
+    /// </summary>
     public void UnPause()
     {
         GameManager.Instance.UnPause(this);
         input.SwitchCurrentActionMap("Player");
     }
 
+    /// <summary>
+    /// destroyes the held ball after ball lifetime
+    /// </summary>
+    /// <param name="currentOrb"></param>
+    /// <returns></returns>
     public IEnumerator KillBall(GameObject currentOrb)
     {
         yield return new WaitForSeconds(_ballLifetime);
@@ -686,16 +783,6 @@ public class CharacterBase : MonoBehaviour
         StartCoroutine(KillBall(currentOrb));
     }
 
-    public virtual void OnAbility1(InputAction.CallbackContext context)
-    {
-
-    }
-
-    public virtual void OnAbility2(InputAction.CallbackContext context)
-    {
-
-    }
-
     public virtual void OnDebug(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -704,12 +791,19 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// handles dissconnecting the player by destroying them and updating the game manger to remove them
+    /// </summary>
     public void OnDissconect()
     {
         GameManager.Instance.DisconnectPlayer(this);
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// vibrates this players controller
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator DoBallAttackHaptics()
     {
         if (playerGamepad != null)
@@ -720,6 +814,13 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// vibrates the players controller based off of the inputs
+    /// </summary>
+    /// <param name="lowInput"></param>
+    /// <param name="highInput"></param>
+    /// <param name="time"></param>
+    /// <returns></returns>
     public IEnumerator AdjustableHaptics(float lowInput, float highInput, float time)
     {
         if (playerGamepad != null)

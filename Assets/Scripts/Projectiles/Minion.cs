@@ -17,7 +17,9 @@ public class Minion : MonoBehaviour
 
     private NavMeshAgent agent;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// finds all players in scene other than the owner and starts the coroutine loop
+    /// </summary>
     void Start()
     {
         CharacterBase[] players = FindObjectsByType<CharacterBase>(FindObjectsSortMode.None);
@@ -30,11 +32,15 @@ public class Minion : MonoBehaviour
             }
         }
 
-            agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         StartCoroutine(UpdateTarget());
         
     }
 
+    /// <summary>
+    /// will find the closest transform in targets and set that as the destination for this objects nav mesh agent
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator UpdateTarget()
     {
         yield return new WaitForEndOfFrame();
@@ -65,11 +71,18 @@ public class Minion : MonoBehaviour
         RestartTarget();
     }
 
+    /// <summary>
+    /// restarts the coroutine for finding a player to target
+    /// </summary>
     public void RestartTarget()
     {
         StartCoroutine(UpdateTarget());
     }
 
+    /// <summary>
+    /// sets the inputted transform as the minions owner and removes it from the list players 
+    /// </summary>
+    /// <param name="player"></param>
     public void RemoveTargetPlayer(Transform player)
     {
         targets.Remove(player);

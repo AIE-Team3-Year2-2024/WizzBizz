@@ -48,7 +48,8 @@ public class GameManager : MonoBehaviour
     private int _scoreToWin;
 
     [Tooltip("how long before the players take damage over time")]
-    public float roundTime;
+    [SerializeField]
+    private float _roundTime;
 
     [Tooltip("the multiplyer for damage taken for the round being over")]
     [SerializeField]
@@ -122,16 +123,12 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    /// <summary>
+    /// before the game starts this is in charge of adding controllers and during the game its in charge of the round timer and spawning orbs
+    /// </summary>
     void Update()
     {
-        if (addingControllers)
+        if(addingControllers)
         {
             for (int i = 0; i < Gamepad.all.Count; i++)
             {
@@ -147,7 +144,7 @@ public class GameManager : MonoBehaviour
 
                 //check if the current gamepad has a button pressed and is not stored
                 if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic))
-                {
+                {                    
                     GameObject newPlayer = PlayerInput.Instantiate(_cursorPrefab, controlScheme: "Gamepad", pairWithDevice: Gamepad.all[i]).gameObject;
                     newPlayer.transform.SetParent(canvas.transform);
                     newPlayer.GetComponent<CursorController>().playerID = _connectedPlayerCount;
@@ -165,9 +162,9 @@ public class GameManager : MonoBehaviour
         } else
         {
             _roundTimer -= Time.deltaTime;
-            if (_roundTimer <= 0)
+            if(_roundTimer <= 0)
             {
-                foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
+                foreach(KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
                 {
                     p.Key.TakeDamage(Time.deltaTime * endGameDamageMult);
                 }
@@ -213,6 +210,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// is used by the cursour when they pick a character
+    /// </summary>
+    /// <param name="listPosition"></param>
+    /// <param name="selection"></param>
     public void SetSelectedCharacter(int listPosition, GameObject selection)
     {
         _playerData[listPosition].characterSelect = selection;
@@ -224,11 +226,11 @@ public class GameManager : MonoBehaviour
     /// <param name="player"></param>
     public void DissconectCursor(PlayerInput player)
     {
-        foreach (InputDevice input in player.devices)
+        foreach(InputDevice input in player.devices)
         {
-            foreach (PlayerData p in _playerData)
+            foreach(PlayerData p in _playerData)
             {
-                if (input == p.gamepad)
+                if(input == p.gamepad)
                 {
                     _playerData.Remove(p);
                     _connectedPlayerCount--;
@@ -238,6 +240,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// removes the player from alive players and player data
+    /// </summary>
+    /// <param name="player"></param>
     public void DisconnectPlayer(CharacterBase player)
     {
         PlayerInput playerInput = player.GetComponent<PlayerInput>();
@@ -256,11 +262,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public int GetConnectedPlayerCount()
     {
         return _connectedPlayerCount;
     }
 
+    /// <summary>
+    /// pauses time and deactivates input on all players other than the pauser
+    /// </summary>
+    /// <param name="pauser"></param>
     public void Pause(CharacterBase pauser)
     {
         Time.timeScale = 0;
@@ -274,6 +285,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// puts time back to normal and re activates all players
+    /// </summary>
+    /// <param name="pauser"></param>
     public void UnPause(CharacterBase pauser)
     {
         Time.timeScale = _currentTimeScale;
@@ -287,28 +302,39 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// used to unpause the game from the game manager e.g. with a button
+    /// </summary>
     public void UnPause()
     {
         _pausingPlayer.UnPause();
     }
 
+    /// <summary>
+    /// removes and destroys dead player and does a win check
+    /// </summary>
+    /// <param name="player"></param>
     public void PlayerDeath(CharacterBase player)
     {
         if (_alivePlayers.Count() > 1)
         {
-            CharacterBase[] deadPlayer = new CharacterBase[] { player };
+            CharacterBase[] deadPlayer = new CharacterBase[]{ player };
             StartSlowDown(deadPlayer);
             _alivePlayers.Remove(player);
+            Destroy(player.gameObject);
         }
-
+        
         if (_alivePlayers.Count() <= 1)
         {
-            _roundTimer = roundTime;
+            _roundTimer = _roundTime;
             // Handle win
             PlayerWin();
         }
     }
 
+    /// <summary>
+    /// adds score to the first alive player and either loads the next round or the end level
+    /// </summary>
     public void PlayerWin()
     {
         foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
@@ -328,13 +354,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public float GetRoundTime() { return _roundTimer; }
-
+    /// <summary>
+    /// resets orb timer
+    /// </summary>
     public void OrbSpawnerCollected()
     {
         _orbSpawnerTimer = orbSpawnerCooldown; // Reset timer.
         _orbCollected = true;
-        Debug.Log("Orb has been collected!");
     }
 
     public void StartGame()
@@ -347,6 +373,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SlowDownEffect(players));
     }
 
+    /// <summary>
+    /// slows down time and then changes the transform group whan waits and reverts the time and transform group back to normal
+    /// </summary>
+    /// <param name="players"></param>
+    /// <returns></returns>
     public IEnumerator SlowDownEffect(CharacterBase[] players)
     {
         CinemachineTargetGroup.Target[] oldTargets = currentTargetGroup.m_Targets;
@@ -387,6 +418,10 @@ public class GameManager : MonoBehaviour
         _currentTimeScale = 1;
     }
 
+    /// <summary>
+    /// sets the game manager back to normal then loads a scene waits for the scene to load and then sets up the scene
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator StartGameRoutine()
     {
         Time.timeScale = 1;
@@ -396,9 +431,6 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
 
-        _roundTimer = roundTime;
-        _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
-
         //theese are here so that the players get spawned in the new scene and not the old one
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
@@ -406,58 +438,47 @@ public class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
+        _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
+
         Spawn spawnInScene = FindAnyObjectByType<Spawn>();
 
         currentTargetGroup = FindAnyObjectByType<CinemachineTargetGroup>();
-        CinemachineTargetGroup.Target[] targs = null;
-        if (currentTargetGroup != null)
-        {
-            //targetGroup.m_PositionMode = 0;
-            //targetGroup.m_RotationMode = 0;
-            currentTargetGroup.m_UpdateMethod = CinemachineTargetGroup.UpdateMethod.LateUpdate;
 
-            targs = new CinemachineTargetGroup.Target[_playerData.Count];
-        }
+        //targetGroup.m_PositionMode = 0;
+        //targetGroup.m_RotationMode = 0;
+        currentTargetGroup.m_UpdateMethod = CinemachineTargetGroup.UpdateMethod.LateUpdate;
+
+        CinemachineTargetGroup.Target[] targs = new CinemachineTargetGroup.Target[_playerData.Count];
 
         for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character
             GameObject newPlayer = PlayerInput.Instantiate(_playerData[i].characterSelect, controlScheme: "Gamepad", pairWithDevice: _playerData[i].gamepad).gameObject;
+            int random = UnityEngine.Random.Range(0, spawnInScene.spawns.Count);
+            newPlayer.transform.position = spawnInScene.spawns[random].position;
+            spawnInScene.spawns.Remove(spawnInScene.spawns[random]);
             newPlayer.name += (" > Player ID (" + i + ")");
-
-            if (spawnInScene != null)
-            {
-                int random = UnityEngine.Random.Range(0, spawnInScene.spawns.Count);
-                newPlayer.transform.position = spawnInScene.spawns[random].position;
-                spawnInScene.spawns.Remove(spawnInScene.spawns[random]);
-            }
-            else
-            {
-                newPlayer.transform.position = Vector3.zero;
-            }
-
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
             character.playerGamepad = _playerData[i].gamepad;
             character.playerNumber.text = "P" + (i + 1);
             _alivePlayers.Add(character, _playerData[i]);
 
-            if (targs != null)
-            {
-                targs[i].target = newPlayer.transform;
-                targs[i].radius = _playerCameraRadius;
-                targs[i].weight = _playerCameraWeight;
-            }
+
+            targs[i].target = newPlayer.transform;
+            targs[i].radius = _playerCameraRadius;
+            targs[i].weight = _playerCameraWeight;
+
         }
 
-        if (currentTargetGroup != null && targs != null)
-            currentTargetGroup.m_Targets = targs;
+        currentTargetGroup.m_Targets = targs;
 
         addingControllers = false;
+
+        _roundTimer = _roundTime;
 
         if (arenaUICanvas != null)
             arenaUICanvas.gameObject.SetActive(true);
 
-        if (spawnInScene != null)
-            Destroy(spawnInScene.gameObject);
+        Destroy(spawnInScene.gameObject);
     }
 }

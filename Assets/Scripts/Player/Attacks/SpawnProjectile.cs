@@ -21,19 +21,19 @@ public class SpawnProjectile : MonoBehaviour
         player = GetComponent<CharacterBase>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// will spawn one of the objects from the projectiles array randomly at the player projectile spawn (also handles life time and damage player settings)
+    /// </summary>
     public void SpawnProjectileAtPlayer()
     {
         GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
-        DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>(); 
-        damage.SetOwner(player);
-        damage.damage *= player.damageMult;
+        DamagePlayerOnCollision damageComponent;
+        if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+        {
+            damageComponent.damage *= player.damageMult;
+            damageComponent.SetOwner(player);
+        }
 
         if (lifetime != 0)
         {
@@ -41,13 +41,19 @@ public class SpawnProjectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will spawn one of the objects that have a frog id from the projectiles array randomly at the player projectile spawn (also handles life time and damage player settings)
+    /// </summary>
     public void FrogSpawnProjectileAtPlayer()
     {
         GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
-        DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>();
-        damage.SetOwner(player);
-        damage.damage *= player.damageMult;
+        DamagePlayerOnCollision damageComponent;
+        if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+        {
+            damageComponent.damage *= player.damageMult;
+            damageComponent.SetOwner(player);
+        }
 
         FrogID frogid = null;
         if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
@@ -61,6 +67,9 @@ public class SpawnProjectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will spawn one of the objects from the projectiles array randomly at the player projectile spawn (also handles life time and damage player settings)
+    /// </summary>
     public void SpawnProjectileAtPlayer(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -78,6 +87,9 @@ public class SpawnProjectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// will spawn one of the objects that have a frog id from the projectiles array randomly at the player projectile spawn (also handles life time and damage player settings)
+    /// </summary>
     public void FrogSpawnProjectileAtPlayer(InputAction.CallbackContext context)
     {
         if (context.performed)

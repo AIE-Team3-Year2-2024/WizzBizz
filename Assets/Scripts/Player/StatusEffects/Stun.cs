@@ -11,13 +11,9 @@ public class Stun : MonoBehaviour
     private PlayerInput input;
     private CharacterBase player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    /// <summary>
+    /// manage lifetime and whther it is enabled
+    /// </summary>
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -27,6 +23,9 @@ public class Stun : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// apply effect to player
+    /// </summary>
     private void OnEnable()
     {
         if(input == null)
@@ -39,6 +38,10 @@ public class Stun : MonoBehaviour
         player.CancelPlayerMovement();
     }
 
+
+    /// <summary>
+    /// set the player back to normal
+    /// </summary>s
     private void OnDisable()
     {
         input.ActivateInput();

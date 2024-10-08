@@ -12,13 +12,10 @@ public class Slow : MonoBehaviour
     private float _speedMinus;
 
     private CharacterBase _player;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
+    /// <summary>
+    /// manage lifetime and whther it is enabled
+    /// </summary>
     void Update()
     {
         lifeTime -= Time.deltaTime;
@@ -28,6 +25,9 @@ public class Slow : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// apply effect to player
+    /// </summary>
     private void OnEnable()
     {
         if (_player == null)
@@ -37,6 +37,9 @@ public class Slow : MonoBehaviour
         _player.AddSpeed(-_speedMinus);
     }
 
+    /// <summary>
+    /// set the player back to normal
+    /// </summary>
     private void OnDisable()
     {
         _player.AddSpeed(_speedMinus);

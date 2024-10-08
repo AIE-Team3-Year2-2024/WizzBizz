@@ -15,6 +15,10 @@ public class IcePatch : MonoBehaviour
 
     private List<CharacterBase> _charactersInside = new List<CharacterBase>();
 
+    /// <summary>
+    /// make any player touching this start sliding
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         CharacterBase character = null;
@@ -25,6 +29,10 @@ public class IcePatch : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// make any player who is no longer touching this stop sliding
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         CharacterBase character = null;
@@ -35,6 +43,9 @@ public class IcePatch : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// make sure any charcaters currently affected by this are set to normal
+    /// </summary>
     private void OnDestroy()
     {
         if (_charactersInside.Count > 0)

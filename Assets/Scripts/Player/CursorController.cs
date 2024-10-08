@@ -15,12 +15,15 @@ public class CursorController : MonoBehaviour
 
     private CharacterButton _lastCollidedCharacterButton;
 
+    [HideInInspector]
     public bool canMove = true;
+
 
     private bool playerSelected = false;
 
     private Vector3 _movementDirection;
 
+    [HideInInspector]
     public int playerID;
 
     [SerializeField]
@@ -29,13 +32,9 @@ public class CursorController : MonoBehaviour
     [SerializeField]
     private Image _tailImage;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    /// <summary>
+    /// movement
+    /// </summary>
     void Update()
     { 
         transform.position += _movementDirection * _speed * Time.deltaTime;

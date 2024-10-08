@@ -5,21 +5,13 @@ using UnityEngine.InputSystem;
 
 public class BallCollision : MonoBehaviour
 {
-
+    [Tooltip("this is the prefab of the ball object the player actually holds MUST BE SET")]
     public GameObject orbProjectilePrefab = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// if this has hit a player trigger box give them the ball and do the slow down effect on them
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         CharacterBase character = null;
@@ -34,6 +26,7 @@ public class BallCollision : MonoBehaviour
                     character.StopCoroutine(character.CatchRoutine());
                     character.GetComponent<PlayerInput>().ActivateInput();
                     character.catchTrigger.enabled = false;
+                    character.InvincibilityForFrames(5);
 
                     CharacterBase[] player = new CharacterBase[] { character };
 

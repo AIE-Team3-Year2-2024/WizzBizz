@@ -13,10 +13,11 @@ public class OrbSpawner : MonoBehaviour
         GameManager.Instance.orbSpawners.Add(this); // Add to the global list of orb spawners.
     }
 
+    /// <summary>
+    /// will despawn wny held ball and spawn a new one
+    /// </summary>
     public void Reset()
     {
-        Debug.Log("Orb now spawning!");
-
         if (_spawnedCollectible)
         {
             Destroy(_spawnedCollectible);

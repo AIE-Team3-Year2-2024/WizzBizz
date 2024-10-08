@@ -29,6 +29,9 @@ public class OrbCollectible : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// handles the balls spawing animation
+    /// </summary>
     void Update()
     {
         if (_justSpawned == true)
@@ -46,6 +49,10 @@ public class OrbCollectible : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// if hit a player give the player an orb 
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         CharacterBase character = null;
