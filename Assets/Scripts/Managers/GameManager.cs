@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
 public class PlayerData
@@ -59,11 +60,35 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Canvas arenaUICanvas;
 
+    [Header("Score board")]
+
+    [Tooltip("The scoreboard object wich shows the player score and round winner")]
+    [SerializeField]
+    private GameObject _scoreBoard;
+
+    [Tooltip("how long the scoreboard will be shown after a player wins")]
+    [SerializeField]
+    private float _scoreBoardWaitTime;
+
+    [Tooltip("the text component of the score board saying who wins")]
+    [SerializeField]
+    private TMP_Text _scoreBoardWinnerText;
+
+    [Tooltip("the prefab for each players score in the scoreBoard")]
+    [SerializeField]
+    private TMP_Text _scoreText;
+
+    [Tooltip("the parent for the player scores")]
+    [SerializeField]
+    private GameObject _scoreParent;
+
     [Tooltip("A reference to the UI text object for the round timer.")]
     [SerializeField]
     private TMP_Text roundTimerText;
 
     private float _roundTimer;
+
+    [Header("Cinemachine")]
 
     [Tooltip("the wieght this players target in the target group will be set to")]
     [SerializeField]
@@ -114,12 +139,11 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(Instance.gameObject);
+            
         }
-        else
-        {
-            Instance = this;
-        }
+        Instance = this;
+        
         DontDestroyOnLoad(gameObject);
     }
 
@@ -159,7 +183,8 @@ public class GameManager : MonoBehaviour
                     _connectedPlayerCount++;
                 }
             }
-        } else
+        } 
+        else
         {
             _roundTimer -= Time.deltaTime;
             if(_roundTimer <= 0)
@@ -318,8 +343,6 @@ public class GameManager : MonoBehaviour
     {
         if (_alivePlayers.Count() > 1)
         {
-            CharacterBase[] deadPlayer = new CharacterBase[]{ player };
-            StartSlowDown(deadPlayer);
             _alivePlayers.Remove(player);
             Destroy(player.gameObject);
         }
@@ -328,19 +351,40 @@ public class GameManager : MonoBehaviour
         {
             _roundTimer = _roundTime;
             // Handle win
-            PlayerWin();
+            StartCoroutine(PlayerWin());
         }
     }
 
     /// <summary>
     /// adds score to the first alive player and either loads the next round or the end level
     /// </summary>
-    public void PlayerWin()
+    public IEnumerator PlayerWin()
     {
         foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
         {
             p.Value.score++;
             _currentRound++;
+
+            CharacterBase[] player = new CharacterBase[] { p.Key };
+
+            GameManager.Instance.StartSlowDown(player);
+
+            //activate the scoreboard and set the winner text and make the score objects for each winner and set the text for them
+            if (_scoreBoard != null)
+            {
+                _scoreBoard.SetActive(true);
+                _scoreBoardWinnerText.text = "The winner of this round is the " + p.Key.gameObject.name + "( " + p.Value.characterSelect.name + " )";
+
+                int pos = 1;
+                foreach(PlayerData pd in _playerData)
+                {
+                    Instantiate(_scoreText, _scoreParent.transform).text = "Player " + pos + " (" + pd.characterSelect.name + ") score: " + pd.score;
+                    pos++;
+                }
+                yield return new WaitForSeconds(_scoreBoardWaitTime);
+            }
+            
+            
 
             //if round over
             if (p.Value.score < _scoreToWin)
@@ -478,6 +522,16 @@ public class GameManager : MonoBehaviour
 
         if (arenaUICanvas != null)
             arenaUICanvas.gameObject.SetActive(true);
+
+        if (_scoreBoard != null)
+        {
+            TMP_Text[] texts = _scoreParent.transform.GetComponentsInChildren<TMP_Text>();
+            foreach(TMP_Text t in texts)
+            {
+                Destroy(t.gameObject);
+            }
+            _scoreBoard.gameObject.SetActive(false);
+        }
 
         Destroy(spawnInScene.gameObject);
     }
