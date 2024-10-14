@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3524933115188226666}
   - component: {fileID: 1615577099760462163}
   - component: {fileID: 4722094569867634446}
-  m_Layer: 0
+  - component: {fileID: 7446219046728104818}
+  m_Layer: 7
   m_Name: Snowman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,6 +114,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7446219046728104818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546918057975252347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780969401da3a2243a46eb3f65e2bcde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _time: 5
 --- !u!1 &8689549448131597180
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +140,7 @@ GameObject:
   - component: {fileID: 4953290485829027673}
   - component: {fileID: 8760029423788067649}
   - component: {fileID: 4743126511350562212}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Damager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
