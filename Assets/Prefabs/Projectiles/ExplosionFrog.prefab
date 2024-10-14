@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 827101628211268161}
   - component: {fileID: 34398456946547949}
   m_Layer: 9
-  m_Name: Explosion
+  m_Name: ExplosionFrog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 52dcc7aea90cea94d8aa5cbb434d3551, type: 2}
+  - {fileID: 2100000, guid: d814083ecb7017c4c80f60462e24d066, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,9 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 18
-  damageEffect: 0
-  effectTime: 0
+  damage: 12
+  damageEffect: 4
+  effectTime: 2
   destroyOnCollision: 1
   destroyOnPlayerCollision: 0
   DoOnDestroy:
