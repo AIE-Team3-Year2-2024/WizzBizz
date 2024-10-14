@@ -15,20 +15,23 @@ public class CharacterMenu : Menu
     public List<PlayerSlot> playerSlots = new List<PlayerSlot>();
     public List<GameObject> characterPrefabs = new List<GameObject>();
 
+    public UICountDown countDown = null;
+
     [HideInInspector] public int _joinedPlayers = 0;
     [HideInInspector] public int _readyPlayers = 0;
 
     private bool _addingControllers = true;
     private List<int> _addedGamepadIDs = new List<int>();
-
-    // TODO: Player leave lobby on controller button.
-    // TODO: Handle going back to character select after everything has already been selected.
     
     public override void Start()
     {
         base.Start();
+
         _menuManager._controllerDisconnectCallback += ControllerDisconnect;
         _menuManager._controllerReconnectCallback += ControllerReconnect;
+
+        if (countDown != null)
+            countDown.countdownEnd += OnCountDownEnd;
     }
     
     public void Update()
@@ -90,6 +93,9 @@ public class CharacterMenu : Menu
 
             if (mm != null && gamepad != null)
             {
+                if (countDown != null)
+                    countDown.StopCountDown();
+
                 slot._playerID = _joinedPlayers;
                 _joinedPlayers++;
                 
@@ -131,11 +137,10 @@ public class CharacterMenu : Menu
                 return;
             }
 
-            // TODO: Check all players ready and start countdown instead of immediately starting the game.
             if (_readyPlayers >= _joinedPlayers)
             {
-                _addingControllers = false;
-                GameManager.Instance.StartGame();
+                if (countDown != null)
+                    countDown.StartCountDown();
             }
         }
     }
@@ -154,8 +159,9 @@ public class CharacterMenu : Menu
         {
             slot.ReadyPlayer(false);
             _readyPlayers--;
-            
-            // TODO: Cancel countdown.
+
+            if (countDown != null)
+                countDown.StopCountDown();
         }
     }
 
@@ -227,5 +233,11 @@ public class CharacterMenu : Menu
         }
 
         return available;
+    }
+
+    public void OnCountDownEnd()
+    {
+        _addingControllers = false;
+        GameManager.Instance.StartGame();
     }
 }
