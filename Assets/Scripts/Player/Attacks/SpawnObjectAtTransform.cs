@@ -29,8 +29,10 @@ public class SpawnObjectAtTransform : MonoBehaviour
     /// </summary>
     public void SpawnObjectAtSpawn()
     {
+        //make this projectile at the set spawn transform
         GameObject newProjectile = Instantiate(projectile, _spawn.position, transform.rotation);
 
+        //set up the progectiles damage component if it exists
         DamagePlayerOnCollision damageComponent;
         if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
         {
@@ -38,6 +40,7 @@ public class SpawnObjectAtTransform : MonoBehaviour
             damageComponent.SetOwner(player);
         }
 
+        //set up this projectiles life time
         if (lifetime != 0)
         {
             Destroy(newProjectile, lifetime);
@@ -49,8 +52,10 @@ public class SpawnObjectAtTransform : MonoBehaviour
     /// </summary>
     public void FrogSpawnObjectAtSpawn()
     {
+        //make this projectile at the set spawn transform
         GameObject newProjectile = Instantiate(projectile, _spawn.position, transform.rotation);
 
+        //set up the progectiles damage component if it exists
         DamagePlayerOnCollision damageComponent;
         if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
         {
@@ -58,12 +63,14 @@ public class SpawnObjectAtTransform : MonoBehaviour
             damageComponent.SetOwner(player);
         }
 
+        //set up the projectiles frog id
         FrogID frogid = null;
         if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
         {
             frogid.ID = player.GetComponent<FrogID>().ID;
         }
 
+        //set up this projectiles life time
         if (lifetime != 0)
         {
             Destroy(newProjectile, lifetime);

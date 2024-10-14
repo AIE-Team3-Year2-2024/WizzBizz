@@ -26,8 +26,10 @@ public class SpawnProjectile : MonoBehaviour
     /// </summary>
     public void SpawnProjectileAtPlayer()
     {
+        //spawns one of the projectiles at this players projectile spawn transform
         GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
+        //sets up the projectiles damage component if it has it
         DamagePlayerOnCollision damageComponent;
         if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
         {
@@ -35,6 +37,7 @@ public class SpawnProjectile : MonoBehaviour
             damageComponent.SetOwner(player);
         }
 
+        //sets up life time
         if (lifetime != 0)
         {
             Destroy(newProjectile, lifetime);
@@ -46,8 +49,10 @@ public class SpawnProjectile : MonoBehaviour
     /// </summary>
     public void FrogSpawnProjectileAtPlayer()
     {
+        //spawns one of the projectiles at this players projectile spawn transform
         GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
+        //sets up the projectiles damage component if it has it
         DamagePlayerOnCollision damageComponent;
         if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
         {
@@ -55,12 +60,14 @@ public class SpawnProjectile : MonoBehaviour
             damageComponent.SetOwner(player);
         }
 
+        //sets up this projectiles frog id
         FrogID frogid = null;
         if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
         {
             frogid.ID = player.GetInstanceID();
         }
 
+        ////sets up life time
         if (lifetime != 0)
         {
             Destroy(newProjectile, lifetime);
@@ -74,12 +81,18 @@ public class SpawnProjectile : MonoBehaviour
     {
         if (context.performed)
         {
+            //spawns one of the projectiles at this players projectile spawn transform
             GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
-            DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>();
-            damage.SetOwner(player);
-            damage.damage *= player.damageMult;
+            //sets up the projectiles damage component if it has it
+            DamagePlayerOnCollision damageComponent;
+            if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+            {
+                damageComponent.damage *= player.damageMult;
+                damageComponent.SetOwner(player);
+            }
 
+            ////sets up life time
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);
@@ -94,18 +107,25 @@ public class SpawnProjectile : MonoBehaviour
     {
         if (context.performed)
         {
+            //spawns one of the projectiles at this players projectile spawn transform
             GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
 
-            DamagePlayerOnCollision damage = newProjectile.GetComponent<DamagePlayerOnCollision>();
-            damage.SetOwner(player);
-            damage.damage *= player.damageMult;
+            //sets up the projectiles damage component if it has it
+            DamagePlayerOnCollision damageComponent;
+            if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+            {
+                damageComponent.damage *= player.damageMult;
+                damageComponent.SetOwner(player);
+            }
 
+            //sets up this projectiles frog id
             FrogID frogid = null;
             if ((frogid = newProjectile.GetComponent<FrogID>()) != null)
             {
                 frogid.ID = player.GetComponent<FrogID>().ID;
             }
 
+            //sets up life time
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);

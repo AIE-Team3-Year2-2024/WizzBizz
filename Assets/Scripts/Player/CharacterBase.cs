@@ -407,6 +407,7 @@ public class CharacterBase : MonoBehaviour
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
         _speed = originalSpeed;
+        canDash = false;
         _movementDirection = Vector3.zero;
         StartCoroutine(WaitToDash());
     }
@@ -474,6 +475,14 @@ public class CharacterBase : MonoBehaviour
             healthBar.value = _health;
         }
 
+        //makes this player drop the orb if they have it
+        if (hasOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
+
         if (_health <= 0)
         {
             Death();
@@ -493,6 +502,14 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+
+        //makes this player drop the orb if they have it
+        if (hasOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
 
         if (healthBar)
         {
