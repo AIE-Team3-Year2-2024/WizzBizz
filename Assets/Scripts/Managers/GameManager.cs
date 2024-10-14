@@ -114,12 +114,10 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(Instance.gameObject);
         }
-        else
-        {
-            Instance = this;
-        }
+        Instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -375,7 +373,8 @@ public class GameManager : MonoBehaviour
             else // if game over
             {
                 arenaUICanvas.gameObject.SetActive(false);
-                SceneManager.LoadScene(_endLevel);
+                //SceneManager.LoadScene(_endLevel);
+                MenuManager.Instance.FadeToScene(_endLevel);
                 Destroy(gameObject);
             }
         }

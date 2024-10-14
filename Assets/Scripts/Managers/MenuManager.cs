@@ -80,7 +80,19 @@ public class MenuManager : MonoBehaviour
         _controllerDisconnectCallback = null;
         _controllerReconnectCallback = null;
         _primaryEventSystem.playerRoot = null;
-        
+
+        if (_controllers.Count > 0)
+        {
+            for (int i = _controllers.Count-1; i >= 0; --i)
+            {
+                if (_controllers[i] == primaryController)
+                    continue;
+                PlayerInput p = _controllers[i];
+                _controllers.Remove(p);
+                Destroy(p.gameObject);
+            }
+        }
+
         PopulateMenus();
 
         Menu firstMenu = null;
@@ -196,20 +208,48 @@ public class MenuManager : MonoBehaviour
         FadeToScene(_lastActiveScene);
     }
 
+    public void SwitchToScene(string sceneName)
+    {
+        if (sceneName.Length <= 0)
+            return;
+
+        if (_activeMenu != null)
+        {
+            _activeMenu._canvasGroup.interactable = false;
+            _activeMenu._canvasGroup.blocksRaycasts = true;
+            _activeMenu.gameObject.SetActive(false);
+            _activeMenu = null;
+        }
+        _lastActiveMenu = null;
+        _targetMenu = null;
+
+        _lastActiveScene = SceneManager.GetActiveScene().name;
+
+        _goingBack = false;
+
+        StartCoroutine(LoadSpecifiedScene(sceneName));
+    }
+
     public void FadeToScene(string sceneName)
     {
         if (fadeCanvas == null || sceneName.Length <= 0)
             return;
 
-        _activeMenu._canvasGroup.interactable = false;
-        _activeMenu._canvasGroup.blocksRaycasts = true;
+        if (_activeMenu != null)
+        {
+            _activeMenu._canvasGroup.interactable = false;
+            _activeMenu._canvasGroup.blocksRaycasts = true;
+        }
 
         Tween.CanvasGroupAlpha(fadeCanvas, 0.0f, 1.0f,
             fadeDuration, 0.0f, transitionCurve, Tween.LoopType.None, 
             () => { /* Unused. */ }, // Start callback.
-            () => { 
-                _activeMenu.gameObject.SetActive(false);
-                _activeMenu = null;
+            () => {
+                if (_activeMenu != null)
+                {
+                    _activeMenu.gameObject.SetActive(false);
+                    _activeMenu = null;
+                }
                 _lastActiveMenu = null;
                 _targetMenu = null;
 
@@ -217,7 +257,7 @@ public class MenuManager : MonoBehaviour
                 
                 _goingBack = false;
 
-                StartCoroutine(LoadSpecifiedScene(sceneName));
+                StartCoroutine(LoadSpecifiedScene(sceneName, true));
             }, // Complete callback. 
             false);
     }
@@ -265,7 +305,7 @@ public class MenuManager : MonoBehaviour
         _menus.AddRange(arr);
     }
 
-    IEnumerator LoadSpecifiedScene(string sceneName)
+    IEnumerator LoadSpecifiedScene(string sceneName, bool fade = false)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
@@ -278,13 +318,16 @@ public class MenuManager : MonoBehaviour
 
         InitializeManager();
 
-        if (fadeCanvas.alpha >= 1.0f)
+        if (fade)
         {
-            Tween.CanvasGroupAlpha(fadeCanvas, 1.0f, 0.0f,
-                fadeDuration, 0.0f, transitionCurve, Tween.LoopType.None, 
-                () => { /* Unused. */ }, // Start callback.
-                () => { /* Unused. */ }, // Complete callback.
-                false);
+            if (fadeCanvas.alpha >= 1.0f)
+            {
+                Tween.CanvasGroupAlpha(fadeCanvas, 1.0f, 0.0f,
+                    fadeDuration, 0.0f, transitionCurve, Tween.LoopType.None,
+                    () => { /* Unused. */ }, // Start callback.
+                    () => { /* Unused. */ }, // Complete callback.
+                    false);
+            }
         }
     }
 }
