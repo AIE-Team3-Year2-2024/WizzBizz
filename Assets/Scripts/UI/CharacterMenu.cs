@@ -5,28 +5,32 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.UI;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class CharacterMenu : Menu
 {
+    [Header("Character Menu Stuff - ")]
     public GameObject controllerPrefab;
-    
+
+    [Tooltip("List of the available player slots that a player can join.")]
     public List<PlayerSlot> playerSlots = new List<PlayerSlot>();
+    [Tooltip("List of the available characters that a player can select.")]
     public List<GameObject> characterPrefabs = new List<GameObject>();
 
+    [Tooltip("Reference to the count down UI. (Optional)")]
     public UICountDown countDown = null;
 
-    [HideInInspector] public int _joinedPlayers = 0;
-    [HideInInspector] public int _readyPlayers = 0;
+    [HideInInspector] public int _joinedPlayers = 0; // How many players have joined?
+    [HideInInspector] public int _readyPlayers = 0; // How many players are ready?
 
-    private bool _addingControllers = true;
-    private List<int> _addedGamepadIDs = new List<int>();
+    private bool _addingControllers = true; // Are we accepted new players?
+    private List<int> _addedGamepadIDs = new List<int>(); // List of the controller indexes that have joined.
     
     public override void Start()
     {
         base.Start();
 
+        // Setup callbacks.
         _menuManager._controllerDisconnectCallback += ControllerDisconnect;
         _menuManager._controllerReconnectCallback += ControllerReconnect;
 
@@ -39,14 +43,15 @@ public class CharacterMenu : Menu
         if (_addingControllers == false)
             return;
         
+        // Check every connected gamepad.
         for (int i = 0; i < Gamepad.all.Count; i++)
         {
-            if (_addedGamepadIDs.Contains(i))
+            if (_addedGamepadIDs.Contains(i)) // Have we already added it?
                 continue;
             
+            // On any button.
             if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic))
             {   
-                Debug.Log("TEST THING: " + i);
                 _addedGamepadIDs.Add(i);
                 JoinPlayer(i);
             }
@@ -55,9 +60,7 @@ public class CharacterMenu : Menu
 
     public void JoinPlayer(int gamepadID = 0)
     {
-        Debug.Log("JOINED TEST");
-
-        Debug.Log(playerSlots.Count);
+        //Debug.Log(playerSlots.Count);
 
         PlayerSlot slot = getNextAvailableSlot(playerSlots);
         if (slot != null)
@@ -65,37 +68,40 @@ public class CharacterMenu : Menu
             Gamepad gamepad = null;
             PlayerInput p = null;
             MultiplayerEventSystem mm = null;
-            if (gamepadID <= 0 && _menuManager.primaryController != null)
+            if (gamepadID <= 0 && _menuManager.primaryController != null) // Joining player is the primary controller.
             {
                 p = _menuManager.primaryController.GetComponent<PlayerInput>();
-                gamepad = (Gamepad)p.devices[0];
+                gamepad = (Gamepad)p.devices[0]; // TODO: Not sure if this is reliable.
                 mm = _menuManager.primaryController.GetComponentInChildren<MultiplayerEventSystem>();
-                mm.playerRoot = slot.gameObject;
             }
-            else if (controllerPrefab != null)
+            else if (controllerPrefab != null) // Joining player is a new controller.
             {
                 gamepad = Gamepad.all[gamepadID]; // TODO: Not sure if this is reliable.
                 if (gamepad == null)
                 {
                     Debug.Log("No suitable gamepad found. " + gameObject.name);
+                    _addedGamepadIDs.Remove(gamepadID); // Shouldn't be added if it failed.
                     return;
                 }
 
+                // Create a new controller instance.
                 p = PlayerInput.Instantiate(controllerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad);
                 p.transform.SetParent(_menuManager.transform);
                 p.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
-                p.onDeviceLost += _menuManager.ControllerDisconnect;
+                p.onDeviceLost += _menuManager.ControllerDisconnect; // Setup callback events.
                 p.onDeviceRegained += _menuManager.ControllerReconnect;
                 _menuManager.AddController(p);
                 mm = p.GetComponentInChildren<MultiplayerEventSystem>();
-                mm.playerRoot = slot.gameObject;
             }
 
+            // Got a controller.
             if (mm != null && gamepad != null)
             {
                 if (countDown != null)
-                    countDown.StopCountDown();
+                    countDown.StopCountDown(); // Shouldn't count down if there is a new player.
 
+                // Join player.
+                mm.playerRoot = slot.gameObject;
                 slot._playerID = _joinedPlayers;
                 _joinedPlayers++;
                 
@@ -105,28 +111,34 @@ public class CharacterMenu : Menu
             else
             {
                 Debug.LogError("Could not find multiplayer event system or an available gamepad for player slot: " + slot.gameObject.name);
+                _addedGamepadIDs.Remove(gamepadID); // Shouldn't be added if it failed.
             }
         }
     }
 
-    public void ReadyPlayer(PlayerSlot slot)
+    public void ReadyPlayer(PlayerSlot slot) // Called by UI Button.
     {
         if (slot == null)
+        {
+            Debug.LogError("Someone forgot to pass the slot in: " + slot.gameObject.name);
             return;
+        }
         if (playerSlots.Contains(slot) == false)
         {
             Debug.LogError("Slot " + slot.gameObject.name + " is not in the PlayerSlots list!");
             return;
         }
         
-        if (slot._playerJoined == true && slot._playerReady == false)
+        if (slot._playerJoined == true && slot._playerReady == false) // Slot is occupied but not already ready.
         {
+            // Ready up.
             slot.ReadyPlayer();
             _readyPlayers++;
 
             if (characterPrefabs != null && characterPrefabs.Count > 0 && 
                 slot._selectedCharacterIndex > -1 && slot._selectedCharacterIndex < characterPrefabs.Count)
             {
+                // Set the correct selected character prefab and pass it into the player data.
                 GameObject selectedCharacter = characterPrefabs[slot._selectedCharacterIndex];
                 Debug.Log(selectedCharacter.name + ", " + slot._selectedCharacterIndex);
                 GameManager.Instance.SetSelectedCharacter(slot._playerID, selectedCharacter);
@@ -137,48 +149,56 @@ public class CharacterMenu : Menu
                 return;
             }
 
-            if (_readyPlayers >= _joinedPlayers)
+            if (_readyPlayers >= _joinedPlayers) // Has everyone readied up?
             {
+                // Try starting the game.
                 if (countDown != null)
                     countDown.StartCountDown();
             }
         }
     }
 
-    public void UnreadyPlayer(PlayerSlot slot)
+    public void UnreadyPlayer(PlayerSlot slot) // Called by UI Button.
     {
         if (slot == null)
+        {
+            Debug.LogError("Someone forgot to pass the slot in: " + slot.gameObject.name);
             return;
+        }
         if (playerSlots.Contains(slot) == false)
         {
             Debug.LogError("Slot " + slot.gameObject.name + " is not in the PlayerSlots list!");
             return;
         }
 
-        if (slot._playerJoined == true && slot._playerReady == true)
+        if (slot._playerJoined == true && slot._playerReady == true) // Slot is occupied and the player is ready.
         {
+            // Unready.
             slot.ReadyPlayer(false);
             _readyPlayers--;
 
+            // Make sure to stop the count down.
             if (countDown != null)
                 countDown.StopCountDown();
         }
     }
 
-    public void ControllerDisconnect(PlayerInput controller)
+    public void ControllerDisconnect(PlayerInput controller) // Handle controller disconnect.
     {
+        // Find the slot associated with this controller.
         PlayerSlot associatedSlot = null;
         for (int i = 0; i < playerSlots.Count; i++)
         {
             if (playerSlots[i]._controllerEventSystem == controller.GetComponentInChildren<MultiplayerEventSystem>())
             {
                 associatedSlot = playerSlots[i];
-                break;
+                break; // We found it.
             }
         }
 
-        if (associatedSlot != null)
+        if (associatedSlot != null) // Controller has an associated slot.
         {
+            // Remove it.
             GameManager.Instance.RemoveController(controller);
             UnreadyPlayer(associatedSlot);
             associatedSlot.LeavePlayer();
@@ -186,8 +206,9 @@ public class CharacterMenu : Menu
         }
     }
     
-    public void ControllerReconnect(PlayerInput controller)
+    public void ControllerReconnect(PlayerInput controller) // Handle controller regained.
     {
+        // Find a slot to add the player back.
         PlayerSlot slot = getNextAvailableSlot(playerSlots);
         if (slot != null)
         {
@@ -196,6 +217,7 @@ public class CharacterMenu : Menu
 
             if (mm != null && gamepad != null)
             {
+                // Add the player back.
                 slot._playerID = _joinedPlayers;
                 _joinedPlayers++;
 
@@ -215,28 +237,28 @@ public class CharacterMenu : Menu
 
     PlayerSlot getNextAvailableSlot(List<PlayerSlot> slots)
     {
-        if (slots == null || slots.Count <= 0)
+        if (slots == null || slots.Count <= 0) // No slots at all.
             return null;
 
         PlayerSlot available = null;
-
         for (int i = 0; i < slots.Count; i++)
         {
-            Debug.Log(slots[i].name + ", " + slots[i]._playerJoined);
-            if (slots[i] == null || slots[i]._playerJoined == true)
+            //Debug.Log(slots[i].name + ", " + slots[i]._playerJoined);
+            if (slots[i] == null || slots[i]._playerJoined == true) // Slot is occupied or invalid.
                 continue;
-            if (slots[i] != null && slots[i]._playerJoined == false)
+            if (slots[i] != null && slots[i]._playerJoined == false) // Slot is both not invalid and not occupied.
             {
                 available = slots[i];
-                break;
+                break; // We found the next available slot.
             }
         }
 
         return available;
     }
 
-    public void OnCountDownEnd()
+    public void OnCountDownEnd() // Handle count down finish.
     {
+        // Just start the game.
         _addingControllers = false;
         GameManager.Instance.StartGame();
     }

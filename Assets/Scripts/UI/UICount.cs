@@ -13,8 +13,10 @@ public class UICount : MonoBehaviour
         _canvasGroup = GetComponent<CanvasGroup>();
     }
 
+    // Do a transition when the object is enabled, then disable itself.
     private void OnEnable()
     {
+        // Scale effect and disappear in a second.
         Tween.LocalScale(transform, Vector3.one * 2.0f, Vector3.one, 1.0f, 0.0f, Tween.EaseInOut, Tween.LoopType.None, 
             () => { /* Unused. */ }, 
             () => { /* Unused. */ }, 

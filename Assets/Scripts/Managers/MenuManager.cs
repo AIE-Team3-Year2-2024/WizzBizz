@@ -12,11 +12,13 @@ using UnityEngine.InputSystem.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    static public MenuManager Instance { get; private set; }
+    static public MenuManager Instance { get; private set; } // Singleton.
 
-    public PlayerInput primaryController = null;
+    // TODO: Maybe get primary controller by first press?
+    public PlayerInput primaryController = null; // The first controller that is connected.
 
-    public string rootSceneName = "";
+    [Tooltip("Should be the scene the game starts on.")]
+    public string rootSceneName = ""; // Makes sure that the scene transitions can't go back further than the first scene.
     
     [Tooltip("The curve that dictates the smoothing of the transition.")]
     public AnimationCurve transitionCurve;
@@ -33,22 +35,24 @@ public class MenuManager : MonoBehaviour
     [HideInInspector]
     public event Action<PlayerInput> _controllerReconnectCallback = null;
 
-    private bool _goingBack = false;
+    private bool _goingBack = false; // Are we currently transitioning back a menu/scene?
     
-    private Menu _activeMenu = null;
-    private Menu _targetMenu = null;
-    private Menu _lastActiveMenu = null;
+    private Menu _activeMenu = null; // The current menu.
+    private Menu _targetMenu = null; // Menu to transition to.
+    private Menu _lastActiveMenu = null; // The last menu.
 
-    private string _lastActiveScene = string.Empty; // TODO: Make this a tree so that menus can be nested properly.
+    // TODO: Make this a tree or stack so that menus can be nested properly.
+    private string _lastActiveScene = string.Empty; // The last scene we were in.
 
-    private List<Menu> _menus = new List<Menu>();
+    private List<Menu> _menus = new List<Menu>(); // List of menus in the current scene.
 
-    private List<PlayerInput> _controllers = new List<PlayerInput>();
+    private List<PlayerInput> _controllers = new List<PlayerInput>(); // List of active controllers.
 
-    private MultiplayerEventSystem _primaryEventSystem = null;
+    private MultiplayerEventSystem _primaryEventSystem = null; // Event system of the primary controller.
 
     void Awake()
     {
+        // Singleton.
         if (Instance != null && Instance != this)
             Destroy(gameObject);
         else
@@ -61,6 +65,7 @@ public class MenuManager : MonoBehaviour
     {
         rootSceneName = SceneManager.GetActiveScene().name;
         
+        // Make sure we have the primary controller.
         if (primaryController != null)
         {
             _controllers.Add(primaryController);
@@ -71,16 +76,17 @@ public class MenuManager : MonoBehaviour
 
         if (fadeCanvas != null)
         {
-            fadeCanvas.alpha = 0.0f;
+            fadeCanvas.alpha = 0.0f; // Make sure that the fade isn't obscuring the screen by default.
         }
     }
 
     public void InitializeManager()
     {
-        _controllerDisconnectCallback = null;
+        _controllerDisconnectCallback = null; // Reset callbacks on scene load (avoids missing references)
         _controllerReconnectCallback = null;
-        _primaryEventSystem.playerRoot = null;
+        _primaryEventSystem.playerRoot = null; // Reset this too.
 
+        // Destroy any new controllers, should only be setup on the character select. (Doesn't destroy the primary controller)
         if (_controllers.Count > 0)
         {
             for (int i = _controllers.Count-1; i >= 0; --i)
@@ -93,9 +99,10 @@ public class MenuManager : MonoBehaviour
             }
         }
 
-        PopulateMenus();
+        PopulateMenus(); // Find all the menus in the scene.
 
-        Menu firstMenu = null;
+        // Setup menus.
+        Menu firstMenu = null; // The first menu that should be selected in the scene.
         foreach (Menu m in _menus)
         {
             if (m.gameObject.activeInHierarchy == false)
@@ -113,11 +120,12 @@ public class MenuManager : MonoBehaviour
         }
 
         SceneInfo info = FindObjectOfType<SceneInfo>();
-        if (info)
+        if (info) // Is there any scene info?
         {
-            firstMenu = info.firstMenu;
+            firstMenu = info.firstMenu; // Set first menu that should be active.
         }
 
+        // Setup first menu.
         if (firstMenu && _menus.Contains(firstMenu))
         {
             _activeMenu = firstMenu;
@@ -138,6 +146,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    // Handle controller disconnect.
     public void ControllerDisconnect(PlayerInput controller)
     {
         if (_controllers.Contains(controller) == false)
@@ -154,6 +163,7 @@ public class MenuManager : MonoBehaviour
             _controllerDisconnectCallback.Invoke(controller);
     }
 
+    // Handle controller regained.
     public void ControllerReconnect(PlayerInput controller)
     {
         if (_controllers.Contains(controller) == true)
@@ -161,6 +171,7 @@ public class MenuManager : MonoBehaviour
         
         if (primaryController == null)
         {
+            // Add a new primary controller.
             primaryController = controller;
             _primaryEventSystem = primaryController.GetComponentInChildren<MultiplayerEventSystem>();
         }
@@ -170,6 +181,7 @@ public class MenuManager : MonoBehaviour
             _controllerReconnectCallback.Invoke(controller);
     }
 
+    // Transition to another menu.
     public void SetTargetMenu(Menu menuObj)
     {
         if (menuObj == null || menuObj == _activeMenu)
@@ -208,11 +220,13 @@ public class MenuManager : MonoBehaviour
         FadeToScene(_lastActiveScene);
     }
 
+    // Go to another scene. (no transition)
     public void SwitchToScene(string sceneName)
     {
         if (sceneName.Length <= 0)
             return;
 
+        // Disable/reset stuff.
         if (_activeMenu != null)
         {
             _activeMenu._canvasGroup.interactable = false;
@@ -227,24 +241,28 @@ public class MenuManager : MonoBehaviour
 
         _goingBack = false;
 
-        StartCoroutine(LoadSpecifiedScene(sceneName));
+        StartCoroutine(LoadSpecifiedScene(sceneName)); // Load new scene.
     }
 
+    // Go to another scene. (Fade in/out)
     public void FadeToScene(string sceneName)
     {
         if (fadeCanvas == null || sceneName.Length <= 0)
             return;
 
+        // Disable menu interaction.
         if (_activeMenu != null)
         {
             _activeMenu._canvasGroup.interactable = false;
             _activeMenu._canvasGroup.blocksRaycasts = true;
         }
 
+        // Fade out.
         Tween.CanvasGroupAlpha(fadeCanvas, 0.0f, 1.0f,
             fadeDuration, 0.0f, transitionCurve, Tween.LoopType.None, 
             () => { /* Unused. */ }, // Start callback.
             () => {
+                // Reset stuff.
                 if (_activeMenu != null)
                 {
                     _activeMenu.gameObject.SetActive(false);
@@ -257,7 +275,7 @@ public class MenuManager : MonoBehaviour
                 
                 _goingBack = false;
 
-                StartCoroutine(LoadSpecifiedScene(sceneName, true));
+                StartCoroutine(LoadSpecifiedScene(sceneName, true)); // Load new scene.
             }, // Complete callback. 
             false);
     }
@@ -267,27 +285,34 @@ public class MenuManager : MonoBehaviour
         if (currentMenu == null || nextMenu == null)
             return;
 
+        // Disable interaction with current menu.
         currentMenu._canvasGroup.interactable = false;
         currentMenu._canvasGroup.blocksRaycasts = true;
         
+        // Current menu moves out of screen.
         float tweenDuration = transitionDuration * 0.5f; // Since it'll do two tweens for each menu technically.
         Tween.LocalPosition(currentMenu.anchorObject, Vector3.zero, new Vector3(currentMenu._canvasReferenceResolution.x * direction, 0, 0),
             tweenDuration, 0.0f, transitionCurve, Tween.LoopType.None, 
             () => { /* Unused. */ }, // Start callback.
             () => { 
+                // Switch visible menus.
                 currentMenu.gameObject.SetActive(false);
                 nextMenu.gameObject.SetActive(true);
 
+                // Next menu moves into screen.
                 Tween.LocalPosition(nextMenu.anchorObject, new Vector3(nextMenu._canvasReferenceResolution.x * direction, 0, 0), Vector3.zero,
                     tweenDuration, 0.0f, transitionCurve, Tween.LoopType.None, 
                     () => { /* Unused. */ }, // Start callback.
                     () => {
+                        // Setup next menu as current menu.
                         _activeMenu = _targetMenu;
                         _targetMenu = null;
 
+                        // Enable interaction.
                         nextMenu._canvasGroup.interactable = true;
                         nextMenu._canvasGroup.blocksRaycasts = false;
 
+                        // Controller select new menu.
                         Selectable selectedObject = nextMenu._lastSelected == null ? nextMenu.firstSelected : nextMenu._lastSelected;
                         _primaryEventSystem.SetSelectedGameObject(selectedObject.gameObject);
 
@@ -300,6 +325,7 @@ public class MenuManager : MonoBehaviour
 
     private void PopulateMenus()
     {
+        // Find all menus in the scene.
         _menus.Clear();
         Menu[] arr = FindObjectsByType<Menu>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         _menus.AddRange(arr);
@@ -316,9 +342,9 @@ public class MenuManager : MonoBehaviour
 
         Debug.Log("Scene Loaded: " + sceneName);
 
-        InitializeManager();
+        InitializeManager(); // Reset menu manager.
 
-        if (fade)
+        if (fade) // Fade back in.
         {
             if (fadeCanvas.alpha >= 1.0f)
             {

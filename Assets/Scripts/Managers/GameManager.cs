@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // TODO: Remove this block.
         if(addingControllers)
         {
             /*for (int i = 0; i < Gamepad.all.Count; i++)
@@ -210,6 +211,7 @@ public class GameManager : MonoBehaviour
 
     public void AddController(Gamepad gamepad)
     {
+        // Add a new controller. Used in the menu system.
         PlayerData newPlayerData = new PlayerData();
         newPlayerData.gamepad = gamepad;
         newPlayerData.characterSelect = null;
@@ -221,6 +223,7 @@ public class GameManager : MonoBehaviour
 
     public void RemoveController(PlayerInput controller)
     {
+        // Remove a controller. Also used in the menu system.
         foreach(InputDevice input in controller.devices)
         {
             foreach(PlayerData p in _playerData)
@@ -235,6 +238,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // TODO: Probably remove this. Unused method.
     /// <summary>
     /// is used by the cursour when they pick a character
     /// </summary>
@@ -245,6 +249,7 @@ public class GameManager : MonoBehaviour
         _playerData[listPosition].characterSelect = selection;
     }
 
+    // TODO: Probably remove this too?
     /// <summary>
     /// removes the players controller from the controller list and updates the player count
     /// </summary>
@@ -455,7 +460,7 @@ public class GameManager : MonoBehaviour
         _orbSpawnerTimer = orbSpawnerCooldown;
         _orbCollected = true;
 
-        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
+        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]); // TODO: Use Menu Manager???
 
         //theese are here so that the players get spawned in the new scene and not the old one
         yield return new WaitForEndOfFrame();

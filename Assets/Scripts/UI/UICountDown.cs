@@ -3,26 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class UICountDown : MonoBehaviour
 {
-    public CanvasGroup countDown;
+    [Tooltip("List of UI objects for the count down.")]
     public List<UICount> counts = new List<UICount>();
 
     [HideInInspector]
-    public event Action countdownEnd = null; 
+    public event Action countdownEnd = null; // Callback for when the countdown has finished. 
 
-    private float _time = 3.0f;
-    private float _clock = 0.0f;
-    private bool _startCounting = false;
-    private int _counted = 0;
+    private float _time = 3.0f; // Max time.
+    private float _clock = 0.0f; // The current time.
+    private bool _startCounting = false; // Should it start counting down?
+    private int _counted = 0; // The objects that have already been counted.
 
     private void Start()
     {
-        _time = counts.Count;
+        _time = counts.Count; // Max time should be the same as the amount of count down objects.
 
-        foreach (UICount c in counts)
+        foreach (UICount c in counts) // Setup count down objects.
         {
             c.gameObject.SetActive(true);
             c.Awake(); // Make sure it gets it's components.
@@ -34,15 +33,17 @@ public class UICountDown : MonoBehaviour
     {
         if (_startCounting)
         {
+            // Count down finish.
             if (_clock <= 0.0f)
             {
-                _clock = 0.0f;
+                _clock = 0.0f; // Reset.
                 _startCounting = false;
                 if (countdownEnd != null)
-                    countdownEnd.Invoke();
+                    countdownEnd.Invoke(); // Callback.
                 return;
             }
 
+            // Enable count down objects in time.
             for (int i = _counted; i > 0; --i)
             {
                 if (_clock <= i)
@@ -52,12 +53,13 @@ public class UICountDown : MonoBehaviour
                 }
             }
 
-            _clock -= Time.unscaledDeltaTime;
+            _clock -= Time.unscaledDeltaTime; // Count down in seconds.
         }
     }
 
     public void StartCountDown()
     {
+        // Setup count down start.
         _clock = _time;
         _counted = counts.Count;
         _startCounting = true;
@@ -65,6 +67,7 @@ public class UICountDown : MonoBehaviour
 
     public void StopCountDown()
     {
+        // Reset everything.
         _clock = 0.0f;
         _counted = 0;
         _startCounting = false;

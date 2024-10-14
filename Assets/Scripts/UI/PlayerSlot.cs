@@ -8,26 +8,31 @@ using UnityEngine.UI;
 
 public class PlayerSlot : MonoBehaviour
 {
+    [Tooltip("Reference to the UI element telling the player to join.")]
     public CanvasGroup joinText;
+    [Tooltip("Reference to the UI element containing the player select.")]
     public CanvasGroup playerSelect;
+    [Tooltip("Reference to the UI element containing the ready overlay.")]
     public CanvasGroup readyOverlay;
+    [Tooltip("Reference to the UI element containing the selection arrows.")]
     public CanvasGroup selectArrows;
+    [Tooltip("Reference to the UI element containing player options.")]
     public CanvasGroup options;
 
-    [HideInInspector] public int _playerID = -1;
-    [HideInInspector] public bool _playerJoined = false;
-    [HideInInspector] public bool _playerReady = false;
+    [HideInInspector] public int _playerID = -1; // The player occupying the slot.
+    [HideInInspector] public bool _playerJoined = false; // Slot is occupied.
+    [HideInInspector] public bool _playerReady = false; // Player is ready.
 
-    [HideInInspector] public int _selectedCharacterIndex = -1;
+    [HideInInspector] public int _selectedCharacterIndex = -1; // The index of the character that is currently selected.
 
     [HideInInspector]
-    public PlayerInput _controller = null;
+    public PlayerInput _controller = null; // The player's controller.
     [HideInInspector]
     public MultiplayerEventSystem _controllerEventSystem = null;
 
     public void OnEnable()
     {
-        Start();
+        Start(); // Make sure start is called. Possible that it isn't called if the slot game object is inactive on scene load.
     }
 
     public void Start()
@@ -38,6 +43,7 @@ public class PlayerSlot : MonoBehaviour
             return;
         }
 
+        // Setup defaults.
         _playerJoined = false;
         joinText.alpha = 1.0f;
         joinText.interactable = true;
@@ -54,13 +60,13 @@ public class PlayerSlot : MonoBehaviour
 
     public void JoinPlayer(PlayerInput cc, MultiplayerEventSystem mm)
     {
-        if (_playerJoined == true)
+        if (_playerJoined == true) // Don't repeat stuff if player has already joined.
             return;
 
-        //Debug.Log("ANOTHER JOINED TEST");
         _controller = cc;
         _controllerEventSystem = mm;
 
+        // Setup player select UI.
         joinText.alpha = 0.0f;
         joinText.interactable = false;
         playerSelect.alpha = 1.0f;
@@ -69,6 +75,7 @@ public class PlayerSlot : MonoBehaviour
         selectArrows.interactable = true;
         options.gameObject.SetActive(true);
 
+        // Set controller selection to the player select UI.
         mm.SetSelectedGameObject(playerSelect.gameObject);
 
         _playerJoined = true;
@@ -76,6 +83,7 @@ public class PlayerSlot : MonoBehaviour
 
     public void LeavePlayer()
     {
+        // Reset slot.
         _playerJoined = false;
         _playerReady = false;
         _controllerEventSystem = null;
@@ -91,33 +99,40 @@ public class PlayerSlot : MonoBehaviour
         options.gameObject.SetActive(false);
     }
 
+    // Handle player ready/unready.
     public void ReadyPlayer(bool isReady = true)
     {
         if (isReady == true)
         {
+            // Setup ready UI.
             _playerReady = true;
             readyOverlay.alpha = 1.0f;
             readyOverlay.interactable = true;
             playerSelect.interactable = false;
             selectArrows.interactable = false;
 
+            // Haptic feedback.
             Gamepad g = (Gamepad)_controller.devices[0];
             StartCoroutine(DoHaptics(g, 1.0f, 1.0f, 0.25f));
             
+            // Set controller selection to the ready UI.
             _controllerEventSystem.SetSelectedGameObject(readyOverlay.GetComponentInChildren<Button>().gameObject); // TODO: Fix this. Make it a parameter or something.
         }
         else
         {
+            // Reset ready UI.
             _playerReady = false;
             readyOverlay.alpha = 0.0f;
             readyOverlay.interactable = false;
             playerSelect.interactable = true;
             selectArrows.interactable = true;
             
+            // Set controller selection back to the player select UI.
             _controllerEventSystem.SetSelectedGameObject(playerSelect.gameObject);
         }
     }
 
+    // Handle controller haptics.
     IEnumerator DoHaptics(Gamepad gamepad, float strengthLow, float strengthHigh, float time)
     {
         gamepad.SetMotorSpeeds(strengthLow, strengthHigh);
