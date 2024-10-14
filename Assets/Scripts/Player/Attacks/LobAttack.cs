@@ -63,9 +63,11 @@ public class LobAttack : MonoBehaviour
     {
         if (!_checker._colliding)
         {
+            //spawn the projectile and set its end pos
             GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
             newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
 
+            //set up projectile damage component if it has one
             DamagePlayerOnCollision damageComponent;
             if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
             {
@@ -73,6 +75,7 @@ public class LobAttack : MonoBehaviour
                 damageComponent.SetOwner(player);
             }
 
+            //set life time of projectile
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);
@@ -88,22 +91,26 @@ public class LobAttack : MonoBehaviour
     {
         if (!_checker._colliding)
         {
-
+            //spawn the projectile and set its end pos
             GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
             newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
 
+            //set up projectile damage component if it has one
             DamagePlayerOnCollision damageComponent;
             if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()) != null)
             {
                 newProjectile.GetComponent<DamagePlayerOnCollision>().damage *= player.damageMult;
+                damageComponent.SetOwner(player);
             }
 
+            //set up this projectiles frog id
             FrogID frogid = null;
             if((frogid = newProjectile.GetComponent<FrogID>()) != null)
             {
                 frogid.ID = player.GetComponent<FrogID>().ID;
             }
 
+            //set up lifetime
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);

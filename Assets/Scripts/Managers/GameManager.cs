@@ -49,8 +49,7 @@ public class GameManager : MonoBehaviour
     private int _scoreToWin;
 
     [Tooltip("how long before the players take damage over time")]
-    [SerializeField]
-    private float _roundTime;
+    public float _roundTime;
 
     [Tooltip("the multiplyer for damage taken for the round being over")]
     [SerializeField]
@@ -460,6 +459,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         _currentTimeScale = 1;
+    }
+
+    public float GetRoundTimer()
+    {
+        return _roundTimer;
     }
 
     /// <summary>
