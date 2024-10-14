@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5050234373528248517}
   - component: {fileID: 6565566166895197277}
   - component: {fileID: 2737089233201251131}
+  - component: {fileID: 5140152316879382446}
   m_Layer: 0
   m_Name: SnakeMinion
   m_TagString: Untagged
@@ -112,7 +113,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -151,7 +152,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!114 &6565566166895197277
 MonoBehaviour:
@@ -245,13 +246,13 @@ TrailRenderer:
         inWeight: 0.45269927
         outWeight: 0.8991271
       - serializedVersion: 3
-        time: 0.31623477
+        time: 0.62600344
         value: 0
-        inSlope: -3.8966012
-        outSlope: -3.8966012
+        inSlope: -0.61981004
+        outSlope: -0.61981004
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.31991893
+        inWeight: 0.35825488
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -294,3 +295,16 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &5140152316879382446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5018500345596398235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2566bb2c025b746a34d1129f609925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10

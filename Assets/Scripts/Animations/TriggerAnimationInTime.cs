@@ -23,7 +23,7 @@ public class TriggerAnimationInTime : MonoBehaviour
         if (_animator == null || GameManager.Instance == null)
             return;
 
-        if (GameManager.Instance.GetRoundTime() <= (GameManager.Instance.roundTime - time) && _shouldTrigger == true)
+        if (GameManager.Instance.GetRoundTimer() <= (GameManager.Instance._roundTime - time) && _shouldTrigger == true)
         {
             _animator.SetTrigger(triggerName);
             _shouldTrigger = false;
