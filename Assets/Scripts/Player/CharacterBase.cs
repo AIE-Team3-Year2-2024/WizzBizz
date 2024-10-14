@@ -407,6 +407,7 @@ public class CharacterBase : MonoBehaviour
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
         _speed = originalSpeed;
+        canDash = false;
         _movementDirection = Vector3.zero;
         StartCoroutine(WaitToDash());
     }
