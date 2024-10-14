@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
@@ -19,6 +20,8 @@ public class PlayerSlot : MonoBehaviour
 
     [HideInInspector] public int _selectedCharacterIndex = -1;
 
+    [HideInInspector]
+    public PlayerInput _controller = null;
     [HideInInspector]
     public MultiplayerEventSystem _controllerEventSystem = null;
 
@@ -49,12 +52,13 @@ public class PlayerSlot : MonoBehaviour
         playerSelect.GetComponentInChildren<PortraitsAnchor>()._playerSelect = playerSelect;
     }
 
-    public void JoinPlayer(MultiplayerEventSystem mm)
+    public void JoinPlayer(PlayerInput cc, MultiplayerEventSystem mm)
     {
         if (_playerJoined == true)
             return;
-        
+
         //Debug.Log("ANOTHER JOINED TEST");
+        _controller = cc;
         _controllerEventSystem = mm;
 
         joinText.alpha = 0.0f;
@@ -75,6 +79,7 @@ public class PlayerSlot : MonoBehaviour
         _playerJoined = false;
         _playerReady = false;
         _controllerEventSystem = null;
+        _controller = null;
         _playerID = -1;
         
         joinText.alpha = 1.0f;
@@ -95,6 +100,9 @@ public class PlayerSlot : MonoBehaviour
             readyOverlay.interactable = true;
             playerSelect.interactable = false;
             selectArrows.interactable = false;
+
+            Gamepad g = (Gamepad)_controller.devices[0];
+            StartCoroutine(DoHaptics(g, 1.0f, 1.0f, 0.25f));
             
             _controllerEventSystem.SetSelectedGameObject(readyOverlay.GetComponentInChildren<Button>().gameObject); // TODO: Fix this. Make it a parameter or something.
         }
@@ -108,6 +116,13 @@ public class PlayerSlot : MonoBehaviour
             
             _controllerEventSystem.SetSelectedGameObject(playerSelect.gameObject);
         }
+    }
+
+    IEnumerator DoHaptics(Gamepad gamepad, float strengthLow, float strengthHigh, float time)
+    {
+        gamepad.SetMotorSpeeds(strengthLow, strengthHigh);
+        yield return new WaitForSeconds(time);
+        gamepad.ResetHaptics();
     }
 
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class CharacterMenu : Menu
@@ -59,10 +60,11 @@ public class CharacterMenu : Menu
         if (slot != null)
         {
             Gamepad gamepad = null;
+            PlayerInput p = null;
             MultiplayerEventSystem mm = null;
             if (gamepadID <= 0 && _menuManager.primaryController != null)
             {
-                PlayerInput p = _menuManager.primaryController.GetComponent<PlayerInput>();
+                p = _menuManager.primaryController.GetComponent<PlayerInput>();
                 gamepad = (Gamepad)p.devices[0];
                 mm = _menuManager.primaryController.GetComponentInChildren<MultiplayerEventSystem>();
                 mm.playerRoot = slot.gameObject;
@@ -76,14 +78,13 @@ public class CharacterMenu : Menu
                     return;
                 }
 
-                PlayerInput controller =
-                    PlayerInput.Instantiate(controllerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad);
-                controller.transform.SetParent(_menuManager.transform);
-                controller.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
-                controller.onDeviceLost += _menuManager.ControllerDisconnect;
-                controller.onDeviceRegained += _menuManager.ControllerReconnect;
-                _menuManager.AddController(controller);
-                mm = controller.GetComponentInChildren<MultiplayerEventSystem>();
+                p = PlayerInput.Instantiate(controllerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad);
+                p.transform.SetParent(_menuManager.transform);
+                p.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
+                p.onDeviceLost += _menuManager.ControllerDisconnect;
+                p.onDeviceRegained += _menuManager.ControllerReconnect;
+                _menuManager.AddController(p);
+                mm = p.GetComponentInChildren<MultiplayerEventSystem>();
                 mm.playerRoot = slot.gameObject;
             }
 
@@ -93,7 +94,7 @@ public class CharacterMenu : Menu
                 _joinedPlayers++;
                 
                 GameManager.Instance.AddController(gamepad);
-                slot.JoinPlayer(mm);
+                slot.JoinPlayer(p, mm);
             }
             else
             {
@@ -193,7 +194,7 @@ public class CharacterMenu : Menu
                 _joinedPlayers++;
 
                 GameManager.Instance.AddController(gamepad);
-                slot.JoinPlayer(mm);
+                slot.JoinPlayer(controller, mm);
             }
             else
             {
