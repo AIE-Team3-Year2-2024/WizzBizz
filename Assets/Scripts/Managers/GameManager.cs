@@ -381,7 +381,7 @@ public class GameManager : MonoBehaviour
                     Instantiate(_scoreText, _scoreParent.transform).text = "Player " + pos + " (" + pd.characterSelect.name + ") score: " + pd.score;
                     pos++;
                 }
-                yield return new WaitForSeconds(_scoreBoardWaitTime);
+                yield return new WaitForSecondsRealtime(_scoreBoardWaitTime);
             }
             
             
