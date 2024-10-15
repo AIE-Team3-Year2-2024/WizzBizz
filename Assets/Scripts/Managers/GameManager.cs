@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
+[Serializable]
 public class PlayerData
 {
     public Gamepad gamepad;
@@ -56,8 +57,7 @@ public class GameManager : MonoBehaviour
     private float endGameDamageMult;
 
     [Tooltip("A reference to the Arena UI canvas.")]
-    [SerializeField]
-    private Canvas arenaUICanvas;
+    public Canvas arenaUICanvas;
 
     [Header("Score board")]
 
@@ -139,10 +139,9 @@ public class GameManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(Instance.gameObject);
-            
         }
         Instance = this;
-        
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -151,9 +150,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // TODO: Remove this block.
         if(addingControllers)
         {
-            for (int i = 0; i < Gamepad.all.Count; i++)
+            /*for (int i = 0; i < Gamepad.all.Count; i++)
             {
                 bool alreadyContainsGamepad = false;
                 for (int j = 0; j < _playerData.Count(); j++)
@@ -181,9 +181,8 @@ public class GameManager : MonoBehaviour
 
                     _connectedPlayerCount++;
                 }
-            }
-        } 
-        else
+            }*/
+        } else
         {
             _roundTimer -= Time.deltaTime;
             if(_roundTimer <= 0)
@@ -234,6 +233,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddController(Gamepad gamepad)
+    {
+        // Add a new controller. Used in the menu system.
+        PlayerData newPlayerData = new PlayerData();
+        newPlayerData.gamepad = gamepad;
+        newPlayerData.characterSelect = null;
+        newPlayerData.score = 0;
+        _playerData.Add(newPlayerData);
+        
+        _connectedPlayerCount++;
+    }
+
+    public void RemoveController(PlayerInput controller)
+    {
+        // Remove a controller. Also used in the menu system.
+        foreach(InputDevice input in controller.devices)
+        {
+            foreach(PlayerData p in _playerData)
+            {
+                if(input == p.gamepad)
+                {
+                    _playerData.Remove(p);
+                    _connectedPlayerCount--;
+                    return;
+                }
+            }
+        }
+    }
+
+    // TODO: Probably remove this. Unused method.
     /// <summary>
     /// is used by the cursour when they pick a character
     /// </summary>
@@ -244,6 +273,7 @@ public class GameManager : MonoBehaviour
         _playerData[listPosition].characterSelect = selection;
     }
 
+    // TODO: Probably remove this too?
     /// <summary>
     /// removes the players controller from the controller list and updates the player count
     /// </summary>
@@ -391,7 +421,8 @@ public class GameManager : MonoBehaviour
             else // if game over
             {
                 arenaUICanvas.gameObject.SetActive(false);
-                SceneManager.LoadScene(_endLevel);
+                //SceneManager.LoadScene(_endLevel);
+                MenuManager.Instance.FadeToScene(_endLevel);
                 Destroy(gameObject);
             }
         }
@@ -477,7 +508,7 @@ public class GameManager : MonoBehaviour
         _orbSpawnerTimer = orbSpawnerCooldown;
         _orbCollected = true;
 
-        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
+        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]); // TODO: Use Menu Manager???
 
         //theese are here so that the players get spawned in the new scene and not the old one
         yield return new WaitForEndOfFrame();
