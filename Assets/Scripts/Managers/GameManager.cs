@@ -428,6 +428,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public List<PlayerData> GetSortedPlayerData()
+    {
+        List<PlayerData> sortedPlayerData = _playerData;
+        ///sort player data here
+
+        sortedPlayerData.Sort((PlayerData x, PlayerData y) =>
+        {
+            return y.score.CompareTo(x.score);
+        });
+
+        return sortedPlayerData;
+    }
+
     /// <summary>
     /// resets orb timer
     /// </summary>
