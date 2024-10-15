@@ -370,7 +370,8 @@ MonoBehaviour:
   _ballLifetime: 8
   canMove: 1
   canDash: 1
-  _pointerAimerRange: 7
+  _pointerAimerRange: 15
+  _defualtPointerAimerHeight: 0
   currentAimMagnitude: 0
   _ballAttackTime: 1
   _basicAttackTime: 0.6
@@ -970,7 +971,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309746413074950827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1599,7 +1600,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c33cc95612ad29f408977c04fb1f701f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bdf0aa10f7574b54090a10ac131d8de9, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
