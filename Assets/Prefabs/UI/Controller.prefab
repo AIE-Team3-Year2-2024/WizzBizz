@@ -103,7 +103,20 @@ MonoBehaviour:
     m_ActionId: 02f390e4-bcf0-45e8-aaaa-454f8ca6a9a7
     m_ActionName: UI/Submit[/XInputControllerWindows/buttonSouth]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: ControllerCancel
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 4027415173824069256}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.InputSystem.PlayerInput,
+            Unity.InputSystem
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
     m_ActionId: 1e32ddff-3f81-41a0-88b7-2d2c505f463a
     m_ActionName: UI/Cancel[/XInputControllerWindows/buttonEast]
   - m_PersistentCalls:

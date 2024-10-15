@@ -265,12 +265,6 @@ MonoBehaviour:
   transitionDuration: 1.5
   fadeCanvas: {fileID: 7602769764038968168}
   fadeDuration: 1
-  controllerDisconnectCallback:
-    m_PersistentCalls:
-      m_Calls: []
-  controllerReconnectCallback:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &6802183741525895684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -285,10 +279,6 @@ PrefabInstance:
     - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
       propertyPath: m_DeviceRegainedEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
       propertyPath: m_DeviceLostEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -315,10 +305,6 @@ PrefabInstance:
       value: ControllerReconnect
       objectReference: {fileID: 0}
     - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
       propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -337,10 +323,6 @@ PrefabInstance:
     - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
       propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoBackMenu
       objectReference: {fileID: 0}
     - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
       propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -368,10 +350,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
       propertyPath: m_DeviceRegainedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
-      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4027415173824069256, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
