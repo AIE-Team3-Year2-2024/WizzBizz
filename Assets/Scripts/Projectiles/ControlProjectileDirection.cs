@@ -33,6 +33,10 @@ public class ControlProjectileDirection : MonoBehaviour
     private void Update()
     {
         Quaternion rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(aimDirection), rotationSpeed * Time.deltaTime);
+        if(aimDirection == Vector3.zero)
+        {
+            Debug.LogWarning("aim direction on the projectile control component is 0 this means the player to control is likely not set check this component is in the onjebts damage player component");
+        }
 
         rotation.z = 0;
         rotation.x = 0;

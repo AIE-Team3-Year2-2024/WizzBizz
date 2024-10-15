@@ -102,6 +102,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _pointerAimerRange;
 
+    [Tooltip("this will be the height of the pointer aimer when the aim stick is not aiming")]
+    [SerializeField]
+    private float _defualtPointerAimerHeight;
+
     [HideInInspector]
     public float currentAimMagnitude;
 
@@ -379,7 +383,7 @@ public class CharacterBase : MonoBehaviour
 
         currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
 
-        _pointerAimer.localScale = new Vector3(_pointerAimer.localScale.x, 1 + (_pointerAimerRange * currentAimMagnitude), _pointerAimer.localScale.z);
+        _pointerAimer.sizeDelta = new Vector2(_pointerAimer.sizeDelta.x, _defualtPointerAimerHeight + ((_pointerAimerRange - _defualtPointerAimerHeight) * currentAimMagnitude));
     }
 
     /// <summary>
