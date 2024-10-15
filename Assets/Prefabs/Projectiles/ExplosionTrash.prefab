@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4245985465227740682
+--- !u!1 &1365639633603684979
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,52 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7939443002887222090}
-  - component: {fileID: 4726496156791657048}
-  - component: {fileID: 8317632203056599215}
-  - component: {fileID: 9077319215393030734}
-  - component: {fileID: -4794265175610384756}
-  - component: {fileID: -2775216548624882883}
-  - component: {fileID: -438540098436973032}
-  - component: {fileID: 3790909454710753257}
-  - component: {fileID: 1678591520207344253}
-  m_Layer: 7
-  m_Name: FrogAOE
+  - component: {fileID: 3962893634544169940}
+  - component: {fileID: 2739859048923229704}
+  - component: {fileID: 3400963064301310978}
+  - component: {fileID: 4940876845082896100}
+  - component: {fileID: 3763258287274443448}
+  - component: {fileID: 827101628211268161}
+  - component: {fileID: 34398456946547949}
+  m_Layer: 9
+  m_Name: ExplosionTrash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7939443002887222090
+--- !u!4 &3962893634544169940
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
+  m_GameObject: {fileID: 1365639633603684979}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 14, y: 0.3, z: 14}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5.3399, y: 0, z: 5.3399}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4726496156791657048
+--- !u!33 &2739859048923229704
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
+  m_GameObject: {fileID: 1365639633603684979}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8317632203056599215
+--- !u!23 &3400963064301310978
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
+  m_GameObject: {fileID: 1365639633603684979}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -67,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b6a9df26b796f84f8fa016440fea3f1, type: 2}
+  - {fileID: 2100000, guid: eaa8a91631b8aa64f8d6c40d4380621f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -89,26 +87,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &9077319215393030734
+--- !u!135 &4940876845082896100
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
+  m_GameObject: {fileID: 1365639633603684979}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-4794265175610384756
+--- !u!54 &3763258287274443448
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
+  m_GameObject: {fileID: 1365639633603684979}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -118,22 +116,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &-2775216548624882883
+--- !u!114 &827101628211268161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
+  m_GameObject: {fileID: 1365639633603684979}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  damageEffect: 11
-  effectTime: 0.3
-  destroyOnCollision: 0
+  damage: 10
+  damageEffect: 0
+  effectTime: 0
+  destroyOnCollision: 1
   destroyOnPlayerCollision: 0
   DoOnDestroy:
     m_PersistentCalls:
@@ -141,44 +139,18 @@ MonoBehaviour:
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
-  controlComponent: {fileID: 3790909454710753257}
+  controlComponent: {fileID: 0}
   damageChildren: []
---- !u!114 &-438540098436973032
+--- !u!114 &34398456946547949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
+  m_GameObject: {fileID: 1365639633603684979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66590d56e1dce0e409cf6619c5f087a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 780969401da3a2243a46eb3f65e2bcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
---- !u!114 &3790909454710753257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a137b190fc878f48b87a66f2cd67bf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 0.7
---- !u!114 &1678591520207344253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4245985465227740682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 30
+  _time: 0.5

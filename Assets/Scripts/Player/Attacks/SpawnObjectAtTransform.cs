@@ -34,7 +34,7 @@ public class SpawnObjectAtTransform : MonoBehaviour
 
         //set up the progectiles damage component if it exists
         DamagePlayerOnCollision damageComponent;
-        if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+        if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()) && player != null)
         {
             damageComponent.damage *= player.damageMult;
             damageComponent.SetOwner(player);
@@ -57,7 +57,7 @@ public class SpawnObjectAtTransform : MonoBehaviour
 
         //set up the progectiles damage component if it exists
         DamagePlayerOnCollision damageComponent;
-        if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+        if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()) && player != null)
         {
             damageComponent.damage *= player.damageMult;
             damageComponent.SetOwner(player);

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2847592580900987440}
   - component: {fileID: 5988690802700073881}
   - component: {fileID: -8108994856186047594}
+  - component: {fileID: 458066566848102420}
   m_Layer: 7
   m_Name: Paper
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 18
 --- !u!114 &1587318600284152238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bab9dcccb60ea37429bc903192c597dc, type: 2}
+  - {fileID: 2100000, guid: 9f0b32905f7dbdb4e8e26ebc95e83ab6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -236,6 +237,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackAmount: 0
   abTest: 0
+--- !u!114 &458066566848102420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363175542702627947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d197b5b7f7b01ab4bbf4da0c4f29dadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  destroyOnCollision: 1
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1108064079310908116
 PrefabInstance:
   m_ObjectHideFlags: 0
