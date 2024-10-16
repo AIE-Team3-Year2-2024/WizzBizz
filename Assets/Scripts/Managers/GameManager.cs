@@ -116,6 +116,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _slowdownLength;
 
+    [HideInInspector]
+    public bool _gameStarted = false;
+
     private float _currentTimeScale = 1;
 
     private CharacterBase _pausingPlayer;
@@ -420,6 +423,7 @@ public class GameManager : MonoBehaviour
                 StartGame();
             else // if game over
             {
+                _gameStarted = false;
                 arenaUICanvas.gameObject.SetActive(false);
                 //SceneManager.LoadScene(_endLevel);
                 MenuManager.Instance.FadeToScene(_endLevel);
@@ -439,6 +443,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        _gameStarted = true;
         StartCoroutine(StartGameRoutine());
     }
 

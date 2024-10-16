@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-// Taken from https://gist.github.com/emredesu/af597de14a4377e1ecf96b6f7b6cc506
+// Modified from https://gist.github.com/emredesu/af597de14a4377e1ecf96b6f7b6cc506
 [RequireComponent(typeof(ScrollRect))]
 public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -13,6 +13,7 @@ public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointe
     private bool mouseOver = false;
 
     private List<Selectable> m_Selectables = new List<Selectable>();
+    private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
     private ScrollRect m_ScrollRect;
 
     private Vector2 m_NextScrollPosition = Vector2.up;
@@ -21,6 +22,7 @@ public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointe
         if (m_ScrollRect)
         {
             m_ScrollRect.content.GetComponentsInChildren(m_Selectables);
+            m_ScrollRect.content.GetComponentsInChildren(m_Groups);
         }
     }
     void Awake()
@@ -32,6 +34,7 @@ public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointe
         if (m_ScrollRect)
         {
             m_ScrollRect.content.GetComponentsInChildren(m_Selectables);
+            m_ScrollRect.content.GetComponentsInChildren(m_Groups);
         }
         ScrollToSelected(true);
     }
@@ -84,14 +87,29 @@ public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointe
 #nullable disable
     void ScrollToSelected(bool quickScroll)
     {
-        int selectedIndex = -1;
+        int selectedIndex = -1, groupIndex = -1;
         Selectable selectedElement = EventSystem.current.currentSelectedGameObject ? EventSystem.current.currentSelectedGameObject.GetComponent<Selectable>() : null;
 
         if (selectedElement)
         {
             selectedIndex = m_Selectables.IndexOf(selectedElement);
+            CanvasGroup group = selectedElement.GetComponent<CanvasGroup>();;
+            if (group) groupIndex = m_Groups.IndexOf(group);
         }
-        if (selectedIndex > -1)
+
+        if (groupIndex > -1)
+        {
+            if (quickScroll)
+            {
+                m_ScrollRect.normalizedPosition = new Vector2(0, 1 - (groupIndex / ((float)m_Groups.Count - 1)));
+                m_NextScrollPosition = m_ScrollRect.normalizedPosition;
+            }
+            else
+            {
+                m_NextScrollPosition = new Vector2(0, 1 - (groupIndex / ((float)m_Groups.Count - 1)));
+            }
+        }
+        else if (selectedIndex > -1)
         {
             if (quickScroll)
             {

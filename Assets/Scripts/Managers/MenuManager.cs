@@ -48,6 +48,7 @@ public class MenuManager : MonoBehaviour
     private string _lastActiveScene = string.Empty; // The last scene we were in.
 
     private List<Menu> _menus = new List<Menu>(); // List of menus in the current scene.
+    private SceneInfo _sceneInfo = null; // Reference to the scene info.
 
     private List<PlayerInput> _controllers = new List<PlayerInput>(); // List of active controllers.
 
@@ -92,6 +93,8 @@ public class MenuManager : MonoBehaviour
         _controllerCancelCallback = null;
         _primaryEventSystem.playerRoot = null; // Reset this too.
 
+        _sceneInfo = null;
+
         // Destroy any new controllers, should only be setup on the character select. (Doesn't destroy the primary controller)
         if (_controllers.Count > 0)
         {
@@ -128,7 +131,8 @@ public class MenuManager : MonoBehaviour
         SceneInfo info = FindObjectOfType<SceneInfo>();
         if (info) // Is there any scene info?
         {
-            firstMenu = info.firstMenu; // Set first menu that should be active.
+            _sceneInfo = info;
+            firstMenu = _sceneInfo.firstMenu; // Set first menu that should be active.
         }
 
         // Setup first menu.
@@ -199,6 +203,8 @@ public class MenuManager : MonoBehaviour
             _controllerCancelCallback.Invoke(controller); // Do this if there's a callback setup.
         else // Otherwise go back instead.
         {
+            if (GameManager.Instance._gameStarted == true) // Don't go back whilst in game.
+                return;
             GoBackMenu(); // Try this. Will do nothing if there's no last menu.
             GoBackScene(); // Also, try this.
         }
@@ -239,8 +245,16 @@ public class MenuManager : MonoBehaviour
     {
         if (_lastActiveScene == string.Empty || SceneManager.GetActiveScene().name == rootSceneName || _goingBack == true)
             return;
+
+        string backScene = _lastActiveScene;
+        if (_sceneInfo) // Is there any scene info?
+        {
+            // Override.
+            backScene = _sceneInfo.backSceneOverride;
+        }
+        
         _goingBack = true;
-        FadeToScene(_lastActiveScene);
+        FadeToScene(backScene);
     }
 
     // Go to another scene. (no transition)
