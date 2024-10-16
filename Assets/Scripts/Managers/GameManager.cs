@@ -116,6 +116,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _slowdownLength;
 
+    [HideInInspector]
+    public bool _gameStarted = false;
+
     private float _currentTimeScale = 1;
 
     private CharacterBase _pausingPlayer;
@@ -420,12 +423,26 @@ public class GameManager : MonoBehaviour
                 StartGame();
             else // if game over
             {
+                _gameStarted = false;
                 arenaUICanvas.gameObject.SetActive(false);
                 //SceneManager.LoadScene(_endLevel);
                 MenuManager.Instance.FadeToScene(_endLevel);
                 Destroy(gameObject);
             }
         }
+    }
+
+    public List<PlayerData> GetSortedPlayerData()
+    {
+        List<PlayerData> sortedPlayerData = _playerData;
+        ///sort player data here
+
+        sortedPlayerData.Sort((PlayerData x, PlayerData y) =>
+        {
+            return y.score.CompareTo(x.score);
+        });
+
+        return sortedPlayerData;
     }
 
     /// <summary>
@@ -439,6 +456,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        _gameStarted = true;
         StartCoroutine(StartGameRoutine());
     }
 
