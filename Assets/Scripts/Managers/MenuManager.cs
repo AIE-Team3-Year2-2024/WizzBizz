@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour
     public PlayerInput primaryController = null; // The first controller that is connected.
 
     [Tooltip("Should be the scene the game starts on.")]
+    [HideInInspector]
     public string rootSceneName = ""; // Makes sure that the scene transitions can't go back further than the first scene.
     
     [Tooltip("The curve that dictates the smoothing of the transition.")]
@@ -34,6 +35,8 @@ public class MenuManager : MonoBehaviour
     public event Action<PlayerInput> _controllerDisconnectCallback = null;
     [HideInInspector]
     public event Action<PlayerInput> _controllerReconnectCallback = null;
+    [HideInInspector]
+    public event Action<PlayerInput> _controllerCancelCallback = null;
 
     private bool _goingBack = false; // Are we currently transitioning back a menu/scene?
     
@@ -45,10 +48,12 @@ public class MenuManager : MonoBehaviour
     private string _lastActiveScene = string.Empty; // The last scene we were in.
 
     private List<Menu> _menus = new List<Menu>(); // List of menus in the current scene.
+    private SceneInfo _sceneInfo = null; // Reference to the scene info.
 
     private List<PlayerInput> _controllers = new List<PlayerInput>(); // List of active controllers.
 
     private MultiplayerEventSystem _primaryEventSystem = null; // Event system of the primary controller.
+    private InputSystemUIInputModule _primaryInputModule = null; // Input module of the primary controller.
 
     void Awake()
     {
@@ -70,6 +75,7 @@ public class MenuManager : MonoBehaviour
         {
             _controllers.Add(primaryController);
             _primaryEventSystem = primaryController.GetComponentInChildren<MultiplayerEventSystem>();
+            _primaryInputModule = primaryController.GetComponentInChildren<InputSystemUIInputModule>();
         }
         
         InitializeManager();
@@ -84,7 +90,10 @@ public class MenuManager : MonoBehaviour
     {
         _controllerDisconnectCallback = null; // Reset callbacks on scene load (avoids missing references)
         _controllerReconnectCallback = null;
+        _controllerCancelCallback = null;
         _primaryEventSystem.playerRoot = null; // Reset this too.
+
+        _sceneInfo = null;
 
         // Destroy any new controllers, should only be setup on the character select. (Doesn't destroy the primary controller)
         if (_controllers.Count > 0)
@@ -122,7 +131,8 @@ public class MenuManager : MonoBehaviour
         SceneInfo info = FindObjectOfType<SceneInfo>();
         if (info) // Is there any scene info?
         {
-            firstMenu = info.firstMenu; // Set first menu that should be active.
+            _sceneInfo = info;
+            firstMenu = _sceneInfo.firstMenu; // Set first menu that should be active.
         }
 
         // Setup first menu.
@@ -157,6 +167,7 @@ public class MenuManager : MonoBehaviour
         {
             primaryController = null;
             _primaryEventSystem = null;
+            _primaryInputModule = null;
         }
 
         if (_controllerDisconnectCallback != null)
@@ -174,11 +185,29 @@ public class MenuManager : MonoBehaviour
             // Add a new primary controller.
             primaryController = controller;
             _primaryEventSystem = primaryController.GetComponentInChildren<MultiplayerEventSystem>();
+            _primaryInputModule = primaryController.GetComponentInChildren<InputSystemUIInputModule>();
         }
         AddController(controller);
 
         if (_controllerReconnectCallback != null)
             _controllerReconnectCallback.Invoke(controller);
+    }
+
+    // Handle controller cancel button.
+    public void ControllerCancel(PlayerInput controller)
+    {
+        if (controller != primaryController) // Probably shouldn't be done by other controllers.
+            return;
+
+        if (_controllerCancelCallback != null)
+            _controllerCancelCallback.Invoke(controller); // Do this if there's a callback setup.
+        else // Otherwise go back instead.
+        {
+            if (GameManager.Instance._gameStarted == true) // Don't go back whilst in game.
+                return;
+            GoBackMenu(); // Try this. Will do nothing if there's no last menu.
+            GoBackScene(); // Also, try this.
+        }
     }
 
     // Transition to another menu.
@@ -216,8 +245,16 @@ public class MenuManager : MonoBehaviour
     {
         if (_lastActiveScene == string.Empty || SceneManager.GetActiveScene().name == rootSceneName || _goingBack == true)
             return;
+
+        string backScene = _lastActiveScene;
+        if (_sceneInfo) // Is there any scene info?
+        {
+            // Override.
+            backScene = _sceneInfo.backSceneOverride;
+        }
+        
         _goingBack = true;
-        FadeToScene(_lastActiveScene);
+        FadeToScene(backScene);
     }
 
     // Go to another scene. (no transition)

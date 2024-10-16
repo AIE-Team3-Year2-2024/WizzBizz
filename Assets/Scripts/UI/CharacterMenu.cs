@@ -31,8 +31,11 @@ public class CharacterMenu : Menu
         base.Start();
 
         // Setup callbacks.
-        _menuManager._controllerDisconnectCallback += ControllerDisconnect;
-        _menuManager._controllerReconnectCallback += ControllerReconnect;
+        if (_menuManager)
+        {
+            _menuManager._controllerDisconnectCallback += ControllerDisconnect;
+            _menuManager._controllerReconnectCallback += ControllerReconnect;
+        }
 
         if (countDown != null)
             countDown.countdownEnd += OnCountDownEnd;
@@ -49,8 +52,8 @@ public class CharacterMenu : Menu
             if (_addedGamepadIDs.Contains(i)) // Have we already added it?
                 continue;
             
-            // On any button.
-            if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic))
+            // On the south button.
+            if (Gamepad.all[i].buttonSouth.isPressed && !Gamepad.all[i].buttonSouth.synthetic)
             {   
                 _addedGamepadIDs.Add(i);
                 JoinPlayer(i);
