@@ -155,6 +155,9 @@ public class CharacterBase : MonoBehaviour
     [SerializeField, Tooltip("the pause screen object to create on pause")]
     private GameObject _pauseScreen;
 
+    [Tooltip("the active pause screen object is stored here so it can be destroyed")]
+    private GameObject _currentPauseScreen;
+
     [Header("Effects")]
 
     [Tooltip("weakness")]
@@ -757,7 +760,7 @@ public class CharacterBase : MonoBehaviour
         {
             GameManager.Instance.Pause(this);
             input.SwitchCurrentActionMap("UI");
-            Instantiate(_pauseScreen);
+            _currentPauseScreen = Instantiate(_pauseScreen);
         }
     }
 
@@ -771,6 +774,11 @@ public class CharacterBase : MonoBehaviour
         {
             GameManager.Instance.UnPause(this);
             input.SwitchCurrentActionMap("Player");
+            if (_currentPauseScreen != null)
+            {
+                Destroy(_currentPauseScreen);
+                _currentPauseScreen = null;
+            }
         }
     }
 
@@ -781,6 +789,11 @@ public class CharacterBase : MonoBehaviour
     {
         GameManager.Instance.UnPause(this);
         input.SwitchCurrentActionMap("Player");
+        if (_currentPauseScreen != null)
+        {
+            Destroy(_currentPauseScreen);
+            _currentPauseScreen = null;
+        }
     }
 
     /// <summary>
