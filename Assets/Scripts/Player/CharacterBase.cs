@@ -102,6 +102,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _pointerAimerRange;
 
+    [Tooltip("this will be the height of the pointer aimer when the aim stick is not aiming")]
+    [SerializeField]
+    private float _defualtPointerAimerHeight;
+
     [HideInInspector]
     public float currentAimMagnitude;
 
@@ -150,6 +154,9 @@ public class CharacterBase : MonoBehaviour
 
     [SerializeField, Tooltip("the pause screen object to create on pause")]
     private GameObject _pauseScreen;
+
+    [Tooltip("the active pause screen object is stored here so it can be destroyed")]
+    private GameObject _currentPauseScreen;
 
     [Header("Effects")]
 
@@ -379,7 +386,7 @@ public class CharacterBase : MonoBehaviour
 
         currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
 
-        _pointerAimer.localScale = new Vector3(_pointerAimer.localScale.x, 1 + (_pointerAimerRange * currentAimMagnitude), _pointerAimer.localScale.z);
+        _pointerAimer.sizeDelta = new Vector2(_pointerAimer.sizeDelta.x, _defualtPointerAimerHeight + ((_pointerAimerRange - _defualtPointerAimerHeight) * currentAimMagnitude));
     }
 
     /// <summary>
@@ -407,6 +414,7 @@ public class CharacterBase : MonoBehaviour
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
         _speed = originalSpeed;
+        canDash = false;
         _movementDirection = Vector3.zero;
         StartCoroutine(WaitToDash());
     }
@@ -474,6 +482,14 @@ public class CharacterBase : MonoBehaviour
             healthBar.value = _health;
         }
 
+        //makes this player drop the orb if they have it
+        if (hasOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
+
         if (_health <= 0)
         {
             Death();
@@ -493,6 +509,14 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+
+        //makes this player drop the orb if they have it
+        if (hasOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
 
         if (healthBar)
         {
@@ -736,7 +760,7 @@ public class CharacterBase : MonoBehaviour
         {
             GameManager.Instance.Pause(this);
             input.SwitchCurrentActionMap("UI");
-            Instantiate(_pauseScreen);
+            _currentPauseScreen = Instantiate(_pauseScreen);
         }
     }
 
@@ -750,6 +774,11 @@ public class CharacterBase : MonoBehaviour
         {
             GameManager.Instance.UnPause(this);
             input.SwitchCurrentActionMap("Player");
+            if (_currentPauseScreen != null)
+            {
+                Destroy(_currentPauseScreen);
+                _currentPauseScreen = null;
+            }
         }
     }
 
@@ -760,6 +789,11 @@ public class CharacterBase : MonoBehaviour
     {
         GameManager.Instance.UnPause(this);
         input.SwitchCurrentActionMap("Player");
+        if (_currentPauseScreen != null)
+        {
+            Destroy(_currentPauseScreen);
+            _currentPauseScreen = null;
+        }
     }
 
     /// <summary>

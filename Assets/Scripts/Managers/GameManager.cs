@@ -9,8 +9,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
+[Serializable]
 public class PlayerData
 {
     public Gamepad gamepad;
@@ -48,22 +50,44 @@ public class GameManager : MonoBehaviour
     private int _scoreToWin;
 
     [Tooltip("how long before the players take damage over time")]
-    [SerializeField]
-    private float _roundTime;
+    public float _roundTime;
 
     [Tooltip("the multiplyer for damage taken for the round being over")]
     [SerializeField]
     private float endGameDamageMult;
 
     [Tooltip("A reference to the Arena UI canvas.")]
+    public Canvas arenaUICanvas;
+
+    [Header("Score board")]
+
+    [Tooltip("The scoreboard object wich shows the player score and round winner")]
     [SerializeField]
-    private Canvas arenaUICanvas;
+    private GameObject _scoreBoard;
+
+    [Tooltip("how long the scoreboard will be shown after a player wins")]
+    [SerializeField]
+    private float _scoreBoardWaitTime;
+
+    [Tooltip("the text component of the score board saying who wins")]
+    [SerializeField]
+    private TMP_Text _scoreBoardWinnerText;
+
+    [Tooltip("the prefab for each players score in the scoreBoard")]
+    [SerializeField]
+    private TMP_Text _scoreText;
+
+    [Tooltip("the parent for the player scores")]
+    [SerializeField]
+    private GameObject _scoreParent;
 
     [Tooltip("A reference to the UI text object for the round timer.")]
     [SerializeField]
     private TMP_Text roundTimerText;
 
     private float _roundTimer;
+
+    [Header("Cinemachine")]
 
     [Tooltip("the wieght this players target in the target group will be set to")]
     [SerializeField]
@@ -92,6 +116,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float _slowdownLength;
 
+    [HideInInspector]
+    public bool _gameStarted = false;
+
     private float _currentTimeScale = 1;
 
     private CharacterBase _pausingPlayer;
@@ -114,12 +141,10 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
+            Destroy(Instance.gameObject);
         }
-        else
-        {
-            Instance = this;
-        }
+        Instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -128,9 +153,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        // TODO: Remove this block.
         if(addingControllers)
         {
-            for (int i = 0; i < Gamepad.all.Count; i++)
+            /*for (int i = 0; i < Gamepad.all.Count; i++)
             {
                 bool alreadyContainsGamepad = false;
                 for (int j = 0; j < _playerData.Count(); j++)
@@ -158,7 +184,7 @@ public class GameManager : MonoBehaviour
 
                     _connectedPlayerCount++;
                 }
-            }
+            }*/
         } else
         {
             _roundTimer -= Time.deltaTime;
@@ -210,6 +236,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddController(Gamepad gamepad)
+    {
+        // Add a new controller. Used in the menu system.
+        PlayerData newPlayerData = new PlayerData();
+        newPlayerData.gamepad = gamepad;
+        newPlayerData.characterSelect = null;
+        newPlayerData.score = 0;
+        _playerData.Add(newPlayerData);
+        
+        _connectedPlayerCount++;
+    }
+
+    public void RemoveController(PlayerInput controller)
+    {
+        // Remove a controller. Also used in the menu system.
+        foreach(InputDevice input in controller.devices)
+        {
+            foreach(PlayerData p in _playerData)
+            {
+                if(input == p.gamepad)
+                {
+                    _playerData.Remove(p);
+                    _connectedPlayerCount--;
+                    return;
+                }
+            }
+        }
+    }
+
+    // TODO: Probably remove this. Unused method.
     /// <summary>
     /// is used by the cursour when they pick a character
     /// </summary>
@@ -220,6 +276,7 @@ public class GameManager : MonoBehaviour
         _playerData[listPosition].characterSelect = selection;
     }
 
+    // TODO: Probably remove this too?
     /// <summary>
     /// removes the players controller from the controller list and updates the player count
     /// </summary>
@@ -318,8 +375,6 @@ public class GameManager : MonoBehaviour
     {
         if (_alivePlayers.Count() > 1)
         {
-            CharacterBase[] deadPlayer = new CharacterBase[]{ player };
-            StartSlowDown(deadPlayer);
             _alivePlayers.Remove(player);
             Destroy(player.gameObject);
         }
@@ -328,30 +383,66 @@ public class GameManager : MonoBehaviour
         {
             _roundTimer = _roundTime;
             // Handle win
-            PlayerWin();
+            StartCoroutine(PlayerWin());
         }
     }
 
     /// <summary>
     /// adds score to the first alive player and either loads the next round or the end level
     /// </summary>
-    public void PlayerWin()
+    public IEnumerator PlayerWin()
     {
         foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
         {
             p.Value.score++;
             _currentRound++;
 
+            CharacterBase[] player = new CharacterBase[] { p.Key };
+
+            GameManager.Instance.StartSlowDown(player);
+
+            //activate the scoreboard and set the winner text and make the score objects for each winner and set the text for them
+            if (_scoreBoard != null)
+            {
+                _scoreBoard.SetActive(true);
+                _scoreBoardWinnerText.text = "The winner of this round is the " + p.Key.gameObject.name + "( " + p.Value.characterSelect.name + " )";
+
+                int pos = 1;
+                foreach(PlayerData pd in _playerData)
+                {
+                    Instantiate(_scoreText, _scoreParent.transform).text = "Player " + pos + " (" + pd.characterSelect.name + ") score: " + pd.score;
+                    pos++;
+                }
+                yield return new WaitForSecondsRealtime(_scoreBoardWaitTime);
+            }
+            
+            
+
             //if round over
             if (p.Value.score < _scoreToWin)
                 StartGame();
             else // if game over
             {
+                _gameStarted = false;
                 arenaUICanvas.gameObject.SetActive(false);
-                SceneManager.LoadScene(_endLevel);
+                //SceneManager.LoadScene(_endLevel);
+                MenuManager.Instance.FadeToScene(_endLevel);
                 Destroy(gameObject);
             }
         }
+    }
+
+    public List<PlayerData> GetSortedPlayerData()
+    {
+        List<PlayerData> sortedPlayerData = _playerData;
+        ///sort player data here
+
+        sortedPlayerData.Sort((PlayerData x, PlayerData y) =>
+        {
+            return y.score.CompareTo(x.score);
+        });
+
+        return sortedPlayerData;
     }
 
     /// <summary>
@@ -365,6 +456,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        _gameStarted = true;
         StartCoroutine(StartGameRoutine());
     }
 
@@ -418,6 +510,11 @@ public class GameManager : MonoBehaviour
         _currentTimeScale = 1;
     }
 
+    public float GetRoundTimer()
+    {
+        return _roundTimer;
+    }
+
     /// <summary>
     /// sets the game manager back to normal then loads a scene waits for the scene to load and then sets up the scene
     /// </summary>
@@ -429,7 +526,7 @@ public class GameManager : MonoBehaviour
         _orbSpawnerTimer = orbSpawnerCooldown;
         _orbCollected = true;
 
-        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
+        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]); // TODO: Use Menu Manager???
 
         //theese are here so that the players get spawned in the new scene and not the old one
         yield return new WaitForEndOfFrame();
@@ -478,6 +575,16 @@ public class GameManager : MonoBehaviour
 
         if (arenaUICanvas != null)
             arenaUICanvas.gameObject.SetActive(true);
+
+        if (_scoreBoard != null)
+        {
+            TMP_Text[] texts = _scoreParent.transform.GetComponentsInChildren<TMP_Text>();
+            foreach(TMP_Text t in texts)
+            {
+                Destroy(t.gameObject);
+            }
+            _scoreBoard.gameObject.SetActive(false);
+        }
 
         Destroy(spawnInScene.gameObject);
     }
