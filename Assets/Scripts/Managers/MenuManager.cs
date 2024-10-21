@@ -203,7 +203,7 @@ public class MenuManager : MonoBehaviour
             _controllerCancelCallback.Invoke(controller); // Do this if there's a callback setup.
         else // Otherwise go back instead.
         {
-            if (GameManager.Instance._gameStarted == true) // Don't go back whilst in game.
+            if (GameManager.Instance != null && GameManager.Instance._gameStarted == true) // Don't go back whilst in game.
                 return;
             GoBackMenu(); // Try this. Will do nothing if there's no last menu.
             GoBackScene(); // Also, try this.
