@@ -12,16 +12,23 @@ public class VectorRangeAttribute : PropertyAttribute
 
     public VectorRangeAttribute(params float[] list)
     {
-        if (list.Length > 1 && list.Length <= 8)
+        if (list.Length > 1)
         {
-            this.min2 = new Vector2(list[0], list[1]);
-            this.max2 = new Vector2(list[2], list[3]);
-
-            this.min3 = new Vector3(list[0], list[1], list[2]);
-            this.max3 = new Vector3(list[3], list[4], list[5]);
-
-            this.min4 = new Vector4(list[0], list[1], list[2], list[3]);
-            this.max4 = new Vector4(list[5], list[5], list[6], list[7]);
+            if (list.Length >= 4)
+            {
+                this.min2 = new Vector2(list[0], list[1]);
+                this.max2 = new Vector2(list[2], list[3]);
+            }
+            if (list.Length >= 6)
+            {
+                this.min3 = new Vector3(list[0], list[1], list[2]);
+                this.max3 = new Vector3(list[3], list[4], list[5]);
+            }
+            if (list.Length >= 8)
+            {
+                this.min4 = new Vector4(list[0], list[1], list[2], list[3]);
+                this.max4 = new Vector4(list[5], list[5], list[6], list[7]);
+            }
         }
     }
 }

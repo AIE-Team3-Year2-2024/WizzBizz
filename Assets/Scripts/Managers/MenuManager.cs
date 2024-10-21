@@ -155,14 +155,16 @@ public class MenuManager : MonoBehaviour
             if (m.gameObject.activeInHierarchy == false)
             {
                 m.gameObject.SetActive(true);
-                m.Awake(); // Make sure this is called so that the component gets its required references since awake isn't called when the game object itself is disabled.
+                if (m._alreadyInitialized == false)
+                    m.Awake(); // Make sure this is called so that the component gets its required references since awake isn't called when the game object itself is disabled.
             }
 
             m._menuManager = this;
             m._canvasGroup.interactable = false;
             m._canvasGroup.blocksRaycasts = true;
 
-            m.Start();
+            if (m._alreadyStarted == false)
+                m.Start();
             m.gameObject.SetActive(false);
         }
 
@@ -322,7 +324,7 @@ public class MenuManager : MonoBehaviour
     // Go to another scene. (Fade in/out)
     public void FadeToScene(string sceneName)
     {
-        if (fadeCanvas == null || sceneName.Length <= 0)
+        if (fadeCanvas == null || sceneName == null || sceneName.Length <= 0)
             return;
 
         // Disable menu interaction.
