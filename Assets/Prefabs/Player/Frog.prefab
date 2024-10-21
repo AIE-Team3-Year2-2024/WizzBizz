@@ -580,6 +580,7 @@ MonoBehaviour:
   canMove: 1
   canDash: 1
   _pointerAimerRange: 5
+  _defualtPointerAimerHeight: 0
   currentAimMagnitude: 0
   _ballAttackTime: 1
   _basicAttackTime: 0.9
@@ -1389,7 +1390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1465012572978774652
 Transform:
   m_ObjectHideFlags: 0

@@ -384,6 +384,7 @@ MonoBehaviour:
   canMove: 1
   canDash: 1
   _pointerAimerRange: 7
+  _defualtPointerAimerHeight: 0
   currentAimMagnitude: 0
   _ballAttackTime: 1
   _basicAttackTime: 0.6
@@ -1031,7 +1032,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 76c013fc69d27704fb20a5e146078ea0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2645,7 +2646,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 76c013fc69d27704fb20a5e146078ea0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
