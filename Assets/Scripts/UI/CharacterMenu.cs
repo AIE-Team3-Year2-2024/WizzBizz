@@ -71,11 +71,11 @@ public class CharacterMenu : Menu
             Gamepad gamepad = null;
             PlayerInput p = null;
             MultiplayerEventSystem mm = null;
-            if (gamepadID <= 0 && _menuManager.primaryController != null) // Joining player is the primary controller.
+            if (gamepadID <= 0 && _menuManager._primaryController != null) // Joining player is the primary controller.
             {
-                p = _menuManager.primaryController.GetComponent<PlayerInput>();
+                p = _menuManager._primaryController.GetComponent<PlayerInput>();
                 gamepad = (Gamepad)p.devices[0]; // TODO: Not sure if this is reliable.
-                mm = _menuManager.primaryController.GetComponentInChildren<MultiplayerEventSystem>();
+                mm = _menuManager._primaryController.GetComponentInChildren<MultiplayerEventSystem>();
             }
             else if (controllerPrefab != null) // Joining player is a new controller.
             {
@@ -90,6 +90,7 @@ public class CharacterMenu : Menu
                 // Create a new controller instance.
                 p = PlayerInput.Instantiate(controllerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad);
                 p.transform.SetParent(_menuManager.transform);
+                p.gameObject.name = "Connected Controller [" + gamepadID + "]";
                 p.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
                 p.onDeviceLost += _menuManager.ControllerDisconnect; // Setup callback events.
                 p.onDeviceRegained += _menuManager.ControllerReconnect;
