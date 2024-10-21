@@ -68,25 +68,16 @@ public class CharacterMenu : Menu
         PlayerSlot slot = getNextAvailableSlot(playerSlots);
         if (slot != null)
         {
-            Gamepad gamepad = null;
+            Gamepad gamepad = Gamepad.all[gamepadID];
             PlayerInput p = null;
             MultiplayerEventSystem mm = null;
-            if (gamepadID <= 0 && _menuManager._primaryController != null) // Joining player is the primary controller.
+            if (_menuManager._primaryController != null && _menuManager._primaryController.devices.Contains(Gamepad.all[gamepadID])) // Joining player is the primary controller.
             {
-                p = _menuManager._primaryController.GetComponent<PlayerInput>();
-                gamepad = (Gamepad)p.devices[0]; // TODO: Not sure if this is reliable.
+                p = _menuManager._primaryController;
                 mm = _menuManager._primaryController.GetComponentInChildren<MultiplayerEventSystem>();
             }
             else if (controllerPrefab != null) // Joining player is a new controller.
             {
-                gamepad = Gamepad.all[gamepadID]; // TODO: Not sure if this is reliable.
-                if (gamepad == null)
-                {
-                    Debug.Log("No suitable gamepad found. " + gameObject.name);
-                    _addedGamepadIDs.Remove(gamepadID); // Shouldn't be added if it failed.
-                    return;
-                }
-
                 // Create a new controller instance.
                 p = PlayerInput.Instantiate(controllerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad);
                 p.transform.SetParent(_menuManager.transform);
@@ -94,6 +85,8 @@ public class CharacterMenu : Menu
                 p.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
                 p.onDeviceLost += _menuManager.ControllerDisconnect; // Setup callback events.
                 p.onDeviceRegained += _menuManager.ControllerReconnect;
+                p.SwitchCurrentActionMap(p.defaultActionMap);
+                p.currentActionMap.Enable();
                 _menuManager.AddController(p);
                 mm = p.GetComponentInChildren<MultiplayerEventSystem>();
             }
@@ -117,6 +110,10 @@ public class CharacterMenu : Menu
                 Debug.LogError("Could not find multiplayer event system or an available gamepad for player slot: " + slot.gameObject.name);
                 _addedGamepadIDs.Remove(gamepadID); // Shouldn't be added if it failed.
             }
+        }
+        else
+        {
+            Debug.LogError("Not slot available for joining gamepad: " + gamepadID);
         }
     }
 

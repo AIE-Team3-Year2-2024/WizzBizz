@@ -110,7 +110,7 @@ public class MenuManager : MonoBehaviour
                     if (cancelAction != null)
                         cancelAction.performed += (ctx) => { if (ctx.performed) { ControllerCancel(_primaryController); } };
 
-                    _controllers.Add(_primaryController);
+                    AddController(_primaryController);
                     _primaryEventSystem = _primaryController.GetComponentInChildren<MultiplayerEventSystem>();
                     _primaryInputModule = _primaryController.GetComponentInChildren<InputSystemUIInputModule>();
 
