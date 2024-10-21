@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727340871342230983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3363175542702627947, guid: be0fbd7d8c008a649856ec3a1edc698e, type: 3}
+  _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 4872620361152214051}
 --- !u!1 &2783992932023041390
@@ -390,7 +391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2895287503457385176}
   m_LocalRotation: {x: -0, y: -0.70710754, z: -0, w: -0.70710605}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -410,6 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3363175542702627947, guid: 121ec97c36d9b9e40ac56cacbf00f4b7, type: 3}
+  _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 2778058637722407896}
 --- !u!1 &5474957593235590119
@@ -437,7 +439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5474957593235590119}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000006258486}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0.25, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -457,6 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3363175542702627947, guid: d502021d43b0f6b45a28a1d75d552d3c, type: 3}
+  _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 4382836550881004990}
 --- !u!1 &8746338100611719258
@@ -484,7 +487,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8746338100611719258}
   m_LocalRotation: {x: -0, y: -0.7071064, z: -0, w: 0.7071072}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -504,6 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3363175542702627947, guid: ecd4ec73662ebce44b65a09fe27d72db, type: 3}
+  _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 4602152283336101413}
 --- !u!1001 &1182509072472734924

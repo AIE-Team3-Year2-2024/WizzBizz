@@ -32,9 +32,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5777404286988346730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1231300193339117174}
   m_Father: {fileID: 0}
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
-  _speedMult: 2
+  _speedMult: 4
 --- !u!114 &394035490441348042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,10 +129,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
   damageEffect: 0
   effectTime: 0
-  destroyOnCollision: 1
+  destroyOnCollision: 0
   destroyOnPlayerCollision: 0
   DoOnDestroy:
     m_PersistentCalls:
@@ -141,9 +141,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   controlComponent: {fileID: 0}
-  damageChildren:
-  - {fileID: 0}
-  - {fileID: 0}
+  damageChildren: []
 --- !u!54 &529405592993949442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a4e08a6c38610438b2d5aab8cd4c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathBounceAmount: 8
+  _deathBounceAmount: 20
 --- !u!96 &-6515065886571002503
 TrailRenderer:
   serializedVersion: 2
@@ -224,7 +222,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.32237226
+        value: 0.33400327
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -232,16 +230,16 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.33443782
-        value: 0.13251537
-        inSlope: -0.5548319
-        outSlope: -0.5548319
+        time: 0.4846757
+        value: 0.17902628
+        inSlope: -0.97431266
+        outSlope: -0.97431266
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.36515576
-        outWeight: 0.54755837
+        outWeight: 0.6944143
       - serializedVersion: 3
-        time: 0.7961428
+        time: 0.89473605
         value: 0
         inSlope: 0
         outSlope: 0
