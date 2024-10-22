@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 1279618877343787457}
   - component: {fileID: 2598744344613293149}
   - component: {fileID: 8326199350830026339}
-  - component: {fileID: 3115987451736039114}
+  - component: {fileID: 6752031939854867279}
   - component: {fileID: 1587318600284152238}
   - component: {fileID: 8759748588996902776}
   - component: {fileID: 6332736741048967311}
-  - component: {fileID: -99800131824615849}
   - component: {fileID: 6134509292193492650}
   - component: {fileID: 5164904202262361543}
   - component: {fileID: 6418827490174559892}
@@ -35,8 +34,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3363175542702627947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,7 +104,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3115987451736039114
+--- !u!114 &6752031939854867279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,10 +113,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3363175542702627947}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
+  m_Script: {fileID: 11500000, guid: a1ea7a35f2619c848bd182a86297db77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 24
+  _speed: 10
+  _speedMult: 3
 --- !u!114 &1587318600284152238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +133,8 @@ MonoBehaviour:
   damage: 22
   damageEffect: 10
   effectTime: 6
-  destroyOnCollision: 1
+  destroyOnCollision: 0
+  destroyOnPlayerCollision: 0
   DoOnDestroy:
     m_PersistentCalls:
       m_Calls: []
@@ -170,21 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a4e08a6c38610438b2d5aab8cd4c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deathBounceAmount: 6
---- !u!114 &-99800131824615849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3363175542702627947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 356116622282bf042af259bc156f6fab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _distanceMult: 0.08
-  _speed: 3
+  _deathBounceAmount: 12
 --- !u!96 &6134509292193492650
 TrailRenderer:
   serializedVersion: 2
@@ -236,7 +223,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6634596
+        value: 0.7099722
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -244,16 +231,16 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.47262147
-        value: 0.3956458
-        inSlope: -1.2426312
-        outSlope: -1.2426312
+        time: 0.51956785
+        value: 0.33750358
+        inSlope: -0.84932935
+        outSlope: -0.84932935
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.4903964
+        inWeight: 0.39818335
         outWeight: 0.48902252
       - serializedVersion: 3
-        time: 0.8798523
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
