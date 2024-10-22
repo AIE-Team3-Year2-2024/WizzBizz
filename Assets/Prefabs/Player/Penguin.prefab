@@ -473,6 +473,7 @@ MonoBehaviour:
   canMove: 1
   canDash: 1
   _pointerAimerRange: 5
+  _defualtPointerAimerHeight: 0
   currentAimMagnitude: 0
   _ballAttackTime: 1
   _basicAttackTime: 0.9
@@ -568,6 +569,7 @@ MonoBehaviour:
   projectiles:
   - {fileID: 6599871779557999481, guid: c0ff7f9cce920a647bd4e8bbec9b41bd, type: 3}
   lifetime: 2
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &-949787460204921858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,7 +638,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 2
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!114 &7826727589078929842
 MonoBehaviour:
@@ -670,6 +672,7 @@ MonoBehaviour:
   range: 15
   lobAimer: {fileID: 7203248672751915788}
   lifetime: 4
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &3000781201183644107
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -908,6 +911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 6599871779557999481, guid: c0ff7f9cce920a647bd4e8bbec9b41bd, type: 3}
+  _projectiles: []
   lifetime: 15
   _spawn: {fileID: 6114661827505666708}
 --- !u!1 &1191514002208151369
@@ -1142,6 +1146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 6599871779557999481, guid: f00d385795e894e47b178dcaf1fd55a4, type: 3}
+  _projectiles: []
   lifetime: 15
   _spawn: {fileID: 639825632643347932}
 --- !u!1 &1469837958510695196
@@ -1677,6 +1682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 6599871779557999481, guid: c0ff7f9cce920a647bd4e8bbec9b41bd, type: 3}
+  _projectiles: []
   lifetime: 15
   _spawn: {fileID: 6096765367254797104}
 --- !u!1 &3647672644212132352
