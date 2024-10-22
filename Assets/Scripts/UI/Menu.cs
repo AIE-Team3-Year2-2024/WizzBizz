@@ -24,6 +24,9 @@ public class Menu : MonoBehaviour // Base menu.
     [HideInInspector] public CanvasGroup _canvasGroup = null;
     [HideInInspector] public MenuManager _menuManager = null; // MenuManager is a singleton but this is probably safer idk.
 
+    [HideInInspector] public bool _alreadyInitialized = false;
+    [HideInInspector] public bool _alreadyStarted = false;
+
     public enum MenuTransitionDirection
     {
         MENU_MOVE_LEFT,
@@ -39,11 +42,14 @@ public class Menu : MonoBehaviour // Base menu.
             _canvasReferenceResolution = cs.referenceResolution;
 
         _lastSelected = firstSelected;
+
+        _alreadyInitialized = true;
     }
 
     public virtual void Start()
     {
         /* Implemented in inherited classes. */
+        _alreadyStarted = true;
     }
 
     // Wrapper functions so we don't have to rely on a MenuManager being in the scene.

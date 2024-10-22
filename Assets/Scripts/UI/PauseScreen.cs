@@ -10,6 +10,7 @@ public class PauseScreen : Menu
 
     public override void Start()
     {
+        base.Start();
         EventSystem.current.SetSelectedGameObject(_firstSelected);
     }
 }

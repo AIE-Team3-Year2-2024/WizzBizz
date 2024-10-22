@@ -3,19 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pixelplacement;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using System.Linq;
+using UnityEngine.InputSystem.Controls;
 
 public class MenuManager : MonoBehaviour
 {
     static public MenuManager Instance { get; private set; } // Singleton.
 
-    // TODO: Maybe get primary controller by first press?
-    public PlayerInput primaryController = null; // The first controller that is connected.
+    public GameObject controllerPrefab; // Instantiates each controller in the scene.
 
     [Tooltip("Should be the scene the game starts on.")]
     [HideInInspector]
@@ -52,8 +51,12 @@ public class MenuManager : MonoBehaviour
 
     private List<PlayerInput> _controllers = new List<PlayerInput>(); // List of active controllers.
 
+    [HideInInspector]
+    public PlayerInput _primaryController = null; // The primary controller.
     private MultiplayerEventSystem _primaryEventSystem = null; // Event system of the primary controller.
     private InputSystemUIInputModule _primaryInputModule = null; // Input module of the primary controller.
+
+    private bool _addingPrimaryController = true; // Are we adding the primary controller?
 
     void Awake()
     {
@@ -69,20 +72,55 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         rootSceneName = SceneManager.GetActiveScene().name;
-        
-        // Make sure we have the primary controller.
-        if (primaryController != null)
-        {
-            _controllers.Add(primaryController);
-            _primaryEventSystem = primaryController.GetComponentInChildren<MultiplayerEventSystem>();
-            _primaryInputModule = primaryController.GetComponentInChildren<InputSystemUIInputModule>();
-        }
-        
-        InitializeManager();
+
+        // Don't initialize the menu manager on start as no primary controller has been assigned yet.
 
         if (fadeCanvas != null)
         {
             fadeCanvas.alpha = 0.0f; // Make sure that the fade isn't obscuring the screen by default.
+        }
+    }
+
+    void Update()
+    {
+        // Try to add the primary controller.
+        if (_addingPrimaryController == true && _primaryController == null) // Don't do this if there is already a primary controller or we are not adding it.
+        {
+            for (int i = 0; i < Gamepad.all.Count; i++) // Iterate through every connected controller.
+            {
+                // On any button pressed.
+                if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic))
+                {
+                    Gamepad gamepad = Gamepad.all[i];
+                    // Instantiate and setup a new controller.
+                    _primaryController = PlayerInput.Instantiate(controllerPrefab, controlScheme: "Gamepad", pairWithDevice: gamepad);
+                    _primaryController.transform.SetParent(transform);
+                    _primaryController.gameObject.name = "Primary Controller [" + i + "]";
+                    _primaryController.notificationBehavior = PlayerNotifications.InvokeCSharpEvents;
+                    _primaryController.onDeviceLost += ControllerDisconnect; // Setup callback events.
+                    _primaryController.onDeviceRegained += ControllerReconnect;
+
+                    // Setup UI Cancel callback event.
+                    // Assuming that the default action map is the UI action map which it should be in the prefab.
+                    _primaryController.SwitchCurrentActionMap(_primaryController.defaultActionMap);
+                    _primaryController.currentActionMap.Enable();
+                    InputAction cancelAction = null;
+                    try { cancelAction = _primaryController.currentActionMap.FindAction("Cancel", true); }
+                    catch (ArgumentException e) { Debug.LogError("Could not find UI Cancel action on primary controller!\n" + e); }
+                    if (cancelAction != null)
+                        cancelAction.performed += (ctx) => { if (ctx.performed) { ControllerCancel(_primaryController); } };
+
+                    AddController(_primaryController);
+                    _primaryEventSystem = _primaryController.GetComponentInChildren<MultiplayerEventSystem>();
+                    _primaryInputModule = _primaryController.GetComponentInChildren<InputSystemUIInputModule>();
+
+                    InitializeManager(); // Now we initialize the menu manager.
+
+                    // Don't need to look for the primary controller anymore.
+                    _addingPrimaryController = false;
+                    break; // No need to loop through anymore gamepads, it has been added.
+                }
+            }
         }
     }
 
@@ -100,7 +138,7 @@ public class MenuManager : MonoBehaviour
         {
             for (int i = _controllers.Count-1; i >= 0; --i)
             {
-                if (_controllers[i] == primaryController)
+                if (_controllers[i] == _primaryController)
                     continue;
                 PlayerInput p = _controllers[i];
                 _controllers.Remove(p);
@@ -117,14 +155,16 @@ public class MenuManager : MonoBehaviour
             if (m.gameObject.activeInHierarchy == false)
             {
                 m.gameObject.SetActive(true);
-                m.Awake(); // Make sure this is called so that the component gets its required references since awake isn't called when the game object itself is disabled.
+                if (m._alreadyInitialized == false)
+                    m.Awake(); // Make sure this is called so that the component gets its required references since awake isn't called when the game object itself is disabled.
             }
 
             m._menuManager = this;
             m._canvasGroup.interactable = false;
             m._canvasGroup.blocksRaycasts = true;
 
-            m.Start();
+            if (m._alreadyStarted == false)
+                m.Start();
             m.gameObject.SetActive(false);
         }
 
@@ -163,9 +203,9 @@ public class MenuManager : MonoBehaviour
             return;
         
         _controllers.Remove(controller);
-        if (controller == primaryController)
+        if (controller == _primaryController)
         {
-            primaryController = null;
+            _primaryController = null;
             _primaryEventSystem = null;
             _primaryInputModule = null;
         }
@@ -180,12 +220,12 @@ public class MenuManager : MonoBehaviour
         if (_controllers.Contains(controller) == true)
             return;
         
-        if (primaryController == null)
+        if (_primaryController == null)
         {
             // Add a new primary controller.
-            primaryController = controller;
-            _primaryEventSystem = primaryController.GetComponentInChildren<MultiplayerEventSystem>();
-            _primaryInputModule = primaryController.GetComponentInChildren<InputSystemUIInputModule>();
+            _primaryController = controller;
+            _primaryEventSystem = _primaryController.GetComponentInChildren<MultiplayerEventSystem>();
+            _primaryInputModule = _primaryController.GetComponentInChildren<InputSystemUIInputModule>();
         }
         AddController(controller);
 
@@ -196,7 +236,7 @@ public class MenuManager : MonoBehaviour
     // Handle controller cancel button.
     public void ControllerCancel(PlayerInput controller)
     {
-        if (controller != primaryController) // Probably shouldn't be done by other controllers.
+        if (controller != _primaryController) // Probably shouldn't be done by other controllers.
             return;
 
         if (_controllerCancelCallback != null)
@@ -284,7 +324,7 @@ public class MenuManager : MonoBehaviour
     // Go to another scene. (Fade in/out)
     public void FadeToScene(string sceneName)
     {
-        if (fadeCanvas == null || sceneName.Length <= 0)
+        if (fadeCanvas == null || sceneName == null || sceneName.Length <= 0)
             return;
 
         // Disable menu interaction.

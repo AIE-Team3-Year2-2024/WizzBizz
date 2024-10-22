@@ -16,6 +16,13 @@ public class PortraitsAnchor : MonoBehaviour
     [Tooltip("The first portrait selected.")]
     public RectTransform defaultPortrait = null;
 
+    [Tooltip("Should it loop through the portraits instead of jumping back to the start?")]
+    public bool loopEffect = true;
+    [Tooltip("The clone portrait for the loop effect when going backwards. Should be placed before the start.")]
+    public RectTransform loopStartPortrait = null;
+    [Tooltip("The clone portrait for the loop effect when going forwards. Should be placed after the end.")]
+    public RectTransform loopEndPortrait = null;
+
     [Tooltip("The curve that dictates the smoothing of the transition.")]
     public AnimationCurve transitionCurve;
     [Tooltip("How long it will take for the menus to fully transition.")]
@@ -23,6 +30,8 @@ public class PortraitsAnchor : MonoBehaviour
 
     private int _activePortrait = 0; // The currently selected portrait.
     private bool _inTransition = false; // Are we currently transitioning between portraits?
+
+    private List<RectTransform> _allThePortraits = new List<RectTransform>(); // All of the portraits including the clone ones for the looping effect.
 
     private RectTransform _theActualTransform; // lol, Unity UI.
 
@@ -59,6 +68,13 @@ public class PortraitsAnchor : MonoBehaviour
 
             if (parentSlot != null)
                 parentSlot._selectedCharacterIndex = _activePortrait;
+
+            // Setup the extended portrait list for loop effect.
+            if (loopEffect && loopStartPortrait != null)
+                _allThePortraits.Add(loopStartPortrait);
+            _allThePortraits.AddRange(portraits);
+            if (loopEffect && loopEndPortrait != null)
+                _allThePortraits.Add(loopEndPortrait);
         }
     }
 
@@ -74,19 +90,28 @@ public class PortraitsAnchor : MonoBehaviour
             return;
 
         // Scroll through.
-        _activePortrait = TrueModulo(forwards ? ++_activePortrait : --_activePortrait, portraits.Count);
+        bool shouldLoop = loopEffect && ((_activePortrait + 1 >= portraits.Count) || (_activePortrait - 1 < 0)); // Should we loop around or not?
+        int allPortraitIndex = _activePortrait;
+        if (shouldLoop) allPortraitIndex = TrueModulo(forwards ? _activePortrait+2 : _activePortrait, _allThePortraits.Count); // Gets the index in the extended list.
+
+        _activePortrait = TrueModulo(forwards ? ++_activePortrait : --_activePortrait, portraits.Count); // The index in the normal portraits list.
 
         // Get the position to the next portrait.
         Vector3 newPosition = _theActualTransform.anchoredPosition;
+        Vector3 newLoopedPosition = _theActualTransform.anchoredPosition;
         newPosition.x = -portraits[_activePortrait].anchoredPosition.x;
+        if (shouldLoop) newLoopedPosition.x = -_allThePortraits[allPortraitIndex].anchoredPosition.x;
 
-        Debug.Log(_activePortrait + "," + newPosition);
+        Debug.Log(_activePortrait + ", " + allPortraitIndex + ", " + newPosition.x + ", " + newLoopedPosition.x);
 
         // Transition to the next portrait.
-        Tween.AnchoredPosition(_theActualTransform, newPosition, 
+        Tween.AnchoredPosition(_theActualTransform, shouldLoop ? newLoopedPosition : newPosition,
             transitionDuration, 0.0f, transitionCurve, Tween.LoopType.None,
             () => { _inTransition = true; }, // Start transition.
-            () => { 
+            () =>
+            {
+                if (shouldLoop) _theActualTransform.anchoredPosition = newPosition; // Snap to real portrait instead of the fake portrait.
+
                 // Set selected character.
                 _inTransition = false;
                 parentSlot._selectedCharacterIndex = _activePortrait;

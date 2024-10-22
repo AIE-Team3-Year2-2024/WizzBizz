@@ -24,7 +24,11 @@ public class LobAttack : MonoBehaviour
     [Tooltip("how long before this object destroys itself (wont destroy itself if set to 0)")]
     [SerializeField]
     private float lifetime;
-    
+
+    [Tooltip("An offset to where the projectile will spawn.")]
+    [SerializeField]
+    [VectorRange(-100.0f, -100.0f, 0.0f, 100.0f, 100.0f, 100.0f)]
+    private Vector3 spawnOffset;
 
     void Start()
     {
@@ -64,7 +68,8 @@ public class LobAttack : MonoBehaviour
         if (!_checker._colliding)
         {
             //spawn the projectile and set its end pos
-            GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
+            Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+            GameObject newProjectile = Instantiate(projectile, spawnPositon, player.transform.rotation);
             newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
 
             //set up projectile damage component if it has one
@@ -120,7 +125,8 @@ public class LobAttack : MonoBehaviour
         if (!_checker._colliding)
         {
             //spawn the projectile and set its end pos
-            GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
+            Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+            GameObject newProjectile = Instantiate(projectile, spawnPositon, player.transform.rotation);
             newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
 
             //set up projectile damage component if it has one
