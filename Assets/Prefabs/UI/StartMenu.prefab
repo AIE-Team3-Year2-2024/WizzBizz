@@ -1037,7 +1037,9 @@ MonoBehaviour:
   _canvasReferenceResolution: {x: 0, y: 0}
   _canvasGroup: {fileID: 0}
   _menuManager: {fileID: 0}
-  startGameScene: ThomasCharacterScreen
+  _alreadyInitialized: 0
+  _alreadyStarted: 0
+  startGameScene: CharacterScreen
 --- !u!225 &2146222079502646528
 CanvasGroup:
   m_ObjectHideFlags: 0
