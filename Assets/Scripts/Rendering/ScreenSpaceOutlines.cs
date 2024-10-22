@@ -80,9 +80,9 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature
             };
 
             normals.Init("_SceneViewSpaceNormals");
-            normalsMaterial = new Material(Shader.Find("Shader Graphs/ViewSpaceNormalsShader"));
+            normalsMaterial = new Material(Shader.Find("Hidden/ViewSpaceNormals"));
 
-            occludersMaterial = new Material(Shader.Find("Shader Graphs/OutlineOccluderShader"));
+            occludersMaterial = new Material(Shader.Find("Hidden/UnlitColor"));
             occludersMaterial.SetColor("_Color", normalsTextureSettings.backgroundColor);
         }
 
@@ -146,7 +146,7 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature
         {
             this.renderPassEvent = renderPassEvent;
 
-            screenSpaceOutlineMaterial = new Material(Shader.Find("Shader Graphs/OutlineShader"));
+            screenSpaceOutlineMaterial = new Material(Shader.Find("Hidden/Outlines"));
             screenSpaceOutlineMaterial.SetColor("_OutlineColor", settings.outlineColor);
             screenSpaceOutlineMaterial.SetFloat("_OutlineScale", settings.outlineScale);
 
