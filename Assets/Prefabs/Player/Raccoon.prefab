@@ -383,6 +383,7 @@ MonoBehaviour:
   canMove: 1
   canDash: 1
   _pointerAimerRange: 7
+  _defualtPointerAimerHeight: 0
   currentAimMagnitude: 0
   _ballAttackTime: 1
   _basicAttackTime: 0.6
@@ -504,7 +505,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 2
   m_Constraints: 112
@@ -529,6 +530,7 @@ MonoBehaviour:
   - {fileID: 3363175542702627947, guid: bdcdf6f0aa965d3439b85973a01533c2, type: 3}
   - {fileID: 3363175542702627947, guid: ecd4ec73662ebce44b65a09fe27d72db, type: 3}
   lifetime: 1.5
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &3833022284611438099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,6 +562,7 @@ MonoBehaviour:
   projectiles:
   - {fileID: 5777404286988346730, guid: 4d549e2601617b24da0ca09748788214, type: 3}
   lifetime: 14
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1710617483415450620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,6 +578,7 @@ MonoBehaviour:
   projectiles:
   - {fileID: 2783992932023041390, guid: 22b4ba189e212dd41809f20795628793, type: 3}
   lifetime: 6
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &-3436212031268177746
 BoxCollider:
   m_ObjectHideFlags: 0
