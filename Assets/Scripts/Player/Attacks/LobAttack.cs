@@ -70,7 +70,9 @@ public class LobAttack : MonoBehaviour
             //spawn the projectile and set its end pos
             Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
             GameObject newProjectile = Instantiate(projectile, spawnPositon, player.transform.rotation);
-            newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
+            MoveInArc arcObject = newProjectile.GetComponent<MoveInArc>();
+            arcObject.SetEndPos(lobAimer.transform.position);
+            arcObject._lifeDistance = player.currentAimMagnitude * range;
 
             //set up projectile damage component if it has one
             DamagePlayerOnCollision damageComponent;
