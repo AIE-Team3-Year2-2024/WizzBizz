@@ -62,10 +62,9 @@ GameObject:
   - component: {fileID: 7123593361693911382}
   - component: {fileID: 2487584900510465726}
   - component: {fileID: 7695426062487486879}
-  - component: {fileID: 8825359376855909104}
   - component: {fileID: 3109678969548366285}
   m_Layer: 13
-  m_Name: RaccoonBall
+  m_Name: TrashBag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,19 +287,6 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &8825359376855909104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2783992932023041390}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bad3f9afd469b4742ba949e1f2a83d3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orbProjectilePrefab: {fileID: 7298617281746096956, guid: f1595ca3a161cae48af787d8bf7fc2c1, type: 3}
 --- !u!114 &3109678969548366285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +352,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _arcObjectToMake: {fileID: 3109678969548366285, guid: 9cfb1accc986a8f4b8480a8fcd9409bd, type: 3}
+  _arcObjectToMake: {fileID: 0}
   _lifeDistance: 0
 --- !u!1 &2895287503457385176
 GameObject:
