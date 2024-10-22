@@ -49,7 +49,6 @@ public class OptionsMenu : Menu
         
         _systemResolutions = Screen.resolutions;
         _currentResolution = Screen.currentResolution;
-        Debug.Log("Yea " + _systemResolutions.Length);
 
         int resolutionSelection = 0;
         List<TMP_Dropdown.OptionData> resolutionOptions = new();

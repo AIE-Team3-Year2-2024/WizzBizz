@@ -12,8 +12,9 @@ public class ConveyorBelt : MonoBehaviour
     /// this will move any object it comes accross by the inputted vector
     /// </summary>
     /// <param name="other"></param>
-    private void OnTriggerStay(Collider other)
+    private IEnumerator OnTriggerStay(Collider other)
     {
-        other.transform.position += direction * Time.deltaTime;
+        yield return new WaitForFixedUpdate();
+        other.transform.position += direction * Time.fixedDeltaTime;
     }
 }
