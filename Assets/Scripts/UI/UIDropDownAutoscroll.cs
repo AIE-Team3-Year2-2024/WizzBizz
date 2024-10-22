@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 // Modified from https://gist.github.com/emredesu/af597de14a4377e1ecf96b6f7b6cc506
 [RequireComponent(typeof(ScrollRect))]
-public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIDropDownAutoscroll : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandler*/
 {
     public float scrollSpeed = 10f;
     private bool mouseOver = false;
@@ -64,20 +65,22 @@ public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         if (m_Selectables.Count > 0)
         {
-            Keyboard? currentKeyboard = Keyboard.current;
-            Gamepad? currentGamepad = Gamepad.current;
+            //Keyboard? currentKeyboard = Keyboard.current;
+            //Gamepad? currentGamepad = Gamepad.current;
 
-            if (currentKeyboard != null)
+            /*if (currentKeyboard != null)
             {
                 if (Keyboard.current.upArrowKey.isPressed || Keyboard.current.downArrowKey.isPressed)
                 {
                     ScrollToSelected(false);
                 }
-            }
+            }*/
 
-            if (currentGamepad != null)
+            // TODO: Pass in gamepad maybe?
+            if (MenuManager.Instance)
             {
-                if (Gamepad.current.dpad.up.isPressed || Gamepad.current.dpad.down.isPressed)
+                if (MenuManager.Instance._primaryController.devices.Any(x => x is Gamepad g && !x.synthetic && 
+                    (g.leftStick.y.magnitude != 0.0f || g.dpad.up.isPressed || g.dpad.down.isPressed)))
                 {
                     ScrollToSelected(false);
                 }
@@ -122,7 +125,8 @@ public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointe
             }
         }
     }
-    public void OnPointerEnter(PointerEventData eventData)
+
+    /*public void OnPointerEnter(PointerEventData eventData)
     {
         mouseOver = true;
     }
@@ -130,5 +134,5 @@ public class UIDropDownAutoscroll : MonoBehaviour, IPointerEnterHandler, IPointe
     {
         mouseOver = false;
         ScrollToSelected(false);
-    }
+    }*/
 }
