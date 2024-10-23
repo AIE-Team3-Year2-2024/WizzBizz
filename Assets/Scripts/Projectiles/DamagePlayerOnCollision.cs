@@ -165,6 +165,14 @@ public class DamagePlayerOnCollision : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// returns the current owner of this damge component
+    /// </summary>
+    public CharacterBase GetOwner()
+    {
+        return ownerPlayer;
+    }
+
 
     private void OnDestroy()
     {

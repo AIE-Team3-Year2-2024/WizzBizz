@@ -25,7 +25,19 @@ public class SpawnObjectAtTransform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponentInParent<CharacterBase>();
+        if (player = GetComponentInParent<CharacterBase>())
+        {
+            return;
+        }
+        DamagePlayerOnCollision thisObjectDamage;
+        if (thisObjectDamage = GetComponentInParent<DamagePlayerOnCollision>())
+        {
+            player = thisObjectDamage.GetOwner();
+        } 
+        else if (thisObjectDamage = GetComponentInParent<DamagePlayerOnCollision>())
+        {
+            player = thisObjectDamage.GetOwner();
+        }
     }
 
     /// <summary>

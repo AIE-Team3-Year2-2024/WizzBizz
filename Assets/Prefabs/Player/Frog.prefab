@@ -944,6 +944,7 @@ MonoBehaviour:
   projectiles:
   - {fileID: 6599871779557999481, guid: 83cc7d76203ea9a42afd2fa37386d50a, type: 3}
   lifetime: 1.3
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &-8277679434416479755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -959,6 +960,7 @@ MonoBehaviour:
   projectiles:
   - {fileID: 6599871779557999481, guid: 495aa339df5df014093ac1cf529b476a, type: 3}
   lifetime: 20
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &5619487726306417995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,7 +1312,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100810549408191807}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1421,7 +1423,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309746413074950827}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

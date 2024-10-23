@@ -51,7 +51,7 @@ MonoBehaviour:
   _endLevel: CamWin
   _cursorPrefab: {fileID: 8008615618210288764, guid: a882bd7f573667947ab7fef84b399e64, type: 3}
   _scoreToWin: 3
-  roundTime: 120
+  _roundTime: 150
   endGameDamageMult: 2
   arenaUICanvas: {fileID: 4376679973628366032}
   _scoreBoard: {fileID: 6317607119796155509}
@@ -66,6 +66,7 @@ MonoBehaviour:
   _slowPlayerCameraWeight: 20
   _slowTimeScale: 0.4
   _slowdownLength: 6
+  _gameStarted: 0
   orbSpawners: []
   orbSpawnerCooldown: 8
   canvas: {fileID: 0}
