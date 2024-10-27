@@ -654,6 +654,165 @@ public class CharacterBase : MonoBehaviour
     }
 
     /// <summary>
+    /// handles taking damage and call death and turns on status affect components 
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="effect"></param>
+    /// <param name="time"></param>
+    public void TakeDamage(float damage, StatusEffects effect, float time, float effectAmount)
+    {
+        if (_health <= 0 || _invincible)
+        {
+            return;
+        }
+        _health -= damage;
+
+        //makes this player drop the orb if they have it
+        if (hasOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
+
+        if (healthBar)
+        {
+            healthBar.value = _health;
+        }
+
+        if (_health <= 0)
+        {
+            Death();
+        }
+
+        switch (effect)
+        {
+            case (StatusEffects.NONE):
+                {
+                    break;
+                }
+
+            case (StatusEffects.CONFUSION):
+                {
+
+                    _confusion.enabled = true;
+                    _confusion.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.DISABLED):
+                {
+                    if (_silence.enabled)
+                    {
+                        _silence.enabled = false;
+                    }
+                    _disabled.enabled = true;
+                    _disabled.lifeTime = time;
+                    break;
+                }
+
+            case (StatusEffects.SILENCE):
+                {
+                    if (_disabled.enabled)
+                    {
+                        _disabled.enabled = false;
+                    }
+                    _silence.enabled = true;
+                    _silence.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.CRIPPLED):
+                {
+
+                    _crippled.enabled = true;
+                    _crippled.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.STUN):
+                {
+
+                    _stun.enabled = true;
+                    _stun.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.WEAKNESS):
+                {
+                    _weakness.damageMinus = effectAmount;
+                    _weakness.enabled = true;
+                    _weakness.lifeTime = time;
+                    break;
+                }
+
+            case (StatusEffects.VITALITY):
+                {
+                    _vitality.damagePlus = effectAmount;
+                    _vitality.enabled = true;
+                    _vitality.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.SLOW):
+                {
+                    _slow.speedMinus = effectAmount;
+                    _slow.enabled = true;
+                    _slow.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.HASTE):
+                {
+                    _haste.speedAdd = effectAmount;
+                    _haste.enabled = true;
+                    _haste.lifeTime = time;
+                    break;
+                }
+
+            case (StatusEffects.BURNING):
+                {
+                    _burn.damage = effectAmount;
+                    _burn.enabled = true;
+                    _burn.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.POISON):
+                {
+                    _poison.damage = effectAmount;
+                    _poison.enabled = true;
+                    _poison.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.CURE):
+                {
+                    _cure.health = effectAmount;
+                    _cure.enabled = true;
+                    _cure.lifeTime = time;
+                    break;
+                }
+
+            case (StatusEffects.DEMENTIA):
+                {
+                    _dementia.enabled = true;
+                    _dementia.lifeTime = time;
+                    break;
+                }
+
+        }
+    }
+
+    /// <summary>
     /// makes the player unable to take damage for time
     /// </summary>
     /// <param name="time"></param>

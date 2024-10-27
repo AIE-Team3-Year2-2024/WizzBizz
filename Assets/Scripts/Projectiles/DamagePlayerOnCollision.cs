@@ -19,6 +19,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [SerializeField]
     private float effectTime;
 
+    [Tooltip("what the effect amount will be set to for any status that this will apply (e.g. damage minus on weakness)")]
+    [SerializeField]
+    private float effectAmount;
+
     [Tooltip("whether the object will destroy itself on any collision")]
     [SerializeField]
     private bool destroyOnCollision;
@@ -64,7 +68,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
         if (collision.gameObject.GetComponent<CharacterBase>())
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
-            player.TakeDamage(damage, damageEffect, effectTime);
+            player.TakeDamage(damage, damageEffect, effectTime, effectAmount);
             DoOnHit.Invoke();
 
             if (_knockbackComponent)
@@ -101,7 +105,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
             Debug.Log("hit player with trigger");
             if (!collision.isTrigger)
             {
-                player.TakeDamage(damage, damageEffect, effectTime);
+                player.TakeDamage(damage, damageEffect, effectTime, effectAmount);
             }
             DoOnHit.Invoke();
             if (destroyOnPlayerCollision)
@@ -130,7 +134,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
         if (collision.gameObject.GetComponent<CharacterBase>())
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
-            player.TakeDamage(damage, damageEffect, effectTime);
+            player.TakeDamage(damage, damageEffect, effectTime, effectAmount);
             DoOnHit.Invoke();
             if (destroyOnPlayerCollision)
             {
