@@ -8,8 +8,8 @@ public class Weakness : MonoBehaviour
     public float lifeTime = 0;
 
     [Tooltip("how much will be taken off of the players damage multiplyer (players base damage multiplyer is 1)")]
-    [SerializeField]
-    private float _damgeMinus;
+    [HideInInspector]
+    public float damageMinus;
 
     private CharacterBase _player;
 
@@ -34,7 +34,7 @@ public class Weakness : MonoBehaviour
         {
             _player = GetComponent<CharacterBase>();
         }
-        _player.damageMult -= _damgeMinus;
+        _player.damageMult -= damageMinus;
     }
 
     /// <summary>
@@ -42,6 +42,6 @@ public class Weakness : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        _player.damageMult += _damgeMinus;
+        _player.damageMult += damageMinus;
     }
 }

@@ -8,8 +8,8 @@ public class Vitality : MonoBehaviour
     public float lifeTime = 0;
 
     [Tooltip("how much will be added too the players damage multiplyer (players base damage multiplyer is 1)")]
-    [SerializeField]
-    private float _damgePlus;
+    [HideInInspector]
+    public float damagePlus;
 
     private CharacterBase _player;
 
@@ -34,7 +34,7 @@ public class Vitality : MonoBehaviour
         {
             _player = GetComponent<CharacterBase>();
         }
-        _player.damageMult += _damgePlus;
+        _player.damageMult += damagePlus;
     }
 
     /// <summary>
@@ -42,6 +42,6 @@ public class Vitality : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        _player.damageMult -= _damgePlus;
+        _player.damageMult -= damagePlus;
     }
 }

@@ -12,8 +12,8 @@ public class Cure : MonoBehaviour
     private float _healthInterval;
 
     [Tooltip("how much health the player player wil take after the interval")]
-    [SerializeField]
-    private float health;
+    [HideInInspector]
+    public float health;
 
     private float currentIntervalAmount = 0;
 

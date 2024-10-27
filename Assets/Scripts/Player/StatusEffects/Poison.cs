@@ -12,8 +12,8 @@ public class Poison : MonoBehaviour
     private float _damageInterval;
 
     [Tooltip("how much damage the player player wil take after the interval")]
-    [SerializeField]
-    private float damage;
+    [HideInInspector]
+    public float damage;
 
     private float currentIntervalAmount = 0;
 
