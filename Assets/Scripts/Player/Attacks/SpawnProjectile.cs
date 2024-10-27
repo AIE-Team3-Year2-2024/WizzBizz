@@ -15,6 +15,11 @@ public class SpawnProjectile : MonoBehaviour
     [SerializeField]
     private float lifetime;
 
+    [Tooltip("An offset to where the projectile will spawn.")]
+    [SerializeField]
+    [VectorRange(-100.0f, -100.0f, 0.0f, 100.0f, 100.0f, 100.0f)]
+    private Vector3 spawnOffset;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +32,8 @@ public class SpawnProjectile : MonoBehaviour
     public void SpawnProjectileAtPlayer()
     {
         //spawns one of the projectiles at this players projectile spawn transform
-        GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
+        Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+        GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], spawnPositon, player.transform.rotation);
 
         //sets up the projectiles damage component if it has it
         DamagePlayerOnCollision damageComponent;
@@ -50,7 +56,8 @@ public class SpawnProjectile : MonoBehaviour
     public void FrogSpawnProjectileAtPlayer()
     {
         //spawns one of the projectiles at this players projectile spawn transform
-        GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
+        Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+        GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], spawnPositon, player.transform.rotation);
 
         //sets up the projectiles damage component if it has it
         DamagePlayerOnCollision damageComponent;
@@ -82,7 +89,8 @@ public class SpawnProjectile : MonoBehaviour
         if (context.performed)
         {
             //spawns one of the projectiles at this players projectile spawn transform
-            GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
+            Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+            GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], spawnPositon, player.transform.rotation);
 
             //sets up the projectiles damage component if it has it
             DamagePlayerOnCollision damageComponent;
@@ -108,7 +116,8 @@ public class SpawnProjectile : MonoBehaviour
         if (context.performed)
         {
             //spawns one of the projectiles at this players projectile spawn transform
-            GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], player._projectileSpawnPosition.position, player.transform.rotation);
+            Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+            GameObject newProjectile = Instantiate(projectiles[Random.Range(0, projectiles.Length)], spawnPositon, player.transform.rotation);
 
             //sets up the projectiles damage component if it has it
             DamagePlayerOnCollision damageComponent;

@@ -24,7 +24,11 @@ public class LobAttack : MonoBehaviour
     [Tooltip("how long before this object destroys itself (wont destroy itself if set to 0)")]
     [SerializeField]
     private float lifetime;
-    
+
+    [Tooltip("An offset to where the projectile will spawn.")]
+    [SerializeField]
+    [VectorRange(-100.0f, -100.0f, 0.0f, 100.0f, 100.0f, 100.0f)]
+    private Vector3 spawnOffset;
 
     void Start()
     {
@@ -64,8 +68,42 @@ public class LobAttack : MonoBehaviour
         if (!_checker._colliding)
         {
             //spawn the projectile and set its end pos
-            GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
-            newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
+            Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+            GameObject newProjectile = Instantiate(projectile, spawnPositon, player.transform.rotation);
+            MoveInArc arcObject = newProjectile.GetComponent<MoveInArc>();
+            arcObject.SetEndPos(lobAimer.transform.position);
+            arcObject._lifeDistance = player.currentAimMagnitude * range;
+
+            //set up projectile damage component if it has one
+            DamagePlayerOnCollision damageComponent;
+            if ((damageComponent = newProjectile.GetComponent<DamagePlayerOnCollision>()))
+            {
+                damageComponent.damage *= player.damageMult;
+                damageComponent.SetOwner(player);
+            }
+
+            //set life time of projectile
+            if (lifetime != 0)
+            {
+                Destroy(newProjectile, lifetime);
+            }
+        }
+    }
+
+    /// <summary>
+    /// used to make the lobbed object (also handles lifetime)
+    /// </summary>
+    /// <param name="context"></param>
+    public void SpawnLobObject()
+    {
+        if (!_checker._colliding)
+        {
+            //spawn the projectile and set its end pos
+            Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+            GameObject newProjectile = Instantiate(projectile, spawnPositon, player.transform.rotation);
+            MoveInArc arcObject = newProjectile.GetComponent<MoveInArc>();
+            arcObject.SetEndPos(lobAimer.transform.position);
+            arcObject._lifeDistance = player.currentAimMagnitude * range;
 
             //set up projectile damage component if it has one
             DamagePlayerOnCollision damageComponent;
@@ -92,8 +130,11 @@ public class LobAttack : MonoBehaviour
         if (!_checker._colliding)
         {
             //spawn the projectile and set its end pos
-            GameObject newProjectile = Instantiate(projectile, player._projectileSpawnPosition.position, player.transform.rotation);
-            newProjectile.GetComponent<MoveInArc>().SetEndPos(lobAimer.transform.position);
+            Vector3 spawnPositon = player._projectileSpawnPosition.position + spawnOffset;
+            GameObject newProjectile = Instantiate(projectile, spawnPositon, player.transform.rotation);
+            MoveInArc arcObject = newProjectile.GetComponent<MoveInArc>();
+            arcObject.SetEndPos(lobAimer.transform.position);
+            arcObject._lifeDistance = player.currentAimMagnitude * range;
 
             //set up projectile damage component if it has one
             DamagePlayerOnCollision damageComponent;

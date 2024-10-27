@@ -292,12 +292,16 @@ public class CharacterBase : MonoBehaviour
     void FixedUpdate()
     {
         _acceleration = _speed * _deceleration;
+        _movementDirection.y = 0.0f;
         if (_movementDirection.magnitude > 0.0f)
-            rb.AddForce(_movementDirection * _acceleration, ForceMode.VelocityChange);
+            rb.AddForce(_movementDirection.normalized * _acceleration, ForceMode.VelocityChange);
         //_velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
 
         //if (rb.velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
-            rb.velocity *= (1.0f - _deceleration);
+        Vector3 newVelocity = rb.velocity;
+        newVelocity *= (1.0f - _deceleration);
+        newVelocity.y = rb.velocity.y;
+        rb.velocity = newVelocity;
         //_velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
 
         //rb.velocity *= (_speed / (_speed + _acceleration)) * _deceleration;
