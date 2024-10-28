@@ -383,9 +383,15 @@ public class GameManager : MonoBehaviour
                 }
                 yield return new WaitForSecondsRealtime(_scoreBoardWaitTime);
             }
-            
-            
 
+            GoToNextRound();
+        }
+    }
+
+    public void GoToNextRound()
+    {
+        foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
+        {
             //if round over
             if (p.Value.score < _scoreToWin)
                 StartGame();
