@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 4759336430947967288}
   - component: {fileID: -8277679434416479755}
   - component: {fileID: 5619487726306417995}
+  - component: {fileID: 7266007580449182535}
   m_Layer: 6
   m_Name: Frog
   m_TagString: Player
@@ -527,7 +528,19 @@ MonoBehaviour:
     m_ActionId: ae155d5c-3ca1-4e92-bfbf-826797fd444c
     m_ActionName: Player/Parry
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7266007580449182535}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: bd70c30c-0deb-47e9-a01d-86ed9ad860d9
     m_ActionName: Player/Debug
   - m_PersistentCalls:
@@ -679,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgeMinus: 5
+  damageMinus: 0
 --- !u!114 &2187619237441558528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgePlus: 5
+  damagePlus: 0
 --- !u!114 &2025562164637247473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 5
+  speedMinus: 0
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,7 +799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 5
+  speedAdd: 0
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -977,6 +990,21 @@ MonoBehaviour:
   range: 5
   lobAimer: {fileID: 1100810549408191807}
   lifetime: 7
+--- !u!114 &7266007580449182535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689a5f3e9f66e9844874107667eb7040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowFreq: 0.263
+  highFreq: 0.842
+  time: 1e+9
 --- !u!1 &642615397704571331
 GameObject:
   m_ObjectHideFlags: 0

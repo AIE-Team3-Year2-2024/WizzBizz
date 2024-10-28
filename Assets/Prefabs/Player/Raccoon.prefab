@@ -34,6 +34,7 @@ GameObject:
   - component: {fileID: 6925921418720077777}
   - component: {fileID: 8364465316122460612}
   - component: {fileID: 6592575009479414156}
+  - component: {fileID: -1773128007534983097}
   m_Layer: 6
   m_Name: Raccoon
   m_TagString: Player
@@ -331,7 +332,19 @@ MonoBehaviour:
     m_ActionId: ae155d5c-3ca1-4e92-bfbf-826797fd444c
     m_ActionName: Player/Parry
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -1773128007534983097}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: bd70c30c-0deb-47e9-a01d-86ed9ad860d9
     m_ActionName: Player/Debug[/SwitchProControllerHID/rightStickPress,/SwitchProControllerHID1/rightStickPress,/DualSenseGamepadHID/rightStickPress]
   - m_PersistentCalls:
@@ -586,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgeMinus: 5
+  damageMinus: 0
 --- !u!114 &2187619237441558528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,7 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgePlus: 5
+  damagePlus: 0
 --- !u!114 &2025562164637247473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 5
+  speedMinus: 0
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 5
+  speedAdd: 0
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +783,21 @@ MonoBehaviour:
   lobAimer: {fileID: 1309746413074950827}
   lifetime: 0
   spawnOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &-1773128007534983097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689a5f3e9f66e9844874107667eb7040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowFreq: 1
+  highFreq: 1
+  time: 100000000
 --- !u!1 &552633597371390174
 GameObject:
   m_ObjectHideFlags: 0
