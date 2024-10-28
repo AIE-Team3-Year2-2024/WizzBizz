@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [HideInInspector]
-    public bool addingControllers;
+    public bool afterControllerAdd;
 
     [Tooltip("The list of level scenes to be picked randomly (CAPITALIZATION MATTERS)")]
     [SerializeField]
@@ -153,39 +153,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        // TODO: Remove this block.
-        if(addingControllers)
-        {
-            /*for (int i = 0; i < Gamepad.all.Count; i++)
-            {
-                bool alreadyContainsGamepad = false;
-                for (int j = 0; j < _playerData.Count(); j++)
-                {
-                    if (_playerData[j].gamepad == Gamepad.all[i])
-                        alreadyContainsGamepad = true;
-                }
-
-                if (alreadyContainsGamepad == true)
-                    continue;
-
-                //check if the current gamepad has a button pressed and is not stored
-                if (Gamepad.all[i].allControls.Any(x => x is ButtonControl button && x.IsPressed() && !x.synthetic))
-                {                    
-                    GameObject newPlayer = PlayerInput.Instantiate(_cursorPrefab, controlScheme: "Gamepad", pairWithDevice: Gamepad.all[i]).gameObject;
-                    newPlayer.transform.SetParent(canvas.transform);
-                    newPlayer.GetComponent<CursorController>().playerID = _connectedPlayerCount;
-
-                    // Create player data, stores gamepad, character and score.
-                    PlayerData newPlayerData = new PlayerData();
-                    newPlayerData.gamepad = Gamepad.all[i];
-                    newPlayerData.characterSelect = null;
-                    newPlayerData.score = 0;
-                    _playerData.Add(newPlayerData);
-
-                    _connectedPlayerCount++;
-                }
-            }*/
-        } else
+        if(!afterControllerAdd)
         {
             _roundTimer -= Time.deltaTime;
             if(_roundTimer <= 0)
@@ -571,7 +539,7 @@ public class GameManager : MonoBehaviour
 
         currentTargetGroup.m_Targets = targs;
 
-        addingControllers = false;
+        afterControllerAdd = false;
 
         _roundTimer = _roundTime;
 
