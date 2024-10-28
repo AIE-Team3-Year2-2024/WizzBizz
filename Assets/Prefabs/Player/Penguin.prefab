@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 8364465316122460612}
   - component: {fileID: 1497816845397379619}
   - component: {fileID: 6396721464964886305}
+  - component: {fileID: 3424854267544527191}
   m_Layer: 6
   m_Name: Penguin
   m_TagString: Player
@@ -423,6 +424,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3424854267544527191}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: bd70c30c-0deb-47e9-a01d-86ed9ad860d9
     m_ActionName: Player/Debug[/SwitchProControllerHID1/rightStickPress,/SwitchProControllerHID/rightStickPress]
   - m_PersistentCalls:
@@ -701,7 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgeMinus: 5
+  damageMinus: 0
 --- !u!114 &2187619237441558528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,7 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damgePlus: 5
+  damagePlus: 0
 --- !u!114 &2025562164637247473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,7 +807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedMinus: 5
+  speedMinus: 0
 --- !u!114 &2022015719311518545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,7 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _speedAdd: 5
+  speedAdd: 0
 --- !u!114 &7904240128527876260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,8 +850,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damageInterval: 1
-  damage: 10
+  _damageInterval: 0.2
+  damage: 6
 --- !u!114 &6925921418720077777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,6 +911,21 @@ MonoBehaviour:
   lowFreq: 0
   highFreq: 1
   time: 0.25
+--- !u!114 &3424854267544527191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689a5f3e9f66e9844874107667eb7040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowFreq: 1
+  highFreq: 0
+  time: 999999
 --- !u!1 &879297873690409584
 GameObject:
   m_ObjectHideFlags: 0

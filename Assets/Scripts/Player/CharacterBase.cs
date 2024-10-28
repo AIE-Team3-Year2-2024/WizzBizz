@@ -415,11 +415,13 @@ public class CharacterBase : MonoBehaviour
         canMove = false;
         _speed = _dashSpeed;
         _movementDirection = _movementDirection.normalized;
+        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
         _speed = originalSpeed;
         canDash = false;
         _movementDirection = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         StartCoroutine(WaitToDash());
     }
 

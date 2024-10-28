@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
-public class WinScreen : MonoBehaviour
+public class WinScreen : Menu
 {
+    [Header("Win Screen stuff - ")]
     [Tooltip("the array of images where the winners will be displayed MUST BE IN ORDER FROM WINNER TO FOURTH PLACE"), SerializeField]
     private RawImage[] _winnerImages;
 
@@ -28,8 +28,21 @@ public class WinScreen : MonoBehaviour
     [Tooltip("the scene to be loaded after this scene is done"), SerializeField]
     private string _afterWinScene;
 
+    [Tooltip("the slider component showing visualaly how far the button has been held")]
+    [SerializeField]
+    private Slider _buttonSlider;
+
+    [Tooltip("how long the button has to be held before this scene is skipped")]
+    [SerializeField]
+    private float _buttonHoldTime;
+
+    [Tooltip("how long the button has currently been held for")]
+    private float _currentButtonHoldTime = 0;
+
+    private bool _shouldReturn = false;
+
     // Start is called before the first frame update
-    void Start()
+    public void OnEnable()
     {
         List<PlayerData> _gameWonData = GameManager.Instance.GetSortedPlayerData();
         int count = 0;
@@ -38,7 +51,7 @@ public class WinScreen : MonoBehaviour
             if (_winnerImages[i] == null)
             {
                 i += 999;
-                return;
+                break;
             }
             count++;
             switch(_gameWonData[i].characterSelect.name)
@@ -70,18 +83,60 @@ public class WinScreen : MonoBehaviour
         {
             Destroy(_winnerImages[i].gameObject);
         }
+
+        _buttonSlider.maxValue = _buttonHoldTime;
+        _buttonSlider.minValue = 0;
+    }
+
+    public override void OnLoaded()
+    {
+        base.OnLoaded();
+
+        if(_menuManager) _menuManager._primaryController.currentActionMap.FindAction("Submit").started += ControlButtonHold;
+        if(_menuManager) _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled += ControlButtonHold;
+
         StartCoroutine(LoadScene());
+    }
+
+    public void ControlButtonHold(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _shouldReturn = true;
+            _buttonSlider.gameObject.SetActive(true);
+        }
+        if (context.canceled)
+        {
+            _buttonSlider.gameObject.SetActive(false);
+            _shouldReturn = false;
+            _currentButtonHoldTime = 0;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(_buttonSlider.gameObject.activeInHierarchy && _shouldReturn)
+        {
+            _currentButtonHoldTime += Time.unscaledDeltaTime;
+            _buttonSlider.value = _currentButtonHoldTime;
 
+            if(_currentButtonHoldTime >= _buttonHoldTime)
+            {
+                _menuManager.FadeToScene(_afterWinScene);
+                _menuManager._primaryController.currentActionMap.FindAction("Submit").started -= ControlButtonHold;
+                _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled -= ControlButtonHold;
+                _shouldReturn = false;
+            }
+        }
     }
 
     public IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(_sceneTime);
-        SceneManager.LoadScene(_afterWinScene);
+        _menuManager.FadeToScene(_afterWinScene);
+
+        _menuManager._primaryController.currentActionMap.FindAction("Submit").started -= ControlButtonHold;
+        _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled -= ControlButtonHold;
     }
 }

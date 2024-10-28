@@ -53,10 +53,11 @@ public class MenuManager : MonoBehaviour
 
     [HideInInspector]
     public PlayerInput _primaryController = null; // The primary controller.
-    private MultiplayerEventSystem _primaryEventSystem = null; // Event system of the primary controller.
-    private InputSystemUIInputModule _primaryInputModule = null; // Input module of the primary controller.
+    public MultiplayerEventSystem _primaryEventSystem = null; // Event system of the primary controller.
+    public InputSystemUIInputModule _primaryInputModule = null; // Input module of the primary controller.
 
     private bool _addingPrimaryController = true; // Are we adding the primary controller?
+    private bool _isInitialized = false;
 
     void Awake()
     {
@@ -126,6 +127,8 @@ public class MenuManager : MonoBehaviour
 
     public void InitializeManager()
     {
+        _isInitialized = false;
+
         _controllerDisconnectCallback = null; // Reset callbacks on scene load (avoids missing references)
         _controllerReconnectCallback = null;
         _controllerCancelCallback = null;
@@ -150,6 +153,14 @@ public class MenuManager : MonoBehaviour
 
         // Setup menus.
         Menu firstMenu = null; // The first menu that should be selected in the scene.
+
+        SceneInfo info = FindObjectOfType<SceneInfo>();
+        if (info) // Is there any scene info?
+        {
+            _sceneInfo = info;
+            firstMenu = _sceneInfo.firstMenu; // Set first menu that should be active.
+        }
+
         foreach (Menu m in _menus)
         {
             if (m.gameObject.activeInHierarchy == false)
@@ -165,14 +176,9 @@ public class MenuManager : MonoBehaviour
 
             if (m._alreadyStarted == false)
                 m.Start();
-            m.gameObject.SetActive(false);
-        }
-
-        SceneInfo info = FindObjectOfType<SceneInfo>();
-        if (info) // Is there any scene info?
-        {
-            _sceneInfo = info;
-            firstMenu = _sceneInfo.firstMenu; // Set first menu that should be active.
+            
+            if (m != firstMenu)
+                m.gameObject.SetActive(false);
         }
 
         // Setup first menu.
@@ -181,11 +187,13 @@ public class MenuManager : MonoBehaviour
             _activeMenu = firstMenu;
             _activeMenu._canvasGroup.interactable = true;
             _activeMenu._canvasGroup.blocksRaycasts = false;
-            _activeMenu.gameObject.SetActive(true);
+            //_activeMenu.gameObject.SetActive(true);
 
             if (_activeMenu.firstSelected)
                 _primaryEventSystem.SetSelectedGameObject(_activeMenu.firstSelected.gameObject);
         }
+
+        _isInitialized = true;
     }
 
     public void AddController(PlayerInput controller)
@@ -236,6 +244,8 @@ public class MenuManager : MonoBehaviour
     // Handle controller cancel button.
     public void ControllerCancel(PlayerInput controller)
     {
+        if (_isInitialized == false)
+            return;
         if (controller != _primaryController) // Probably shouldn't be done by other controllers.
             return;
 
@@ -253,6 +263,8 @@ public class MenuManager : MonoBehaviour
     // Transition to another menu.
     public void SetTargetMenu(Menu menuObj)
     {
+        if (_isInitialized == false)
+            return;
         if (menuObj == null || menuObj == _activeMenu)
             return;
 
@@ -275,6 +287,8 @@ public class MenuManager : MonoBehaviour
 
     public void GoBackMenu()
     {
+        if (_isInitialized == false)
+            return;
         if (_lastActiveMenu == null || _goingBack == true) 
             return;
         _goingBack = true;
@@ -283,6 +297,8 @@ public class MenuManager : MonoBehaviour
 
     public void GoBackScene()
     {
+        if (_isInitialized == false)
+            return;
         if (_lastActiveScene == string.Empty || SceneManager.GetActiveScene().name == rootSceneName || _goingBack == true)
             return;
 
@@ -300,6 +316,8 @@ public class MenuManager : MonoBehaviour
     // Go to another scene. (no transition)
     public void SwitchToScene(string sceneName)
     {
+        if (_isInitialized == false)
+            return;
         if (sceneName.Length <= 0)
             return;
 
@@ -324,6 +342,8 @@ public class MenuManager : MonoBehaviour
     // Go to another scene. (Fade in/out)
     public void FadeToScene(string sceneName)
     {
+        if (_isInitialized == false)
+            return;
         if (fadeCanvas == null || sceneName == null || sceneName.Length <= 0)
             return;
 
@@ -359,6 +379,8 @@ public class MenuManager : MonoBehaviour
 
     private void TransitionHorizontalToTarget(Menu currentMenu, Menu nextMenu, int direction)
     {
+        if (_isInitialized == false)
+            return;
         if (currentMenu == null || nextMenu == null)
             return;
 
@@ -428,9 +450,17 @@ public class MenuManager : MonoBehaviour
                 Tween.CanvasGroupAlpha(fadeCanvas, 1.0f, 0.0f,
                     fadeDuration, 0.0f, transitionCurve, Tween.LoopType.None,
                     () => { /* Unused. */ }, // Start callback.
-                    () => { /* Unused. */ }, // Complete callback.
+                    () => {
+                        if (_activeMenu._alreadyLoaded == false)
+                            _activeMenu.OnLoaded();
+                    }, // Complete callback.
                     false);
             }
+        }
+        else
+        {
+            if (_activeMenu._alreadyLoaded == false)
+                _activeMenu.OnLoaded();
         }
     }
 }

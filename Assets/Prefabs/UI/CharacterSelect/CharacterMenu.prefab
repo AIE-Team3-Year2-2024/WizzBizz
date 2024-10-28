@@ -170,6 +170,9 @@ MonoBehaviour:
   _canvasReferenceResolution: {x: 0, y: 0}
   _canvasGroup: {fileID: 0}
   _menuManager: {fileID: 0}
+  _alreadyInitialized: 0
+  _alreadyStarted: 0
+  _alreadyLoaded: 0
   controllerPrefab: {fileID: 4027415173824069258, guid: c8854c1bea9aff34db50418411f6abc5, type: 3}
   playerSlots:
   - {fileID: 3744403317466172687}
@@ -181,8 +184,10 @@ MonoBehaviour:
   - {fileID: 452431045987376296, guid: 148a73ed0ea7d284fbf6ad3d6ecb2bf0, type: 3}
   - {fileID: 452431045987376296, guid: 453d4fd5b397f7642b8bda97c466a66b, type: 3}
   - {fileID: 452431045987376296, guid: 6547c17825dc82e48b48d1d64ba78fca, type: 3}
+  countDown: {fileID: 0}
   _joinedPlayers: 0
   _readyPlayers: 0
+  _minmumPlayerCount: 2
 --- !u!1 &3744403318256729444
 GameObject:
   m_ObjectHideFlags: 0

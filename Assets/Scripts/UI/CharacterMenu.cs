@@ -22,24 +22,10 @@ public class CharacterMenu : Menu
 
     [HideInInspector] public int _joinedPlayers = 0; // How many players have joined?
     [HideInInspector] public int _readyPlayers = 0; // How many players are ready?
+    [SerializeField] private int _minmumPlayerCount;
 
-    private bool _addingControllers = true; // Are we accepted new players?
+    private bool _addingControllers = false; // Are we accepted new players?
     private List<int> _addedGamepadIDs = new List<int>(); // List of the controller indexes that have joined.
-    
-    public override void Start()
-    {
-        base.Start();
-
-        // Setup callbacks.
-        if (_menuManager)
-        {
-            _menuManager._controllerDisconnectCallback += ControllerDisconnect;
-            _menuManager._controllerReconnectCallback += ControllerReconnect;
-        }
-
-        if (countDown != null)
-            countDown.countdownEnd += OnCountDownEnd;
-    }
     
     public void Update()
     {
@@ -59,6 +45,23 @@ public class CharacterMenu : Menu
                 JoinPlayer(i);
             }
         }
+    }
+
+    public override void OnLoaded()
+    {
+        base.OnLoaded();
+
+        // Setup callbacks.
+        if (_menuManager)
+        {
+            _menuManager._controllerDisconnectCallback += ControllerDisconnect;
+            _menuManager._controllerReconnectCallback += ControllerReconnect;
+        }
+
+        if (countDown != null)
+            countDown.countdownEnd += OnCountDownEnd;
+
+        _addingControllers = true;
     }
 
     public void JoinPlayer(int gamepadID = 0)
@@ -150,7 +153,7 @@ public class CharacterMenu : Menu
                 return;
             }
 
-            if (_readyPlayers >= _joinedPlayers) // Has everyone readied up?
+            if (_readyPlayers >= _joinedPlayers && _joinedPlayers >= _minmumPlayerCount) // Has everyone readied up?
             {
                 // Try starting the game.
                 if (countDown != null)
