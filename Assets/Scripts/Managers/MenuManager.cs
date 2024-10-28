@@ -150,6 +150,14 @@ public class MenuManager : MonoBehaviour
 
         // Setup menus.
         Menu firstMenu = null; // The first menu that should be selected in the scene.
+
+        SceneInfo info = FindObjectOfType<SceneInfo>();
+        if (info) // Is there any scene info?
+        {
+            _sceneInfo = info;
+            firstMenu = _sceneInfo.firstMenu; // Set first menu that should be active.
+        }
+
         foreach (Menu m in _menus)
         {
             if (m.gameObject.activeInHierarchy == false)
@@ -165,14 +173,9 @@ public class MenuManager : MonoBehaviour
 
             if (m._alreadyStarted == false)
                 m.Start();
-            m.gameObject.SetActive(false);
-        }
-
-        SceneInfo info = FindObjectOfType<SceneInfo>();
-        if (info) // Is there any scene info?
-        {
-            _sceneInfo = info;
-            firstMenu = _sceneInfo.firstMenu; // Set first menu that should be active.
+            
+            if (m != firstMenu)
+                m.gameObject.SetActive(false);
         }
 
         // Setup first menu.
@@ -181,7 +184,7 @@ public class MenuManager : MonoBehaviour
             _activeMenu = firstMenu;
             _activeMenu._canvasGroup.interactable = true;
             _activeMenu._canvasGroup.blocksRaycasts = false;
-            _activeMenu.gameObject.SetActive(true);
+            //_activeMenu.gameObject.SetActive(true);
 
             if (_activeMenu.firstSelected)
                 _primaryEventSystem.SetSelectedGameObject(_activeMenu.firstSelected.gameObject);

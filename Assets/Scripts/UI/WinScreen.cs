@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
-public class WinScreen : MonoBehaviour
+public class WinScreen : Menu
 {
+    [Header("Win Screen stuff - ")]
     [Tooltip("the array of images where the winners will be displayed MUST BE IN ORDER FROM WINNER TO FOURTH PLACE"), SerializeField]
     private RawImage[] _winnerImages;
 
@@ -29,8 +29,10 @@ public class WinScreen : MonoBehaviour
     private string _afterWinScene;
 
     // Start is called before the first frame update
-    void Start()
+    public void OnEnable()
     {
+        if (_menuManager) _menuManager._controllerCancelCallback += OnControllerCancel;
+
         List<PlayerData> _gameWonData = GameManager.Instance.GetSortedPlayerData();
         int count = 0;
         for(int i = 0; i < _gameWonData.Count; i++)
@@ -38,7 +40,7 @@ public class WinScreen : MonoBehaviour
             if (_winnerImages[i] == null)
             {
                 i += 999;
-                return;
+                break;
             }
             count++;
             switch(_gameWonData[i].characterSelect.name)
@@ -70,6 +72,8 @@ public class WinScreen : MonoBehaviour
         {
             Destroy(_winnerImages[i].gameObject);
         }
+
+        Debug.Log("Fuck you");
         StartCoroutine(LoadScene());
     }
 
@@ -79,9 +83,18 @@ public class WinScreen : MonoBehaviour
 
     }
 
+    public void OnControllerCancel(PlayerInput controller)
+    {
+        // Override controller cancel.
+        return;
+    }
+
     public IEnumerator LoadScene()
     {
+        Debug.Log("Mother fucker");
         yield return new WaitForSeconds(_sceneTime);
-        SceneManager.LoadScene(_afterWinScene);
+        Debug.Log("Asshole");
+        _menuManager.FadeToScene(_afterWinScene);
+        _menuManager._controllerCancelCallback -= OnControllerCancel;
     }
 }
