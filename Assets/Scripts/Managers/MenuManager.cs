@@ -457,5 +457,10 @@ public class MenuManager : MonoBehaviour
                     false);
             }
         }
+        else
+        {
+            if (_activeMenu._alreadyLoaded == false)
+                _activeMenu.OnLoaded();
+        }
     }
 }
