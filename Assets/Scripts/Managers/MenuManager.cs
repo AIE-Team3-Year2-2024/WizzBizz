@@ -53,8 +53,8 @@ public class MenuManager : MonoBehaviour
 
     [HideInInspector]
     public PlayerInput _primaryController = null; // The primary controller.
-    private MultiplayerEventSystem _primaryEventSystem = null; // Event system of the primary controller.
-    private InputSystemUIInputModule _primaryInputModule = null; // Input module of the primary controller.
+    public MultiplayerEventSystem _primaryEventSystem = null; // Event system of the primary controller.
+    public InputSystemUIInputModule _primaryInputModule = null; // Input module of the primary controller.
 
     private bool _addingPrimaryController = true; // Are we adding the primary controller?
     private bool _isInitialized = false;
