@@ -73,7 +73,6 @@ public class WinScreen : Menu
             Destroy(_winnerImages[i].gameObject);
         }
 
-        Debug.Log("Fuck you");
         StartCoroutine(LoadScene());
     }
 
@@ -91,9 +90,7 @@ public class WinScreen : Menu
 
     public IEnumerator LoadScene()
     {
-        Debug.Log("Mother fucker");
         yield return new WaitForSeconds(_sceneTime);
-        Debug.Log("Asshole");
         _menuManager.FadeToScene(_afterWinScene);
         _menuManager._controllerCancelCallback -= OnControllerCancel;
     }

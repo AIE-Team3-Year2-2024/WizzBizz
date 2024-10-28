@@ -26,6 +26,7 @@ public class Menu : MonoBehaviour // Base menu.
 
     [HideInInspector] public bool _alreadyInitialized = false;
     [HideInInspector] public bool _alreadyStarted = false;
+    [HideInInspector] public bool _alreadyLoaded = false;
 
     public enum MenuTransitionDirection
     {
@@ -50,6 +51,12 @@ public class Menu : MonoBehaviour // Base menu.
     {
         /* Implemented in inherited classes. */
         _alreadyStarted = true;
+    }
+
+    public virtual void OnLoaded()
+    {
+        /* Implemented in inherited classes. */
+        _alreadyLoaded = true;
     }
 
     // Wrapper functions so we don't have to rely on a MenuManager being in the scene.

@@ -23,7 +23,7 @@ public class CharacterMenu : Menu
     [HideInInspector] public int _joinedPlayers = 0; // How many players have joined?
     [HideInInspector] public int _readyPlayers = 0; // How many players are ready?
 
-    private bool _addingControllers = true; // Are we accepted new players?
+    private bool _addingControllers = false; // Are we accepted new players?
     private List<int> _addedGamepadIDs = new List<int>(); // List of the controller indexes that have joined.
     
     public override void Start()
@@ -59,6 +59,13 @@ public class CharacterMenu : Menu
                 JoinPlayer(i);
             }
         }
+    }
+
+    public override void OnLoaded()
+    {
+        base.OnLoaded();
+        Debug.Log("Character Menu OnLoaded()");
+        _addingControllers = true;
     }
 
     public void JoinPlayer(int gamepadID = 0)
