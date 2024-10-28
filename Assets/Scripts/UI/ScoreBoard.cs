@@ -87,5 +87,6 @@ public class ScoreBoard : Menu
     {
         _menuManager._primaryController.currentActionMap.FindAction("Submit").started -= ControlButtonHold;
         _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled -= ControlButtonHold;
+        _buttonSlider.gameObject.SetActive(false);
     }
 }
