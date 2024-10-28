@@ -279,8 +279,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   damageEffect: 1
-  effectTime: 4
+  effectTime: 2
+  effectAmount: 0
   destroyOnCollision: 1
+  destroyOnPlayerCollision: 0
   DoOnDestroy:
     m_PersistentCalls:
       m_Calls: []
