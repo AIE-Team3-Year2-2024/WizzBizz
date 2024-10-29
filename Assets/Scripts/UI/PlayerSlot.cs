@@ -17,7 +17,9 @@ public class PlayerSlot : MonoBehaviour
     [Tooltip("Reference to the UI element containing the selection arrows.")]
     public CanvasGroup selectArrows;
     [Tooltip("Reference to the UI element containing player options.")]
-    public CanvasGroup options;
+    public CanvasGroup descriptionSection;
+
+    [HideInInspector] public CharacterMenu _characterMenu = null;
 
     [HideInInspector] public int _playerID = -1; // The player occupying the slot.
     [HideInInspector] public bool _playerJoined = false; // Slot is occupied.
@@ -37,7 +39,7 @@ public class PlayerSlot : MonoBehaviour
 
     public void Start()
     {
-        if (!joinText || !playerSelect || !selectArrows || !options)
+        if (!joinText || !playerSelect || !selectArrows || !descriptionSection)
         {
             Debug.LogError("Player slot has not been setup! (" + gameObject.name + ")");
             return;
@@ -53,7 +55,8 @@ public class PlayerSlot : MonoBehaviour
         readyOverlay.interactable = false;
         selectArrows.alpha = 0.0f;
         selectArrows.interactable = false;
-        options.gameObject.SetActive(false);
+        descriptionSection.alpha = 0.0f;
+        descriptionSection.interactable = false;
 
         playerSelect.GetComponentInChildren<PortraitsAnchor>()._playerSelect = playerSelect;
     }
@@ -73,7 +76,7 @@ public class PlayerSlot : MonoBehaviour
         playerSelect.interactable = true;
         selectArrows.alpha = 1.0f;
         selectArrows.interactable = true;
-        options.gameObject.SetActive(true);
+        descriptionSection.alpha = 1.0f;
 
         // Set controller selection to the player select UI.
         mm.SetSelectedGameObject(playerSelect.gameObject);
@@ -96,7 +99,7 @@ public class PlayerSlot : MonoBehaviour
         playerSelect.interactable = false;
         selectArrows.alpha = 0.0f;
         selectArrows.interactable = false;
-        options.gameObject.SetActive(false);
+        descriptionSection.alpha = 0.0f;
     }
 
     // Handle player ready/unready.
@@ -130,6 +133,13 @@ public class PlayerSlot : MonoBehaviour
             // Set controller selection back to the player select UI.
             _controllerEventSystem.SetSelectedGameObject(playerSelect.gameObject);
         }
+    }
+
+    public void SelectCharacter(int index)
+    {
+        _selectedCharacterIndex = index;
+
+        descriptionSection.gameObject.GetComponent<CharacterAbilityDescription>().ChangeDescription(_characterMenu.characterDescriptions[index].description);
     }
 
     // Handle controller haptics.

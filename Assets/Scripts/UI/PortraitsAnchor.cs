@@ -12,7 +12,7 @@ public class PortraitsAnchor : MonoBehaviour
     public PlayerSlot parentSlot = null;
 
     [Tooltip("List of the potraits to scroll through.")]
-    public List<RectTransform> portraits = new List<RectTransform>();
+    public List<RectTransform> portraits = new List<RectTransform>(); // Order must match the character prefabs list in the character menu.
     [Tooltip("The first portrait selected.")]
     public RectTransform defaultPortrait = null;
 
@@ -67,7 +67,7 @@ public class PortraitsAnchor : MonoBehaviour
             _theActualTransform.anchoredPosition = newPosition;
 
             if (parentSlot != null)
-                parentSlot._selectedCharacterIndex = _activePortrait;
+                parentSlot.SelectCharacter(_activePortrait);
 
             // Setup the extended portrait list for loop effect.
             if (loopEffect && loopStartPortrait != null)
@@ -114,7 +114,7 @@ public class PortraitsAnchor : MonoBehaviour
 
                 // Set selected character.
                 _inTransition = false;
-                parentSlot._selectedCharacterIndex = _activePortrait;
+                parentSlot.SelectCharacter(_activePortrait);
                 parentSlot._controllerEventSystem.SetSelectedGameObject(_playerSelect.gameObject);
             }, // Complete transition.
             false);
