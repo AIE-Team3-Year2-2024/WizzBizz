@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6134509292193492650}
   - component: {fileID: 5164904202262361543}
   - component: {fileID: 6418827490174559892}
+  - component: {fileID: 6420727665081147571}
   m_Layer: 10
   m_Name: LizardBall
   m_TagString: Untagged
@@ -70,6 +71,10 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 914bf8d8e167d7446b3fb6bbd9a7e319, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ea7a35f2619c848bd182a86297db77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
-  _speedMult: 3
+  _speed: 30
+  _speedMult: 4
 --- !u!114 &1587318600284152238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +200,10 @@ TrailRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 30c60ea9d942d4e4d9aeff4684398789, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -232,22 +241,22 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51956785
-        value: 0.33750358
-        inSlope: -0.84932935
-        outSlope: -0.84932935
+        time: 0.69573104
+        value: 0.27969897
+        inSlope: -0.83142066
+        outSlope: -0.83142066
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.39818335
-        outWeight: 0.48902252
+        inWeight: 0.17403467
+        outWeight: 0.5572502
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: -1.0598264
+        outSlope: -1.0598264
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.34057686
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -317,3 +326,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orbProjectilePrefab: {fileID: 7298617281746096956, guid: f1595ca3a161cae48af787d8bf7fc2c1, type: 3}
+--- !u!114 &6420727665081147571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363175542702627947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.7372315, b: 0.1745283, a: 1}
+  outlineWidth: 1
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

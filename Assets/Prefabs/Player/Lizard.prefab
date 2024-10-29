@@ -563,7 +563,7 @@ MonoBehaviour:
   projectiles:
   - {fileID: 3363175542702627947, guid: aaec805ed6194ae49bb8e030505b9dda, type: 3}
   lifetime: 15
-  spawnOffset: {x: 0, y: 0, z: 0}
+  spawnOffset: {x: 0, y: 0, z: 1}
 --- !u!114 &2189079599295184151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -817,7 +817,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1103141523079865413}
   - component: {fileID: 377105204263379920}
-  - component: {fileID: 1802106951720622928}
   m_Layer: 6
   m_Name: Ability2Cooldown
   m_TagString: Untagged
@@ -897,35 +896,7 @@ MonoBehaviour:
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1802106951720622928}
-        m_TargetAssemblyTypeName: ImageFading, Assembly-CSharp
-        m_MethodName: SetAlphasToOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1802106951720622928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 494237234743098436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a7feb4ff1d008442abe31c04c5aff41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  images:
-  - {fileID: 6016982992520790597}
-  - {fileID: 7652408647589987290}
-  speed: 1
+      m_Calls: []
 --- !u!1 &542121855424046096
 GameObject:
   m_ObjectHideFlags: 0
