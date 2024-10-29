@@ -19,10 +19,7 @@ GameObject:
   - component: {fileID: 1143968817450751776}
   - component: {fileID: 3314487795171020480}
   - component: {fileID: 2189079599295184151}
-  - component: {fileID: 4897880449972657288}
-  - component: {fileID: 6273077283286855474}
-  - component: {fileID: 6824721345329797457}
-  - component: {fileID: 1714746252522696318}
+  - component: {fileID: 3307137157304878805}
   - component: {fileID: 3429027457535621894}
   - component: {fileID: 3722349283893674540}
   - component: {fileID: 2187619237441558528}
@@ -483,7 +480,7 @@ MonoBehaviour:
   ability1Toggle: 1
   ability2Toggle: 1
   ability1Cooldown: 14
-  ability2Cooldown: 14
+  ability2Cooldown: 10
   uiSlider1: {fileID: 7438209131174251057}
   uiSlider2: {fileID: 377105204263379920}
   ability1Chargeup: 0
@@ -508,45 +505,9 @@ MonoBehaviour:
   ability2Callback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4897880449972657288}
-        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
-        m_MethodName: MakeObjectAsChild
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6273077283286855474}
-        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
-        m_MethodName: MakeObjectAsChild
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6824721345329797457}
-        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
-        m_MethodName: MakeObjectAsChild
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1714746252522696318}
-        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
-        m_MethodName: MakeObjectAsChild
+      - m_Target: {fileID: 3307137157304878805}
+        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
+        m_MethodName: SpawnProjectileAtPlayer
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -619,7 +580,7 @@ MonoBehaviour:
   - {fileID: 3363175542702627947, guid: 29f1144a58d8e3a4c92bd8d2b62cd283, type: 3}
   lifetime: 3
   spawnOffset: {x: 0, y: 0, z: 0}
---- !u!114 &4897880449972657288
+--- !u!114 &3307137157304878805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -628,53 +589,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 452431045987376296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
+  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 3763851691602367980, guid: d084eecfe7a30344691c61ff27bd4bc1, type: 3}
-  _spawn: {fileID: 452431045987376296}
---- !u!114 &6273077283286855474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefab: {fileID: 3763851691602367980, guid: 6fc658a5b45bc614da75a09f0cc15553, type: 3}
-  _spawn: {fileID: 452431045987376296}
---- !u!114 &6824721345329797457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefab: {fileID: 3763851691602367980, guid: ef689e983576c524b974d3e2201f543c, type: 3}
-  _spawn: {fileID: 452431045987376296}
---- !u!114 &1714746252522696318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefab: {fileID: 3763851691602367980, guid: 7ece4252c1edeaf428a37bac5af1fe76, type: 3}
-  _spawn: {fileID: 452431045987376296}
+  projectiles:
+  - {fileID: 3763851691602367980, guid: 5fb3cfd2a1dcca0428438a9674082099, type: 3}
+  lifetime: 6
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &3429027457535621894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,9 +804,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689a5f3e9f66e9844874107667eb7040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowFreq: 0.5
+  lowFreq: 0
   highFreq: 1
-  time: 0.5
+  time: 0.2
 --- !u!1 &494237234743098436
 GameObject:
   m_ObjectHideFlags: 0
