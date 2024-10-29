@@ -16,6 +16,8 @@ public class CharacterMenu : Menu
     public List<PlayerSlot> playerSlots = new List<PlayerSlot>();
     [Tooltip("List of the available characters that a player can select.")]
     public List<GameObject> characterPrefabs = new List<GameObject>();
+    [Tooltip("List of the character descriptions to be displayed. Order must match the character prefabs list.")]
+    public List<UIPortraitDescription> characterDescriptions = new List<UIPortraitDescription>();
 
     [Tooltip("Reference to the count down UI. (Optional)")]
     public UICountDown countDown = null;
@@ -26,7 +28,17 @@ public class CharacterMenu : Menu
 
     private bool _addingControllers = false; // Are we accepted new players?
     private List<int> _addedGamepadIDs = new List<int>(); // List of the controller indexes that have joined.
-    
+
+    public override void Awake()
+    {
+        base.Awake();
+
+        foreach (PlayerSlot p in playerSlots)
+        {
+            p._characterMenu = this;
+        }
+    }
+
     public void Update()
     {
         if (_addingControllers == false)
