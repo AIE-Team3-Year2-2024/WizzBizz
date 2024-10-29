@@ -92,10 +92,8 @@ public class WinScreen : Menu
     {
         base.OnLoaded();
 
-        if (_menuManager) _menuManager._controllerCancelCallback += OnControllerCancel;
-
-        _menuManager._primaryController.currentActionMap.FindAction("Submit").started += ControlButtonHold;
-        _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled += ControlButtonHold;
+        if(_menuManager) _menuManager._primaryController.currentActionMap.FindAction("Submit").started += ControlButtonHold;
+        if(_menuManager) _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled += ControlButtonHold;
 
         StartCoroutine(LoadScene());
     }
@@ -126,7 +124,6 @@ public class WinScreen : Menu
             if(_currentButtonHoldTime >= _buttonHoldTime)
             {
                 _menuManager.FadeToScene(_afterWinScene);
-                _menuManager._controllerCancelCallback -= OnControllerCancel;
                 _menuManager._primaryController.currentActionMap.FindAction("Submit").started -= ControlButtonHold;
                 _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled -= ControlButtonHold;
                 _shouldReturn = false;
@@ -134,17 +131,10 @@ public class WinScreen : Menu
         }
     }
 
-    public void OnControllerCancel(PlayerInput controller)
-    {
-        // Override controller cancel.
-        return;
-    }
-
     public IEnumerator LoadScene()
     {
         yield return new WaitForSeconds(_sceneTime);
         _menuManager.FadeToScene(_afterWinScene);
-        _menuManager._controllerCancelCallback -= OnControllerCancel;
 
         _menuManager._primaryController.currentActionMap.FindAction("Submit").started -= ControlButtonHold;
         _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled -= ControlButtonHold;
