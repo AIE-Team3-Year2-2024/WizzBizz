@@ -973,7 +973,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4667192415441706822}
   - component: {fileID: 8428138248725169156}
-  - component: {fileID: 2927302258077667678}
   m_Layer: 6
   m_Name: Ability1Cooldown
   m_TagString: Untagged
@@ -1053,35 +1052,7 @@ MonoBehaviour:
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2927302258077667678}
-        m_TargetAssemblyTypeName: ImageFading, Assembly-CSharp
-        m_MethodName: SetAlphasToOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2927302258077667678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683194986331357104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a7feb4ff1d008442abe31c04c5aff41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  images:
-  - {fileID: 6317348331262848278}
-  - {fileID: 1709987009925643456}
-  speed: 1
+      m_Calls: []
 --- !u!1 &879297873690409584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1944,7 +1915,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3454439083265851398}
   - component: {fileID: 8289619844333391295}
-  - component: {fileID: 3048751535576230817}
   m_Layer: 6
   m_Name: Ability2Cooldown
   m_TagString: Untagged
@@ -2024,35 +1994,7 @@ MonoBehaviour:
   m_Value: 3
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3048751535576230817}
-        m_TargetAssemblyTypeName: ImageFading, Assembly-CSharp
-        m_MethodName: SetAlphasToOne
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &3048751535576230817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3647672644212132352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a7feb4ff1d008442abe31c04c5aff41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  images:
-  - {fileID: 8029054068149465393}
-  - {fileID: 8236506650249746996}
-  speed: 1
+      m_Calls: []
 --- !u!1 &3727981422894263725
 GameObject:
   m_ObjectHideFlags: 0
