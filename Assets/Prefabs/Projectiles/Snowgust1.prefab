@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 2411617602834269093}
   - component: {fileID: 8816167267902855499}
   - component: {fileID: 1505624923386359286}
-  - component: {fileID: 3677742120245538066}
   - component: {fileID: 3498324173033440310}
   - component: {fileID: 1625968428615464150}
   m_Layer: 7
@@ -136,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 22
+  speed: 26
 --- !u!114 &2411617602834269093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,21 +316,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &3677742120245538066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1516138443394319677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!73398921 &3498324173033440310
 VFXRenderer:
   serializedVersion: 1
@@ -403,7 +387,6 @@ GameObject:
   - component: {fileID: 3090975813704961530}
   - component: {fileID: 203132199534771893}
   - component: {fileID: 4864671245755160494}
-  - component: {fileID: 6901901549320873150}
   - component: {fileID: 9002667312424249452}
   - component: {fileID: 7499112748887450168}
   m_Layer: 7
@@ -520,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 22
+  speed: 26
 --- !u!114 &3090975813704961530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,21 +684,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &6901901549320873150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618165012806698796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!73398921 &9002667312424249452
 VFXRenderer:
   serializedVersion: 1
@@ -787,7 +755,6 @@ GameObject:
   - component: {fileID: 6054657065994335519}
   - component: {fileID: 4598368547826890441}
   - component: {fileID: 6402163616759776682}
-  - component: {fileID: 1184782247536076628}
   - component: {fileID: 6392030297281203161}
   - component: {fileID: 5123585039541864386}
   m_Layer: 7
@@ -906,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 22
+  speed: 26
 --- !u!114 &6054657065994335519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,21 +1054,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &1184782247536076628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052513051215906217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!73398921 &6392030297281203161
 VFXRenderer:
   serializedVersion: 1
@@ -1173,7 +1125,6 @@ GameObject:
   - component: {fileID: 6600643633332403006}
   - component: {fileID: 5196415589171327729}
   - component: {fileID: 6618193417414486743}
-  - component: {fileID: 1183393572237239977}
   - component: {fileID: 123744425545180437}
   - component: {fileID: 5548828304359279062}
   m_Layer: 7
@@ -1292,7 +1243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 22
+  speed: 26
 --- !u!114 &6600643633332403006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1473,21 +1424,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &1183393572237239977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2278205695223698547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!73398921 &123744425545180437
 VFXRenderer:
   serializedVersion: 1
@@ -1559,7 +1495,6 @@ GameObject:
   - component: {fileID: 1171402392908344817}
   - component: {fileID: 690439730358207269}
   - component: {fileID: 5715026946982101255}
-  - component: {fileID: 4532699896535827992}
   - component: {fileID: 6331034574568130275}
   - component: {fileID: 8660238328101078779}
   m_Layer: 7
@@ -1678,7 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 22
+  speed: 26
 --- !u!114 &1171402392908344817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1859,21 +1794,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &4532699896535827992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3123210228766249001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
-  m_UseGraphicAlpha: 1
 --- !u!73398921 &6331034574568130275
 VFXRenderer:
   serializedVersion: 1
