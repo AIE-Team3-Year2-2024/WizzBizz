@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1503976902938853302}
   - component: {fileID: 8173011205568647346}
   - component: {fileID: 8655502945146184939}
-  - component: {fileID: 9204749844849259392}
   - component: {fileID: -3851539590872105335}
   - component: {fileID: -5499903698515181038}
   - component: {fileID: 8114987668639932540}
@@ -120,35 +119,9 @@ MonoBehaviour:
   heightMultiplyer: 3
   doOnDestroy:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9204749844849259392}
-        m_TargetAssemblyTypeName: MakeObjectAtObject, Assembly-CSharp
-        m_MethodName: MakeObject
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _arcObjectToMake: {fileID: 0}
   _lifeDistance: 0
---- !u!114 &9204749844849259392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3192898056125740344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb27aeb5d53a392469f9d8db3afe58ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefab: {fileID: 4245985465227740682, guid: c7140e668c6d6bf47936c17b2d1a3d0e, type: 3}
-  _spawn: {fileID: 0}
 --- !u!114 &-3851539590872105335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,3 +306,5 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy:
+  - {fileID: -2775216548624882883, guid: c7140e668c6d6bf47936c17b2d1a3d0e, type: 3}

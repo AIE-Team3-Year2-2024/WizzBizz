@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -438540098436973032}
   - component: {fileID: 3790909454710753257}
   - component: {fileID: 4773507244246756381}
+  - component: {fileID: 5778421600311616790}
   m_Layer: 7
   m_Name: FrogAOE
   m_TagString: Untagged
@@ -146,6 +147,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 3790909454710753257}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!114 &-438540098436973032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a137b190fc878f48b87a66f2cd67bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 999
+  rotationSpeed: 0.8
 --- !u!114 &4773507244246756381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +188,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _speedMult: 6
+--- !u!114 &5778421600311616790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245985465227740682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780969401da3a2243a46eb3f65e2bcde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _time: 8
 --- !u!1001 &3179239318303955199
 PrefabInstance:
   m_ObjectHideFlags: 0
