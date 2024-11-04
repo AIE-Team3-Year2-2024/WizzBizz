@@ -10,6 +10,11 @@ public class ControlProjectileDirection : MonoBehaviour
 
     private Vector3 aimDirection;
 
+    private void Start()
+    {
+        aimDirection = transform.forward;
+    }
+
     /// <summary>
     /// will rotate this object based on the vector in context
     /// </summary>
