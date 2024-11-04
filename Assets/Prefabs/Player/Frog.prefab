@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 452431045987376309}
   - component: {fileID: 452431045987376298}
   - component: {fileID: 532612227137173808}
+  - component: {fileID: 7266007580449182535}
   - component: {fileID: 3006249}
   - component: {fileID: 1143968817450751776}
   - component: {fileID: 3722349283893674540}
@@ -200,8 +201,9 @@ GameObject:
   - component: {fileID: 2795027882588230036}
   - component: {fileID: 4759336430947967288}
   - component: {fileID: -8277679434416479755}
-  - component: {fileID: 5619487726306417995}
-  - component: {fileID: 7266007580449182535}
+  - component: {fileID: 94103231913229806}
+  - component: {fileID: 2053631589853531403}
+  - component: {fileID: 2370909801206995805}
   m_Layer: 6
   m_Name: Frog
   m_TagString: Player
@@ -286,7 +288,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452431045987376296}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09fb78cf3b48eb946844182c4fb053e0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -549,18 +551,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 12
+  _speed: 14
   originalSpeed: 0
-  _deceleration: 0.1
+  _deceleration: 0.25
   catchTrigger: {fileID: 1143968817450751776}
-  _dashTime: 0.4
+  _dashTime: 0.3
   _dashSpeed: 34
   _dashWaitTime: 3
   _chargeSpeed: 2.5
   catchParryTime: 0.4
   catchWaitTime: 1.5
   _health: 100
-  _ballLifetime: 8
+  _ballLifetime: 15
   canMove: 1
   canDash: 1
   _pointerAimerRange: 10
@@ -594,9 +596,21 @@ MonoBehaviour:
   ballAttack:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -8277679434416479755}
+      - m_Target: {fileID: 2053631589853531403}
         m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
         m_MethodName: FrogSpawnProjectileAtPlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 94103231913229806}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -621,6 +635,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7266007580449182535}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7266007580449182535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689a5f3e9f66e9844874107667eb7040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowFreq: 0
+  highFreq: 1
+  time: 0.2
 --- !u!54 &3006249
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -784,7 +825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damageInterval: 2
+  _damageInterval: 1
   damage: 4
 --- !u!114 &7124786109629838651
 MonoBehaviour:
@@ -884,10 +925,22 @@ MonoBehaviour:
   ability1Callback:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5619487726306417995}
-        m_TargetAssemblyTypeName: SpawnObjectAtAim, Assembly-CSharp
-        m_MethodName: FrogSpawnObjectAtAimFunction
+      - m_Target: {fileID: 2370909801206995805}
+        m_TargetAssemblyTypeName: LobAttack, Assembly-CSharp
+        m_MethodName: FrogSpawnLobObject
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 94103231913229806}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -903,6 +956,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: PortalAttack, Assembly-CSharp
         m_MethodName: SpawnObjectAtAimFunction
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7266007580449182535}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -945,23 +1010,7 @@ MonoBehaviour:
   - {fileID: 6599871779557999481, guid: 495aa339df5df014093ac1cf529b476a, type: 3}
   lifetime: 20
   spawnOffset: {x: 0, y: 0, z: 0}
---- !u!114 &5619487726306417995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37a98c60a0bbbc04f86b8da631a3625e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 4245985465227740682, guid: c7140e668c6d6bf47936c17b2d1a3d0e, type: 3}
-  range: 5
-  lobAimer: {fileID: 1100810549408191807}
-  lifetime: 7
---- !u!114 &7266007580449182535
+--- !u!114 &94103231913229806
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -975,7 +1024,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lowFreq: 0
   highFreq: 1
-  time: 0.2
+  time: 0.5
+--- !u!114 &2053631589853531403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectiles:
+  - {fileID: 6599871779557999481, guid: 495aa339df5df014093ac1cf529b476a, type: 3}
+  lifetime: 15
+  spawnOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &2370909801206995805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b60f96ddef8e024d97a54219ffa3c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 3192898056125740344, guid: 4c3ad09c25219884cb6a60481f923ac9, type: 3}
+  range: 5
+  lobAimer: {fileID: 1100810549408191807}
+  lifetime: 7
+  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &642615397704571331
 GameObject:
   m_ObjectHideFlags: 0
