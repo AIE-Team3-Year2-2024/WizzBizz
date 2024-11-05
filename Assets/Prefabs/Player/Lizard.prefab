@@ -400,9 +400,9 @@ MonoBehaviour:
   _defualtPointerAimerHeight: 0
   currentAimMagnitude: 0
   _ballAttackTime: 1
-  _basicAttackTime: 0.7
+  _basicAttackTime: 0.9
   damageMult: 1
-  _basicAttackCooldownGoal: 0.7
+  _basicAttackCooldownGoal: 0.9
   _pointerAimer: {fileID: 3872852656298533993}
   healthBar: {fileID: 4719265066123218409}
   ballAttackChargeBar: {fileID: 4871652096983409706}
@@ -591,7 +591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 3363175542702627947, guid: 29f1144a58d8e3a4c92bd8d2b62cd283, type: 3}
-  lifetime: 3
+  lifetime: 2
   spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &3307137157304878805
 MonoBehaviour:

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4773507244246756381}
   - component: {fileID: 5778421600311616790}
   - component: {fileID: 5292709835265403990}
+  - component: {fileID: 4025224296675085213}
   m_Layer: 7
   m_Name: FrogAOE
   m_TagString: Untagged
@@ -737,6 +738,23 @@ MonoBehaviour:
     - {x: -0.6959634, y: 0.1768332, z: -0.6959634}
     - {x: -0.34139428, y: 0.6646524, z: -0.66459554}
     - {x: -0.17685792, y: 0.6958694, z: -0.6960511}
+--- !u!114 &4025224296675085213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4245985465227740682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d197b5b7f7b01ab4bbf4da0c4f29dadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 4
+  destroyOnCollision: 0
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3179239318303955199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -808,9 +826,17 @@ PrefabInstance:
       propertyPath: _heightOffset
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5831486563031283741, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831486563031283741, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 31
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -898,6 +924,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.data[30]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[31]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[32]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[33]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[34]
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -982,10 +1024,22 @@ PrefabInstance:
       propertyPath: _heightOffset
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5831486563031283741, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831486563031283741, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 31
+      value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f0b32905f7dbdb4e8e26ebc95e83ab6, type: 2}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
@@ -1072,6 +1126,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.data[30]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[31]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[32]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[33]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[34]
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []

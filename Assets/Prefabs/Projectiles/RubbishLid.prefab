@@ -145,6 +145,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!54 &529405592993949442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -233,23 +234,32 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4846757
-        value: 0.17902628
-        inSlope: -0.97431266
-        outSlope: -0.97431266
+        time: 0.35773784
+        value: 0.21949258
+        inSlope: -0.46748984
+        outSlope: -0.46748984
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.36515576
-        outWeight: 0.6944143
+        outWeight: 0.64980865
       - serializedVersion: 3
-        time: 0.89473605
+        time: 0.64860576
+        value: 0.017332397
+        inSlope: -0.2806555
+        outSlope: -0.2806555
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.85058326
+        outWeight: 1
+      - serializedVersion: 3
+        time: 0.7409326
         value: 0
         inSlope: 0
         outSlope: 0
-        tangentMode: 0
+        tangentMode: 136
         weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -360,7 +370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
       propertyPath: m_Materials.Array.data[1]

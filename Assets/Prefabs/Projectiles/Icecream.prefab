@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6459568132806065712}
   - component: {fileID: 743633967367418717}
   - component: {fileID: 635959111677137771}
+  - component: {fileID: 6902607760224960571}
   m_Layer: 7
   m_Name: Icecream
   m_TagString: Untagged
@@ -344,6 +345,23 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
+--- !u!114 &6902607760224960571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599871779557999481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d197b5b7f7b01ab4bbf4da0c4f29dadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  destroyOnCollision: 0
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7768673102871072099
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,6 +417,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2533c705593089b43b45a7ebf0383834, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
