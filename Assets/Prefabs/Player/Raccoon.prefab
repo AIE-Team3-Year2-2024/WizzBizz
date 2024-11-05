@@ -35,6 +35,7 @@ GameObject:
   - component: {fileID: 8364465316122460612}
   - component: {fileID: 6592575009479414156}
   - component: {fileID: -1773128007534983097}
+  - component: {fileID: 926319221542270233}
   m_Layer: 6
   m_Name: Raccoon
   m_TagString: Player
@@ -119,7 +120,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 452431045987376296}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 09fb78cf3b48eb946844182c4fb053e0, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -386,14 +387,14 @@ MonoBehaviour:
   originalSpeed: 0
   _deceleration: 0.25
   catchTrigger: {fileID: -3436212031268177746}
-  _dashTime: 0.4
+  _dashTime: 0.3
   _dashSpeed: 34
   _dashWaitTime: 3
   _chargeSpeed: 1
   catchParryTime: 2
   catchWaitTime: 1
   _health: 100
-  _ballLifetime: 8
+  _ballLifetime: 15
   canMove: 1
   canDash: 1
   _pointerAimerRange: 10
@@ -439,12 +440,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 926319221542270233}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   normalAttack:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2599945780600720797}
         m_TargetAssemblyTypeName: LobAttack, Assembly-CSharp
         m_MethodName: SpawnLobObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -1773128007534983097}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -491,6 +516,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 926319221542270233}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ability2Callback:
     m_PersistentCalls:
       m_Calls:
@@ -498,6 +535,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
         m_MethodName: SpawnProjectileAtPlayer
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -1773128007534983097}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -720,7 +769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 0
-  _damageInterval: 2
+  _damageInterval: 1
   damage: 4
 --- !u!114 &7124786109629838651
 MonoBehaviour:
@@ -784,6 +833,21 @@ MonoBehaviour:
   lifetime: 0
   spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &-1773128007534983097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 689a5f3e9f66e9844874107667eb7040, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lowFreq: 0
+  highFreq: 1
+  time: 0.2
+--- !u!114 &926319221542270233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

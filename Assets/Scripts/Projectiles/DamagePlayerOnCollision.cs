@@ -45,6 +45,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [SerializeField]
     private DamagePlayerOnCollision[] damageChildren;
 
+    [Tooltip("damage objects to make when this object is destroyed that will have the same owner player")]
+    [SerializeField]
+    private DamagePlayerOnCollision[] damageChildrenOnDestroy;
+
     private CharacterBase ownerPlayer;
 
     private AttackKnockback _knockbackComponent;
@@ -185,6 +189,14 @@ public class DamagePlayerOnCollision : MonoBehaviour
             ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").performed -= controlComponent.OnAim;
             ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").canceled -= controlComponent.OnAim;
         }
+
+        foreach(DamagePlayerOnCollision damage in damageChildrenOnDestroy)
+        {
+            DamagePlayerOnCollision current = Instantiate(damage, transform.position, transform.rotation);
+            current.SetOwner(ownerPlayer);
+            
+        }
+
         DoOnDestroy.Invoke();
     }
 }
