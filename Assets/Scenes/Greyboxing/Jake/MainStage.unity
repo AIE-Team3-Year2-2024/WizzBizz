@@ -33133,7 +33133,7 @@ Transform:
   - {fileID: 542722070}
   - {fileID: 1812496149}
   m_Father: {fileID: 1033009377}
-  m_RootOrder: 80
+  m_RootOrder: 68
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &782129314
 PrefabInstance:
@@ -42520,6 +42520,7 @@ Transform:
   - {fileID: 1788484590}
   - {fileID: 495300531}
   - {fileID: 114091017}
+  - {fileID: 779701384}
   - {fileID: 360089467}
   - {fileID: 2031210273}
   - {fileID: 1906133499}
@@ -42532,7 +42533,6 @@ Transform:
   - {fileID: 1919787556}
   - {fileID: 662010934}
   - {fileID: 314254352}
-  - {fileID: 779701384}
   - {fileID: 73626554}
   - {fileID: 1647767408}
   - {fileID: 469090765}
@@ -51673,6 +51673,10 @@ PrefabInstance:
     - target: {fileID: 1131222966555970248, guid: 6e2d996603c781349afe80520ca1a209, type: 3}
       propertyPath: m_Name
       value: IcePlatform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126553094934097701, guid: 6e2d996603c781349afe80520ca1a209, type: 3}
+      propertyPath: slipperyness
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e2d996603c781349afe80520ca1a209, type: 3}
