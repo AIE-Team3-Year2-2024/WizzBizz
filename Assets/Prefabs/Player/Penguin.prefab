@@ -148,10 +148,6 @@ GameObject:
   - component: {fileID: 1497816845397379619}
   - component: {fileID: 3424854267544527191}
   - component: {fileID: 8837453654854279791}
-  - component: {fileID: 1250526107570323719}
-  - component: {fileID: 4281912004791566196}
-  - component: {fileID: 3535700230976829535}
-  - component: {fileID: 9068257180167262936}
   m_Layer: 6
   m_Name: Penguin
   m_TagString: Player
@@ -701,54 +697,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1250526107570323719}
-        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
-        m_MethodName: SpawnProjectileAtPlayer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4281912004791566196}
-        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
-        m_MethodName: SpawnProjectileAtPlayer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3535700230976829535}
-        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
-        m_MethodName: SpawnProjectileAtPlayer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 9068257180167262936}
-        m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
-        m_MethodName: SpawnProjectileAtPlayer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   ability1Aimer: {fileID: 7833503155740149353}
   ability2Aimer: {fileID: 3746523721965615788}
 --- !u!54 &-907038504855142003
@@ -1023,70 +971,6 @@ MonoBehaviour:
   - {fileID: 8886036772630649441, guid: 0870404d8c826af4fa45fac2628b9e40, type: 3}
   lifetime: 3
   spawnOffset: {x: 0, y: 0, z: 0}
---- !u!114 &1250526107570323719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles:
-  - {fileID: 768616216586351220, guid: dd32d15f8d9614b45880129dfe7f3c65, type: 3}
-  lifetime: 3
-  spawnOffset: {x: 0.25, y: 0, z: 0}
---- !u!114 &4281912004791566196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles:
-  - {fileID: 768616216586351220, guid: dd32d15f8d9614b45880129dfe7f3c65, type: 3}
-  lifetime: 3
-  spawnOffset: {x: -0.25, y: 0, z: 0}
---- !u!114 &3535700230976829535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles:
-  - {fileID: 7197127415005391814, guid: 1623b6c6ea5dcda4f8667b0984468986, type: 3}
-  lifetime: 3
-  spawnOffset: {x: 0.5, y: 0, z: 0}
---- !u!114 &9068257180167262936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles:
-  - {fileID: 7197127415005391814, guid: 1623b6c6ea5dcda4f8667b0984468986, type: 3}
-  lifetime: 3
-  spawnOffset: {x: -0.5, y: 0, z: 0}
 --- !u!1 &683194986331357104
 GameObject:
   m_ObjectHideFlags: 0
