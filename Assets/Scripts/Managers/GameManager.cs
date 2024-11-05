@@ -20,10 +20,19 @@ public class PlayerData
     public int score;
 }
 
+public class TeamData
+{
+    public int score;
+    public int teamID;
+}
+
 public class GameManager : MonoBehaviour
 {
     // Static reference
     public static GameManager Instance { get; private set; }
+
+    [Tooltip("whether the game is in team mode")]
+    public bool teamMode;
 
     [HideInInspector]
     public bool afterControllerAdd;
@@ -135,6 +144,8 @@ public class GameManager : MonoBehaviour
     public GameObject canvas;
 
     private List<PlayerData> _playerData = new List<PlayerData>();
+
+    private List<TeamData> teamData = new List<TeamData>();
 
     // Singleton instantiation
     private void Awake()
@@ -280,6 +291,10 @@ public class GameManager : MonoBehaviour
                 {
                     _playerData.Remove(p);
                     _alivePlayers.Remove(player);
+                    foreach(CharacterBase teamMate in player.teamMates)
+                    {
+                        teamMate.teamMates.Remove(player);
+                    }
                     _connectedPlayerCount--;
                     return;
                 }
@@ -355,6 +370,63 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayerTeamModeDeath(CharacterBase player)
+    {
+        bool otherTeamMatesAlive = false;
+
+        foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
+        {
+            if(player.teamMates.Contains(p.Key))
+            {
+                otherTeamMatesAlive = true;
+            }
+        }
+
+        if(otherTeamMatesAlive)
+        {
+            _alivePlayers.Remove(player);
+            Destroy(player.gameObject);
+        } 
+        else
+        {
+            _roundTimer = _roundTime;
+            // Handle win
+            StartCoroutine(TeamWin());
+        }
+    }
+
+    public IEnumerator TeamWin()
+    {
+        foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
+        {
+            teamData[p.Key._teamID].score++;
+            _currentRound++;
+
+            CharacterBase[] player = new CharacterBase[] { p.Key };
+
+            GameManager.Instance.StartSlowDown(player);
+
+            //activate the scoreboard and set the winner text and make the score objects for each winner and set the text for them
+            if (_scoreBoard != null)
+            {
+                _scoreBoard.SetActive(true);
+                _scoreBoardWinnerText.text = "The winner of this round is the " + p.Key._teamID + " team";
+
+                int pos = 1;
+                foreach (TeamData td in teamData)
+                {
+                    Instantiate(_scoreText, _scoreParent.transform).text = "Team " + p.Key._teamID + " Score: " + teamData[p.Key._teamID].score;
+                    pos++;
+                }
+                yield return new WaitForSecondsRealtime(_scoreBoardWaitTime);
+            }
+
+            GoToNextTeamRound();
+            yield break;
+        }
+        
+    }
+
     /// <summary>
     /// adds score to the first alive player and either loads the next round or the end level
     /// </summary>
@@ -394,6 +466,24 @@ public class GameManager : MonoBehaviour
         {
             //if round over
             if (p.Value.score < _scoreToWin)
+                StartGame();
+            else // if game over
+            {
+                _gameStarted = false;
+                arenaUICanvas.gameObject.SetActive(false);
+                //SceneManager.LoadScene(_endLevel);
+                MenuManager.Instance.FadeToScene(_endLevel);
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    public void GoToNextTeamRound()
+    {
+        foreach (TeamData team in teamData)
+        {
+            //if round over
+            if (team.score < _scoreToWin)
                 StartGame();
             else // if game over
             {
@@ -523,6 +613,10 @@ public class GameManager : MonoBehaviour
 
         CinemachineTargetGroup.Target[] targs = new CinemachineTargetGroup.Target[_playerData.Count];
 
+        CharacterBase lastPlayer = null;
+
+        int currentTeam = 0;
+
         for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character
@@ -540,6 +634,27 @@ public class GameManager : MonoBehaviour
             targs[i].target = newPlayer.transform;
             targs[i].radius = _playerCameraRadius;
             targs[i].weight = _playerCameraWeight;
+
+            //team mode additions
+            if(lastPlayer == null)
+            {
+                lastPlayer = character;
+            }
+            else if(teamMode)
+            {
+                lastPlayer.teamMates.Add(character);
+                character.teamMates.Add(lastPlayer);
+                lastPlayer = null;
+
+                TeamData td = new TeamData();
+
+                td.teamID = currentTeam;
+                td.score = 0;
+
+                teamData.Add(td);
+
+                currentTeam++;
+            }
 
         }
 
