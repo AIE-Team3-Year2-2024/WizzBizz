@@ -73,6 +73,7 @@ public class ScoreBoard : Menu
                 _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled -= ControlButtonHold;
                 _shouldReturn = false;
                 GameManager.Instance.GoToNextRound();
+                StopCoroutine(GameManager.Instance.PlayerWin());
             }
         }
     }
