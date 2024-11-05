@@ -68,6 +68,8 @@ MeshRenderer:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -186,6 +188,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!114 &413267540910040873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +226,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.8
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &8252697303617144653
 TrailRenderer:
@@ -247,6 +250,8 @@ TrailRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d814083ecb7017c4c80f60462e24d066, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

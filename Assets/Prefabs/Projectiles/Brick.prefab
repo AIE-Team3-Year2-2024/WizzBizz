@@ -80,6 +80,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!54 &7146000015864153475
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -118,6 +119,10 @@ TrailRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 9f0b32905f7dbdb4e8e26ebc95e83ab6, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -308,6 +313,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 95658017c4d729c479ea2845c113a675, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 95658017c4d729c479ea2845c113a675, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 95658017c4d729c479ea2845c113a675, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 95658017c4d729c479ea2845c113a675, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 95658017c4d729c479ea2845c113a675, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8414730017779267143, guid: 95658017c4d729c479ea2845c113a675, type: 3}
       propertyPath: m_Name
       value: StillRaccoon
@@ -370,6 +395,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 684dcea7f28d11842bfab2393df8d6b8, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 684dcea7f28d11842bfab2393df8d6b8, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 684dcea7f28d11842bfab2393df8d6b8, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 684dcea7f28d11842bfab2393df8d6b8, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: 684dcea7f28d11842bfab2393df8d6b8, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8414730017779267143, guid: 684dcea7f28d11842bfab2393df8d6b8, type: 3}
       propertyPath: m_Name
       value: StillRaccoon 1
@@ -431,6 +476,26 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7469cc35b09efc048957cc9eb13c82ca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7469cc35b09efc048957cc9eb13c82ca, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7469cc35b09efc048957cc9eb13c82ca, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7469cc35b09efc048957cc9eb13c82ca, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7469cc35b09efc048957cc9eb13c82ca, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7469cc35b09efc048957cc9eb13c82ca, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7469cc35b09efc048957cc9eb13c82ca, type: 3}
       propertyPath: m_Name

@@ -103,8 +103,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.8
+  m_Radius: 0.5
+  m_Height: 0.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8639114462583802718
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   damageEffect: 8
-  effectTime: 6
+  effectTime: 4
   effectAmount: 0
   destroyOnCollision: 1
   destroyOnPlayerCollision: 0
@@ -162,6 +162,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!96 &8816167267902855499
 TrailRenderer:
   serializedVersion: 2
@@ -473,8 +474,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.8
+  m_Radius: 0.5
+  m_Height: 0.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &495597669340244311
@@ -520,7 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   damageEffect: 8
-  effectTime: 6
+  effectTime: 4
   effectAmount: 5
   destroyOnCollision: 1
   destroyOnPlayerCollision: 0
@@ -532,6 +533,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!96 &203132199534771893
 TrailRenderer:
   serializedVersion: 2
@@ -843,8 +845,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.8
+  m_Radius: 0.5
+  m_Height: 0.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8042535040693185200
@@ -890,7 +892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   damageEffect: 8
-  effectTime: 6
+  effectTime: 4
   effectAmount: 0
   destroyOnCollision: 1
   destroyOnPlayerCollision: 0
@@ -902,6 +904,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!96 &4598368547826890441
 TrailRenderer:
   serializedVersion: 2
@@ -1213,8 +1216,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.8
+  m_Radius: 0.5
+  m_Height: 0.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7880321694842476258
@@ -1260,7 +1263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   damageEffect: 8
-  effectTime: 6
+  effectTime: 4
   effectAmount: 0
   destroyOnCollision: 1
   destroyOnPlayerCollision: 0
@@ -1272,6 +1275,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!96 &5196415589171327729
 TrailRenderer:
   serializedVersion: 2
@@ -1583,8 +1587,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.8
+  m_Radius: 0.5
+  m_Height: 0.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &161024869886255292
@@ -1630,7 +1634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   damageEffect: 8
-  effectTime: 6
+  effectTime: 4
   effectAmount: 0
   destroyOnCollision: 1
   destroyOnPlayerCollision: 0
@@ -1642,6 +1646,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!96 &690439730358207269
 TrailRenderer:
   serializedVersion: 2
@@ -1859,7 +1864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8946907209598107322}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Snowgust1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

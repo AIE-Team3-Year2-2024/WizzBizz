@@ -202,7 +202,6 @@ GameObject:
   - component: {fileID: 4759336430947967288}
   - component: {fileID: -8277679434416479755}
   - component: {fileID: 94103231913229806}
-  - component: {fileID: 2053631589853531403}
   - component: {fileID: 2370909801206995805}
   m_Layer: 6
   m_Name: Frog
@@ -596,7 +595,7 @@ MonoBehaviour:
   ballAttack:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2053631589853531403}
+      - m_Target: {fileID: -8277679434416479755}
         m_TargetAssemblyTypeName: SpawnProjectile, Assembly-CSharp
         m_MethodName: FrogSpawnProjectileAtPlayer
         m_Mode: 1
@@ -1025,22 +1024,6 @@ MonoBehaviour:
   lowFreq: 0
   highFreq: 1
   time: 0.5
---- !u!114 &2053631589853531403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c7f02fa0ac0ff4bada1a4bbb28f035, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectiles:
-  - {fileID: 6599871779557999481, guid: 495aa339df5df014093ac1cf529b476a, type: 3}
-  lifetime: 15
-  spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &2370909801206995805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1054,9 +1037,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3192898056125740344, guid: 4c3ad09c25219884cb6a60481f923ac9, type: 3}
-  range: 5
+  range: 10
   lobAimer: {fileID: 1100810549408191807}
-  lifetime: 7
+  lifetime: 0
   spawnOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &642615397704571331
 GameObject:

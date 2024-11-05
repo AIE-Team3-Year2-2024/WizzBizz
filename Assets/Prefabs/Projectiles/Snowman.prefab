@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ce9ac3fd42bb94c9c00ee85f7fd8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 2
   _trigger: {fileID: 4722094569867634446}
 --- !u!135 &4722094569867634446
 SphereCollider:
@@ -217,6 +217,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!136 &8760029423788067649
 CapsuleCollider:
   m_ObjectHideFlags: 0
