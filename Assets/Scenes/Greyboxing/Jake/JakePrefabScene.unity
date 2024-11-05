@@ -3125,10 +3125,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3057900805870474986, guid: 09ee59ca75f623543b8068ab47cd4147, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0d2499c781297754cb6cfb620d32b6cc, type: 2}
     - target: {fileID: 3562106395885434687, guid: 09ee59ca75f623543b8068ab47cd4147, type: 3}
       propertyPath: m_Name
       value: Pillar
@@ -3780,7 +3776,7 @@ PrefabInstance:
     - target: {fileID: 4226887806408126454, guid: 465fbd0456b983c45827b7903d48ef91, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4895811545b615440abbd2cc4d19e82f, type: 2}
+      objectReference: {fileID: 2100000, guid: 0d2499c781297754cb6cfb620d32b6cc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 465fbd0456b983c45827b7903d48ef91, type: 3}
 --- !u!1001 &5046753606522675434
@@ -3793,7 +3789,7 @@ PrefabInstance:
     - target: {fileID: 5445120737624392982, guid: d8bbbc38d295a5e4db27a89b18a102c0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4895811545b615440abbd2cc4d19e82f, type: 2}
+      objectReference: {fileID: 2100000, guid: 0d2499c781297754cb6cfb620d32b6cc, type: 2}
     - target: {fileID: 5805148742274819267, guid: d8bbbc38d295a5e4db27a89b18a102c0, type: 3}
       propertyPath: m_Name
       value: ColapsedPillar
@@ -4705,6 +4701,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d8ec790018ad8694db2c321348d90eb5, type: 2}
+    - target: {fileID: 4126553094934097701, guid: 6e2d996603c781349afe80520ca1a209, type: 3}
+      propertyPath: slipperyness
+      value: 0.627
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e2d996603c781349afe80520ca1a209, type: 3}
 --- !u!1001 &9059363595291374814
