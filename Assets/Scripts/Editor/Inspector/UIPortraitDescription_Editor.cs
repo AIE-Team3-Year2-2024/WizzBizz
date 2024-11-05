@@ -39,5 +39,7 @@ public class UIPortraitDescription_Editor : Editor
         }
 
         serializedObject.ApplyModifiedProperties();
+        EditorUtility.SetDirty(target);
+
     }
 }
