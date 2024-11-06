@@ -44,8 +44,6 @@ public class WinScreen : Menu
     // Start is called before the first frame update
     public void OnEnable()
     {
-        TeamData[] tds = GameManager.Instance.GetSortedTeamData();
-
         List<PlayerData> _gameWonData = GameManager.Instance.GetSortedPlayerData();
 
         
