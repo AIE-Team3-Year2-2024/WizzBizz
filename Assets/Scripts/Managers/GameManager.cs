@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
 
     private List<PlayerData> _playerData = new List<PlayerData>();
 
-    private List<TeamData> teamData = new List<TeamData>();
+    private TeamData[] _teamData = new TeamData[2];
 
     // Singleton instantiation
     private void Awake()
@@ -157,6 +157,16 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        for (int i = 0; i < _teamData.Length; i++)
+        {
+            TeamData current = new TeamData();
+
+            current.teamID = i;
+            current.score = 0;
+
+            _teamData[i] = current;
+        }
     }
 
     /// <summary>
@@ -389,6 +399,8 @@ public class GameManager : MonoBehaviour
         } 
         else
         {
+            _alivePlayers.Remove(player);
+            Destroy(player.gameObject);
             _roundTimer = _roundTime;
             // Handle win
             StartCoroutine(TeamWin());
@@ -397,9 +409,10 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator TeamWin()
     {
+        
         foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
         {
-            teamData[p.Key._teamID].score++;
+            _teamData[p.Key._teamID].score++;
             _currentRound++;
 
             CharacterBase[] player = new CharacterBase[] { p.Key };
@@ -412,17 +425,15 @@ public class GameManager : MonoBehaviour
                 _scoreBoard.SetActive(true);
                 _scoreBoardWinnerText.text = "The winner of this round is the " + p.Key._teamID + " team";
 
-                int pos = 1;
-                foreach (TeamData td in teamData)
+                foreach (TeamData td in _teamData)
                 {
-                    Instantiate(_scoreText, _scoreParent.transform).text = "Team " + p.Key._teamID + " Score: " + teamData[p.Key._teamID].score;
-                    pos++;
+                    Instantiate(_scoreText, _scoreParent.transform).text = "Team " + td.teamID + " Score: " + td.score;
                 }
                 yield return new WaitForSecondsRealtime(_scoreBoardWaitTime);
             }
 
-            GoToNextTeamRound();
-            yield break;
+            GoToNextTeamRound(p.Key._teamID);
+            break;
         }
         
     }
@@ -478,22 +489,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GoToNextTeamRound()
+    public void GoToNextTeamRound(int winningTeamID)
     {
-        foreach (TeamData team in teamData)
+        //if round over
+        if (_teamData[winningTeamID].score < _scoreToWin)
+            StartGame();
+        else // if game over
         {
-            //if round over
-            if (team.score < _scoreToWin)
-                StartGame();
-            else // if game over
-            {
-                _gameStarted = false;
-                arenaUICanvas.gameObject.SetActive(false);
-                //SceneManager.LoadScene(_endLevel);
-                MenuManager.Instance.FadeToScene(_endLevel);
-                Destroy(gameObject);
-            }
+            _gameStarted = false;
+            arenaUICanvas.gameObject.SetActive(false);
+            //SceneManager.LoadScene(_endLevel);
+            MenuManager.Instance.FadeToScene(_endLevel);
+            Destroy(gameObject);
         }
+        
     }
 
     public List<PlayerData> GetSortedPlayerData()
@@ -507,6 +516,15 @@ public class GameManager : MonoBehaviour
         });
 
         return sortedPlayerData;
+    }
+
+    public TeamData[] GetSortedTeamData()
+    {
+        TeamData[] sortedTeamData = _teamData;
+
+        Array.Sort(sortedTeamData, delegate (TeamData x, TeamData y) { return y.score.CompareTo(x.score); });
+
+        return sortedTeamData;
     }
 
     /// <summary>
@@ -644,14 +662,11 @@ public class GameManager : MonoBehaviour
             {
                 lastPlayer.teamMates.Add(character);
                 character.teamMates.Add(lastPlayer);
+
+                lastPlayer.SetTeamID(currentTeam);
+                character.SetTeamID(currentTeam);
+
                 lastPlayer = null;
-
-                TeamData td = new TeamData();
-
-                td.teamID = currentTeam;
-                td.score = 0;
-
-                teamData.Add(td);
 
                 currentTeam++;
             }

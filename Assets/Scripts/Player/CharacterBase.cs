@@ -873,7 +873,7 @@ public class CharacterBase : MonoBehaviour
     {
         input.DeactivateInput();
         _movementDirection = Vector3.zero;
-        if (!GameManager.Instance.teamMode)
+        if (GameManager.Instance.teamMode == false)
         {
             GameManager.Instance.PlayerDeath(this);
         }
