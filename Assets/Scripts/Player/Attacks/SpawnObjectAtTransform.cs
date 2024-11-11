@@ -32,11 +32,11 @@ public class SpawnObjectAtTransform : MonoBehaviour
         DamagePlayerOnCollision thisObjectDamage;
         if (thisObjectDamage = GetComponentInParent<DamagePlayerOnCollision>())
         {
-            player = thisObjectDamage.GetOwner();
+            player = thisObjectDamage.GetMainOwner();
         } 
         else if (thisObjectDamage = GetComponentInParent<DamagePlayerOnCollision>())
         {
-            player = thisObjectDamage.GetOwner();
+            player = thisObjectDamage.GetMainOwner();
         }
     }
 

@@ -20,10 +20,21 @@ public class PlayerData
     public int score;
 }
 
+[Serializable]
+public class TeamData
+{
+    public int score;
+    public int teamID;
+    public PlayerData[] playerData = new PlayerData[2];
+}
+
 public class GameManager : MonoBehaviour
 {
     // Static reference
     public static GameManager Instance { get; private set; }
+
+    [Tooltip("whether the game is in team mode")]
+    public bool teamMode;
 
     [HideInInspector]
     public bool afterControllerAdd;
@@ -136,6 +147,8 @@ public class GameManager : MonoBehaviour
 
     private List<PlayerData> _playerData = new List<PlayerData>();
 
+    private TeamData[] _teamData = new TeamData[2];
+
     // Singleton instantiation
     private void Awake()
     {
@@ -146,6 +159,16 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
+
+        for (int i = 0; i < _teamData.Length; i++)
+        {
+            TeamData current = new TeamData();
+
+            current.teamID = i;
+            current.score = 0;
+
+            _teamData[i] = current;
+        }
     }
 
     /// <summary>
@@ -280,6 +303,10 @@ public class GameManager : MonoBehaviour
                 {
                     _playerData.Remove(p);
                     _alivePlayers.Remove(player);
+                    foreach(CharacterBase teamMate in player.teamMates)
+                    {
+                        teamMate.teamMates.Remove(player);
+                    }
                     _connectedPlayerCount--;
                     return;
                 }
@@ -355,6 +382,64 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayerTeamModeDeath(CharacterBase player)
+    {
+        bool otherTeamMatesAlive = false;
+
+        foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
+        {
+            if(player.teamMates.Contains(p.Key))
+            {
+                otherTeamMatesAlive = true;
+            }
+        }
+
+        if(otherTeamMatesAlive)
+        {
+            _alivePlayers.Remove(player);
+            Destroy(player.gameObject);
+        } 
+        else
+        {
+            _alivePlayers.Remove(player);
+            Destroy(player.gameObject);
+            _roundTimer = _roundTime;
+            // Handle win
+            StartCoroutine(TeamWin());
+        }
+    }
+
+    public IEnumerator TeamWin()
+    {
+        
+        foreach (KeyValuePair<CharacterBase, PlayerData> p in _alivePlayers)
+        {
+            _teamData[p.Key._teamID].score++;
+            _currentRound++;
+
+            CharacterBase[] player = new CharacterBase[] { p.Key };
+
+            GameManager.Instance.StartSlowDown(player);
+
+            //activate the scoreboard and set the winner text and make the score objects for each winner and set the text for them
+            if (_scoreBoard != null)
+            {
+                _scoreBoard.SetActive(true);
+                _scoreBoardWinnerText.text = "The winner of this round is the " + (p.Key._teamID + 1) + " team";
+
+                foreach (TeamData td in _teamData)
+                {
+                    Instantiate(_scoreText, _scoreParent.transform).text = "Team " + (td.teamID + 1) + " Score: " + td.score;
+                }
+                yield return new WaitForSecondsRealtime(_scoreBoardWaitTime);
+            }
+
+            GoToNextTeamRound(p.Key._teamID);
+            break;
+        }
+        
+    }
+
     /// <summary>
     /// adds score to the first alive player and either loads the next round or the end level
     /// </summary>
@@ -406,6 +491,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GoToNextTeamRound(int winningTeamID)
+    {
+        //if round over
+        if (_teamData[winningTeamID].score < _scoreToWin)
+            StartGame();
+        else // if game over
+        {
+            _gameStarted = false;
+            arenaUICanvas.gameObject.SetActive(false);
+            //SceneManager.LoadScene(_endLevel);
+            MenuManager.Instance.FadeToScene(_endLevel);
+            Destroy(gameObject);
+        }
+        
+    }
+
     public List<PlayerData> GetSortedPlayerData()
     {
         List<PlayerData> sortedPlayerData = _playerData;
@@ -417,6 +518,15 @@ public class GameManager : MonoBehaviour
         });
 
         return sortedPlayerData;
+    }
+
+    public TeamData[] GetSortedTeamData()
+    {
+        TeamData[] sortedTeamData = _teamData;
+
+        Array.Sort(sortedTeamData, delegate (TeamData x, TeamData y) { return y.score.CompareTo(x.score); });
+
+        return sortedTeamData;
     }
 
     /// <summary>
@@ -523,6 +633,10 @@ public class GameManager : MonoBehaviour
 
         CinemachineTargetGroup.Target[] targs = new CinemachineTargetGroup.Target[_playerData.Count];
 
+        CharacterBase lastPlayer = null;
+
+        int currentTeam = 0;
+
         for (int i = 0; i < _playerData.Count; i++)
         {
             //here we would check a player data list at the same position to find this players character
@@ -540,6 +654,27 @@ public class GameManager : MonoBehaviour
             targs[i].target = newPlayer.transform;
             targs[i].radius = _playerCameraRadius;
             targs[i].weight = _playerCameraWeight;
+
+            //team mode additions
+            if(lastPlayer == null)
+            {
+                lastPlayer = character;
+            }
+            else if(teamMode)
+            {
+                lastPlayer.teamMates.Add(character);
+                character.teamMates.Add(lastPlayer);
+
+                lastPlayer.SetTeamID(currentTeam);
+                character.SetTeamID(currentTeam);
+
+                _teamData[currentTeam].playerData[0] = _alivePlayers[lastPlayer];
+                _teamData[currentTeam].playerData[1] = _alivePlayers[character];
+
+                lastPlayer = null;
+
+                currentTeam++;
+            }
 
         }
 
