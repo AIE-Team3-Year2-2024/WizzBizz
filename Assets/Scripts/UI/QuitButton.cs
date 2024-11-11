@@ -13,6 +13,9 @@ public class QuitButton : MonoBehaviour
     /// </summary>
     public void LoadScene()
     {
-        SceneManager.LoadScene(_level);
+        MenuManager.Instance.FadeToScene(_level);
+        MenuManager.Instance.InitializeManager();
+        if (GameManager.Instance.arenaUICanvas != null)
+            GameManager.Instance.arenaUICanvas.gameObject.SetActive(false);
     }
 }

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PauseScreen : MonoBehaviour
+public class PauseScreen : Menu
 {
     [SerializeField, Tooltip("this will be the defualt button to hover over")]
     private GameObject _firstSelected;
 
-    public void Start()
+    public override void Start()
     {
+        base.Start();
         EventSystem.current.SetSelectedGameObject(_firstSelected);
     }
 }

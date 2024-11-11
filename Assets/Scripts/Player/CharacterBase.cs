@@ -102,6 +102,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float _pointerAimerRange;
 
+    [Tooltip("this will be the height of the pointer aimer when the aim stick is not aiming")]
+    [SerializeField]
+    private float _defualtPointerAimerHeight;
+
     [HideInInspector]
     public float currentAimMagnitude;
 
@@ -150,6 +154,16 @@ public class CharacterBase : MonoBehaviour
 
     [SerializeField, Tooltip("the pause screen object to create on pause")]
     private GameObject _pauseScreen;
+
+    [Tooltip("the active pause screen object is stored here so it can be destroyed")]
+    private GameObject _currentPauseScreen;
+
+    [Tooltip("other players on this players team")]
+    [HideInInspector]
+    public List<CharacterBase> teamMates;
+
+    [HideInInspector]
+    public int _teamID;
 
     [Header("Effects")]
 
@@ -285,12 +299,16 @@ public class CharacterBase : MonoBehaviour
     void FixedUpdate()
     {
         _acceleration = _speed * _deceleration;
+        _movementDirection.y = 0.0f;
         if (_movementDirection.magnitude > 0.0f)
-            rb.AddForce(_movementDirection * _acceleration, ForceMode.VelocityChange);
+            rb.AddForce(_movementDirection.normalized * _acceleration, ForceMode.VelocityChange);
         //_velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
 
         //if (rb.velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
-            rb.velocity *= (1.0f - _deceleration);
+        Vector3 newVelocity = rb.velocity;
+        newVelocity *= (1.0f - _deceleration);
+        newVelocity.y = rb.velocity.y;
+        rb.velocity = newVelocity;
         //_velocity *= (1.0f - _deceleration); // Invert the value so it's more intuitive in the inspector, so 0 is no deceleration instead of 1.
 
         //rb.velocity *= (_speed / (_speed + _acceleration)) * _deceleration;
@@ -359,6 +377,11 @@ public class CharacterBase : MonoBehaviour
         _speed = newSpeed;
     }
 
+    public void SetTeamID(int inputTeamID)
+    {
+        _teamID = inputTeamID;
+    }
+
     /// <summary>
     /// this function should be called by all charcters and will change the direction that this player faces
     /// </summary>
@@ -379,7 +402,7 @@ public class CharacterBase : MonoBehaviour
 
         currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
 
-        _pointerAimer.localScale = new Vector3(_pointerAimer.localScale.x, 1 + (_pointerAimerRange * currentAimMagnitude), _pointerAimer.localScale.z);
+        _pointerAimer.sizeDelta = new Vector2(_pointerAimer.sizeDelta.x, _defualtPointerAimerHeight + ((_pointerAimerRange - _defualtPointerAimerHeight) * currentAimMagnitude));
     }
 
     /// <summary>
@@ -403,11 +426,14 @@ public class CharacterBase : MonoBehaviour
         Vector3 oldMoveDir = _movementDirection;
         canMove = false;
         _speed = _dashSpeed;
+        canDash = false;
         _movementDirection = _movementDirection.normalized;
+        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
         yield return new WaitForSeconds(_dashTime);
         canMove = true;
         _speed = originalSpeed;
         _movementDirection = Vector3.zero;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         StartCoroutine(WaitToDash());
     }
 
@@ -474,6 +500,14 @@ public class CharacterBase : MonoBehaviour
             healthBar.value = _health;
         }
 
+        //makes this player drop the orb if they have it
+        if (hasOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
+
         if (_health <= 0)
         {
             Death();
@@ -493,6 +527,14 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+
+        //makes this player drop the orb if they have it
+        if (hasOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
 
         if (healthBar)
         {
@@ -626,6 +668,165 @@ public class CharacterBase : MonoBehaviour
     }
 
     /// <summary>
+    /// handles taking damage and call death and turns on status affect components 
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="effect"></param>
+    /// <param name="time"></param>
+    public void TakeDamage(float damage, StatusEffects effect, float time, float effectAmount)
+    {
+        if (_health <= 0 || _invincible)
+        {
+            return;
+        }
+        _health -= damage;
+
+        //makes this player drop the orb if they have it
+        if (hasOrb)
+        {
+            hasOrb = false;
+            Destroy(heldOrb);
+            heldOrb = null;
+        }
+
+        if (healthBar)
+        {
+            healthBar.value = _health;
+        }
+
+        if (_health <= 0)
+        {
+            Death();
+        }
+
+        switch (effect)
+        {
+            case (StatusEffects.NONE):
+                {
+                    break;
+                }
+
+            case (StatusEffects.CONFUSION):
+                {
+
+                    _confusion.enabled = true;
+                    _confusion.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.DISABLED):
+                {
+                    if (_silence.enabled)
+                    {
+                        _silence.enabled = false;
+                    }
+                    _disabled.enabled = true;
+                    _disabled.lifeTime = time;
+                    break;
+                }
+
+            case (StatusEffects.SILENCE):
+                {
+                    if (_disabled.enabled)
+                    {
+                        _disabled.enabled = false;
+                    }
+                    _silence.enabled = true;
+                    _silence.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.CRIPPLED):
+                {
+
+                    _crippled.enabled = true;
+                    _crippled.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.STUN):
+                {
+
+                    _stun.enabled = true;
+                    _stun.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.WEAKNESS):
+                {
+                    _weakness.damageMinus = effectAmount;
+                    _weakness.enabled = true;
+                    _weakness.lifeTime = time;
+                    break;
+                }
+
+            case (StatusEffects.VITALITY):
+                {
+                    _vitality.damagePlus = effectAmount;
+                    _vitality.enabled = true;
+                    _vitality.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.SLOW):
+                {
+                    _slow.speedMinus = effectAmount;
+                    _slow.enabled = true;
+                    _slow.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.HASTE):
+                {
+                    _haste.speedAdd = effectAmount;
+                    _haste.enabled = true;
+                    _haste.lifeTime = time;
+                    break;
+                }
+
+            case (StatusEffects.BURNING):
+                {
+                    _burn.damage = effectAmount;
+                    _burn.enabled = true;
+                    _burn.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.POISON):
+                {
+                    _poison.damage = effectAmount;
+                    _poison.enabled = true;
+                    _poison.lifeTime = time;
+
+                    break;
+                }
+
+            case (StatusEffects.CURE):
+                {
+                    _cure.health = effectAmount;
+                    _cure.enabled = true;
+                    _cure.lifeTime = time;
+                    break;
+                }
+
+            case (StatusEffects.DEMENTIA):
+                {
+                    _dementia.enabled = true;
+                    _dementia.lifeTime = time;
+                    break;
+                }
+
+        }
+    }
+
+    /// <summary>
     /// makes the player unable to take damage for time
     /// </summary>
     /// <param name="time"></param>
@@ -672,7 +873,14 @@ public class CharacterBase : MonoBehaviour
     {
         input.DeactivateInput();
         _movementDirection = Vector3.zero;
-        GameManager.Instance.PlayerDeath(this);
+        if (GameManager.Instance.teamMode == false)
+        {
+            GameManager.Instance.PlayerDeath(this);
+        }
+        else
+        {
+            GameManager.Instance.PlayerTeamModeDeath(this);
+        }
     }
 
     /// <summary>
@@ -736,7 +944,7 @@ public class CharacterBase : MonoBehaviour
         {
             GameManager.Instance.Pause(this);
             input.SwitchCurrentActionMap("UI");
-            Instantiate(_pauseScreen);
+            _currentPauseScreen = Instantiate(_pauseScreen);
         }
     }
 
@@ -750,6 +958,11 @@ public class CharacterBase : MonoBehaviour
         {
             GameManager.Instance.UnPause(this);
             input.SwitchCurrentActionMap("Player");
+            if (_currentPauseScreen != null)
+            {
+                Destroy(_currentPauseScreen);
+                _currentPauseScreen = null;
+            }
         }
     }
 
@@ -760,6 +973,11 @@ public class CharacterBase : MonoBehaviour
     {
         GameManager.Instance.UnPause(this);
         input.SwitchCurrentActionMap("Player");
+        if (_currentPauseScreen != null)
+        {
+            Destroy(_currentPauseScreen);
+            _currentPauseScreen = null;
+        }
     }
 
     /// <summary>

@@ -71,7 +71,7 @@ public class PortalAttack : MonoBehaviour
     {
         if (!_checker._colliding)
         {
-
+            //if there is no active portal made by this component make the first one and set it up
             if(_firstPortal == null)
             {
                 GameObject newPortal = Instantiate(_portalPrefab, _lobAimer.transform.position, _player.transform.rotation);
@@ -81,6 +81,7 @@ public class PortalAttack : MonoBehaviour
 
                 _firstPortal.frogID = frogID;
             } 
+            //if the first portal does exist make the second set it up and connect the portals
             else if (_secondPortal == null)
             {
                 GameObject newPortal = Instantiate(_portalPrefab, _lobAimer.transform.position, _player.transform.rotation);

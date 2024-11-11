@@ -19,6 +19,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [SerializeField]
     private float effectTime;
 
+    [Tooltip("what the effect amount will be set to for any status that this will apply (e.g. damage minus on weakness)")]
+    [SerializeField]
+    private float effectAmount;
+
     [Tooltip("whether the object will destroy itself on any collision")]
     [SerializeField]
     private bool destroyOnCollision;
@@ -41,6 +45,13 @@ public class DamagePlayerOnCollision : MonoBehaviour
     [SerializeField]
     private DamagePlayerOnCollision[] damageChildren;
 
+    [HideInInspector]
+    public List<CharacterBase> ownerPlayers = new List<CharacterBase>();
+
+    [Tooltip("damage objects to make when this object is destroyed that will have the same owner player")]
+    [SerializeField]
+    private DamagePlayerOnCollision[] damageChildrenOnDestroy;
+
     private CharacterBase ownerPlayer;
 
     private AttackKnockback _knockbackComponent;
@@ -56,15 +67,18 @@ public class DamagePlayerOnCollision : MonoBehaviour
     /// <param name="collision"></param>
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
+        if (ownerPlayers.Count != 0)
         {
-            return;
+            if (ownerPlayers.Contains(collision.gameObject.GetComponent<CharacterBase>()))
+            {
+                return;
+            }
         }
 
         if (collision.gameObject.GetComponent<CharacterBase>())
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
-            player.TakeDamage(damage, damageEffect, effectTime);
+            player.TakeDamage(damage, damageEffect, effectTime, effectAmount);
             DoOnHit.Invoke();
 
             if (_knockbackComponent)
@@ -90,9 +104,12 @@ public class DamagePlayerOnCollision : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
+        if (ownerPlayers.Count != 0)
         {
-            return;
+            if (ownerPlayers.Contains(collision.gameObject.GetComponent<CharacterBase>()))
+            {
+                return;
+            }
         }
 
         if (collision.gameObject.GetComponent<CharacterBase>())
@@ -101,7 +118,7 @@ public class DamagePlayerOnCollision : MonoBehaviour
             Debug.Log("hit player with trigger");
             if (!collision.isTrigger)
             {
-                player.TakeDamage(damage, damageEffect, effectTime);
+                player.TakeDamage(damage, damageEffect, effectTime, effectAmount);
             }
             DoOnHit.Invoke();
             if (destroyOnPlayerCollision)
@@ -122,15 +139,18 @@ public class DamagePlayerOnCollision : MonoBehaviour
     /// <param name="collision"></param>
     private void OnTriggerStay(Collider collision)
     {
-        if (collision.gameObject.GetComponent<CharacterBase>() == ownerPlayer)
+        if (ownerPlayers.Count != 0)
         {
-            return;
+            if (ownerPlayers.Contains(collision.gameObject.GetComponent<CharacterBase>()))
+            {
+                return;
+            }
         }
 
         if (collision.gameObject.GetComponent<CharacterBase>())
         {
             CharacterBase player = collision.gameObject.GetComponent<CharacterBase>();
-            player.TakeDamage(damage, damageEffect, effectTime);
+            player.TakeDamage(damage, damageEffect, effectTime, effectAmount);
             DoOnHit.Invoke();
             if (destroyOnPlayerCollision)
             {
@@ -150,19 +170,36 @@ public class DamagePlayerOnCollision : MonoBehaviour
     /// <param name="inputPlayer"></param>
     public void SetOwner(CharacterBase inputPlayer)
     {
-        ownerPlayer = inputPlayer;
+        ownerPlayers.Add(inputPlayer);
+        foreach (CharacterBase currentTeammate in inputPlayer.teamMates)
+        {
+            ownerPlayers.Add(currentTeammate);
+        }
 
         foreach (DamagePlayerOnCollision child in damageChildren)
         {
-            child.ownerPlayer = inputPlayer;
+            child.ownerPlayers = ownerPlayers;
         }
 
 
         if (controlComponent)
         {
-            ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").performed += controlComponent.OnAim;
-            ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").canceled += controlComponent.OnAim;
+            inputPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").performed += controlComponent.OnAim;
+            inputPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").canceled += controlComponent.OnAim;
         }
+    }
+
+    /// <summary>
+    /// returns the current owner of this damge component
+    /// </summary>
+    public List<CharacterBase> GetOwners()
+    {
+        return ownerPlayers;
+    }
+
+    public CharacterBase GetMainOwner()
+    {
+        return ownerPlayers[0];
     }
 
 
@@ -170,9 +207,20 @@ public class DamagePlayerOnCollision : MonoBehaviour
     {
         if (controlComponent)
         {
-            ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").performed -= controlComponent.OnAim;
-            ownerPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").canceled -= controlComponent.OnAim;
+            ownerPlayers[0].GetComponent<PlayerInput>().actions.FindAction("Aim").performed -= controlComponent.OnAim;
+            ownerPlayers[0].GetComponent<PlayerInput>().actions.FindAction("Aim").canceled -= controlComponent.OnAim;
         }
+
+        foreach (DamagePlayerOnCollision damage in damageChildrenOnDestroy)
+        {
+            DamagePlayerOnCollision current = Instantiate(damage, transform.position, transform.rotation);
+            current.SetOwner(ownerPlayer);
+
+        }
+
         DoOnDestroy.Invoke();
     }
+
+   
+
 }

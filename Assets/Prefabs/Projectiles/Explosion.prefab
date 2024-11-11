@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 52dcc7aea90cea94d8aa5cbb434d3551, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,10 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69365ce548e6693498c764936b22ee3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 12
-  damageEffect: 4
-  effectTime: 2
+  damage: 18
+  damageEffect: 0
+  effectTime: 0
   destroyOnCollision: 1
+  destroyOnPlayerCollision: 0
   DoOnDestroy:
     m_PersistentCalls:
       m_Calls: []

@@ -8,8 +8,8 @@ public class Haste : MonoBehaviour
     public float lifeTime = 0;
 
     [Tooltip("how much will added to the players speed")]
-    [SerializeField]
-    private float _speedAdd;
+    [HideInInspector]
+    public float speedAdd;
 
     private CharacterBase _player;
 
@@ -34,7 +34,7 @@ public class Haste : MonoBehaviour
         {
             _player = GetComponent<CharacterBase>();
         }
-        _player.AddSpeed(_speedAdd);
+        _player.AddSpeed(speedAdd);
     }
 
     /// <summary>
@@ -42,6 +42,6 @@ public class Haste : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        _player.AddSpeed(-_speedAdd);
+        _player.AddSpeed(-speedAdd);
     }
 }

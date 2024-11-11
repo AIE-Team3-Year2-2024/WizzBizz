@@ -8,8 +8,8 @@ public class Slow : MonoBehaviour
     public float lifeTime = 0;
 
     [Tooltip("how much will be taken off of the players speed")]
-    [SerializeField]
-    private float _speedMinus;
+    [HideInInspector]
+    public float speedMinus;
 
     private CharacterBase _player;
 
@@ -34,7 +34,7 @@ public class Slow : MonoBehaviour
         {
             _player = GetComponent<CharacterBase>();
         }
-        _player.AddSpeed(-_speedMinus);
+        _player.AddSpeed(-speedMinus);
     }
 
     /// <summary>
@@ -42,6 +42,6 @@ public class Slow : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        _player.AddSpeed(_speedMinus);
+        _player.AddSpeed(speedMinus);
     }
 }
