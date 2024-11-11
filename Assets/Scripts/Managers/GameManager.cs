@@ -20,10 +20,12 @@ public class PlayerData
     public int score;
 }
 
+[Serializable]
 public class TeamData
 {
     public int score;
     public int teamID;
+    public PlayerData[] playerData = new PlayerData[2];
 }
 
 public class GameManager : MonoBehaviour
@@ -665,6 +667,9 @@ public class GameManager : MonoBehaviour
 
                 lastPlayer.SetTeamID(currentTeam);
                 character.SetTeamID(currentTeam);
+
+                _teamData[currentTeam].playerData[0] = _alivePlayers[lastPlayer];
+                _teamData[currentTeam].playerData[1] = _alivePlayers[character];
 
                 lastPlayer = null;
 
