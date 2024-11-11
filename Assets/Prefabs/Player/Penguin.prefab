@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 1497816845397379619}
   - component: {fileID: 3424854267544527191}
   - component: {fileID: 8837453654854279791}
+  - component: {fileID: 2427182484972189709}
   m_Layer: 6
   m_Name: Penguin
   m_TagString: Player
@@ -613,6 +614,8 @@ MonoBehaviour:
   playerNumber: {fileID: 8326083534325353139}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   _pauseScreen: {fileID: 2512867238049467500, guid: 4d01d40f403474947962a052c0f46ca9, type: 3}
+  teamMates: []
+  _teamID: 0
   _weakness: {fileID: 3722349283893674540}
   _crippled: {fileID: 2187619237441558528}
   _stun: {fileID: 8237443836018001246}
@@ -672,6 +675,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3424854267544527191}
         m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
         m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2427182484972189709}
+        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+        m_MethodName: InstantiateSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1047,6 +1062,20 @@ MonoBehaviour:
   - {fileID: 8016190983616367775, guid: 7ade5392ee143824a8153a5cbb24feb2, type: 3}
   lifetime: 3
   spawnOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &2427182484972189709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clip: {fileID: 8300000, guid: 96e15eaecc098614c8cc982f0d2279db, type: 3}
 --- !u!1 &683194986331357104
 GameObject:
   m_ObjectHideFlags: 0
