@@ -11,4 +11,7 @@ public class SceneInfo : MonoBehaviour
 
     [Tooltip("Overrides which scene the menu should go back to on the back button. (Optional)")]
     public string backSceneOverride; // Used by the menu manager.
+
+    [Tooltip("the audio sourse wich is playing the song or theme for this scene")]
+    public AudioSource sceneAudioSource;
 }
