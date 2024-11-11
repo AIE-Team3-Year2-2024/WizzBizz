@@ -220,8 +220,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 0.8
+  m_Radius: 0.5
+  m_Height: 0.1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &9221482579838518048
@@ -279,6 +279,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  damageChildrenOnDestroy: []
 --- !u!114 &6879255582340932219
 MonoBehaviour:
   m_ObjectHideFlags: 0
