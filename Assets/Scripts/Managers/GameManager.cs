@@ -425,11 +425,11 @@ public class GameManager : MonoBehaviour
             if (_scoreBoard != null)
             {
                 _scoreBoard.SetActive(true);
-                _scoreBoardWinnerText.text = "The winner of this round is the " + p.Key._teamID + " team";
+                _scoreBoardWinnerText.text = "The winner of this round is the " + (p.Key._teamID + 1) + " team";
 
                 foreach (TeamData td in _teamData)
                 {
-                    Instantiate(_scoreText, _scoreParent.transform).text = "Team " + td.teamID + " Score: " + td.score;
+                    Instantiate(_scoreText, _scoreParent.transform).text = "Team " + (td.teamID + 1) + " Score: " + td.score;
                 }
                 yield return new WaitForSecondsRealtime(_scoreBoardWaitTime);
             }
