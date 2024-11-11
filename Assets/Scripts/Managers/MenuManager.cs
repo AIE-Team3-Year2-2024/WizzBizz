@@ -375,6 +375,8 @@ public class MenuManager : MonoBehaviour
                 StartCoroutine(LoadSpecifiedScene(sceneName, true)); // Load new scene.
             }, // Complete callback. 
             false);
+
+        Tween.Volume(_sceneInfo.sceneAudioSource, 0, fadeDuration, 0, transitionCurve, Tween.LoopType.None, () => { });
     }
 
     private void TransitionHorizontalToTarget(Menu currentMenu, Menu nextMenu, int direction)
