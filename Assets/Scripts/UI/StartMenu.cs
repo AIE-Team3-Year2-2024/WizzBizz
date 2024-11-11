@@ -14,8 +14,6 @@ using UnityEditor;
 public class StartMenu : Menu
 {
     [Header("Start Menu Stuff - ")]
-    [Tooltip("What scene should be loaded when the start button is pressed.")]
-    public string startGameScene = "Character";
 
     public CanvasGroup menuGroup = null;
     public CanvasGroup exitPromptGroup = null;
@@ -32,14 +30,7 @@ public class StartMenu : Menu
         exitPromptGroup.interactable = false;
     }
 
-    // Handle start button press.
-    public void StartGameButton()
-    {
-        if (_menuManager)
-            _menuManager.FadeToScene(startGameScene);
-        else
-            Debug.LogError("Menu couldn't find the Menu Manager. Is it in the scene?");
-    }
+    
 
     // Handle exit button press.
     public void ExitGameButton(bool confirm = false)

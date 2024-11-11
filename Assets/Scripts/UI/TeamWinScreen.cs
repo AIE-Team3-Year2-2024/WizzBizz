@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class WinScreen : Menu
+public class TeamWinScreen : Menu
 {
-    [Header("Win Screen stuff - ")]
     [Tooltip("the array of images where the winners will be displayed MUST BE IN ORDER FROM WINNER TO FOURTH PLACE"), SerializeField]
     private RawImage[] _winnerImages;
 
@@ -41,49 +40,45 @@ public class WinScreen : Menu
 
     private bool _shouldReturn = false;
 
-    // Start is called before the first frame update
-    public void OnEnable()
+    private void OnEnable()
     {
-        List<PlayerData> _gameWonData = GameManager.Instance.GetSortedPlayerData();
+        TeamData[] teamWonData = GameManager.Instance.GetSortedTeamData();
 
-        
         int count = 0;
-        for(int i = 0; i < _gameWonData.Count; i++)
+
+        for(int i = 0; i < teamWonData.Length; i++)
         {
-            if (_winnerImages[i] == null)
+            if (_winnerImages[count] == null)
             {
-                i += 999;
                 break;
             }
-            count++;
-            switch(_gameWonData[i].characterSelect.name)
+            for(int j = 0; j < teamWonData[i].playerData.Length; j++)
             {
-                case ("Raccoon"):
-                    {
-                        _winnerImages[i].texture = _raccoonRenderTexture;
-                        break;
-                    }
-                case ("Penguin"):
-                    {
-                        _winnerImages[i].texture = _penguinRenderTexture;
-                        break;
-                    }
-                case ("Lizard"):
-                    {
-                        _winnerImages[i].texture = _lizardRenderTexture;
-                        break;
-                    }
-                case ("Frog"):
-                    {
-                        _winnerImages[i].texture = _frogRenderTexture;
-                        break;
-                    }
+                switch (teamWonData[i].playerData[j].characterSelect.name)
+                {
+                    case ("Raccoon"):
+                        {
+                            _winnerImages[count].texture = _raccoonRenderTexture;
+                            break;
+                        }
+                    case ("Penguin"):
+                        {
+                            _winnerImages[count].texture = _penguinRenderTexture;
+                            break;
+                        }
+                    case ("Lizard"):
+                        {
+                            _winnerImages[count].texture = _lizardRenderTexture;
+                            break;
+                        }
+                    case ("Frog"):
+                        {
+                            _winnerImages[count].texture = _frogRenderTexture;
+                            break;
+                        }
+                }
+                count++;
             }
-        }
-
-        for (int i = count; i < 4; i++)
-        {
-            Destroy(_winnerImages[i].gameObject);
         }
 
         _buttonSlider.maxValue = _buttonHoldTime;
@@ -94,8 +89,8 @@ public class WinScreen : Menu
     {
         base.OnLoaded();
 
-        if(_menuManager) _menuManager._primaryController.currentActionMap.FindAction("Submit").started += ControlButtonHold;
-        if(_menuManager) _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled += ControlButtonHold;
+        if (_menuManager) _menuManager._primaryController.currentActionMap.FindAction("Submit").started += ControlButtonHold;
+        if (_menuManager) _menuManager._primaryController.currentActionMap.FindAction("Submit").canceled += ControlButtonHold;
 
         StartCoroutine(LoadScene());
     }
@@ -118,12 +113,12 @@ public class WinScreen : Menu
     // Update is called once per frame
     void Update()
     {
-        if(_buttonSlider.gameObject.activeInHierarchy && _shouldReturn)
+        if (_buttonSlider.gameObject.activeInHierarchy && _shouldReturn)
         {
             _currentButtonHoldTime += Time.unscaledDeltaTime;
             _buttonSlider.value = _currentButtonHoldTime;
 
-            if(_currentButtonHoldTime >= _buttonHoldTime)
+            if (_currentButtonHoldTime >= _buttonHoldTime)
             {
                 _menuManager.FadeToScene(_afterWinScene);
                 _menuManager._primaryController.currentActionMap.FindAction("Submit").started -= ControlButtonHold;

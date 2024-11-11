@@ -739,8 +739,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 347443268}
     - target: {fileID: 4376679972535037485, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
+      propertyPath: teamMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376679972535037485, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
       propertyPath: _endLevel
-      value: Win
+      value: CamTeamWin
       objectReference: {fileID: 0}
     - target: {fileID: 4376679972535037485, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
       propertyPath: _scoreToWin
@@ -748,7 +752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4376679972535037485, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
       propertyPath: _levels.Array.data[0]
-      value: MainGameStage
+      value: CamMainGameStage
       objectReference: {fileID: 0}
     - target: {fileID: 4376679972535037485, guid: c3b0ef13d6cf6764d8c882d1c709c26f, type: 3}
       propertyPath: _levels.Array.data[1]
@@ -1228,6 +1232,10 @@ PrefabInstance:
       propertyPath: countDown
       value: 
       objectReference: {fileID: 158994333}
+    - target: {fileID: 2523588329873881728, guid: ebfe09625110a2743befe5bdedcb4dc0, type: 3}
+      propertyPath: _minmumPlayerCount
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3744403317466172681, guid: ebfe09625110a2743befe5bdedcb4dc0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -158,6 +158,13 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("the active pause screen object is stored here so it can be destroyed")]
     private GameObject _currentPauseScreen;
 
+    [Tooltip("other players on this players team")]
+    [HideInInspector]
+    public List<CharacterBase> teamMates;
+
+    [HideInInspector]
+    public int _teamID;
+
     [Header("Effects")]
 
     [Tooltip("weakness")]
@@ -368,6 +375,11 @@ public class CharacterBase : MonoBehaviour
     public void ChangeCurrentSpeed(float newSpeed)
     {
         _speed = newSpeed;
+    }
+
+    public void SetTeamID(int inputTeamID)
+    {
+        _teamID = inputTeamID;
     }
 
     /// <summary>
@@ -861,7 +873,14 @@ public class CharacterBase : MonoBehaviour
     {
         input.DeactivateInput();
         _movementDirection = Vector3.zero;
-        GameManager.Instance.PlayerDeath(this);
+        if (GameManager.Instance.teamMode == false)
+        {
+            GameManager.Instance.PlayerDeath(this);
+        }
+        else
+        {
+            GameManager.Instance.PlayerTeamModeDeath(this);
+        }
     }
 
     /// <summary>
