@@ -45,6 +45,8 @@ public class WinScreen : Menu
     public void OnEnable()
     {
         List<PlayerData> _gameWonData = GameManager.Instance.GetSortedPlayerData();
+
+        
         int count = 0;
         for(int i = 0; i < _gameWonData.Count; i++)
         {

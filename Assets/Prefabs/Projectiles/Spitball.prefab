@@ -18,7 +18,6 @@ GameObject:
   - component: {fileID: 8114987668639932540}
   - component: {fileID: -8165500124068218547}
   - component: {fileID: 8643878340703666312}
-  - component: {fileID: 7521398346550654423}
   m_Layer: 13
   m_Name: Spitball
   m_TagString: Untagged
@@ -309,20 +308,3 @@ MonoBehaviour:
   damageChildren: []
   damageChildrenOnDestroy:
   - {fileID: -2775216548624882883, guid: c7140e668c6d6bf47936c17b2d1a3d0e, type: 3}
---- !u!114 &7521398346550654423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3192898056125740344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d197b5b7f7b01ab4bbf4da0c4f29dadc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 4
-  destroyOnCollision: 0
-  DoOnDestroy:
-    m_PersistentCalls:
-      m_Calls: []
