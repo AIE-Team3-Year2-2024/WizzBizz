@@ -73,6 +73,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: f17994f648902684098ffadcc1e9c8f4, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -820,7 +822,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4961317654015132169, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: _followSpeed
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4961317654015132169, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: _heightOffset
@@ -836,7 +838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 35
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -942,6 +944,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[34]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[35]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[36]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
 --- !u!4 &1197531444592757144 stripped
@@ -1018,7 +1028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4961317654015132169, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: _followSpeed
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4961317654015132169, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: _heightOffset
@@ -1034,7 +1044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 35
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1142,6 +1152,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
       propertyPath: m_Materials.Array.data[34]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[35]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862649015522980577, guid: 661e87637f14b124fbb8154d21e42185, type: 3}
+      propertyPath: m_Materials.Array.data[36]
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
