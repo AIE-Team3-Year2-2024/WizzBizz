@@ -10396,6 +10396,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2736939384435889472}
     m_Modifications:
+    - target: {fileID: 102439362630213330, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
+      propertyPath: endPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 102439362630213330, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
+      propertyPath: endPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 2774634553968748295}
     - target: {fileID: 507690757215815016, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -10451,6 +10459,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 507690757215815016, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
   m_PrefabInstance: {fileID: 2736939386232075525}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2634746314628541399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 102439362630213330, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
+  m_PrefabInstance: {fileID: 2736939386232075525}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed4b609f347b2d45be10a79714e1872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2736939386240798427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11140,6 +11159,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2736939384435889472}
     m_Modifications:
+    - target: {fileID: 102439362630213330, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
+      propertyPath: endPoints.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 102439362630213330, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
+      propertyPath: endPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 2634746314628541399}
     - target: {fileID: 507690757215815016, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -11195,3 +11222,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 507690757215815016, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
   m_PrefabInstance: {fileID: 2876264572136962517}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2774634553968748295 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 102439362630213330, guid: a2d72a863c5571d49926753f41d7a790, type: 3}
+  m_PrefabInstance: {fileID: 2876264572136962517}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed4b609f347b2d45be10a79714e1872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
