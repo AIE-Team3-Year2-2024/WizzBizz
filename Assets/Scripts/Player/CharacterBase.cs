@@ -155,6 +155,9 @@ public class CharacterBase : MonoBehaviour
     [SerializeField, Tooltip("the pause screen object to create on pause")]
     private GameObject _pauseScreen;
 
+    [SerializeField, Tooltip("the animator for this character")]
+    private Animator _animator;
+
     [Tooltip("the active pause screen object is stored here so it can be destroyed")]
     private GameObject _currentPauseScreen;
 
@@ -348,6 +351,8 @@ public class CharacterBase : MonoBehaviour
         {
             _movementDirection = -_movementDirection;//reverses the movement direction
         }
+
+        _animator.SetFloat("Speed", _movementDirection.magnitude);
     }
 
     /// <summary>
