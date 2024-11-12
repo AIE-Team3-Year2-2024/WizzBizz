@@ -21,6 +21,14 @@ public class MoveInArc : MonoBehaviour
     [SerializeField]
     private UnityEvent doOnDestroy;
 
+    [Tooltip("another lobbed object that this object will make when it is destroyed(if empty will not make any object on destroy)")]
+    [SerializeField]
+    private MoveInArc _arcObjectToMake;
+
+    [Tooltip("the distance from the player and this objects end position used to make the next move in arc object")]
+    [HideInInspector]
+    public float _lifeDistance;
+
     void Start()
     {
         startPos = transform.position;
@@ -52,6 +60,11 @@ public class MoveInArc : MonoBehaviour
 
     private void OnDestroy()
     {
+        if(_arcObjectToMake != null)
+        {
+            MoveInArc madeObject = Instantiate(_arcObjectToMake, transform.position, transform.rotation);
+            madeObject.SetEndPos(transform.position + (transform.forward * _lifeDistance));
+        }
         doOnDestroy.Invoke();
     }
 }
