@@ -162,6 +162,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy: []
 --- !u!96 &2912030163934912888
 TrailRenderer:
@@ -369,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ed61b81abb68c47a678156308b5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackAmount: 80
+  knockbackAmount: 20
   abTest: 0
 --- !u!1001 &5117641783079435328
 PrefabInstance:
