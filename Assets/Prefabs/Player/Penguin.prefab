@@ -525,18 +525,6 @@ MonoBehaviour:
     m_ActionName: Player/Parry
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 532612227137173808}
-        m_TargetAssemblyTypeName: CharacterBase, Assembly-CSharp
-        m_MethodName: OnDebug
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 50
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 3424854267544527191}
         m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
         m_MethodName: Vibrate
@@ -1076,6 +1064,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
   clip: {fileID: 8300000, guid: 96e15eaecc098614c8cc982f0d2279db, type: 3}
+  _maxPitch: 1
+  _minPitch: 1
 --- !u!1 &683194986331357104
 GameObject:
   m_ObjectHideFlags: 0
