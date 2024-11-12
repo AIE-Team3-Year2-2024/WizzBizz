@@ -542,6 +542,17 @@ MonoBehaviour:
   firstMenu: {fileID: 568372071}
   backSceneOverride: 
   sceneAudioSource: {fileID: 427616243}
+--- !u!114 &1509254275 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5027879212879038331, guid: 68ccdea6fac005f479f036c1a6fde26c, type: 3}
+  m_PrefabInstance: {fileID: 8896787544929330492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f121294d8e219c844a30bcaa0f48810d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1571446203
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1278,6 +1289,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2773830631360860307, guid: 9caea9d689bee84408c4cdd4fe7bddd4, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1509254275}
     - target: {fileID: 4795710211649608620, guid: 9caea9d689bee84408c4cdd4fe7bddd4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
