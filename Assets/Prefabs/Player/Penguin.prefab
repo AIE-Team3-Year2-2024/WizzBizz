@@ -247,7 +247,7 @@ Transform:
   - {fileID: 4626773549339273389}
   - {fileID: 6096765367254797104}
   - {fileID: 6114661827505666708}
-  - {fileID: 6004925734878891796}
+  - {fileID: 8681509224841975600}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -561,7 +561,7 @@ MonoBehaviour:
   playerNumber: {fileID: 8326083534325353139}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   _pauseScreen: {fileID: 2512867238049467500, guid: 4d01d40f403474947962a052c0f46ca9, type: 3}
-  _animator: {fileID: 411486692486354286}
+  _animator: {fileID: 0}
   teamMates: []
   _teamID: 0
   _weakness: {fileID: 3722349283893674540}
@@ -2940,7 +2940,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 100
---- !u!1001 &6115731469893871871
+--- !u!1001 &9218960632094060763
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3005,13 +3005,8 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 16dda6d29d5082d4a8adc10daadce832, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 272851a1dfcde994c91065f2cd86c903, type: 3}
---- !u!95 &411486692486354286 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 272851a1dfcde994c91065f2cd86c903, type: 3}
-  m_PrefabInstance: {fileID: 6115731469893871871}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6004925734878891796 stripped
+--- !u!4 &8681509224841975600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 272851a1dfcde994c91065f2cd86c903, type: 3}
-  m_PrefabInstance: {fileID: 6115731469893871871}
+  m_PrefabInstance: {fileID: 9218960632094060763}
   m_PrefabAsset: {fileID: 0}
