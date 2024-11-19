@@ -28,6 +28,10 @@ public class PortalAttack : MonoBehaviour
     [HideInInspector]
     public int frogID;
 
+    [Tooltip("the name of the trigger to be set when this attack is triggerd")]
+    [SerializeField]
+    private string animationTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,6 +100,10 @@ public class PortalAttack : MonoBehaviour
                 _secondPortal.endPoint = _firstPortal.transform;
             }
 
+            if (_player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+            {
+                _player.animator.SetTrigger(animationTrigger);
+            }
         }
     }
 

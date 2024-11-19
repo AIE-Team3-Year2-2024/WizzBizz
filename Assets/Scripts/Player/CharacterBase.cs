@@ -157,8 +157,8 @@ public class CharacterBase : MonoBehaviour
     [SerializeField, Tooltip("the pause screen object to create on pause")]
     private GameObject _pauseScreen;
 
-    [SerializeField, Tooltip("the animator for this character")]
-    private Animator _animator;
+    [Tooltip("the animator for this character")]
+    public Animator animator;
 
     [Tooltip("the active pause screen object is stored here so it can be destroyed")]
     private GameObject _currentPauseScreen;
@@ -323,7 +323,8 @@ public class CharacterBase : MonoBehaviour
         //rb.position += _velocity * Time.fixedDeltaTime; // Apply the velocity to the character position.
         //rb.velocity = _velocity;
 
-        float moveAimDiff = Vector3.Dot(transform.TransformDirection(_movementDirection), transform.TransformDirection(_aimDirection));
+        const float epsilon = 0.001f;
+        float moveAimDiff = Vector3.Dot(transform.TransformDirection(_movementDirection), transform.TransformDirection(_aimDirection + transform.forward * epsilon));
         _isMovingBackwards = (moveAimDiff < 0.0f);
     }
 
@@ -357,7 +358,7 @@ public class CharacterBase : MonoBehaviour
             _movementDirection = -_movementDirection;//reverses the movement direction
         }
 
-        _animator.SetFloat("Speed", _movementDirection.magnitude);
+        animator.SetFloat("Speed", _isMovingBackwards ? -_movementDirection.magnitude : _movementDirection.magnitude);
     }
 
     /// <summary>

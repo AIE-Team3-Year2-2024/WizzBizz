@@ -22,6 +22,10 @@ public class SpawnObjectAtTransform : MonoBehaviour
     [SerializeField]
     private Transform _spawn;
 
+    [Tooltip("the name of the trigger to be set when this attack is triggerd")]
+    [SerializeField]
+    private string animationTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +65,11 @@ public class SpawnObjectAtTransform : MonoBehaviour
         {
             Destroy(newProjectile, lifetime);
         }
+
+        if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+        {
+            player.animator.SetTrigger(animationTrigger);
+        }
     }
 
 
@@ -84,6 +93,11 @@ public class SpawnObjectAtTransform : MonoBehaviour
         if (lifetime != 0)
         {
             Destroy(newProjectile, lifetime);
+        }
+
+        if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+        {
+            player.animator.SetTrigger(animationTrigger);
         }
     }
 
@@ -115,6 +129,11 @@ public class SpawnObjectAtTransform : MonoBehaviour
         {
             Destroy(newProjectile, lifetime);
         }
+
+        if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+        {
+            player.animator.SetTrigger(animationTrigger);
+        }
     }
 
     /// <summary>
@@ -144,6 +163,11 @@ public class SpawnObjectAtTransform : MonoBehaviour
         if (lifetime != 0)
         {
             Destroy(newProjectile, lifetime);
+        }
+
+        if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+        {
+            player.animator.SetTrigger(animationTrigger);
         }
     }
 }
