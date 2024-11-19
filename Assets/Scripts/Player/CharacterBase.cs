@@ -97,6 +97,7 @@ public class CharacterBase : MonoBehaviour
     [HideInInspector]
     public bool canDash = true;
 
+    private bool _isMovingBackwards = false;
 
     [Tooltip("this value multiplies the size of the pointer aimer when aiming")]
     [SerializeField]
@@ -147,7 +148,8 @@ public class CharacterBase : MonoBehaviour
     [Tooltip("the Text on the player showing what number they are")]
     public TMP_Text playerNumber;
 
-    private Vector3 _movementDirection;
+    private Vector3 _movementDirection = Vector3.zero;
+    private Vector3 _aimDirection = Vector3.zero;
 
     [Tooltip("where to spawn projectiles on this character")]
     public Transform _projectileSpawnPosition;
@@ -301,7 +303,7 @@ public class CharacterBase : MonoBehaviour
         _acceleration = _speed * _deceleration;
         _movementDirection.y = 0.0f;
         if (_movementDirection.magnitude > 0.0f)
-            rb.AddForce(_movementDirection.normalized * _acceleration, ForceMode.VelocityChange);
+            rb.AddForce(_movementDirection * _acceleration, ForceMode.VelocityChange);
         //_velocity += _movementDirection * _acceleration; // Add acceleration when there is input.
 
         //if (rb.velocity.magnitude > 0.0f && _movementDirection.magnitude <= 0.0f) // Only start decelerating when the character is moving, but also when there's no input.
@@ -317,6 +319,9 @@ public class CharacterBase : MonoBehaviour
         //_velocity = Vector3.ClampMagnitude(_velocity, _speed); // Clamp the velocity to the maximum speed.
         //rb.position += _velocity * Time.fixedDeltaTime; // Apply the velocity to the character position.
         //rb.velocity = _velocity;
+
+        float moveAimDiff = Vector3.Dot(transform.TransformDirection(_movementDirection), transform.TransformDirection(_aimDirection));
+        _isMovingBackwards = (moveAimDiff < 0.0f);
     }
 
 
@@ -388,16 +393,16 @@ public class CharacterBase : MonoBehaviour
     /// <param name="context"></param>
     public void OnAim(InputAction.CallbackContext context)
     {
-        Vector3 aimDirection = new Vector3();
-        aimDirection.z = context.ReadValue<Vector2>().y;
-        aimDirection.x = context.ReadValue<Vector2>().x;
+        _aimDirection = Vector3.zero;
+        _aimDirection.z = context.ReadValue<Vector2>().y;
+        _aimDirection.x = context.ReadValue<Vector2>().x;
 
         if(confused)
         {
-            aimDirection = -aimDirection;//reverses aim direction
+            _aimDirection = -_aimDirection;//reverses aim direction
         }
                 
-        transform.LookAt(aimDirection += transform.position, transform.up);
+        transform.LookAt(_aimDirection + transform.position, transform.up);
         
 
         currentAimMagnitude = context.ReadValue<Vector2>().magnitude;
