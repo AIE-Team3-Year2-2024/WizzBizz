@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2856424123219449186}
   - component: {fileID: 9064380061922466464}
   - component: {fileID: 3566253542496564835}
+  - component: {fileID: 7339564267943426673}
   m_Layer: 7
   m_Name: GustStrawberry
   m_TagString: Untagged
@@ -372,6 +373,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackAmount: 20
   abTest: 0
+--- !u!114 &7339564267943426673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7197127415005391814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d197b5b7f7b01ab4bbf4da0c4f29dadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 6
+  destroyOnCollision: 0
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &5417727066522666679
 PrefabInstance:
   m_ObjectHideFlags: 0

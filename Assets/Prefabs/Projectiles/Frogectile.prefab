@@ -66,6 +66,8 @@ MeshRenderer:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,6 +107,7 @@ GameObject:
   - component: {fileID: -8286081650823615748}
   - component: {fileID: 7405523138902183227}
   - component: {fileID: -4651468834412735935}
+  - component: {fileID: 324261321650897601}
   m_Layer: 7
   m_Name: Frogectile
   m_TagString: Untagged
@@ -196,6 +199,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy: []
 --- !u!114 &413267540910040873
 MonoBehaviour:
@@ -272,6 +276,8 @@ TrailRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 6b6a9df26b796f84f8fa016440fea3f1, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -906,6 +912,23 @@ MonoBehaviour:
     - {x: -0.6959634, y: 0.1768332, z: -0.6959634}
     - {x: -0.34139428, y: 0.6646524, z: -0.66459554}
     - {x: -0.17685792, y: 0.6958694, z: -0.6960511}
+--- !u!114 &324261321650897601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599871779557999481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d197b5b7f7b01ab4bbf4da0c4f29dadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 6
+  destroyOnCollision: 1
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &4343005370456441073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -959,7 +982,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4271476819219072907, guid: d20850b315837ee4a9f52d9897e3106a, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4271476819219072907, guid: d20850b315837ee4a9f52d9897e3106a, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -975,6 +998,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4271476819219072907, guid: d20850b315837ee4a9f52d9897e3106a, type: 3}
       propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: d20850b315837ee4a9f52d9897e3106a, type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271476819219072907, guid: d20850b315837ee4a9f52d9897e3106a, type: 3}
+      propertyPath: m_Materials.Array.data[6]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8414730017779267143, guid: d20850b315837ee4a9f52d9897e3106a, type: 3}

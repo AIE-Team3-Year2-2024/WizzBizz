@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3763258287274443448}
   - component: {fileID: 827101628211268161}
   - component: {fileID: 34398456946547949}
+  - component: {fileID: 8350927102750274007}
   m_Layer: 9
   m_Name: ExplosionTrash
   m_TagString: Untagged
@@ -131,6 +132,7 @@ MonoBehaviour:
   damage: 10
   damageEffect: 0
   effectTime: 0
+  effectAmount: 0
   destroyOnCollision: 1
   destroyOnPlayerCollision: 0
   DoOnDestroy:
@@ -141,6 +143,8 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
+  damageChildrenOnDestroy: []
 --- !u!114 &34398456946547949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,3 +158,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 0.2
+--- !u!114 &8350927102750274007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365639633603684979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d197b5b7f7b01ab4bbf4da0c4f29dadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  destroyOnCollision: 0
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []

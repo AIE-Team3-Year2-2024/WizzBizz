@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3361835302748506851}
   - component: {fileID: 1281993057585804577}
   - component: {fileID: 375866452729692021}
+  - component: {fileID: 8044797437320295346}
   m_Layer: 7
   m_Name: GustCream
   m_TagString: Untagged
@@ -372,6 +373,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockbackAmount: 20
   abTest: 0
+--- !u!114 &8044797437320295346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886036772630649441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d197b5b7f7b01ab4bbf4da0c4f29dadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 6
+  destroyOnCollision: 0
+  DoOnDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &5083053685010424956
 PrefabInstance:
   m_ObjectHideFlags: 0
