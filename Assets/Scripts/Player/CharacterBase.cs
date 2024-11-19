@@ -75,6 +75,13 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private float catchParryTime;
 
+    [Tooltip("how many times the player can reset there catch routine")]
+    [SerializeField]
+    private int _maxButtonPress;
+
+    [HideInInspector]
+    public int currentCatchPresses;
+
     [Tooltip("how long after the catch trigger activates where the player cant move and is vulnrable")]
     [SerializeField]
     private float catchWaitTime;
@@ -453,7 +460,11 @@ public class CharacterBase : MonoBehaviour
     /// <param name="context"></param>
     public void OnCatch(InputAction.CallbackContext context)
     {
-        StartCoroutine(CatchRoutine());
+        if (currentCatchPresses < _maxButtonPress)
+        {
+            StartCoroutine(CatchRoutine());
+            currentCatchPresses++;
+        }
     }
 
     /// <summary>
@@ -462,12 +473,11 @@ public class CharacterBase : MonoBehaviour
     /// <returns></returns>
     public IEnumerator CatchRoutine()
     {
-        input.DeactivateInput();
         catchTrigger.enabled = true;
         yield return new WaitForSeconds(catchParryTime);
         catchTrigger.enabled = false;
         yield return new WaitForSeconds(catchWaitTime);
-        input.ActivateInput();
+        currentCatchPresses = 0;
     }
 
     public void StartSliding(float slipperyness, float accelFactor)
@@ -527,6 +537,10 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+
+        StopCoroutine(CatchRoutine());
+        currentCatchPresses = 0;
+        catchTrigger.enabled = false;
 
         //makes this player drop the orb if they have it
         if (hasOrb)
@@ -680,6 +694,10 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+
+        StopCoroutine(CatchRoutine());
+        currentCatchPresses = 0;
+        catchTrigger.enabled = false;
 
         //makes this player drop the orb if they have it
         if (hasOrb)
