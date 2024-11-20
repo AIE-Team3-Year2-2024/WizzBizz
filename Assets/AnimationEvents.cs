@@ -7,23 +7,17 @@ public class AnimationEvents : MonoBehaviour
 {
     private Animator animator;
 
+    [SerializeField, Tooltip("the ausio source used to play sound effects from this component")]
+    private AudioSource audioSource;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    // Specific trigger wrappers because input actions can't have parameters.
-    public void SetWhackTrigger(InputAction.CallbackContext context)
+    public void PlaySound(string fileLoaction)
     {
-        if (context.performed)
-        {
-            animator.SetTrigger("Whack");
-        }
-    }
-
-    // Generic set trigger for use in animation events/scripts.
-    public void SetAnimationTrigger(string trigger)
-    {
-        animator.SetTrigger(trigger);
+        AudioClip clip = (AudioClip)Resources.Load(fileLoaction);
+        audioSource.PlayOneShot(clip);
     }
 }
