@@ -425,6 +425,7 @@ public class CharacterBase : MonoBehaviour
         if (context.performed && canDash)
         {
             StartCoroutine(DashRoutine());
+            animator.SetTrigger("Dash");
         }
     }
 
@@ -465,6 +466,7 @@ public class CharacterBase : MonoBehaviour
     public void OnCatch(InputAction.CallbackContext context)
     {
         StartCoroutine(CatchRoutine());
+        animator.SetTrigger("Dash");
     }
 
     /// <summary>

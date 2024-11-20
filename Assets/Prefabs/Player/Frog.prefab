@@ -578,7 +578,7 @@ MonoBehaviour:
   playerNumber: {fileID: 4139183580649500251}
   _projectileSpawnPosition: {fileID: 639825632643347932}
   _pauseScreen: {fileID: 2512867238049467500, guid: 4d01d40f403474947962a052c0f46ca9, type: 3}
-  _animator: {fileID: 2543621962248731876}
+  animator: {fileID: 2543621962248731876}
   teamMates: []
   _teamID: 0
   _weakness: {fileID: 3722349283893674540}
@@ -902,6 +902,7 @@ MonoBehaviour:
   _lobAimer: {fileID: 1309746413074950827}
   _portalPrefab: {fileID: 6539852389524594942, guid: d71e1466c2f03624791dfbbb70b1ad5f, type: 3}
   frogID: 0
+  animationTrigger: 
 --- !u!114 &2795027882588230036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,6 +997,7 @@ MonoBehaviour:
   - {fileID: 6599871779557999481, guid: 83cc7d76203ea9a42afd2fa37386d50a, type: 3}
   lifetime: 1.3
   spawnOffset: {x: 0, y: 0, z: 0}
+  animationTrigger: Whack
 --- !u!114 &-8277679434416479755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,6 +1014,7 @@ MonoBehaviour:
   - {fileID: 6599871779557999481, guid: 495aa339df5df014093ac1cf529b476a, type: 3}
   lifetime: 20
   spawnOffset: {x: 0, y: 0, z: 0}
+  animationTrigger: 
 --- !u!114 &94103231913229806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1047,7 @@ MonoBehaviour:
   lobAimer: {fileID: 1100810549408191807}
   lifetime: 0
   spawnOffset: {x: 0, y: 0, z: 0}
+  animationTrigger: 
 --- !u!1 &642615397704571331
 GameObject:
   m_ObjectHideFlags: 0
