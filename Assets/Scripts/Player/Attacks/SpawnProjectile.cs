@@ -20,6 +20,10 @@ public class SpawnProjectile : MonoBehaviour
     [VectorRange(-100.0f, -100.0f, 0.0f, 100.0f, 100.0f, 100.0f)]
     private Vector3 spawnOffset;
 
+    [Tooltip("the name of the trigger to be set when this attack is triggerd")]
+    [SerializeField]
+    private string animationTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,10 @@ public class SpawnProjectile : MonoBehaviour
         if (lifetime != 0)
         {
             Destroy(newProjectile, lifetime);
+        }
+        if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+        {
+            player.animator.SetTrigger(animationTrigger);
         }
     }
 
@@ -79,6 +87,10 @@ public class SpawnProjectile : MonoBehaviour
         {
             Destroy(newProjectile, lifetime);
         }
+        if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+        {
+            player.animator.SetTrigger(animationTrigger);
+        }
     }
 
     /// <summary>
@@ -104,6 +116,11 @@ public class SpawnProjectile : MonoBehaviour
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);
+            }
+
+            if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+            {
+                player.animator.SetTrigger(animationTrigger);
             }
         }
     }
@@ -138,6 +155,11 @@ public class SpawnProjectile : MonoBehaviour
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);
+            }
+
+            if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+            {
+                player.animator.SetTrigger(animationTrigger);
             }
         }
     }

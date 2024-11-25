@@ -145,6 +145,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy: []
 --- !u!54 &529405592993949442
 Rigidbody:
@@ -217,7 +218,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -243,16 +244,7 @@ TrailRenderer:
         inWeight: 0.36515576
         outWeight: 0.64980865
       - serializedVersion: 3
-        time: 0.64860576
-        value: 0.017332397
-        inSlope: -0.2806555
-        outSlope: -0.2806555
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.85058326
-        outWeight: 1
-      - serializedVersion: 3
-        time: 0.7409326
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -370,7 +362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 13
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -410,6 +402,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
       propertyPath: m_Materials.Array.data[10]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
+      propertyPath: m_Materials.Array.data[13]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
+      propertyPath: m_Materials.Array.data[14]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}

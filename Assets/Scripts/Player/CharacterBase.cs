@@ -152,6 +152,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private Slider basicAttackCoolDownBar;
 
+    [Tooltip("the particles to be made when the player dashes")]
+    [SerializeField]
+    private ParticleSystem dashParticles;
+
     [Tooltip("the Text on the player showing what number they are")]
     public TMP_Text playerNumber;
 
@@ -163,6 +167,9 @@ public class CharacterBase : MonoBehaviour
 
     [SerializeField, Tooltip("the pause screen object to create on pause")]
     private GameObject _pauseScreen;
+
+    [Tooltip("the animator for this character")]
+    public Animator animator;
 
     [Tooltip("the active pause screen object is stored here so it can be destroyed")]
     private GameObject _currentPauseScreen;
@@ -234,6 +241,10 @@ public class CharacterBase : MonoBehaviour
     [Header("Trigger Attacks")]
     public UnityEvent ballAttack;
     public UnityEvent normalAttack;
+
+    [Header("Color Coding")]
+    public PlayerData.ColorCode colorCode;
+    [SerializeField] private MeshRenderer colorShadowRenderer;
 
     private Rigidbody rb;
 
@@ -327,7 +338,8 @@ public class CharacterBase : MonoBehaviour
         //rb.position += _velocity * Time.fixedDeltaTime; // Apply the velocity to the character position.
         //rb.velocity = _velocity;
 
-        float moveAimDiff = Vector3.Dot(transform.TransformDirection(_movementDirection), transform.TransformDirection(_aimDirection));
+        const float epsilon = 0.001f;
+        float moveAimDiff = Vector3.Dot(transform.TransformDirection(_movementDirection), transform.TransformDirection(_aimDirection + transform.forward * epsilon));
         _isMovingBackwards = (moveAimDiff < 0.0f);
     }
 
@@ -341,6 +353,56 @@ public class CharacterBase : MonoBehaviour
                 //_acceleration = _originalAccel; // Reset.
                 _deceleration = _originalDecel;
                 _shouldStopSliding = false;
+            }
+        }
+    }
+
+    public void ChangeColorCode(PlayerData.ColorCode newColor)
+    {
+        colorCode = newColor;
+
+        Color colorCodeGreen, colorCodePurple, colorCodePink, colorCodeYellow;
+        if (ColorUtility.TryParseHtmlString("#33f7ac", out colorCodeGreen) &&
+            ColorUtility.TryParseHtmlString("#7133f7", out colorCodePurple) &&
+            ColorUtility.TryParseHtmlString("#f73377", out colorCodePink) &&
+            ColorUtility.TryParseHtmlString("#f7d333", out colorCodeYellow))
+        {
+            if (colorShadowRenderer)
+            {
+                switch (colorCode)
+                {
+                    case PlayerData.ColorCode.COLORCODE_GREEN:
+                        { colorShadowRenderer.material.color = colorCodeGreen; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_YELLOW:
+                        { colorShadowRenderer.material.color = colorCodeYellow; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PINK:
+                        { colorShadowRenderer.material.color = colorCodePink; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PURPLE:
+                        { colorShadowRenderer.material.color = colorCodePurple; }
+                        break;
+                }
+            }
+
+            if (playerNumber)
+            {
+                switch (colorCode)
+                {
+                    case PlayerData.ColorCode.COLORCODE_GREEN:
+                        { playerNumber.color = colorCodeGreen; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.black); }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_YELLOW:
+                        { playerNumber.color = colorCodeYellow; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.black); }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PINK:
+                        { playerNumber.color = colorCodePink; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.white); }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PURPLE:
+                        { playerNumber.color = colorCodePurple; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.white); }
+                        break;
+                }
             }
         }
     }
@@ -360,6 +422,8 @@ public class CharacterBase : MonoBehaviour
         {
             _movementDirection = -_movementDirection;//reverses the movement direction
         }
+
+        animator.SetFloat("Speed", _isMovingBackwards ? -_movementDirection.magnitude : _movementDirection.magnitude);
     }
 
     /// <summary>
@@ -426,6 +490,8 @@ public class CharacterBase : MonoBehaviour
         if (context.performed && canDash)
         {
             StartCoroutine(DashRoutine());
+            animator.SetTrigger("Dash");
+            dashParticles.Play(true);
         }
     }
 
@@ -468,6 +534,7 @@ public class CharacterBase : MonoBehaviour
         if (currentCatchPresses < _maxButtonPress)
         {
             StartCoroutine(CatchRoutine());
+            animator.SetTrigger("Catch");
             currentCatchPresses++;
         }
     }
