@@ -152,6 +152,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private Slider basicAttackCoolDownBar;
 
+    [Tooltip("the particles to be made when the player dashes")]
+    [SerializeField]
+    private ParticleSystem dashParticles;
+
     [Tooltip("the Text on the player showing what number they are")]
     public TMP_Text playerNumber;
 
@@ -433,6 +437,7 @@ public class CharacterBase : MonoBehaviour
         {
             StartCoroutine(DashRoutine());
             animator.SetTrigger("Dash");
+            dashParticles.Play(true);
         }
     }
 
