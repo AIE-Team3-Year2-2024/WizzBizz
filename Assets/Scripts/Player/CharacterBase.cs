@@ -242,6 +242,10 @@ public class CharacterBase : MonoBehaviour
     public UnityEvent ballAttack;
     public UnityEvent normalAttack;
 
+    [Header("Color Coding")]
+    public PlayerData.ColorCode colorCode;
+    [SerializeField] private MeshRenderer colorShadowRenderer;
+
     private Rigidbody rb;
 
     public enum StatusEffects
@@ -349,6 +353,56 @@ public class CharacterBase : MonoBehaviour
                 //_acceleration = _originalAccel; // Reset.
                 _deceleration = _originalDecel;
                 _shouldStopSliding = false;
+            }
+        }
+    }
+
+    public void ChangeColorCode(PlayerData.ColorCode newColor)
+    {
+        colorCode = newColor;
+
+        Color colorCodeGreen, colorCodePurple, colorCodePink, colorCodeYellow;
+        if (ColorUtility.TryParseHtmlString("#33f7ac", out colorCodeGreen) &&
+            ColorUtility.TryParseHtmlString("#7133f7", out colorCodePurple) &&
+            ColorUtility.TryParseHtmlString("#f73377", out colorCodePink) &&
+            ColorUtility.TryParseHtmlString("#f7d333", out colorCodeYellow))
+        {
+            if (colorShadowRenderer)
+            {
+                switch (colorCode)
+                {
+                    case PlayerData.ColorCode.COLORCODE_GREEN:
+                        { colorShadowRenderer.material.color = colorCodeGreen; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_YELLOW:
+                        { colorShadowRenderer.material.color = colorCodeYellow; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PINK:
+                        { colorShadowRenderer.material.color = colorCodePink; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PURPLE:
+                        { colorShadowRenderer.material.color = colorCodePurple; }
+                        break;
+                }
+            }
+
+            if (playerNumber)
+            {
+                switch (colorCode)
+                {
+                    case PlayerData.ColorCode.COLORCODE_GREEN:
+                        { playerNumber.color = colorCodeGreen; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.black); }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_YELLOW:
+                        { playerNumber.color = colorCodeYellow; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.black); }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PINK:
+                        { playerNumber.color = colorCodePink; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.white); }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PURPLE:
+                        { playerNumber.color = colorCodePurple; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.white); }
+                        break;
+                }
             }
         }
     }
