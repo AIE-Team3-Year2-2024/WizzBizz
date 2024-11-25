@@ -475,7 +475,7 @@ public class CharacterBase : MonoBehaviour
         if (currentCatchPresses < _maxButtonPress)
         {
             StartCoroutine(CatchRoutine());
-            animator.SetTrigger("Dash");
+            animator.SetTrigger("Catch");
             currentCatchPresses++;
         }
     }
