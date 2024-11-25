@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 743633967367418717}
   - component: {fileID: 635959111677137771}
   - component: {fileID: 6902607760224960571}
+  - component: {fileID: 9106441385439908178}
   m_Layer: 7
   m_Name: Icecream
   m_TagString: Untagged
@@ -118,11 +119,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 9106441385439908178}
+        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+        m_MethodName: InstantiateSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
   controlComponent: {fileID: 3006305223808691435}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy: []
 --- !u!96 &6420938608266462877
 TrailRenderer:
@@ -166,7 +180,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -175,24 +189,24 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6634596
+        value: 0.35220844
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       - serializedVersion: 3
-        time: 0.37158415
-        value: 0.3176201
-        inSlope: -1.0687509
-        outSlope: -1.0687509
+        time: 0.5335952
+        value: 0.1918419
+        inSlope: -0.5542988
+        outSlope: -0.5542988
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.38274062
-        outWeight: 0.48902252
+        outWeight: 0.35785574
       - serializedVersion: 3
-        time: 0.63891625
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -362,6 +376,23 @@ MonoBehaviour:
   DoOnDestroy:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9106441385439908178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599871779557999481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clip: {fileID: 8300000, guid: 79cfaf607cb5acb4499d7dfebe07adeb, type: 3}
+  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
+  _maxPitch: 1.2
+  _minPitch: 0.8
 --- !u!1 &7768673102871072099
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,6 +448,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2533c705593089b43b45a7ebf0383834, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
