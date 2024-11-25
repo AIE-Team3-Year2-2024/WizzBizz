@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8114987668639932540}
   - component: {fileID: -8165500124068218547}
   - component: {fileID: 8643878340703666312}
+  - component: {fileID: 5506679329211664858}
   m_Layer: 13
   m_Name: Spitball
   m_TagString: Untagged
@@ -300,11 +301,41 @@ MonoBehaviour:
   destroyOnPlayerCollision: 0
   DoOnDestroy:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5506679329211664858}
+        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+        m_MethodName: InstantiateSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   DoOnHit:
     m_PersistentCalls:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy:
-  - {fileID: -2775216548624882883, guid: c7140e668c6d6bf47936c17b2d1a3d0e, type: 3}
+  - {fileID: 5653299416069908154, guid: dceee4190409a1541a8d252bfa11bf17, type: 3}
+--- !u!114 &5506679329211664858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3192898056125740344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clip: {fileID: 8300000, guid: c7480477131306948b5a8614c87563b3, type: 3}
+  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
+  _maxPitch: 1.1
+  _minPitch: 0.7

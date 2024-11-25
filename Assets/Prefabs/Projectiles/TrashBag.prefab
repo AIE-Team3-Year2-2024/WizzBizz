@@ -48,6 +48,7 @@ MonoBehaviour:
   _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 4872620361152214051}
+  animationTrigger: 
 --- !u!1 &735032794744832265
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,6 +97,7 @@ MonoBehaviour:
   _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 601471039190317856}
+  animationTrigger: 
 --- !u!1 &2783992932023041390
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,6 +111,7 @@ GameObject:
   - component: {fileID: 6078610161218990181}
   - component: {fileID: 7123593361693911382}
   - component: {fileID: 3109678969548366285}
+  - component: {fileID: 8433646607993109126}
   m_Layer: 13
   m_Name: TrashBag
   m_TagString: Untagged
@@ -189,6 +192,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy: []
 --- !u!54 &7123593361693911382
 Rigidbody:
@@ -283,8 +287,37 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8433646607993109126}
+        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+        m_MethodName: InstantiateSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _arcObjectToMake: {fileID: 0}
   _lifeDistance: 0
+--- !u!114 &8433646607993109126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783992932023041390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clip: {fileID: 8300000, guid: 7f4890a1e376ab249a1905d2b43c79dc, type: 3}
+  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
+  _maxPitch: 1.1
+  _minPitch: 0.7
 --- !u!1 &2895287503457385176
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,6 +366,7 @@ MonoBehaviour:
   _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 2778058637722407896}
+  animationTrigger: 
 --- !u!1 &5474957593235590119
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,6 +415,7 @@ MonoBehaviour:
   _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 4382836550881004990}
+  animationTrigger: 
 --- !u!1 &8746338100611719258
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,6 +464,7 @@ MonoBehaviour:
   _projectiles: []
   lifetime: 0.2
   _spawn: {fileID: 4602152283336101413}
+  animationTrigger: 
 --- !u!1001 &1182509072472734924
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -510,7 +546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -534,6 +570,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
       propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
+      propertyPath: m_Materials.Array.data[7]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
+      propertyPath: m_Materials.Array.data[8]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
+      propertyPath: m_Materials.Array.data[9]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
+      propertyPath: m_Materials.Array.data[10]
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
