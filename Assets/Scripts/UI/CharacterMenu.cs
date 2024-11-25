@@ -220,6 +220,15 @@ public class CharacterMenu : Menu
             associatedSlot.LeavePlayer();
             _joinedPlayers--;
         }
+
+        if (countDown != null)
+            countDown.StopCountDown(); // Shouldn't count down if someone just disconnected.
+
+        // Unready everyone else.
+        foreach (PlayerSlot s in playerSlots)
+        {
+            UnreadyPlayer(s);
+        }
     }
     
     public void ControllerReconnect(PlayerInput controller) // Handle controller regained.

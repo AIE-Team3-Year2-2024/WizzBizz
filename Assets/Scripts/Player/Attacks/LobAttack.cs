@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class LobAttack : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class LobAttack : MonoBehaviour
     [SerializeField]
     [VectorRange(-100.0f, -100.0f, 0.0f, 100.0f, 100.0f, 100.0f)]
     private Vector3 spawnOffset;
+
+    [Tooltip("the name of the trigger to be set when this attack is triggerd")]
+    [SerializeField]
+    private string animationTrigger;
 
     void Start()
     {
@@ -87,6 +92,11 @@ public class LobAttack : MonoBehaviour
             {
                 Destroy(newProjectile, lifetime);
             }
+
+            if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+            {
+                player.animator.SetTrigger(animationTrigger);
+            }
         }
     }
 
@@ -117,6 +127,11 @@ public class LobAttack : MonoBehaviour
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);
+            }
+
+            if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+            {
+                player.animator.SetTrigger(animationTrigger);
             }
         }
     }
@@ -155,6 +170,11 @@ public class LobAttack : MonoBehaviour
             if (lifetime != 0)
             {
                 Destroy(newProjectile, lifetime);
+            }
+
+            if (player.animator != null && animationTrigger != null && animationTrigger.Length > 0)
+            {
+                player.animator.SetTrigger(animationTrigger);
             }
         }
     }

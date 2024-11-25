@@ -612,14 +612,13 @@ public class GameManager : MonoBehaviour
         _orbSpawnerTimer = orbSpawnerCooldown;
         _orbCollected = true;
 
-        SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]); // TODO: Use Menu Manager???
+        //SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]); // TODO: Use Menu Manager???
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
 
-        //theese are here so that the players get spawned in the new scene and not the old one
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
+        while (!asyncLoad.isDone) // Wait until loaded.
+        {
+            yield return null;
+        }
 
         _alivePlayers = new Dictionary<CharacterBase, PlayerData>();
 
