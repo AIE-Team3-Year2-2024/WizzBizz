@@ -114,8 +114,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 18
-  m_Acceleration: 8
+  m_Speed: 20
+  m_Acceleration: 9
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -181,6 +181,8 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
+  damageChildrenOnDestroy: []
 --- !u!96 &2737089233201251131
 TrailRenderer:
   serializedVersion: 2
@@ -249,13 +251,13 @@ TrailRenderer:
         inWeight: 0.45269927
         outWeight: 0.8991271
       - serializedVersion: 3
-        time: 0.62600344
+        time: 0.6679116
         value: 0
-        inSlope: -0.61981004
-        outSlope: -0.61981004
+        inSlope: -0.33454093
+        outSlope: -0.33454093
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.35825488
+        inWeight: 0.29789367
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
