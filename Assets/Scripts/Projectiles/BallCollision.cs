@@ -29,9 +29,6 @@ public class BallCollision : MonoBehaviour
                     character.InvincibilityForFrames(5);
                     character.currentCatchPresses = 0;
 
-                    CharacterBase[] player = new CharacterBase[] { character };
-
-                    GameManager.Instance.StartSlowDown(player);
                     Destroy(gameObject);
                 }
             }
