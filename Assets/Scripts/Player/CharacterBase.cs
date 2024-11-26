@@ -501,7 +501,6 @@ public class CharacterBase : MonoBehaviour
     /// <returns></returns>
     public IEnumerator DashRoutine()
     {
-        Vector3 oldMoveDir = _movementDirection;
         canMove = false;
         _speed = _dashSpeed;
         canDash = false;
