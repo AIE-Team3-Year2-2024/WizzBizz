@@ -280,6 +280,8 @@ GameObject:
   - component: {fileID: 94103231913229806}
   - component: {fileID: 2370909801206995805}
   - component: {fileID: 864884926417720549}
+  - component: {fileID: 8178246379313800167}
+  - component: {fileID: 8781425063325072677}
   m_Layer: 6
   m_Name: Frog
   m_TagString: Player
@@ -1234,6 +1236,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8178246379313800167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fa8eff99ffd214f97e6e106215e014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDestroy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8781425063325072677}
+        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+        m_MethodName: InstantiateSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8781425063325072677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clip: {fileID: 8300000, guid: 5645146367125c94f9249daa5eee9153, type: 3}
+  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
+  _maxPitch: 1.3
+  _minPitch: 0.7
 --- !u!1 &642615397704571331
 GameObject:
   m_ObjectHideFlags: 0

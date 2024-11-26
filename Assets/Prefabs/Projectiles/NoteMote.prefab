@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1089310859426952809}
   - component: {fileID: 7965076593845259287}
   - component: {fileID: 2872304198869575866}
+  - component: {fileID: 742510301937445241}
+  - component: {fileID: 2064731804174758109}
   m_Layer: 0
   m_Name: NoteMote
   m_TagString: Untagged
@@ -30,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 6248073878416804282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 937.3837, y: 557.01416, z: 258.328}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3471198371041556133}
@@ -122,6 +124,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7, z: 0.7}
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!114 &742510301937445241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248073878416804282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fa8eff99ffd214f97e6e106215e014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDestroy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2064731804174758109}
+        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+        m_MethodName: InstantiateSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2064731804174758109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6248073878416804282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clip: {fileID: 8300000, guid: efab4ee6a933dd94d92c34060781f74c, type: 3}
+  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
+  _maxPitch: 1.2
+  _minPitch: 0.8
 --- !u!1001 &1559695607786118559
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -488,6 +534,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1769540786595762667, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769540786595762667, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769540786595762667, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769540786595762667, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -528,6 +586,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2944116612538787695, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
+      propertyPath: ShapeModule.type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944116612538787695, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
       propertyPath: ShapeModule.m_Scale.x
       value: 0.5
       objectReference: {fileID: 0}
@@ -538,6 +600,10 @@ PrefabInstance:
     - target: {fileID: 2944116612538787695, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
       propertyPath: ShapeModule.m_Scale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944116612538787695, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2944116612538787695, guid: 23eb1ee8d4021184c8dc6cabc4bf414c, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b

@@ -224,6 +224,8 @@ GameObject:
   - component: {fileID: 8837453654854279791}
   - component: {fileID: 7622405365305493414}
   - component: {fileID: 2820781370348479512}
+  - component: {fileID: 4798988316867031694}
+  - component: {fileID: 4212392731917969919}
   m_Layer: 6
   m_Name: Penguin
   m_TagString: Player
@@ -1140,6 +1142,50 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: e256c9887c93e1a41a6523f8a0c07a8a, type: 3}
   mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
   _maxPitch: 1.1
+  _minPitch: 0.7
+--- !u!114 &4798988316867031694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fa8eff99ffd214f97e6e106215e014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDestroy:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4212392731917969919}
+        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+        m_MethodName: InstantiateSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4212392731917969919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clip: {fileID: 8300000, guid: 5645146367125c94f9249daa5eee9153, type: 3}
+  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
+  _maxPitch: 1.3
   _minPitch: 0.7
 --- !u!1 &683194986331357104
 GameObject:
