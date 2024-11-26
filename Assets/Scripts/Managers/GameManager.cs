@@ -655,9 +655,10 @@ public class GameManager : MonoBehaviour
             spawnInScene.spawns.Remove(spawnInScene.spawns[random]);
             newPlayer.name += (" > Player ID (" + i + ")");
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
-            character.ChangeColorCode(_playerData[i].color);
             character.playerGamepad = _playerData[i].gamepad;
-            character.playerNumber.text = "P" + (i + 1);
+            character.playerId = i;
+            //character.playerNumber.text = "P" + (i + 1);
+            character.UpdatePlayerUI(_playerData[i].color, i);
             _alivePlayers.Add(character, _playerData[i]);
 
 
