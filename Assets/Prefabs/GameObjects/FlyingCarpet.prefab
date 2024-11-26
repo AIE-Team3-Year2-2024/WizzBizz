@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8457337603221322147}
   - component: {fileID: 4823817169869501958}
   - component: {fileID: 7283819650256765644}
+  - component: {fileID: 4538253322242413614}
   m_Layer: 11
   m_Name: FlyingCarpet
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4538253322242413614
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9085360312370012953}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.004259, y: 0.25469208, z: 6.011905}
+  m_Center: {x: 0.0014414788, y: 0.12606704, z: -0.0006587505}

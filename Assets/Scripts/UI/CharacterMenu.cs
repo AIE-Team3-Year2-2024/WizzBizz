@@ -157,7 +157,7 @@ public class CharacterMenu : Menu
                 // Set the correct selected character prefab and pass it into the player data.
                 GameObject selectedCharacter = characterPrefabs[slot._selectedCharacterIndex];
                 Debug.Log(selectedCharacter.name + ", " + slot._selectedCharacterIndex);
-                GameManager.Instance.SetSelectedCharacter(slot._playerID, selectedCharacter);
+                GameManager.Instance.SetSelectedCharacter(slot._playerID, selectedCharacter, slot.colorCode);
             }
             else
             {
@@ -219,6 +219,15 @@ public class CharacterMenu : Menu
             UnreadyPlayer(associatedSlot);
             associatedSlot.LeavePlayer();
             _joinedPlayers--;
+        }
+
+        if (countDown != null)
+            countDown.StopCountDown(); // Shouldn't count down if someone just disconnected.
+
+        // Unready everyone else.
+        foreach (PlayerSlot s in playerSlots)
+        {
+            UnreadyPlayer(s);
         }
     }
     

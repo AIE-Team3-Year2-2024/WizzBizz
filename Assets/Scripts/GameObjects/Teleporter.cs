@@ -17,7 +17,7 @@ public class Teleporter : MonoBehaviour
 
     [Tooltip("the renderer with the material to be dimmed when inactive")]
     [SerializeField]
-    private MeshRenderer renderer;
+    private MeshRenderer _renderer;
 
     /// <summary>
     /// finds this objects collider
@@ -52,11 +52,11 @@ public class Teleporter : MonoBehaviour
     {
         teleCollider.enabled = false;
 
-        renderer.material.color /= 2;
+        _renderer.material.color /= 2;
 
         yield return new WaitForSeconds(_offTime);
 
-        renderer.material.color *= 2;
+        _renderer.material.color *= 2;
 
         teleCollider.enabled = true;
     }

@@ -187,6 +187,8 @@ public class DamagePlayerOnCollision : MonoBehaviour
             inputPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").performed += controlComponent.OnAim;
             inputPlayer.GetComponent<PlayerInput>().actions.FindAction("Aim").canceled += controlComponent.OnAim;
         }
+
+        
     }
 
     /// <summary>
