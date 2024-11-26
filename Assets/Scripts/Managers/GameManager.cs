@@ -15,6 +15,15 @@ using UnityEngine.UIElements;
 [Serializable]
 public class PlayerData
 {
+    public enum ColorCode
+    {
+        COLORCODE_GREEN = 0,
+        COLORCODE_PURPLE,
+        COLORCODE_PINK,
+        COLORCODE_YELLOW
+    }
+
+    public ColorCode color;
     public Gamepad gamepad;
     public GameObject characterSelect;
     public int score;
@@ -262,9 +271,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     /// <param name="listPosition"></param>
     /// <param name="selection"></param>
-    public void SetSelectedCharacter(int listPosition, GameObject selection)
+    public void SetSelectedCharacter(int listPosition, GameObject selection, PlayerData.ColorCode colorCode = PlayerData.ColorCode.COLORCODE_GREEN)
     {
         _playerData[listPosition].characterSelect = selection;
+        _playerData[listPosition].color = colorCode;
     }
 
     // TODO: Probably remove this too?
@@ -646,7 +656,9 @@ public class GameManager : MonoBehaviour
             newPlayer.name += (" > Player ID (" + i + ")");
             CharacterBase character = newPlayer.GetComponent<CharacterBase>();
             character.playerGamepad = _playerData[i].gamepad;
-            character.playerNumber.text = "P" + (i + 1);
+            character.playerId = i;
+            //character.playerNumber.text = "P" + (i + 1);
+            character.UpdatePlayerUI(_playerData[i].color, i);
             _alivePlayers.Add(character, _playerData[i]);
 
 

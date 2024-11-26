@@ -152,8 +152,18 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private Slider basicAttackCoolDownBar;
 
+    [Tooltip("the particles to be made when the player dashes")]
+    [SerializeField]
+    private ParticleSystem dashParticles;
+
     [Tooltip("the Text on the player showing what number they are")]
-    public TMP_Text playerNumber;
+    public RectTransform playerNumber;
+
+    [Tooltip("Probably obvious this should be setup in order from 1 to 4.")]
+    [SerializeField]
+    private Sprite[] playerNumberSprites;
+
+    [HideInInspector] public int playerId = 0;
 
     private Vector3 _movementDirection = Vector3.zero;
     private Vector3 _aimDirection = Vector3.zero;
@@ -237,6 +247,10 @@ public class CharacterBase : MonoBehaviour
     [Header("Trigger Attacks")]
     public UnityEvent ballAttack;
     public UnityEvent normalAttack;
+
+    [Header("Color Coding")]
+    public PlayerData.ColorCode colorCode;
+    [SerializeField] private MeshRenderer colorShadowRenderer;
 
     private Rigidbody rb;
 
@@ -349,6 +363,90 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
+    public void UpdatePlayerUI(PlayerData.ColorCode newColor, int id)
+    {
+        if (playerId != id) playerId = id;
+        if (playerId > 4 || playerId < 0)
+        {
+            Debug.LogError("Player ID is out of range! {" + playerId + "}");
+            return;
+        }
+
+        colorCode = newColor;
+        Color colorCodeGreen, colorCodePurple, colorCodePink, colorCodeYellow;
+        if (ColorUtility.TryParseHtmlString("#33f7ac", out colorCodeGreen) &&
+            ColorUtility.TryParseHtmlString("#7133f7", out colorCodePurple) &&
+            ColorUtility.TryParseHtmlString("#f73377", out colorCodePink) &&
+            ColorUtility.TryParseHtmlString("#f7d333", out colorCodeYellow))
+        {
+            if (colorShadowRenderer)
+            {
+                switch (colorCode)
+                {
+                    case PlayerData.ColorCode.COLORCODE_GREEN:
+                        { colorShadowRenderer.material.color = colorCodeGreen; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_YELLOW:
+                        { colorShadowRenderer.material.color = colorCodeYellow; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PINK:
+                        { colorShadowRenderer.material.color = colorCodePink; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PURPLE:
+                        { colorShadowRenderer.material.color = colorCodePurple; }
+                        break;
+                }
+            }
+
+            if (_pointerAimer)
+            {
+                Image pointerAimerImg = _pointerAimer.GetComponent<Image>();
+
+                switch (colorCode)
+                {
+                    case PlayerData.ColorCode.COLORCODE_GREEN:
+                        { pointerAimerImg.color = colorCodeGreen; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_YELLOW:
+                        { pointerAimerImg.color = colorCodeYellow; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PINK:
+                        { pointerAimerImg.color = colorCodePink; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PURPLE:
+                        { pointerAimerImg.color = colorCodePurple; }
+                        break;
+                }
+            }
+
+            if (playerNumber)
+            {
+                Image playerNumberImg = playerNumber.GetComponent<Image>();
+                playerNumberImg.sprite = playerNumberSprites[playerId];
+
+                switch (colorCode)
+                {
+                    case PlayerData.ColorCode.COLORCODE_GREEN:
+                        { playerNumberImg.color = colorCodeGreen; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_YELLOW:
+                        { playerNumberImg.color = colorCodeYellow; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PINK:
+                        { playerNumberImg.color = colorCodePink; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PURPLE:
+                        { playerNumberImg.color = colorCodePurple; }
+                        break;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to parse color codes.");
+        }
+    }
+
     /// <summary>
     /// this function is called by the players input controller wich will change the vector the charcater moves by
     /// </summary>
@@ -433,6 +531,7 @@ public class CharacterBase : MonoBehaviour
         {
             StartCoroutine(DashRoutine());
             animator.SetTrigger("Dash");
+            dashParticles.Play(true);
         }
     }
 
@@ -442,7 +541,6 @@ public class CharacterBase : MonoBehaviour
     /// <returns></returns>
     public IEnumerator DashRoutine()
     {
-        Vector3 oldMoveDir = _movementDirection;
         canMove = false;
         _speed = _dashSpeed;
         canDash = false;

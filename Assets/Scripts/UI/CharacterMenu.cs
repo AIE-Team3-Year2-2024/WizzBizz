@@ -76,6 +76,29 @@ public class CharacterMenu : Menu
         _addingControllers = true;
     }
 
+    [ContextMenu("Force Start Game")]
+    public void ForceStartGame()
+    {
+        bool slotsEmpty = true;
+        int readySlots = 0;
+        foreach (PlayerSlot s in playerSlots)
+        {
+            if (s._playerJoined)
+            {
+                slotsEmpty = false;
+                if (s._playerReady)
+                    readySlots++;
+            }
+        }
+
+        if (slotsEmpty || readySlots < _joinedPlayers)
+            return;
+
+        // Try starting the game.
+        if (countDown != null)
+            countDown.StartCountDown();
+    }
+
     public void JoinPlayer(int gamepadID = 0)
     {
         //Debug.Log(playerSlots.Count);
@@ -157,7 +180,7 @@ public class CharacterMenu : Menu
                 // Set the correct selected character prefab and pass it into the player data.
                 GameObject selectedCharacter = characterPrefabs[slot._selectedCharacterIndex];
                 Debug.Log(selectedCharacter.name + ", " + slot._selectedCharacterIndex);
-                GameManager.Instance.SetSelectedCharacter(slot._playerID, selectedCharacter);
+                GameManager.Instance.SetSelectedCharacter(slot._playerID, selectedCharacter, slot.colorCode);
             }
             else
             {

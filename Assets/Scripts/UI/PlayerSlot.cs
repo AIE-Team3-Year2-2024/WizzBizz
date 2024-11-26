@@ -19,6 +19,11 @@ public class PlayerSlot : MonoBehaviour
     [Tooltip("Reference to the UI element containing player options.")]
     public CanvasGroup descriptionSection;
 
+    [Tooltip("Reference to a sprite asset which will be the background image for this specific player slot.")]
+    public Sprite backgroundImage;
+    [Tooltip("What color coding is attributed to this player slot?")]
+    public PlayerData.ColorCode colorCode;
+
     [HideInInspector] public CharacterMenu _characterMenu = null;
 
     [HideInInspector] public int _playerID = -1; // The player occupying the slot.

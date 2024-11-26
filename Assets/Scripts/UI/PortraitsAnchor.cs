@@ -75,6 +75,15 @@ public class PortraitsAnchor : MonoBehaviour
             _allThePortraits.AddRange(portraits);
             if (loopEffect && loopEndPortrait != null)
                 _allThePortraits.Add(loopEndPortrait);
+
+            if (parentSlot != null)
+            {
+                Image[] portraitImages = transform.GetComponentsInChildren<Image>();
+                for (int i = 0; i < portraitImages.Length; i++)
+                {
+                    portraitImages[i].sprite = parentSlot.backgroundImage;
+                }
+            }
         }
     }
 
