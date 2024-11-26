@@ -157,7 +157,13 @@ public class CharacterBase : MonoBehaviour
     private ParticleSystem dashParticles;
 
     [Tooltip("the Text on the player showing what number they are")]
-    public TMP_Text playerNumber;
+    public RectTransform playerNumber;
+
+    [Tooltip("Probably obvious this should be setup in order from 1 to 4.")]
+    [SerializeField]
+    private Sprite[] playerNumberSprites;
+
+    [HideInInspector] public int playerId = 0;
 
     private Vector3 _movementDirection = Vector3.zero;
     private Vector3 _aimDirection = Vector3.zero;
@@ -357,10 +363,16 @@ public class CharacterBase : MonoBehaviour
         }
     }
 
-    public void ChangeColorCode(PlayerData.ColorCode newColor)
+    public void UpdatePlayerUI(PlayerData.ColorCode newColor, int id)
     {
-        colorCode = newColor;
+        if (playerId != id) playerId = id;
+        if (playerId > 4 || playerId < 0)
+        {
+            Debug.LogError("Player ID is out of range! {" + playerId + "}");
+            return;
+        }
 
+        colorCode = newColor;
         Color colorCodeGreen, colorCodePurple, colorCodePink, colorCodeYellow;
         if (ColorUtility.TryParseHtmlString("#33f7ac", out colorCodeGreen) &&
             ColorUtility.TryParseHtmlString("#7133f7", out colorCodePurple) &&
@@ -386,24 +398,52 @@ public class CharacterBase : MonoBehaviour
                 }
             }
 
-            if (playerNumber)
+            if (_pointerAimer)
             {
+                Image pointerAimerImg = _pointerAimer.GetComponent<Image>();
+
                 switch (colorCode)
                 {
                     case PlayerData.ColorCode.COLORCODE_GREEN:
-                        { playerNumber.color = colorCodeGreen; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.black); }
+                        { pointerAimerImg.color = colorCodeGreen; }
                         break;
                     case PlayerData.ColorCode.COLORCODE_YELLOW:
-                        { playerNumber.color = colorCodeYellow; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.black); }
+                        { pointerAimerImg.color = colorCodeYellow; }
                         break;
                     case PlayerData.ColorCode.COLORCODE_PINK:
-                        { playerNumber.color = colorCodePink; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.white); }
+                        { pointerAimerImg.color = colorCodePink; }
                         break;
                     case PlayerData.ColorCode.COLORCODE_PURPLE:
-                        { playerNumber.color = colorCodePurple; playerNumber.fontMaterial.SetColor("_OutlineColor", Color.white); }
+                        { pointerAimerImg.color = colorCodePurple; }
                         break;
                 }
             }
+
+            if (playerNumber)
+            {
+                Image playerNumberImg = playerNumber.GetComponent<Image>();
+                playerNumberImg.sprite = playerNumberSprites[playerId];
+
+                switch (colorCode)
+                {
+                    case PlayerData.ColorCode.COLORCODE_GREEN:
+                        { playerNumberImg.color = colorCodeGreen; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_YELLOW:
+                        { playerNumberImg.color = colorCodeYellow; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PINK:
+                        { playerNumberImg.color = colorCodePink; }
+                        break;
+                    case PlayerData.ColorCode.COLORCODE_PURPLE:
+                        { playerNumberImg.color = colorCodePurple; }
+                        break;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to parse color codes.");
         }
     }
 
