@@ -216,7 +216,10 @@ public class DamagePlayerOnCollision : MonoBehaviour
         foreach (DamagePlayerOnCollision damage in damageChildrenOnDestroy)
         {
             DamagePlayerOnCollision current = Instantiate(damage, transform.position, transform.rotation);
-            current.SetOwner(ownerPlayer);
+            foreach(CharacterBase player in ownerPlayers)
+            {
+                current.SetOwner(player);
+            }
 
         }
 
