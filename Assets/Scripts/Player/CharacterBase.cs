@@ -156,6 +156,10 @@ public class CharacterBase : MonoBehaviour
     [SerializeField]
     private ParticleSystem dashParticles;
 
+    [Tooltip("The effect that'll spawn when the player's dash is ready.")]
+    [SerializeField]
+    private GameObject dashReadyEffect;
+
     [Tooltip("the Text on the player showing what number they are")]
     public RectTransform playerNumber;
 
@@ -562,6 +566,7 @@ public class CharacterBase : MonoBehaviour
     {
         yield return new WaitForSeconds(_dashWaitTime);
         canDash = true;
+        GameObject instantiatedEffect = Instantiate(dashReadyEffect, transform, false);
     }
 
     /// <summary>
