@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66f5920625916440a5c115339e5ce7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
+  speed: 0.5
   heightMultiplyer: 5
   doOnDestroy:
     m_PersistentCalls:
@@ -338,4 +338,6 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: c7480477131306948b5a8614c87563b3, type: 3}
   mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
   _maxPitch: 1.1
+  _maxVolume: 1
+  _minVolume: 0
   _minPitch: 0.7
