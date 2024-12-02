@@ -18,6 +18,16 @@ public class MakeSound : MonoBehaviour
     [SerializeField]
     private float _maxPitch = 1;
 
+    [Tooltip("the maximum possible volume")]
+    [SerializeField]
+    [Range(0, 1)]
+    private float _maxVolume = 1;
+
+    [Tooltip("the minimum possible volume")]
+    [SerializeField]
+    [Range(0, 1)]
+    private float _minVolume;
+
     [Tooltip("the minimum the pitch this can be")]
     [SerializeField]
     private float _minPitch = 1;
@@ -28,6 +38,7 @@ public class MakeSound : MonoBehaviour
         if (mixerGroup) { reference.outputAudioMixerGroup = mixerGroup; }
         reference.PlayOneShot(clip);
         reference.pitch = Random.Range(_minPitch, _maxPitch);
+        reference.volume = Random.Range(_minVolume, _maxVolume);
         Destroy(reference.gameObject, clip.length);
     }
 
@@ -37,6 +48,7 @@ public class MakeSound : MonoBehaviour
         reference.outputAudioMixerGroup = mixerGroup ? mixerGroup : this.mixerGroup;
         reference.PlayOneShot(clip);
         reference.pitch = Random.Range(minPitch, maxPitch);
+        reference.volume = Random.Range(_minVolume, _maxVolume);
         Destroy(reference.gameObject, clip.length);
     }
 }

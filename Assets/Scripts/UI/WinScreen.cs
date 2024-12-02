@@ -39,6 +39,25 @@ public class WinScreen : Menu
     [Tooltip("how long the button has currently been held for")]
     private float _currentButtonHoldTime = 0;
 
+    [Header("Optional Stuff - ")]
+    [Tooltip("Should we use the drawn portraits or the render textures?"), SerializeField]
+    private bool _useDrawnPortraits = false;
+
+    [Tooltip("The drawn portrait of the raccoon"), SerializeField]
+    private Sprite _raccoonDrawnPortrait;
+
+    [Tooltip("The drawn portrait of the penguin"), SerializeField]
+    private Sprite _penguinDrawnPortrait;
+
+    [Tooltip("The drawn portrait of the lizard"), SerializeField]
+    private Sprite _lizardDrawnPortrait;
+
+    [Tooltip("The drawn portrait of the frog"), SerializeField]
+    private Sprite _frogDrawnPortrait;
+
+    [Tooltip("How the drawn portraits should be scaled and positioned."), SerializeField]
+    private Rect _drawnPortraitsRect = new Rect(0.25f, 0.45f, 0.44444444f, 0.33333333f);
+
     private bool _shouldReturn = false;
 
     // Start is called before the first frame update
@@ -46,7 +65,6 @@ public class WinScreen : Menu
     {
         List<PlayerData> _gameWonData = GameManager.Instance.GetSortedPlayerData();
 
-        
         int count = 0;
         for(int i = 0; i < _gameWonData.Count; i++)
         {
@@ -60,25 +78,27 @@ public class WinScreen : Menu
             {
                 case ("Raccoon"):
                     {
-                        _winnerImages[i].texture = _raccoonRenderTexture;
+                        _winnerImages[i].texture = _useDrawnPortraits ? _raccoonDrawnPortrait.texture : _raccoonRenderTexture;
                         break;
                     }
                 case ("Penguin"):
                     {
-                        _winnerImages[i].texture = _penguinRenderTexture;
+                        _winnerImages[i].texture = _useDrawnPortraits ? _penguinDrawnPortrait.texture : _penguinRenderTexture;
                         break;
                     }
                 case ("Lizard"):
                     {
-                        _winnerImages[i].texture = _lizardRenderTexture;
+                        _winnerImages[i].texture = _useDrawnPortraits ? _lizardDrawnPortrait.texture : _lizardRenderTexture;
                         break;
                     }
                 case ("Frog"):
                     {
-                        _winnerImages[i].texture = _frogRenderTexture;
+                        _winnerImages[i].texture = _useDrawnPortraits ? _frogDrawnPortrait.texture : _frogRenderTexture;
                         break;
                     }
             }
+            if (_useDrawnPortraits)
+                _winnerImages[i].uvRect = _drawnPortraitsRect;
         }
 
         for (int i = count; i < 4; i++)
