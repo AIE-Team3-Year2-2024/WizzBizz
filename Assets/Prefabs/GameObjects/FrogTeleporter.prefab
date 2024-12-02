@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &667908348706204063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1501041328198690427}
+  - component: {fileID: 4853485166496430944}
+  - component: {fileID: 8076381921741600397}
+  m_Layer: 0
+  m_Name: TeleportPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1501041328198690427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667908348706204063}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.584, z: 0}
+  m_LocalScale: {x: 0.57142854, y: 0.8571429, z: 0.57142854}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507690757215815016}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4853485166496430944
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667908348706204063}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.9
+  m_Height: 3.4190776
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1859623, z: 0.04218483}
+--- !u!114 &8076381921741600397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667908348706204063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aed4b609f347b2d45be10a79714e1872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endPoints: []
+  _offTime: 10
+  _renderer: {fileID: 0}
 --- !u!1 &882844758482444242
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,8 +73,6 @@ GameObject:
   - component: {fileID: 507690757215815016}
   - component: {fileID: 3505055707870661325}
   - component: {fileID: 1675482897345609223}
-  - component: {fileID: 7787341203436458706}
-  - component: {fileID: 102439362630213330}
   m_Layer: 0
   m_Name: FrogTeleporter
   m_TagString: Untagged
@@ -33,6 +93,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7589419247492933325}
+  - {fileID: 1501041328198690427}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -86,35 +147,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7787341203436458706
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882844758482444242}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.77240056
-  m_Height: 3.4190776
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.1859623, z: 0.04218483}
---- !u!114 &102439362630213330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 882844758482444242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aed4b609f347b2d45be10a79714e1872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endPoints: []
-  _offTime: 10
-  _renderer: {fileID: 0}
 --- !u!1 &3640743089567832395
 GameObject:
   m_ObjectHideFlags: 0
