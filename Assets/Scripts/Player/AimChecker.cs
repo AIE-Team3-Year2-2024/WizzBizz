@@ -21,7 +21,10 @@ public class AimChecker : MonoBehaviour
     private void FixedUpdate()
     {
         _colliding = false;
-        _renderer.material.color = Color.green;
+        if (_renderer)
+        {
+            _renderer.material.color = Color.green;
+        }
     }
 
     /// <summary>
@@ -31,7 +34,10 @@ public class AimChecker : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         _colliding = true;
-        _renderer.material.color = Color.red;
+        if (_renderer)
+        {
+            _renderer.material.color = Color.red;
+        }
     }
 
     
