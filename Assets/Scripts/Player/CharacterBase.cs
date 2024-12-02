@@ -252,6 +252,11 @@ public class CharacterBase : MonoBehaviour
     public UnityEvent ballAttack;
     public UnityEvent normalAttack;
 
+    [Header("general events")]
+    public UnityEvent onTakeDamage;
+    public UnityEvent onCatch;
+    public UnityEvent onDash;
+
     [Header("Color Coding")]
     public PlayerData.ColorCode colorCode;
     [SerializeField] private MeshRenderer colorShadowRenderer;
@@ -545,6 +550,7 @@ public class CharacterBase : MonoBehaviour
     /// <returns></returns>
     public IEnumerator DashRoutine()
     {
+        onDash.Invoke();
         canMove = false;
         _speed = _dashSpeed;
         canDash = false;
@@ -589,6 +595,7 @@ public class CharacterBase : MonoBehaviour
     /// <returns></returns>
     public IEnumerator CatchRoutine()
     {
+        onCatch.Invoke();
         catchTrigger.enabled = true;
         yield return new WaitForSeconds(catchParryTime);
         catchTrigger.enabled = false;
@@ -620,6 +627,7 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+        onTakeDamage.Invoke();
 
         if (healthBar)
         {
@@ -653,6 +661,7 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+        onTakeDamage.Invoke();
 
         StopCoroutine(CatchRoutine());
         currentCatchPresses = 0;
@@ -810,6 +819,7 @@ public class CharacterBase : MonoBehaviour
             return;
         }
         _health -= damage;
+        onTakeDamage.Invoke();
 
         StopCoroutine(CatchRoutine());
         currentCatchPresses = 0;
