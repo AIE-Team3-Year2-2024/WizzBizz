@@ -539,12 +539,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 14
+  _speed: 12
   originalSpeed: 0
   _deceleration: 0.25
   catchTrigger: {fileID: 3000781201183644107}
-  _dashTime: 0.3
-  _dashSpeed: 34
+  _dashTime: 0.2
+  _dashSpeed: 30
   _dashWaitTime: 3
   _chargeSpeed: 4
   catchParryTime: 2
@@ -1143,6 +1143,8 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: e256c9887c93e1a41a6523f8a0c07a8a, type: 3}
   mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
   _maxPitch: 1.1
+  _maxVolume: 1
+  _minVolume: 0.523
   _minPitch: 0.7
 --- !u!114 &4798988316867031694
 MonoBehaviour:
@@ -1187,6 +1189,8 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 5645146367125c94f9249daa5eee9153, type: 3}
   mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
   _maxPitch: 1.3
+  _maxVolume: 1
+  _minVolume: 1
   _minPitch: 0.7
 --- !u!1 &683194986331357104
 GameObject:

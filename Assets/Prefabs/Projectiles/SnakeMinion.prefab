@@ -115,7 +115,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 20
+  m_Speed: 18
   m_Acceleration: 9
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -235,7 +235,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.87096786
+        value: 0.65084076
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -243,22 +243,31 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.20380116
-        value: 0.5393851
-        inSlope: -2.8238945
-        outSlope: -2.8238945
+        time: 0.46358392
+        value: 0.35700268
+        inSlope: -1.0318244
+        outSlope: -1.0318244
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.45269927
-        outWeight: 0.8991271
+        inWeight: 0.34398943
+        outWeight: 0.44261503
       - serializedVersion: 3
-        time: 0.6679116
-        value: 0
-        inSlope: -0.33454093
-        outSlope: -0.33454093
+        time: 0.9163335
+        value: 0.023145504
+        inSlope: -0.2546468
+        outSlope: -0.2546468
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.29789367
+        inWeight: 0.35619518
+        outWeight: 0.6151472
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0.3555114
+        outSlope: -0.3555114
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.6133853
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2

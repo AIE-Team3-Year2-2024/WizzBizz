@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 28
 --- !u!114 &4297597167232359517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy: []
 --- !u!114 &6879255582340932219
 MonoBehaviour:
@@ -314,7 +315,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1fdd6fc511ef1c14ab027ae7d7fe75a5, type: 2}
+  - {fileID: 2100000, guid: c7dc89cb53b2b7f4bb2fc6018aa75b49, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -352,8 +353,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.80658066
-        value: 0
+        time: 1
+        value: 0.018875122
         inSlope: -0.43268377
         outSlope: -0.43268377
         tangentMode: 0

@@ -70,6 +70,8 @@ MeshRenderer:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -188,6 +190,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy: []
 --- !u!114 &413267540910040873
 MonoBehaviour:
@@ -258,6 +261,8 @@ TrailRenderer:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -304,7 +309,7 @@ TrailRenderer:
         inWeight: 0.45269927
         outWeight: 0.5750444
       - serializedVersion: 3
-        time: 0.7639124
+        time: 1
         value: 0
         inSlope: -0.09306214
         outSlope: -0.09306214
