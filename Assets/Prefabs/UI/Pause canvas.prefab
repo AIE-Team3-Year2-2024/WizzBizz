@@ -209,6 +209,8 @@ MonoBehaviour:
   _alreadyStarted: 0
   _alreadyLoaded: 0
   _firstSelected: {fileID: 5738857927929822936}
+  _teamLevelName: TeamCharacterScreen
+  _freeForAllLevelName: CharacterScreen
 --- !u!225 &8294275382323920945
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -726,7 +728,6 @@ GameObject:
   - component: {fileID: 4655186632054161781}
   - component: {fileID: 4605277703997102256}
   - component: {fileID: 1302892589315232054}
-  - component: {fileID: 8369650342153801343}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -837,9 +838,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8369650342153801343}
-        m_TargetAssemblyTypeName: QuitButton, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 3196282538584861015}
+        m_TargetAssemblyTypeName: PauseScreen, Assembly-CSharp
+        m_MethodName: QuitButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -849,16 +850,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8369650342153801343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8612396482272170527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8df5d6f75c6c7c64eaf6b4ed62b55710, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _level: CharacterScreen
