@@ -385,7 +385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: 914d240f1661a6e41af4168eaf1d41aa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 370872fcfabf31f4a9ce3e5652f0b8f1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -806,7 +806,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -10, y: -10}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5271238057286863771
 GameObject:
@@ -844,7 +844,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 150, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5271238057286863750
 CanvasRenderer:
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c028b7044393bd048bf83b1e9b34f7c9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b25e0b53bae19774b88bc4c0100aa748, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1253,6 +1253,12 @@ MonoBehaviour:
   _penguinDrawnPortrait: {fileID: 21300000, guid: 42496c127831eef4e8266506eeaea724, type: 3}
   _lizardDrawnPortrait: {fileID: 21300000, guid: f5ec6dca7a4bab44a8d58fd39b37ecc1, type: 3}
   _frogDrawnPortrait: {fileID: 21300000, guid: dcc66184c30684f4ab94db2adef7d486, type: 3}
+  _drawnPortraitsRect:
+    serializedVersion: 2
+    x: 0.25
+    y: 0.45
+    width: 0.44444445
+    height: 0.33333334
 --- !u!225 &5271238057750551066
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1324,7 +1330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.03901863, g: 0, b: 1, a: 1}
+  m_Color: {r: 0.4269527, g: 0.18396229, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
