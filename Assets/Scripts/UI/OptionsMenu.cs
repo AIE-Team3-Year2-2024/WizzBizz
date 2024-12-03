@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -12,6 +13,13 @@ public class OptionsMenu : Menu
     public TMP_Dropdown resolutionDropdown;
     public TMP_Dropdown windowModeDropdown;
     public Toggle vsyncToggle;
+    public Slider masterAudioSlider;
+    public Slider musicAudioSlider;
+    public Slider sfxAudioSlider;
+
+    public AudioMixerGroup masterAudioGroup;
+    public AudioMixerGroup musicAudioGroup;
+    public AudioMixerGroup sfxAudioGroup;
 
     private Resolution[] _systemResolutions;
     private Resolution _currentResolution;
@@ -34,6 +42,8 @@ public class OptionsMenu : Menu
             Debug.LogError("References haven't been set.");
             return;
         }
+
+        // TODO: Read settings from file, and save to file.
 
         _isBorderlessFullscreen = (Screen.fullScreenMode == FullScreenMode.FullScreenWindow);
         _isExclusiveFullscreen = (Screen.fullScreenMode == FullScreenMode.ExclusiveFullScreen);
@@ -61,6 +71,17 @@ public class OptionsMenu : Menu
 
         resolutionDropdown.AddOptions(resolutionOptions);
         resolutionDropdown.SetValueWithoutNotify(resolutionSelection);
+
+        masterAudioSlider.maxValue = 1.0f;
+        masterAudioSlider.minValue = 0.0001f;
+        musicAudioSlider.maxValue = 1.0f;
+        musicAudioSlider.minValue = 0.0001f;
+        sfxAudioSlider.maxValue = 1.0f;
+        sfxAudioSlider.minValue = 0.0001f;
+
+        masterAudioSlider.SetValueWithoutNotify(masterAudioSlider.maxValue);
+        musicAudioSlider.SetValueWithoutNotify(masterAudioSlider.maxValue);
+        sfxAudioSlider.SetValueWithoutNotify(masterAudioSlider.maxValue);
     }
 
     public void Update()
@@ -137,6 +158,27 @@ public class OptionsMenu : Menu
     {
         // Override controller cancel.
         return;
+    }
+
+    public void OnMasterAudioChange()
+    {
+        // Power/dB = Log10(x), Power = Voltage^2
+        // Voltage/dB = Log20(x) = Log10(x)*20
+        // Mixer Volume (dB) = Signal Voltage
+        if (masterAudioGroup)
+            masterAudioGroup.audioMixer.SetFloat("masterVolume", Mathf.Log10(masterAudioSlider.value) * 20.0f);
+    }
+
+    public void OnMusicAudioChange()
+    {
+        if (musicAudioGroup)
+            musicAudioGroup.audioMixer.SetFloat("musicVolume", Mathf.Log10(musicAudioSlider.value) * 20.0f);
+    }
+
+    public void OnSFXAudioChange()
+    {
+        if (sfxAudioGroup)
+            sfxAudioGroup.audioMixer.SetFloat("sfxVolume", Mathf.Log10(sfxAudioSlider.value) * 20.0f);
     }
 
 }

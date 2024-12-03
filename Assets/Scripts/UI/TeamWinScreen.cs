@@ -40,6 +40,25 @@ public class TeamWinScreen : Menu
 
     private bool _shouldReturn = false;
 
+    [Header("Optional Stuff - ")]
+    [Tooltip("Should we use the drawn portraits or the render textures?"), SerializeField]
+    private bool _useDrawnPortraits = false;
+
+    [Tooltip("The drawn portrait of the raccoon"), SerializeField]
+    private Sprite _raccoonDrawnPortrait;
+
+    [Tooltip("The drawn portrait of the penguin"), SerializeField]
+    private Sprite _penguinDrawnPortrait;
+
+    [Tooltip("The drawn portrait of the lizard"), SerializeField]
+    private Sprite _lizardDrawnPortrait;
+
+    [Tooltip("The drawn portrait of the frog"), SerializeField]
+    private Sprite _frogDrawnPortrait;
+
+    [Tooltip("How the drawn portraits should be scaled and positioned."), SerializeField]
+    private Rect _drawnPortraitsRect = new Rect(0.25f, 0.45f, 0.44444444f, 0.33333333f);
+
     private void OnEnable()
     {
         TeamData[] teamWonData = GameManager.Instance.GetSortedTeamData();
@@ -58,27 +77,31 @@ public class TeamWinScreen : Menu
                 {
                     case ("Raccoon"):
                         {
-                            _winnerImages[count].texture = _raccoonRenderTexture;
+                            _winnerImages[count].texture = _useDrawnPortraits ? _raccoonDrawnPortrait.texture : _raccoonRenderTexture;
                             break;
                         }
                     case ("Penguin"):
                         {
-                            _winnerImages[count].texture = _penguinRenderTexture;
+                            _winnerImages[count].texture = _useDrawnPortraits ? _penguinDrawnPortrait.texture : _penguinRenderTexture;
                             break;
                         }
                     case ("Lizard"):
                         {
-                            _winnerImages[count].texture = _lizardRenderTexture;
+                            _winnerImages[count].texture = _useDrawnPortraits ? _lizardDrawnPortrait.texture : _lizardRenderTexture;
                             break;
                         }
                     case ("Frog"):
                         {
-                            _winnerImages[count].texture = _frogRenderTexture;
+                            _winnerImages[count].texture = _useDrawnPortraits ? _frogDrawnPortrait.texture : _frogRenderTexture;
                             break;
                         }
                 }
+                if (_useDrawnPortraits)
+                    _winnerImages[count].uvRect = _drawnPortraitsRect;
                 count++;
+                
             }
+            
         }
 
         _buttonSlider.maxValue = _buttonHoldTime;
