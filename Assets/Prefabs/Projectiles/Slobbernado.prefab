@@ -69,7 +69,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.1, z: 0}
 --- !u!114 &7050021054743505708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,7 +421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 19
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -499,6 +499,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[18]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[19]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[20]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Name
       value: MOD_Frog_Tornado
@@ -519,24 +527,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
   m_PrefabInstance: {fileID: 3892453928682567695}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7816745616689445063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4234984437722350942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 0.5235849, g: 1, b: 0.8413293, a: 1}
-  outlineWidth: 1
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
 --- !u!95 &960557075745648767
 Animator:
   serializedVersion: 5
@@ -558,6 +548,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7816745616689445063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234984437722350942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.5235849, g: 1, b: 0.8413293, a: 1}
+  outlineWidth: 1
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &5210910264730808706
 PrefabInstance:
   m_ObjectHideFlags: 0
