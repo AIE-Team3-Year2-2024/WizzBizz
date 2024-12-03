@@ -26,7 +26,7 @@ public class MakeSound : MonoBehaviour
     [Tooltip("the minimum possible volume")]
     [SerializeField]
     [Range(0, 1)]
-    private float _minVolume;
+    private float _minVolume = 1;
 
     [Tooltip("the minimum the pitch this can be")]
     [SerializeField]
