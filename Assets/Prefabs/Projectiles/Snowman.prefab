@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 780969401da3a2243a46eb3f65e2bcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _time: 6
+  _time: 5
 --- !u!1 &8689549448131597180
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +217,7 @@ MonoBehaviour:
       m_Calls: []
   controlComponent: {fileID: 0}
   damageChildren: []
+  ownerPlayers: []
   damageChildrenOnDestroy: []
 --- !u!136 &8760029423788067649
 CapsuleCollider:

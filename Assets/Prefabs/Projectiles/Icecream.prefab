@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 26
+  speed: 24
 --- !u!114 &4297597167232359517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.35220844
+        value: 0.44025928
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -392,6 +392,8 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 79cfaf607cb5acb4499d7dfebe07adeb, type: 3}
   mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
   _maxPitch: 1.2
+  _maxVolume: 1
+  _minVolume: 1
   _minPitch: 0.8
 --- !u!1 &7768673102871072099
 GameObject:
@@ -448,6 +450,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 2533c705593089b43b45a7ebf0383834, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
