@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3211621773486415377}
   - component: {fileID: 8750884013139477186}
   - component: {fileID: 2546031941754549970}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Slobbernado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1
+<<<<<<< Updated upstream
   _speedMult: 6
+=======
+  _speedMult: 3
+>>>>>>> Stashed changes
 --- !u!135 &5911971867580264655
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -337,6 +341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwirlyGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 8414730017779267143, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
 --- !u!4 &1477684186165174646 stripped
@@ -397,7 +405,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.size
+<<<<<<< Updated upstream
       value: 9
+=======
+      value: 19
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -435,9 +447,56 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[8]
       value: 
       objectReference: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[9]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[10]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[11]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[12]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[13]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[14]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[15]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[16]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[17]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[18]
+      value: 
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes
     - target: {fileID: 919132149155446097, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Name
       value: MOD_Frog_Tornado
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
@@ -469,7 +528,11 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+<<<<<<< Updated upstream
 --- !u!95 &7090597388556921085
+=======
+--- !u!95 &6490303979108282141
+>>>>>>> Stashed changes
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -479,7 +542,11 @@ Animator:
   m_GameObject: {fileID: 4234984437722350942}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
+<<<<<<< Updated upstream
   m_Controller: {fileID: 0}
+=======
+  m_Controller: {fileID: 9100000, guid: 9c30b2b910bceca488fb8c46a3e76f64, type: 2}
+>>>>>>> Stashed changes
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -549,9 +616,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f17994f648902684098ffadcc1e9c8f4, type: 2}
+    - target: {fileID: -974956793347181809, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
       propertyPath: m_Name
       value: MOD_Frog_TornadoBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8972271183856317617, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
