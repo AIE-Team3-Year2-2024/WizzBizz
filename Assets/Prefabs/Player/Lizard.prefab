@@ -633,12 +633,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasOrb: 0
   heldOrb: {fileID: 0}
-  _speed: 14
+  _speed: 11
   originalSpeed: 0
   _deceleration: 0.1
   catchTrigger: {fileID: 1143968817450751776}
-  _dashTime: 0.3
-  _dashSpeed: 34
+  _dashTime: 0.2
+  _dashSpeed: 30
   _dashWaitTime: 3
   _chargeSpeed: 4
   catchParryTime: 0.4
@@ -772,6 +772,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1923236045762313803}
         m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
         m_MethodName: InstantiateSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2101238211701431135}
+        m_TargetAssemblyTypeName: ActivateHaptics, Assembly-CSharp
+        m_MethodName: Vibrate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -970,7 +982,7 @@ MonoBehaviour:
   - {fileID: 6248073878416804282, guid: e2c8821e63294a2448d2ae1ffcbc8582, type: 3}
   lifetime: 6
   spawnOffset: {x: 0, y: 0, z: 0}
-  animationTrigger: 
+  animationTrigger: Whack
 --- !u!114 &3429027457535621894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,8 +998,8 @@ MonoBehaviour:
   projectile: {fileID: 2655046034569396977, guid: f21fdade79723394c9e7b1cd4ed54458, type: 3}
   range: 0
   lobAimer: {fileID: 1309746413074950827}
-  lifetime: 15
-  animationTrigger: 
+  lifetime: 10
+  animationTrigger: Whack
 --- !u!114 &3722349283893674540
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 5777404286988346730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1231300193339117174}
@@ -103,7 +103,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6499904377694194802
 MonoBehaviour:
@@ -362,7 +362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 19
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -426,6 +426,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
       propertyPath: m_Materials.Array.data[18]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
+      propertyPath: m_Materials.Array.data[19]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
+      propertyPath: m_Materials.Array.data[20]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a90a2e804a8e55b48bda8d128c4210be, type: 3}
