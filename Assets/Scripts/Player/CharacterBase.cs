@@ -596,8 +596,10 @@ public class CharacterBase : MonoBehaviour
     public IEnumerator CatchRoutine()
     {
         onCatch.Invoke();
+        canMove = false;
         catchTrigger.enabled = true;
         yield return new WaitForSeconds(catchParryTime);
+        canMove = true;
         catchTrigger.enabled = false;
         yield return new WaitForSeconds(catchWaitTime);
         currentCatchPresses = 0;
@@ -634,14 +636,6 @@ public class CharacterBase : MonoBehaviour
             healthBar.value = _health;
         }
 
-        //makes this player drop the orb if they have it
-        if (hasOrb)
-        {
-            hasOrb = false;
-            Destroy(heldOrb);
-            heldOrb = null;
-        }
-
         if (_health <= 0)
         {
             Death();
@@ -666,14 +660,6 @@ public class CharacterBase : MonoBehaviour
         StopCoroutine(CatchRoutine());
         currentCatchPresses = 0;
         catchTrigger.enabled = false;
-
-        //makes this player drop the orb if they have it
-        if (hasOrb)
-        {
-            hasOrb = false;
-            Destroy(heldOrb);
-            heldOrb = null;
-        }
 
         if (healthBar)
         {
@@ -825,13 +811,6 @@ public class CharacterBase : MonoBehaviour
         currentCatchPresses = 0;
         catchTrigger.enabled = false;
 
-        //makes this player drop the orb if they have it
-        if (hasOrb)
-        {
-            hasOrb = false;
-            Destroy(heldOrb);
-            heldOrb = null;
-        }
 
         if (healthBar)
         {
