@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 17
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -487,6 +487,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[16]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[17]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
+      propertyPath: m_Materials.Array.data[18]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Name
       value: MOD_Frog_Tornado
@@ -521,6 +529,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!95 &960557075745648767
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234984437722350942}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25f64daa6c1123546be63b59c85bba7c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &5210910264730808706
 PrefabInstance:
   m_ObjectHideFlags: 0
