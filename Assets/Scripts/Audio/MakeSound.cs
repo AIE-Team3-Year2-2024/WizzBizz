@@ -32,23 +32,33 @@ public class MakeSound : MonoBehaviour
     [SerializeField]
     private float _minPitch = 1;
 
+    private GameObject soundObjectReference;
+
     public void InstantiateSound()
     {
-        AudioSource reference = Instantiate(audioSourcePrefab, transform.position, Quaternion.identity);
-        if (mixerGroup) { reference.outputAudioMixerGroup = mixerGroup; }
-        reference.PlayOneShot(clip);
-        reference.pitch = Random.Range(_minPitch, _maxPitch);
-        reference.volume = Random.Range(_minVolume, _maxVolume);
-        Destroy(reference.gameObject, clip.length);
+        if (!soundObjectReference)
+        {
+            AudioSource reference = Instantiate(audioSourcePrefab, transform.position, Quaternion.identity);
+            soundObjectReference = reference.gameObject;
+            if (mixerGroup) { reference.outputAudioMixerGroup = mixerGroup; }
+            reference.PlayOneShot(clip);
+            reference.pitch = Random.Range(_minPitch, _maxPitch);
+            reference.volume = Random.Range(_minVolume, _maxVolume);
+            Destroy(reference.gameObject, clip.length);
+        }
     }
 
     public void InstantiateSound(AudioClip clip, AudioMixerGroup mixerGroup = null, float minPitch = 1.0f, float maxPitch = 1.0f, Transform position = null, AudioSource sourcePrefab = null)
     {
-        AudioSource reference = Instantiate(sourcePrefab ? sourcePrefab : audioSourcePrefab, position ? position.position : transform.position, Quaternion.identity);
-        reference.outputAudioMixerGroup = mixerGroup ? mixerGroup : this.mixerGroup;
-        reference.PlayOneShot(clip);
-        reference.pitch = Random.Range(minPitch, maxPitch);
-        reference.volume = Random.Range(_minVolume, _maxVolume);
-        Destroy(reference.gameObject, clip.length);
+        if (!soundObjectReference)
+        {
+            AudioSource reference = Instantiate(sourcePrefab ? sourcePrefab : audioSourcePrefab, position ? position.position : transform.position, Quaternion.identity);
+            soundObjectReference = reference.gameObject;
+            reference.outputAudioMixerGroup = mixerGroup ? mixerGroup : this.mixerGroup;
+            reference.PlayOneShot(clip);
+            reference.pitch = Random.Range(minPitch, maxPitch);
+            reference.volume = Random.Range(_minVolume, _maxVolume);
+            Destroy(reference.gameObject, clip.length);
+        }
     }
 }
