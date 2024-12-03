@@ -72,6 +72,8 @@ MeshRenderer:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -163,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76b9b2f4fb078304c9f2d5a151d2c05a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 28
 --- !u!114 &4297597167232359517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,14 +257,6 @@ TrailRenderer:
   - {fileID: 2100000, guid: d814083ecb7017c4c80f60462e24d066, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -300,8 +294,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.50077266
-        value: 0.15834874
+        time: 0.7186529
+        value: 0.20237035
         inSlope: -0.9782753
         outSlope: -0.9782753
         tangentMode: 0
@@ -311,11 +305,11 @@ TrailRenderer:
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0.09306214
-        outSlope: -0.09306214
+        inSlope: 0.09789443
+        outSlope: 0.09789443
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.5149046
+        inWeight: 0.25738102
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -370,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ed61b81abb68c47a678156308b5495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackAmount: 40
+  knockbackAmount: 20
   abTest: 0
 --- !u!114 &2327555214322669241
 MonoBehaviour:
