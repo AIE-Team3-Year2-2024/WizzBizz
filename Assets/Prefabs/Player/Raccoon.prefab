@@ -867,6 +867,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onCatch:
+    m_PersistentCalls:
+      m_Calls: []
+  onDash:
+    m_PersistentCalls:
+      m_Calls: []
   colorCode: 0
   colorShadowRenderer: {fileID: 8111308423595921452}
 --- !u!114 &2242162613206557862
@@ -885,8 +894,8 @@ MonoBehaviour:
   ability2Toggle: 1
   ability1Cooldown: 10
   ability2Cooldown: 6
-  uiSlider1: {fileID: 0}
-  uiSlider2: {fileID: 0}
+  uiSlider1: {fileID: 6902580705304881317}
+  uiSlider2: {fileID: 1726453605629493933}
   ability1Chargeup: 0
   ability2Chargeup: 0
   ability1ChargeSpeed: 0
