@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 7282975921075579502}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 937.3837, y: 557.01416, z: 258.328}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3570931488428908516}
@@ -56,11 +56,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1
-<<<<<<< Updated upstream
-  _speedMult: 6
-=======
-  _speedMult: 3
->>>>>>> Stashed changes
+  _speedMult: 4
 --- !u!135 &5911971867580264655
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -72,8 +68,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7050021054743505708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +199,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.4
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -212,13 +208,13 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.47169623
+        value: 0.8616352
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       - serializedVersion: 3
         time: 1
         value: 0
@@ -281,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a137b190fc878f48b87a66f2cd67bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0.7
+  rotationSpeed: 0.8
 --- !u!1001 &869021041719865501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292,6 +288,18 @@ PrefabInstance:
     - target: {fileID: 1769540786595762667, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769540786595762667, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769540786595762667, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1769540786595762667, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1769540786595762667, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -332,6 +340,14 @@ PrefabInstance:
     - target: {fileID: 1769540786595762667, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944116612538787695, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
+      propertyPath: ShapeModule.type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2944116612538787695, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2944116612538787695, guid: b577a72d2d1f0d645af911ded683866a, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -405,11 +421,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.size
-<<<<<<< Updated upstream
-      value: 9
-=======
       value: 19
->>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -447,8 +459,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[8]
       value: 
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
-=======
     - target: {fileID: -7511558181221131132, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Materials.Array.data[9]
       value: 
@@ -489,7 +499,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[18]
       value: 
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     - target: {fileID: 919132149155446097, guid: df4b5c76e18a6b245a17434a39e080bd, type: 3}
       propertyPath: m_Name
       value: MOD_Frog_Tornado
@@ -528,11 +537,7 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
-<<<<<<< Updated upstream
---- !u!95 &7090597388556921085
-=======
---- !u!95 &6490303979108282141
->>>>>>> Stashed changes
+--- !u!95 &960557075745648767
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -542,11 +547,7 @@ Animator:
   m_GameObject: {fileID: 4234984437722350942}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-<<<<<<< Updated upstream
-  m_Controller: {fileID: 0}
-=======
-  m_Controller: {fileID: 9100000, guid: 9c30b2b910bceca488fb8c46a3e76f64, type: 2}
->>>>>>> Stashed changes
+  m_Controller: {fileID: 9100000, guid: 25f64daa6c1123546be63b59c85bba7c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -567,6 +568,18 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3278a3c775f66f042967b0e63f9aa9c3, type: 3}
       propertyPath: m_LocalPosition.x
