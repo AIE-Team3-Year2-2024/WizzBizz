@@ -317,6 +317,8 @@ MonoBehaviour:
   clip: {fileID: 8300000, guid: 7f4890a1e376ab249a1905d2b43c79dc, type: 3}
   mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
   _maxPitch: 1.1
+  _maxVolume: 1
+  _minVolume: 1
   _minPitch: 0.7
 --- !u!1 &2895287503457385176
 GameObject:
@@ -546,7 +548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
       propertyPath: m_Materials.Array.size
-      value: 11
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
       propertyPath: m_Materials.Array.data[1]
@@ -586,6 +588,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
       propertyPath: m_Materials.Array.data[10]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
+      propertyPath: m_Materials.Array.data[11]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804223331448664395, guid: 18deb99e66eddd04cb12f0684c002c76, type: 3}
+      propertyPath: m_Materials.Array.data[12]
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []

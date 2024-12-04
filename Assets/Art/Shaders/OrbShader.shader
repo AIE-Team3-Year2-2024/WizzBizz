@@ -44,6 +44,8 @@ Shader "Custom/OrbShader"
             #pragma vertex vert
             #pragma fragment frag
 
+            #define _ADDITIONAL_LIGHTS
+            #define _ADDITIONAL_LIGHTS_VERTEX
             #define _SPECULAR_COLOR
             #pragma shader_feature_local_fragment _SPECULAR_SETUP
             #pragma shader_feature_local_fragment _EMISSION
