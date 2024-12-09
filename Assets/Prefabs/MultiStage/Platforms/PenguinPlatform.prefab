@@ -124,6 +124,7 @@ Transform:
   - {fileID: 958646417637734346}
   - {fileID: 958646417156283541}
   - {fileID: 6278787971716378392}
+  - {fileID: 3916970326080212404}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -192,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 958646417637734346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallsP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,6 +226,135 @@ Transform:
   m_Father: {fileID: 958646416375711177}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4400033803938141966
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3916970326080212404}
+  - component: {fileID: 140742262074032657}
+  - component: {fileID: 2742959485891786459}
+  m_Layer: 0
+  m_Name: MOD_SnowMan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3916970326080212404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400033803938141966}
+  m_LocalRotation: {x: -0, y: 0.38268325, z: -0, w: 0.9238797}
+  m_LocalPosition: {x: -6.672507, y: 1.1628653, z: -36.658936}
+  m_LocalScale: {x: 0.014285714, y: 0.014285713, z: 0.014285714}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3616089164725238760}
+  m_Father: {fileID: 958646416375711177}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
+--- !u!33 &140742262074032657
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400033803938141966}
+  m_Mesh: {fileID: -8291231918819068002, guid: ffcd6032819418a40a3d5638ed111789, type: 3}
+--- !u!23 &2742959485891786459
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400033803938141966}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 12d3eacfc1f09244b85c2baf78104bbe, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8703981836956151768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3616089164725238760}
+  - component: {fileID: 1601631029179880559}
+  m_Layer: 8
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3616089164725238760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8703981836956151768}
+  m_LocalRotation: {x: -0, y: 0.38268316, z: -0, w: 0.9238796}
+  m_LocalPosition: {x: 0, y: -0.000033378605, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3916970326080212404}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!65 &1601631029179880559
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8703981836956151768}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 421.54736, y: 178.30167, z: 399.9997}
+  m_Center: {x: 160.77373, y: 76.026276, z: -149.99994}
 --- !u!1001 &958646415684823636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6471,6 +6601,10 @@ PrefabInstance:
       value: IceCreamCone
       objectReference: {fileID: 0}
     - target: {fileID: 1295009997260416437, guid: 81f9b4bf39fba1d47b5751dcf9fdff81, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295009997260416437, guid: 81f9b4bf39fba1d47b5751dcf9fdff81, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 1
       objectReference: {fileID: 0}
@@ -6959,6 +7093,10 @@ PrefabInstance:
     - target: {fileID: 1295009997260416437, guid: 81f9b4bf39fba1d47b5751dcf9fdff81, type: 3}
       propertyPath: m_Name
       value: IceCreamCone (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1295009997260416437, guid: 81f9b4bf39fba1d47b5751dcf9fdff81, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1295009997260416437, guid: 81f9b4bf39fba1d47b5751dcf9fdff81, type: 3}
       propertyPath: m_StaticEditorFlags
