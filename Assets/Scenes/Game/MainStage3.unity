@@ -6843,7 +6843,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -1.2185202e-34, z: 9.28e-43, w: -4.5347225e-37}
+  m_BoundingSphereOverride: {x: 0, y: 2.7917993e-37, z: 1.6759978e-38, w: -3.4222e-40}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -11086,9 +11086,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PenguinPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 2742959485891786459, guid: 30e21e4b10f97514bb9996358eabb3e7, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4400033803938141966, guid: 30e21e4b10f97514bb9996358eabb3e7, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400033803938141966, guid: 30e21e4b10f97514bb9996358eabb3e7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8703981836956151768, guid: 30e21e4b10f97514bb9996358eabb3e7, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30e21e4b10f97514bb9996358eabb3e7, type: 3}
@@ -11106,6 +11118,22 @@ PrefabInstance:
     - target: {fileID: 103652466029196913, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
       propertyPath: m_LocalPosition.z
       value: 11.666
+      objectReference: {fileID: 0}
+    - target: {fileID: 737446790884961483, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 991520332957514889, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241607574791163166, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1639989820114459996, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2498228951275421080, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
       propertyPath: m_Name
@@ -11154,6 +11182,18 @@ PrefabInstance:
     - target: {fileID: 2498228951275421083, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681575742047896227, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098349426454894149, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6755405740665911184, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82b54fa46ee58da439d8dd4b95d40e31, type: 3}
