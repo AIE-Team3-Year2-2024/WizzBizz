@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
     // Static reference
     public static GameManager Instance { get; private set; }
 
+    [Tooltip("The name of our loading scene.")]
+    public string loadingScene = "LoadingScene";
+
     [Tooltip("whether the game is in team mode")]
     public bool teamMode;
 
@@ -616,15 +619,40 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("StartGameRoutine");
 
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(loadingScene, LoadSceneMode.Additive);
+        while (!asyncLoad.isDone) // Wait until loaded.
+        {
+            yield return null;
+        }
+
+        asyncLoad = SceneManager.UnloadSceneAsync(currentScene);
+        while (!asyncLoad.isDone) // Wait until unloaded.
+        {
+            yield return null;
+        }
+
         Time.timeScale = 1;
         orbSpawners.Clear(); // Should be cleared everytime a new arena is loaded.
         _orbSpawnerTimer = orbSpawnerCooldown;
         _orbCollected = true;
 
         //SceneManager.LoadScene(_levels[UnityEngine.Random.Range(0, _levels.Length)]); // TODO: Use Menu Manager???
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(_levels[UnityEngine.Random.Range(0, _levels.Length)]);
-
+        asyncLoad = SceneManager.LoadSceneAsync(_levels[UnityEngine.Random.Range(0, _levels.Length)], LoadSceneMode.Additive);
         while (!asyncLoad.isDone) // Wait until loaded.
+        {
+            yield return null;
+        }
+
+        asyncLoad = SceneManager.UnloadSceneAsync(loadingScene);
+        while (!asyncLoad.isDone) // Wait until unloaded.
+        {
+            yield return null;
+        }
+
+        asyncLoad = Resources.UnloadUnusedAssets();
+        while (!asyncLoad.isDone) // Wait until unloaded.
         {
             yield return null;
         }
