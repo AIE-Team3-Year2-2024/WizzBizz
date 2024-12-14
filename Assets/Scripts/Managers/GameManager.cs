@@ -265,7 +265,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // TODO: Probably remove this. Unused method.
     /// <summary>
     /// is used by the cursour when they pick a character
     /// </summary>
