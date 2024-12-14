@@ -633,6 +633,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(0.5f); // Arbitrary load time so the loading screen isn't as jarring.
+
         Time.timeScale = 1;
         orbSpawners.Clear(); // Should be cleared everytime a new arena is loaded.
         _orbSpawnerTimer = orbSpawnerCooldown;
