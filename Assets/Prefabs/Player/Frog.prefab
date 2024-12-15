@@ -266,10 +266,10 @@ GameObject:
   - component: {fileID: 94103231913229806}
   - component: {fileID: 2370909801206995805}
   - component: {fileID: 864884926417720549}
-  - component: {fileID: -6425428796453889478}
   - component: {fileID: 4628980668777122391}
   - component: {fileID: 1086082058792959479}
   - component: {fileID: 862899250800453998}
+  - component: {fileID: 3259165369975116094}
   m_Layer: 6
   m_Name: Frog
   m_TagString: Player
@@ -756,8 +756,8 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6425428796453889478}
-        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+      - m_Target: {fileID: 3259165369975116094}
+        m_TargetAssemblyTypeName: MakeSoundRandom, Assembly-CSharp
         m_MethodName: InstantiateSound
         m_Mode: 1
         m_Arguments:
@@ -1295,25 +1295,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-6425428796453889478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
-  clip: {fileID: 8300000, guid: 6bc9b89fc97e45942b31b356ffe7e40e, type: 3}
-  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
-  _maxPitch: 1.3
-  _maxVolume: 0.5
-  _minVolume: 0.5
-  _minPitch: 0.7
 --- !u!114 &4628980668777122391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1370,6 +1351,31 @@ MonoBehaviour:
   _maxPitch: 1.2
   _maxVolume: 0.7
   _minVolume: 0.7
+  _minPitch: 0.8
+--- !u!114 &3259165369975116094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db03844cf0afd8459fb9d5a8d00fd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clips:
+  - {fileID: 8300000, guid: 34feec5abe5b7bb408789708d8b24be8, type: 3}
+  - {fileID: 8300000, guid: c7b32ab6b5474ab499b9f8c34026c853, type: 3}
+  - {fileID: 8300000, guid: dd0c6b19c80f6f348a0da572912faa08, type: 3}
+  - {fileID: 8300000, guid: 48a2a6fb805b9804b817c1b9d7fdd30a, type: 3}
+  - {fileID: 8300000, guid: bd8de409f8368444db18f88a20fe6ae1, type: 3}
+  - {fileID: 8300000, guid: e4c7d7465a13aef43a548ca0cc514e60, type: 3}
+  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
+  _maxPitch: 1.2
+  _maxVolume: 0.798
+  _minVolume: 0.745
   _minPitch: 0.8
 --- !u!1 &655786515643181571
 GameObject:

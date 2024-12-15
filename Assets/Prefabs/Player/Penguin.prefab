@@ -112,8 +112,8 @@ GameObject:
   - component: {fileID: 7622405365305493414}
   - component: {fileID: 2820781370348479512}
   - component: {fileID: 6452949686268522896}
-  - component: {fileID: 359715569737200644}
   - component: {fileID: 8776893488012401916}
+  - component: {fileID: 6329277565670357636}
   m_Layer: 6
   m_Name: Penguin
   m_TagString: Player
@@ -552,8 +552,8 @@ MonoBehaviour:
   onTakeDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 359715569737200644}
-        m_TargetAssemblyTypeName: MakeSound, Assembly-CSharp
+      - m_Target: {fileID: 6329277565670357636}
+        m_TargetAssemblyTypeName: MakeSoundRandom, Assembly-CSharp
         m_MethodName: InstantiateSound
         m_Mode: 1
         m_Arguments:
@@ -1099,25 +1099,6 @@ MonoBehaviour:
   _maxVolume: 0.7
   _minVolume: 0.7
   _minPitch: 0.8
---- !u!114 &359715569737200644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 452431045987376296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdf4325224112f240a89c78afa54e6a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
-  clip: {fileID: 8300000, guid: 6bc9b89fc97e45942b31b356ffe7e40e, type: 3}
-  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
-  _maxPitch: 1.3
-  _maxVolume: 0.5
-  _minVolume: 0.5
-  _minPitch: 0.7
 --- !u!114 &8776893488012401916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,6 +1117,31 @@ MonoBehaviour:
   _maxPitch: 1.2
   _maxVolume: 0.7
   _minVolume: 0.7
+  _minPitch: 0.8
+--- !u!114 &6329277565670357636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452431045987376296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db03844cf0afd8459fb9d5a8d00fd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePrefab: {fileID: 4131829214768338066, guid: 69ec3d63965f5724e81c9ce7c70f754a, type: 3}
+  clips:
+  - {fileID: 8300000, guid: 34feec5abe5b7bb408789708d8b24be8, type: 3}
+  - {fileID: 8300000, guid: c7b32ab6b5474ab499b9f8c34026c853, type: 3}
+  - {fileID: 8300000, guid: dd0c6b19c80f6f348a0da572912faa08, type: 3}
+  - {fileID: 8300000, guid: 48a2a6fb805b9804b817c1b9d7fdd30a, type: 3}
+  - {fileID: 8300000, guid: bd8de409f8368444db18f88a20fe6ae1, type: 3}
+  - {fileID: 8300000, guid: e4c7d7465a13aef43a548ca0cc514e60, type: 3}
+  mixerGroup: {fileID: -6987091761326694915, guid: 5a8c65bc36d05a249b34003b251368e2, type: 2}
+  _maxPitch: 1.2
+  _maxVolume: 0.798
+  _minVolume: 0.745
   _minPitch: 0.8
 --- !u!1 &879297873690409584
 GameObject:
